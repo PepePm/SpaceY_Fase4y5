@@ -436,7 +436,26 @@ create() {
         setUserOnline(that, userName, false);
     });*/
 
-//setUserOnline(that, userName, false);
+    //setUserOnline(that, userName, false);
+
+    //Websockets
+    var ws = new WebsocketsTest();
+    /*console.log("test socket \n");
+    var connection = new WebSocket("ws://localhost:8080/pSockets");
+
+    connection.open = function(){
+        connection.send("socketTruco chaval");
+    }
+
+    connection.onerror = function(e){
+        console.log("error: " + e);
+    }
+
+    connection.onmessage = function(msg){
+        console.log("AAAAAAAAAAAAAAAA: " + msg.data);
+    }
+
+    console.log(connection);*/
 }
 
 
