@@ -36,7 +36,7 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 		
 		// Añade al cliente al mapa de clientes con el identificador del lobby que ha creado
 		lobbies.put(idLobby, session);
-		session.sendMessage(new TextMessage("Te conectaste"));
+		//session.sendMessage(new TextMessage("Te conectaste"));
 	}
 	
 	// Se ejecuta cuando un cliente se ha desconectado
