@@ -439,7 +439,7 @@ create() {
     //setUserOnline(that, userName, false);
 
     //Websockets
-    var ws = new WebsocketsTest();
+    //var ws = new WebsocketsTest();
     /*console.log("test socket \n");
     var connection = new WebSocket("ws://localhost:8080/pSockets");
 
@@ -642,7 +642,8 @@ enterButtonRestState(boton) {
      this.tutorialButton.setVisible(false);
      isTutorial = false;
      var timedEvent = this.time.addEvent({ delay: yPos+500, callback: function(){this.scene.start('SceneGame'); isTutorial = false;}, callbackScope: this});
- }
+ 		//VAR CONNECTION POR AQUÍ
+}
 //Show login fields
 ShowLoginFields(scene,show)
 {

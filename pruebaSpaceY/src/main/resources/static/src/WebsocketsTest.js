@@ -1,4 +1,4 @@
-class WebsocketsTest {
+/*class WebsocketsTest {
     
     constructor(){
         var connection = new WebSocket("ws://79.146.8.198:8080/pSockets");
@@ -23,4 +23,4 @@ class WebsocketsTest {
         console.log(connection);
     }
 
-}
+}*/

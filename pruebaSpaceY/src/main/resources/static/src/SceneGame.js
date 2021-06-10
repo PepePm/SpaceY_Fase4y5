@@ -152,7 +152,8 @@ var isbig = false;
 class SceneGame extends Phaser.Scene {
     
     constructor() {
-
+		//var connection2 = new WebSocket("ws://"+ urlServer +"/lobbies");	//urlServer es una variable global
+		
         super("SceneGame");
     }
 
@@ -161,6 +162,19 @@ class SceneGame extends Phaser.Scene {
     }
 
     create() {
+	
+	var connection = new WebSocket("ws://"+ urlServer +"/lobbies");
+	
+	//En cuanto se abra la conexion
+	connection.onopen = function(){
+            console.log("abierto");
+            connection.send("Muy buenas tardes Pepe");
+        }
+
+		//En cuanto me llegue un mensaje
+		connection.onmessage = function(msg){
+			console.log("Mensaje recibidoOOOOO: " + msg.data);
+		}
 
         //Valores iniciales recursos
         nCoheteMat = 150;
@@ -452,6 +466,8 @@ class SceneGame extends Phaser.Scene {
             emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
             emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
             //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
+
+//Signal
         }
         else if (key_right.isDown) {
             
@@ -517,6 +533,10 @@ class SceneGame extends Phaser.Scene {
             if(maquinas[i].isBroken == true)
                 emitterMachines[i].emitParticleAt(emitterMachines[i].posX, emitterMachines[i].posY);
         }
+
+		
+//Signal JSON con el estado de las máquinas
+//{tipo:maquinas, valor:[10,40,0,82]}
 
         ///////////
         //Pasivas//
@@ -748,6 +768,8 @@ function OpenPostIt(obj,scene) {
             }
         });
     }
+
+
     
 }
 
