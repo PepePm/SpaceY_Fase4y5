@@ -149,6 +149,10 @@ var emitterMachines = []; // 0 - Cohete || 1 - Radio || 2 - Mina || 3 - Terrafor
 var postIt;
 var postItExp;
 var isbig = false;
+
+
+var connection;
+
 class SceneGame extends Phaser.Scene {
     
     constructor() {
@@ -163,12 +167,12 @@ class SceneGame extends Phaser.Scene {
 
     create() {
 	
-	var connection = new WebSocket("ws://"+ urlServer +"/lobbies");
-	
-	//En cuanto se abra la conexion
-	connection.onopen = function(){
+		connection = new WebSocket("ws://"+ urlServer +"/lobbies");
+		
+		//En cuanto se abra la conexion
+		connection.onopen = function(){
             console.log("abierto");
-            connection.send("Muy buenas tardes Pepe");
+            //connection.send("Muy buenas tardes Pepe");
         }
 
 		//En cuanto me llegue un mensaje
@@ -467,6 +471,11 @@ class SceneGame extends Phaser.Scene {
             emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
             //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
 
+			var data = {
+		        type: "rotation",
+		        value: marte.rotation
+		    }
+			connection.send(JSON.stringify(data));
 //Signal
         }
         else if (key_right.isDown) {
@@ -487,6 +496,12 @@ class SceneGame extends Phaser.Scene {
             emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
             emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
             //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
+
+			var data = {
+		        type: "rotation",
+		        value: marte.rotation
+		    }
+			connection.send(JSON.stringify(data));
         }
         else {
 
