@@ -32,6 +32,7 @@ var player;
 var playerSpeed = 1;
 var marte;
 var fondoMarte;
+var fondoConsola;
 var nubes;
 var N_NUBES = 5;
 var teclaAccion;
@@ -304,7 +305,11 @@ class SceneMars extends Phaser.Scene {
         
 
         //MARTE
-        fondoMarte = this.add.image(407, 450, "fondoMarte").setDepth(-2);
+        fondoMarte =
+         this.add.image(407, 450, "fondoMarte").setDepth(-2);
+
+         //Fondo Consola
+         fondoConsola = this.add.image(1202, 450, "fondoTierra").setDepth(1);
 
         //Inicialización planeta
         marte = this.add.image(game.config.width/4, 1250, "marte").setScale(3).setDepth(-2);
@@ -525,6 +530,8 @@ class SceneMars extends Phaser.Scene {
         //*/
     
         //emitter.setEmitZone(emitZones[emitZoneIndex]); 
+         //Añadimos fondo de marte
+
     
     }
     update(time, delta) {

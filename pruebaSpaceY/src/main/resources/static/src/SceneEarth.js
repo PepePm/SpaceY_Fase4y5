@@ -79,6 +79,7 @@ var chatTween;
 var controlTierra;
 
 var fondoTierra;
+var fondoConsola;
 var lanzadera;
 var rocket;
 var lanzPuerta;
@@ -198,87 +199,9 @@ class SceneEarth extends Phaser.Scene {
     }
 
     create() {
-           //CHATBOX
-    //Chatbox icon
-    this.chatbutton = this.add.image(chatPos[0], chatPos[1],'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
-    .setScale(0.6);
-    this.chatbutton.setInteractive()
-    .on('pointerdown', () => this.MovinBoxes(this ,1))
-    .on('pointerover', () => this.enterIconHoverState(this.chatbutton, this))
-    .on('pointerout', () => this.enterIconRestState(this.chatbutton))
-    this.chatbutton.setOrigin(0.5);
-
-    //chatbox base
-    this.chatBase = this.add.image(chatPos[2], chatPos[3],'ChatBox_Base')
-    .setScale(0.8);
-    this.chatBase.setOrigin(0.5);
-
-    //chatbox write msg
-    this.chatWritter = this.add.image(chatPos[6], chatPos[7],'ChatBox_MsgBox')
-    .setScale(0.37);
-    this.chatWritter.setOrigin(0.5);
-
-    //chatbox send
-    this.sendButton = this.add.image(chatPos[8], chatPos[9],'ChatBox_SendBtn')
-    .setScale(0.4);
-    this.sendButton.setInteractive()
-    .on('pointerdown', () => RestCreateMsg(this, userName))
-    .on('pointerover', () => this.enterIconHoverState(this.sendButton, this) )
-    .on('pointerout', () => this.enterIconRestState(this.sendButton))
-    this.sendButton.setOrigin(0.5);
-    this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter,this.sendButton, this.globalbutton];
-
-    var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
-    key_enter.on('down', () => RestCreateMsg(this, userName));
-    
-    
-    //Chatbox code
-    this.chatContent = [];
-    loadMsgs(this);
-
-    this.chatText = this.add.text(game.config.width/6*4+10, game.config.height/5+10, this.chatContent, { fontSize:"25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
-
-    this.chatText.setMask(mask).setVisible(false);
-
-    var zone = this.add.zone(game.config.width/6*4+10, game.config.height/5+1, 320, game.config.height/5*3+5).setOrigin(0).setInteractive();
-    var that = this;
-    zone.on('pointermove', function (pointer) {
-
-        if (pointer.isDown)
-        {
-            that.chatText.y += (pointer.velocity.y / 10);
-
-            that.chatText.y = Phaser.Math.Clamp(that.chatText.y, (game.config.height/5+10)-(25*lineasChat), game.config.height/5+10);
-        }
-
-    });
-
-    this.writeTextChat = this.add.dom(1280, 785).createFromCache('formChat').setVisible(false);
-    
-    var graphics = this.make.graphics();
-    graphics.fillRect(game.config.width/6*4+10, game.config.height/5+1, game.config.width/6*4+300, game.config.height/5*3+5);
-    var mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
-
-        //LOBBY
-        this.lobbyContent = ["Connected Users: "];
-        loadLobby(this);
-    
-        this.lobbyText = this.add.text(game.config.width/6*4+10, game.config.height/5+10, this.lobbyContent,
-        {fontSize:"25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
-        this.lobbyText.setMask(mask).setVisible(false).setDepth(1000);
-    
-        this.numPlayers = updateUsers(this);
-        this.numPlayersTxt = this.add.text(game.config.width*3.25/4, (game.config.height/8)*6.8, "REGISTERED USERS: "+this.numPlayers, { fill: '#FFFFFF',fontFamily:'menuFont',fontSize:'40px' });
-        this.numPlayersTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
-    
-        this.serverOnlineTxt = this.add.text(game.config.width*3.25/4, (game.config.height/8)*7.2, "SERVER ¿?", { fill: '#FFFFFF',fontFamily:'menuFont',fontSize:'40px' });
-        this.serverOnlineTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
-    
-        isServerOnline(this);
-
-
-
-
+       
+          //Fondo Consola
+          fondoConsola = this.add.image(407, 450, "fondoTierra").setDepth(1);
 
         //Valores iniciales recursos
         nCoheteMat = 150;
@@ -531,6 +454,90 @@ class SceneEarth extends Phaser.Scene {
         //*/
     
         //emitter.setEmitZone(emitZones[emitZoneIndex]); 
+
+
+        
+         //CHATBOX
+     //Chatbox icon
+     this.chatbutton = this.add.image(chatPos[0], chatPos[1],'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
+     .setScale(0.6);
+     this.chatbutton.setInteractive()
+     .on('pointerdown', () => this.MovinBoxes(this ,1))
+     .on('pointerover', () => this.enterIconHoverState(this.chatbutton, this))
+     .on('pointerout', () => this.enterIconRestState(this.chatbutton))
+     this.chatbutton.setOrigin(0.5);
+ 
+     //chatbox base
+     this.chatBase = this.add.image(chatPos[2], chatPos[3],'ChatBox_Base')
+     .setScale(0.8);
+     this.chatBase.setOrigin(0.5);
+ 
+     //chatbox write msg
+     this.chatWritter = this.add.image(chatPos[6], chatPos[7],'ChatBox_MsgBox')
+     .setScale(0.37);
+     this.chatWritter.setOrigin(0.5);
+ 
+     //chatbox send
+     this.sendButton = this.add.image(chatPos[8], chatPos[9],'ChatBox_SendBtn')
+     .setScale(0.4);
+     this.sendButton.setInteractive()
+     .on('pointerdown', () => RestCreateMsg(this, userName))
+     .on('pointerover', () => this.enterIconHoverState(this.sendButton, this) )
+     .on('pointerout', () => this.enterIconRestState(this.sendButton))
+     this.sendButton.setOrigin(0.5);
+     this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter,this.sendButton, this.globalbutton];
+ 
+     var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
+     key_enter.on('down', () => RestCreateMsg(this, userName));
+     
+     
+     //Chatbox code
+     this.chatContent = [];
+     loadMsgs(this);
+ 
+     this.chatText = this.add.text(game.config.width/6*4+10, game.config.height/5+10, this.chatContent, { fontSize:"25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
+ 
+     this.chatText.setMask(mask).setVisible(false);
+ 
+     var zone = this.add.zone(game.config.width/6*4+10, game.config.height/5+1, 320, game.config.height/5*3+5).setOrigin(0).setInteractive();
+     var that = this;
+     zone.on('pointermove', function (pointer) {
+ 
+         if (pointer.isDown)
+         {
+             that.chatText.y += (pointer.velocity.y / 10);
+ 
+             that.chatText.y = Phaser.Math.Clamp(that.chatText.y, (game.config.height/5+10)-(25*lineasChat), game.config.height/5+10);
+         }
+ 
+     });
+ 
+     this.writeTextChat = this.add.dom(1280, 785).createFromCache('formChat').setVisible(false);
+     
+     var graphics = this.make.graphics();
+     graphics.fillRect(game.config.width/6*4+10, game.config.height/5+1, game.config.width/6*4+300, game.config.height/5*3+5);
+     var mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
+ 
+         //LOBBY
+         this.lobbyContent = ["Connected Users: "];
+         loadLobby(this);
+     
+         this.lobbyText = this.add.text(game.config.width/6*4+10, game.config.height/5+10, this.lobbyContent,
+         {fontSize:"25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
+         this.lobbyText.setMask(mask).setVisible(false).setDepth(1000);
+     
+         this.numPlayers = updateUsers(this);
+         this.numPlayersTxt = this.add.text(game.config.width*3.25/4, (game.config.height/8)*6.8, "REGISTERED USERS: "+this.numPlayers, { fill: '#FFFFFF',fontFamily:'menuFont',fontSize:'40px' });
+         this.numPlayersTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
+     
+         this.serverOnlineTxt = this.add.text(game.config.width*3.25/4, (game.config.height/8)*7.2, "SERVER ¿?", { fill: '#FFFFFF',fontFamily:'menuFont',fontSize:'40px' });
+         this.serverOnlineTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
+     
+         isServerOnline(this);
+ 
+      
+ 
+ 
     
     }
     update(time, delta) {
