@@ -74,6 +74,7 @@ var lineasChat = 0;
 var chatPos;
 var chatTween;
 
+
 //Tierra
 var controlTierra;
 
@@ -172,7 +173,28 @@ class SceneEarth extends Phaser.Scene {
     }
 
     preload() {
-        //this.load.image('smoke', './Resources/smoke_particle.png');
+        this.load.image('smoke', './Resources/smoke_particle.png');
+
+        //CHAT POSTITIONS BEFORE - AFTER
+        var chtOffset = 1000;
+   
+        chatTween = [
+            game.config.width - 625, game.config.height-200,    //icono
+            game.config.width -300, game.config.height-380, //base
+            game.config.width -300, game.config.height-380, //frame
+            game.config.width -315, game.config.height-110, //write msg
+            game.config.width -55, game.config.height-110,  //send
+            game.config.width - 625, game.config.height-400,    //global
+        
+        ];
+        chatPos = [
+            game.config.width-100,  chatTween[1],    //icono
+            chatTween[2]+chtOffset,  chatTween[3], //base
+            chatTween[4]+chtOffset,  chatTween[5], //frame
+            chatTween[6]+chtOffset,  chatTween[7], //write msg
+            chatTween[8]+chtOffset,  chatTween[9],  //send
+            game.config.width-100,  chatTween[11]  //global
+        ];
     }
 
     create() {
