@@ -20,6 +20,7 @@ public class PruebaSpaceYApplication implements WebSocketConfigurer{
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(Handler(), "/pSockets").setAllowedOrigins("*");
 		registry.addHandler(LobbiesHandler(), "/lobbies").setAllowedOrigins("*");
+		registry.addHandler(GamesHandler(), "/games").setAllowedOrigins("*");
 	}
 	
 	@Bean
@@ -31,6 +32,12 @@ public class PruebaSpaceYApplication implements WebSocketConfigurer{
 	public WsLobbiesHandler LobbiesHandler() {
 		return new WsLobbiesHandler();
 	}
+	
+	@Bean
+	public WsGamesHandler GamesHandler() {
+		return new WsGamesHandler();
+	}
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PruebaSpaceYApplication.class, args);
