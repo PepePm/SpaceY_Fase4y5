@@ -177,7 +177,14 @@ class SceneGame extends Phaser.Scene {
 
 		//En cuanto me llegue un mensaje
 		connection.onmessage = function(msg){
-			console.log("Mensaje recibidoOOOOO: " + msg.data);
+			var data = JSON.parse(msg.data);
+			
+			switch(data["type"]){
+				case "rotation":
+					marte.rotation = data["value"];
+				break;
+				
+			}
 		}
 
         //Valores iniciales recursos
