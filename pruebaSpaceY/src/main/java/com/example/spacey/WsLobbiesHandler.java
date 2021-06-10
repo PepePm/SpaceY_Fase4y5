@@ -12,23 +12,27 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+public class WsLobbiesHandler extends TextWebSocketHandler {
 
-
-public class WebSocketPruebaHandler extends TextWebSocketHandler {
-
-	private Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
+	private Map<String, WebSocketSession> lobbies = new ConcurrentHashMap<>();
+	private Map<String, List<WebSocketSession>> games = new ConcurrentHashMap<>();
+	
 	private ObjectMapper mapper = new ObjectMapper();
 	
-	@Override
+	/*@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("New user: " + session.getId());
 		sessions.put(session.getId(), session);
-	}
+	}*/
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println("Session closed: " + session.getId());
-		sessions.remove(session.getId());
+		//System.out.println("Borramos lobby: " + session.getId());
+		//sessions.remove(session.getId());
+		
+		// Si aun no ha empezado la partida, se cierra el lobby
+		//if (lobbies.containsValue(session))
+			//lobbies.remove()session lobbies.get
 	}
 	
 	@Override

@@ -1,7 +1,7 @@
 class WebsocketsTest {
     
     constructor(){
-        var connection = new WebSocket("ws://127.0.0.1:8080/pSockets");
+        var connection = new WebSocket("ws://79.146.8.198:8080/pSockets");
 
         connection.onopen = function(){
             console.log("abierto");

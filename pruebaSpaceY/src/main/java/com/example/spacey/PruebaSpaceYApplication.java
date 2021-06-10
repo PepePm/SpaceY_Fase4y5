@@ -19,11 +19,17 @@ public class PruebaSpaceYApplication implements WebSocketConfigurer{
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(Handler(), "/pSockets").setAllowedOrigins("*");
+		registry.addHandler(LobbiesHandler(), "/lobbies").setAllowedOrigins("*");
 	}
 	
 	@Bean
 	public WebSocketPruebaHandler Handler() {
 		return new WebSocketPruebaHandler();
+	}
+	
+	@Bean
+	public WsLobbiesHandler LobbiesHandler() {
+		return new WsLobbiesHandler();
 	}
 	
 	public static void main(String[] args) {
