@@ -21,7 +21,15 @@ public class WebSocketPruebaHandler extends TextWebSocketHandler {
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("New user: " + session.getId());
+		
+		// Crea un identificador unico en base al id del cliente
+		String sessionID = session.getId().replaceAll("-", "");
+		System.out.println("id: " + sessionID + "\n");
+		
+		Hashids hashids = new Hashids(sessionID);
+		String id = hashids.encode(123456);
+
+		System.out.println("New user: " + session.getId() + "id hash: " + id);
 		sessions.put(session.getId(), session);
 	}
 	

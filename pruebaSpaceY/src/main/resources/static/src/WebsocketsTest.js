@@ -8,6 +8,10 @@ class WebsocketsTest {
             connection.send("socketTruco chaval");
         }
 
+        connection.onclose = function(){
+            
+        }
+
         connection.onerror = function(e){
             console.log("error: " + e);
         }

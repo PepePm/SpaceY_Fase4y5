@@ -19,33 +19,52 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	
-	/*@Override
+	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("New user: " + session.getId());
-		sessions.put(session.getId(), session);
-	}*/
+		
+		// Crea un identificador unico en base al id del cliente
+		String sessionID = session.getId().replaceAll("-", "");
+		System.out.println("id: " + sessionID + "\n");
+		
+		Hashids hashids = new Hashids(sessionID);
+		String idLobby = hashids.encode(123456);
+		System.out.println("Nuevo lobby: " + idLobby);
+		
+		lobbies.put(idLobby, session);
+		session.sendMessage(new TextMessage("Te conectaste"));
+	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		//System.out.println("Borramos lobby: " + session.getId());
-		//sessions.remove(session.getId());
+		
+		// Crea un identificador unico en base al id del cliente
+		String sessionID = session.getId().replaceAll("-", "");
+		System.out.println("id: " + sessionID + "\n");
+		
+		Hashids hashids = new Hashids(sessionID);
+		String idLobby = hashids.encode(123456);
+		System.out.println("Lobby que se va a cerrar: " + idLobby);
+		
+		lobbies.remove(idLobby);
+		games.remove(idLobby);
 		
 		// Si aun no ha empezado la partida, se cierra el lobby
 		//if (lobbies.containsValue(session))
 			//lobbies.remove()session lobbies.get
 	}
 	
+	// Se ejecuta cuando un cliente envía un mensaje al server
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("Message received: " + message.getPayload());
+		System.out.println("Mensaje recibido: " + message.getPayload());
 		
 		String msg = message.getPayload();
 		/*session.sendMessage(new TextMessage(msg));*/
 		
-		for(WebSocketSession participant : sessions.values()) {
-			if(!participant.getId().equals(session.getId())) {
+		for(WebSocketSession participant : lobbies.values()) {
+			//if(!participant.getId().equals(session.getId())) {
 				participant.sendMessage(new TextMessage(msg));
-			}
+			//}
 		}
 	}
 }

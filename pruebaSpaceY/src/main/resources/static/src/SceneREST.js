@@ -32,7 +32,7 @@ function RestCreateMsg (scene, username) {
 function createMsg(scene, msg) {
     $.ajax({
         method: "POST",
-        url: urlServer+'/messages',
+        url: "http://"+urlServer+'/messages',
         data: JSON.stringify(msg),
         processData: false,
         headers: {
@@ -47,7 +47,7 @@ function createMsg(scene, msg) {
 function loadMsgs(scene) {
 
     $.ajax({
-        url: urlServer+'/messages',
+        url: "http://"+urlServer+'/messages',
 
     }).done(function (msgs) {
         ////console.log('Messages loaded: ' + JSON.stringify(msgs));
@@ -111,7 +111,7 @@ function createUser(scene, user) {
 
     $.ajax({
         method: "POST",
-        url: urlServer+'/users',
+        url: "http://"+urlServer+'/users',
         data: JSON.stringify(user),
         processData: false,
         headers: {
@@ -134,7 +134,7 @@ function createUser(scene, user) {
 //Load users from server
 function loadUsers() {
     $.ajax({
-        url: urlServer+'/users'
+        url: "http://"+urlServer+'/users'
     }).done(function (users) {
         //console.log('Users loaded: ' + JSON.stringify(users));
     })
@@ -142,7 +142,7 @@ function loadUsers() {
 
 function loadLobby(scene) {
     $.ajax({
-        url: urlServer+'/users/online'
+        url: "http://"+urlServer+'/users/online'
     }).done(function (users) {
 
         scene.lobbyContent = ['Connected users:'];
@@ -165,7 +165,7 @@ function CheckUsernameDB (scene, user) {
 
     $.ajax({
         method: "POST",
-        url: urlServer+'/users/check',
+        url: "http://"+urlServer+'/users/check',
         data: JSON.stringify(user),
         processData: false,
         headers: {
@@ -199,7 +199,7 @@ function CheckUserPasswordCorrect(scene, name_, pass_) {
 
     $.ajax({
         method: "POST",
-        url: urlServer+'/users/checkPassword',
+        url: "http://"+urlServer+'/users/checkPassword',
         data: JSON.stringify(user),
         processData: false,
         headers: {
@@ -223,7 +223,7 @@ function setUserOnline(scene, username, online_) {
     }
     $.ajax({
         method: 'PUT',
-        url: urlServer+'/users/'+username,
+        url: "http://"+urlServer+'/users/'+username,
         data: JSON.stringify(user),
         processData: false,
         headers: {
@@ -271,7 +271,7 @@ function RestCreateLoginOutMsg (scene, username, logIn) {
 function GetUserImg(scene, username){
 
     $.ajax({
-        url: urlServer+'/users/'+username,
+        url: "http://"+urlServer+'/users/'+username,
         data: username,
     }).done(function (numImg) {
         //console.log("Imagen: " + numImg);
@@ -316,7 +316,7 @@ function LoginVisibility(scene, username, userExists){
 
 function isServerOnline(scene) {
     $.ajax({
-        url: urlServer+'/messages',
+        url: "http://"+urlServer+'/messages',
         success: function(){
             setOnline(scene, true);
         },
@@ -350,7 +350,7 @@ function setOnline(scene, b) {
 function updateUsers(scene) {
 
     $.ajax({
-        url: urlServer+'/users/count'
+        url: "http://"+urlServer+'/users/count'
     }).done(function (n) {
 
         setUsers(scene, n)
@@ -455,7 +455,7 @@ function RestCreateItem (scene) {
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: urlServer+'/items'
+        url: "http://"+urlServer+'/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -466,7 +466,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: urlServer+'/items',
+        url: "http://"+urlServer+'/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -482,7 +482,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: urlServer+'/items/' + item.id,
+        url: "http://"+urlServer+'/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -497,7 +497,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: urlServer+'/items/' + itemId
+        url: "http://"+urlServer+'/items/' + itemId
     }).done(function (item) {
         //console.log("Deleted item " + itemId)
     })
