@@ -61,8 +61,8 @@ class CommsMachine extends Machine {
 
     AlertSandStorm() {
         //Avisar de tormenta
-        if (!this.isBroken)
-            controlTierra.WarnEvent(1);
+        if (!this.isBroken) //      play    :       https://www.youtube.com/watch?v=y6120QOlsfU
+            //controlTierra.WarnEvent(1); //signal a TIERRA de tormenta acercándose... EN TIERRA ENVIAR MENSAJE DE LA TORMENTA !!
 
         this.scene.time.addEvent({ delay: 1000*5, callback: this.SandStorm, callbackScope: this});
     }
@@ -86,7 +86,7 @@ class CommsMachine extends Machine {
         }
         emitterStorm.on = false;
         playerSpeed = 1;
-        controlTierra.tweenTxtEventsOUT();
+        //controlTierra.tweenTxtEventsOUT();    // enviar signal a tierra para acabar la tormenta de arena
     }
 
     AlertMeteorRain() {

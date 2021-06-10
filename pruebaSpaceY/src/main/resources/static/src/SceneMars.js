@@ -1,7 +1,3 @@
-//import meteorito from './meteorito.js';
-
-//const { default: Machine } = require("./Machine");
-
 //Variables
 //Directorio imágenes
 var directory = "./Resources/Game/";
@@ -61,6 +57,19 @@ var indO2;
 var indMat;
 var indHam;
 var meteoritos;
+
+
+//CHATBOX
+var chatBoxActive = false;
+var chatBoxOut = false;
+var lobbyActive = false;
+//check active
+var lineasChat = 0;
+
+//posiciones
+var chatPos;
+var chatTween;
+
 /*
 //Tierra
 var controlTierra;
@@ -161,18 +170,119 @@ class SceneMars extends Phaser.Scene {
 
     preload() {
         this.load.image('smoke', './Resources/smoke_particle.png');
+
+        //CHAT POSTITIONS BEFORE - AFTER
+        var chtOffset = 1000;
+   
+        chatTween = [
+            game.config.width - 625, game.config.height-200,    //icono
+            game.config.width -300, game.config.height-380, //base
+            game.config.width -300, game.config.height-380, //frame
+            game.config.width -315, game.config.height-110, //write msg
+            game.config.width -55, game.config.height-110,  //send
+            game.config.width - 625, game.config.height-400,    //global
+        
+        ];
+        chatPos = [
+            game.config.width-100,  chatTween[1],    //icono
+            chatTween[2]+chtOffset,  chatTween[3], //base
+            chatTween[4]+chtOffset,  chatTween[5], //frame
+            chatTween[6]+chtOffset,  chatTween[7], //write msg
+            chatTween[8]+chtOffset,  chatTween[9],  //send
+            game.config.width-100,  chatTween[11]  //global
+        ];
     }
 
     create() {
+
+
+         //CHATBOX
+    //Chatbox icon
+    this.chatbutton = this.add.image(chatPos[0], chatPos[1],'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
+    .setScale(0.6);
+    this.chatbutton.setInteractive()
+    .on('pointerdown', () => this.MovinBoxes(this ,1))
+    .on('pointerover', () => this.enterIconHoverState(this.chatbutton, this))
+    .on('pointerout', () => this.enterIconRestState(this.chatbutton))
+    this.chatbutton.setOrigin(0.5);
+
+    //chatbox base
+    this.chatBase = this.add.image(chatPos[2], chatPos[3],'ChatBox_Base')
+    .setScale(0.8);
+    this.chatBase.setOrigin(0.5);
+
+    //chatbox write msg
+    this.chatWritter = this.add.image(chatPos[6], chatPos[7],'ChatBox_MsgBox')
+    .setScale(0.37);
+    this.chatWritter.setOrigin(0.5);
+
+    //chatbox send
+    this.sendButton = this.add.image(chatPos[8], chatPos[9],'ChatBox_SendBtn')
+    .setScale(0.4);
+    this.sendButton.setInteractive()
+    .on('pointerdown', () => RestCreateMsg(this, userName))
+    .on('pointerover', () => this.enterIconHoverState(this.sendButton, this) )
+    .on('pointerout', () => this.enterIconRestState(this.sendButton))
+    this.sendButton.setOrigin(0.5);
+    this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter,this.sendButton, this.globalbutton];
+
+    var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
+    key_enter.on('down', () => RestCreateMsg(this, userName));
+    
+    
+    //Chatbox code
+    this.chatContent = [];
+    loadMsgs(this);
+
+    this.chatText = this.add.text(game.config.width/6*4+10, game.config.height/5+10, this.chatContent, { fontSize:"25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
+
+    this.chatText.setMask(mask).setVisible(false);
+
+    var zone = this.add.zone(game.config.width/6*4+10, game.config.height/5+1, 320, game.config.height/5*3+5).setOrigin(0).setInteractive();
+    var that = this;
+    zone.on('pointermove', function (pointer) {
+
+        if (pointer.isDown)
+        {
+            that.chatText.y += (pointer.velocity.y / 10);
+
+            that.chatText.y = Phaser.Math.Clamp(that.chatText.y, (game.config.height/5+10)-(25*lineasChat), game.config.height/5+10);
+        }
+
+    });
+
+    this.writeTextChat = this.add.dom(1280, 785).createFromCache('formChat').setVisible(false);
+    
+    var graphics = this.make.graphics();
+    graphics.fillRect(game.config.width/6*4+10, game.config.height/5+1, game.config.width/6*4+300, game.config.height/5*3+5);
+    var mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
+
+        //LOBBY
+        this.lobbyContent = ["Connected Users: "];
+        loadLobby(this);
+    
+        this.lobbyText = this.add.text(game.config.width/6*4+10, game.config.height/5+10, this.lobbyContent,
+        {fontSize:"25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
+        this.lobbyText.setMask(mask).setVisible(false).setDepth(1000);
+    
+        this.numPlayers = updateUsers(this);
+        this.numPlayersTxt = this.add.text(game.config.width*3.25/4, (game.config.height/8)*6.8, "REGISTERED USERS: "+this.numPlayers, { fill: '#FFFFFF',fontFamily:'menuFont',fontSize:'40px' });
+        this.numPlayersTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
+    
+        this.serverOnlineTxt = this.add.text(game.config.width*3.25/4, (game.config.height/8)*7.2, "SERVER ¿?", { fill: '#FFFFFF',fontFamily:'menuFont',fontSize:'40px' });
+        this.serverOnlineTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
+    
+        isServerOnline(this);
+
+
+
+
 
         //Valores iniciales recursos
         nCoheteMat = 150;
         nComida_M = 75;
         nRocas_M = 30;
         nMaterial_M = 20;
-
-
-
 
         sfx.sounds[2].loop = sfx.loop;  //NI IDEA OIGA                  ****************************************
         sfx.sounds[3].loop = sfx.loop;
@@ -194,7 +304,6 @@ class SceneMars extends Phaser.Scene {
         
 
         //MARTE
-		 ui_M_bck
         fondoMarte = this.add.image(407, 450, "fondoMarte").setDepth(-2);
 
         //Inicialización planeta
@@ -267,7 +376,7 @@ class SceneMars extends Phaser.Scene {
         objCoheteMat.obj.setRotation(-1.57);
 
         //Barra de carga
-        //barraCarga = new Bar(this, player.x-40, player.y-50, nCarga, MAX_CARGA, 0.4, 0.4, -1, false);        
+        barraCarga = new Bar(this, player.x-40, player.y-50, nCarga, MAX_CARGA, 0.4, 0.4, -1, false);        
 
         //Input events
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -421,7 +530,7 @@ class SceneMars extends Phaser.Scene {
     update(time, delta) {
 
 
-        controlTierra.pantallaPlano.rotation+=delta/16000;
+        //controlTierra.pantallaPlano.rotation+=delta/16000;
         //DEBUG PARTICULAS
         /*if (key_left.isDown) {
             //Apaga
@@ -512,10 +621,10 @@ class SceneMars extends Phaser.Scene {
         //Interaccionar con máquinas//
         //////////////////////////////
         //Mostrar tecla interacción
-        /*if (!(maquinas[0].canInteract() || maquinas[1].canInteract() || maquinas[2].canInteract() || maquinas[3].canInteract()) && maquinas[0].isSending) {
+        if (!(maquinas[0].canInteract() || maquinas[1].canInteract() || maquinas[2].canInteract() || maquinas[3].canInteract()) && maquinas[0].isSending) {
 
             teclaAccion.setVisible(false);
-        }*/
+        }
         
         //Acciones de cada máquina
         for(i = 0; i < 4; i++) {
@@ -547,7 +656,7 @@ class SceneMars extends Phaser.Scene {
 
         
         //TIERRA
-        controlTierra.Update(delta);
+        //controlTierra.Update(delta);
 
         if (key_pause.isDown && !paused) {
 
@@ -571,9 +680,239 @@ class SceneMars extends Phaser.Scene {
         //
     }
 
+    OpenChat(scene)
+{
+  
+   var nX = 0; var nY = 1;
+        for (let i = 0; i < scene.chatboxStuff.length; i++)
+        {
+            scene.tweens.add({
+                targets: scene.chatboxStuff[i],
+                x: chatTween[nX],
+                y: chatTween[nY],
+                //delay: 100,
+                //aplha: {start: game.config.width / 2, to: game.config.width / 8},
+                duration: 100,
+                ease: 'Bounce.easeOut',
+            });
+            nX+=2;nY+=2;
+        }
+        chatBoxOut = true;
     
 }
+ChatManager(scene,id)
+{
+    if(!chatBoxActive && chatBoxOut && !lobbyActive)
+    {
+        this.CloseChat(scene);
+    }
+    if(chatBoxActive && !chatBoxOut && !lobbyActive)    //abrimos chat
+    {
+        scene.chatWritter.setVisible(true);
+        scene.sendButton.setVisible(true);
+        scene.chatText.setVisible(true);
+        scene.writeTextChat.setVisible(true);
+        scene.lobbyText.setVisible(false);
+        scene.numPlayersTxt.setVisible(false);
+        scene.serverOnlineTxt.setVisible(false);
+        this.OpenChat(scene);
+    }
+    if(!chatBoxActive && !chatBoxOut && lobbyActive)    //abrimos lobby
+    {
+        scene.chatWritter.setVisible(false);
+        scene.sendButton.setVisible(false);
+        scene.chatText.setVisible(false);
+        scene.writeTextChat.setVisible(false);
+        scene.lobbyText.setVisible(true);
+        scene.numPlayersTxt.setVisible(true);
+        scene.serverOnlineTxt.setVisible(true);
+        this.OpenChat(scene);
+    }
+    if(chatBoxActive && chatBoxOut && lobbyActive)
+    {
+        if(id == 0)
+        {
+            scene.chatWritter.setVisible(false);
+            scene.sendButton.setVisible(false);
+            scene.chatText.setVisible(false);
+            scene.writeTextChat.setVisible(false);
+            scene.lobbyText.setVisible(true);
+            scene.numPlayersTxt.setVisible(true);
+            scene.serverOnlineTxt.setVisible(true);
+            chatBoxActive = false;
+        }
+        else
+        {
+            scene.chatWritter.setVisible(true);
+            scene.sendButton.setVisible(true);
+            scene.chatText.setVisible(true);
+            scene.writeTextChat.setVisible(true);
+            scene.lobbyText.setVisible(false);
+            scene.numPlayersTxt.setVisible(false);
+            scene.serverOnlineTxt.setVisible(false);
+            lobbyActive = false;
+        }
+    }
+}
+//sacar el chat 
+MovinBoxes(scene, id) 
+{
+    sfx.sounds[1].play();
 
+    var nX = 0; var nY = 1;
+    switch(id)
+    {
+        case 0: // Abrir cerrar lobby 
+            lobbyActive = !lobbyActive;
+            this.ChatManager(scene,id);
+            break;
+        case 1: //abrir cerrar chatbox chatbox
+           
+            chatBoxActive = !chatBoxActive;
+            this.ChatManager(scene,id);
+
+            break;
+        case 2: //login loginBox,loginOption;
+        
+            
+            if(loginOut)    //guardar log in
+            {
+                
+                for (let i = 0; i < scene.loginStuff.length; i++)
+                {
+                    scene.tweens.add({
+                        targets: scene.loginStuff[i],
+                        x: loginPos[nX],
+                        y: loginPos[nY],
+                        duration: 100,
+                        ease: 'Bounce.easeOut',
+                    });
+                    nX+=2;nY+=2;
+                }
+                loginOut = true;
+                this.ShowLoginFields(scene,loginOut);
+
+                this.accountText.setVisible(false);
+                this.accountLogin.setVisible(false);
+                this.accountLogin.setVisible(false);
+                this.accountLogin.setActive(false);
+            }
+            else if (!loginOut) //sacar log in
+            {
+                this.accountText.setVisible(true);
+                //this.accountLogin.setVisible(true);
+
+                for (let i = 0; i < scene.loginStuff.length; i++)
+
+                {
+                    scene.tweens.add({
+                        targets: scene.loginStuff[i],
+                        x: loginTween[nX],
+                        y: loginTween[nY],
+                        duration: 100,
+                        ease: 'Bounce.easeOut',
+                    });
+                    nX+=2;nY+=2;
+                }
+                loginOut = false;
+
+                this.ShowLoginFields(scene,loginOut);
+            }
+            
+            break;
+        case 3: //register registerBox, registerBtn, nextImg, prevImg;
+            
+            if(registerOut) //guardar register
+            {
+                this.regLogin.setVisible(false);
+                this.accountText.setColor("white");
+                this.accountText.setText('Please enter in your account');
+
+                for (let i = 0; i<scene.registerStuff.length; i++)
+
+                {
+                    scene.tweens.add({
+                        targets: scene.registerStuff[i],
+                        x: regisPos[nX],
+                        y: regisPos[nY],
+                        duration: 100,
+                        ease: 'Expo.easeOut',
+                    });
+                    nX+=2;nY+=2;
+                }
+                registerOut = false
+                //this.ShowRegisternFields(scene,registerOn);
+            }
+            else if(!registerOut) //sacar register
+            {
+                this.regLogin.setVisible(true);
+                for (let i = 0; i < scene.registerStuff.length; i++)
+                {
+                    scene.tweens.add({
+                        targets: scene.registerStuff[i],
+                        x: regisTween[nX],
+                        y: regisTween[nY],
+                        duration: 100,
+                        ease: 'Expo.easeOut',
+                    });
+                    nX+=2;nY+=2;
+                }
+                registerOut = true
+                //this.ShowRegisternFields(scene,registerOn);
+            }
+            
+            break;
+    }
+        
+
+       
+    
+}
+CloseChat(scene){
+    var nX = 0; var nY = 1; 
+    scene.chatWritter.setVisible(false);
+    scene.sendButton.setVisible(false);
+    scene.chatText.setVisible(false);
+    scene.writeTextChat.setVisible(false);
+    scene.lobbyText.setVisible(false);
+    scene.numPlayersTxt.setVisible(false);
+    scene.serverOnlineTxt.setVisible(false);
+    for (let i = 0; i < scene.chatboxStuff.length; i++)
+    {
+        scene.tweens.add({
+            targets: scene.chatboxStuff[i],
+            x: chatPos[nX],
+            y: chatPos[nY],
+            //delay: 100,
+            //aplha: {start: game.config.width / 2, to: game.config.width / 8},
+            duration: 100,
+            ease: 'Bounce.easeIn',
+        });
+        nX+=2;nY+=2;
+    }
+    chatBoxOut = false;
+    chatBoxActive = false;
+    lobbyActive = false;
+}
+//INTERACTIVIDAD
+
+
+
+enterIconHoverState(boton, scene){
+    
+    sfx.sounds[1].play();
+    boton.x = boton.x+movTxt;
+    boton.y = boton.y+movTxt;
+}
+
+enterIconRestState(boton) {
+
+    boton.x = boton.x-movTxt;
+    boton.y = boton.y-movTxt;
+}
+
+
+}
 function genMeteors() {
 
     //var delay = 0;
@@ -690,6 +1029,7 @@ function HighlightPostIt(obj, b) {
     b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);  
     //if (!b) obj.add.image(game.config.width/2, game.config.height/2, "postIt");
 }
+
 function OpenPostIt(obj,scene) {
 
     switch(obj)
@@ -760,4 +1100,6 @@ function OpenPostIt(obj,scene) {
     }
     
 }
+
+
 
