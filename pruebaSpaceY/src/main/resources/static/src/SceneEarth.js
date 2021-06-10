@@ -1037,6 +1037,10 @@ function HighlightPostIt(obj, b) {
     b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);  
     //if (!b) obj.add.image(game.config.width/2, game.config.height/2, "postIt");
 }
+function WarningSignal(warning, ){
+    //recibimos uin tipo de mensaje y en función de su contenido enviamos una señal al terminal de marte
+    //
+}
 function OpenPostIt(obj,scene) {
 
     switch(obj)
