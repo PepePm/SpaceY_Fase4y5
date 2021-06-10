@@ -944,7 +944,7 @@ easeMe(boton,scene,nOp){
     var endY;
     switch (nOp)
     {
-        case 1: endX = game.config.width / 2; endY = (game.config.height/8)*3; break;
+        case 1: endX = game.config.width / 2; endY = (game.config.height/8)*3; break;  
         case 2: endX = game.config.width / 2; endY = (game.config.height/8)*4; break;
         case 3: endX = game.config.width / 2; endY = (game.config.height/8)*5; break;
         case 4: endX = game.config.width / 2; endY = (game.config.height/8)*6; break;

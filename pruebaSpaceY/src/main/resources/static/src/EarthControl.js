@@ -40,6 +40,8 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         this.maxSize = maxSize;
         this.size = 0;
 
+
+        //metodos del cohete
         this.rocket = scene.add.sprite(957, -400, "movimientoCohete", 7).setScale(1.3).setDepth(2);
         this.rocketY = 400;
         this.goTakeOff = false;
@@ -201,20 +203,27 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         .on('pointerover', () => this.HighlightController(this.controlTerr, true) )
         .on('pointerout', () => this.HighlightController(this.controlTerr, false) );
 
-        //Textos desgaste
-        this.wearTxt = new Array(4);
-        for (var i=0; i < maquinas.length; i++) {
+        //Textos desgaste                                                                   //**************************************************** */
+        /*this.wearTxt = new Array(4);
+        for (var i=0; i < 4; i++) { //meter que el length es hasta las máquinas.length
 
             this.wearTxt[i] = scene.add.text(800, 200, Math.round((maquinas[i].wear/maquinas[i].maxWear)*100)+"%",{
                 fontSize:'35px',
                 fill:'#ffffff',
                 fontStyle:'bold',
             }).setOrigin(0.5).setDepth(5);
-        }
+        }*/
+
+        /*
         this.wearTxt[0].setPosition(this.controlRocket.x, this.controlRocket.y).setVisible(false);
         this.wearTxt[1].setPosition(this.controlTerr.x, this.controlTerr.y).setVisible(false);
         this.wearTxt[2].setPosition(this.controlCom.x, this.controlCom.y).setVisible(false);
         this.wearTxt[3].setPosition(this.controlMina.x, this.controlMina.y).setVisible(false);
+        */
+
+
+
+
 
         this.comboNums = new Array(8);
         this.TxtComboNums = scene.add.text(this.controlKey.x, this.controlKey.y+2, "00000000",{
@@ -250,6 +259,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
     Update(delta) {
 
+        /*
         if (objCohete.goLand)
             controlTierra.Land(delta);
         
@@ -257,10 +267,10 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             controlTierra.TakeOff(delta);
 
         //Desgaste textos
-        for (var i=0; i < maquinas.length; i++) {
+        for (var i=0; i < 4; i++) {
             this.wearTxt[i].setText(Math.round((maquinas[i].wear/maquinas[i].maxWear)*100)+"%");
         }
-
+        */
         
         
     }
