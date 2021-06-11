@@ -609,6 +609,7 @@ goHost(){
 			connection.send(JSON.stringify(data));   
         }
 
+        var that = this;
         connection.onmessage = function(msg){
             var data = JSON.parse(msg.data);
 			
@@ -620,9 +621,9 @@ goHost(){
                     break;
                 case "startGame":
                     if(data["gamemode"] == "Mars")
-                        startGame('sceneMars');
+                        that.startGame('sceneMars');
                     else
-                        startGame('sceneEarth');
+                        that.startGame('sceneEarth');
                     break;
                 case "playerJoined":
                     var data = {
@@ -668,6 +669,7 @@ goJoin(){
 			connection.send(JSON.stringify(data));   
         }
 
+        var that = this;
         connection.onmessage = function(msg){
            switch(data["type"]){
                 case "connected":
@@ -677,9 +679,9 @@ goJoin(){
                     break;
                 case "startGame":
                     if(data["gamemode"] == "Mars")
-                        startGame('sceneMars');
+                        that.startGame('sceneMars');
                     else
-                        startGame('sceneEarth');
+                        that.startGame('sceneEarth');
                     break;
             }
             
