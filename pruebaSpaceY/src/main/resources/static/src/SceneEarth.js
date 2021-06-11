@@ -196,6 +196,8 @@ class SceneEarth extends Phaser.Scene {
             chatTween[8]+chtOffset,  chatTween[9],  //send
             game.config.width-100,  chatTween[11]  //global
         ];
+
+        
     }
 
     create() {

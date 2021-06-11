@@ -12,6 +12,7 @@ var toDestroy;          //NI IDEA OIGA                  ************************
 //Interfaz
 var movTxt = 2;    //Píxeles que se mueve el texto al hacer hovering
 var counter;    //contador de 
+var ConsolePos;
 
 //Inputs
 var key_left;
@@ -192,6 +193,26 @@ class SceneMars extends Phaser.Scene {
             chatTween[8]+chtOffset,  chatTween[9],  //send
             game.config.width-100,  chatTween[11]  //global
         ];
+
+
+        //CONSOLE POSITIONS
+        ConsolePos = [
+            1207, 447,    //consolabase
+            1280, 165, //timer
+            1430, 155, //terraform level
+            1065, 166, //alertas
+            1435, 419,  //caja pilotos
+            1435, 265,    //piloto antena
+            1435, 365,  //piloto terraformador
+            1435, 465, //piloto cohete
+            1435, 565,  //piloto mina
+            1267, 675,  //boton enviar mensaje
+            1443, 675,  //boton necesito recursos
+            1353, 675,  //boton necesito comida
+            1078, 680,  //caja de mensaje
+            1150, 419,  //chatbox
+        ];
+        
     }
 
     create() {
@@ -306,10 +327,10 @@ class SceneMars extends Phaser.Scene {
 
         //MARTE
         fondoMarte =
-         this.add.image(407, 450, "fondoMarte").setDepth(-2);
+        this.add.image(407, 450, "fondoMarte").setDepth(-2);
 
-         //Fondo Consola
-         fondoConsola = this.add.image(1202, 450, "fondoTierra").setDepth(1);
+        //Fondo Consola
+        fondoConsola = this.add.image(1202, 450, "fondoTierra").setDepth(1);
 
         //Inicialización planeta
         marte = this.add.image(game.config.width/4, 1250, "marte").setScale(3).setDepth(-2);
@@ -532,21 +553,20 @@ class SceneMars extends Phaser.Scene {
         //emitter.setEmitZone(emitZones[emitZoneIndex]); 
          //Añadimos fondo de marte
 
-         //ELEMENTOS DE LA CONSOLA DE MARTE
-         this.UiMarsCons = this.add.image(1207, 447, "UIMarsCons").setDepth(4);
-         this.UiMarsTime = this.add.image(1280, 165, "UIMarsTime").setDepth(4);
-         this.UiMarTerraform = this.add.image(1430, 155, "UIMarsTerraform").setDepth(4);
-         this.UiMarsAlerts = this.add.image(1065, 166, "UIMarsAlerts").setDepth(4);
-         this.UiMarsPilots = this.add.image(1435, 419, "UIMarsPilots").setDepth(4);
-         this.UiMarsAntenaPilot = this.add.image(1435, 265, "UIMarsAntennaPilot").setDepth(4);
-         this.UiMarsTerraPilot = this.add.image(1435, 365, "UIMarsTerraPilot").setDepth(4);
-         this.UiMarsRocketPilot = this.add.image(1435, 465, "UIMarsRocketPilot").setDepth(4);
-         this.UiMarsMinePilot = this.add.image(1435, 565, "UIMarsMinePilot").setDepth(4);
-
+         //*****************************                    ELEMENTOS DE LA CONSOLA DE MARTE        ***********************************
+         this.UiMarsCons = this.add.image(ConsolePos[0], ConsolePos[1], "UIMarsCons").setDepth(4);
+         this.UiMarsTime = this.add.image(ConsolePos[2], ConsolePos[3], "UIMarsTime").setDepth(4);
+         this.UiMarTerraform = this.add.image(ConsolePos[4], ConsolePos[5], "UIMarsTerraform").setDepth(4);
+         this.UiMarsAlerts = this.add.image(ConsolePos[6], ConsolePos[7], "UIMarsAlerts").setDepth(4);
+         this.UiMarsPilots = this.add.image(ConsolePos[8], ConsolePos[9], "UIMarsPilots").setDepth(4);
+         this.UiMarsAntenaPilot = this.add.image(ConsolePos[10], ConsolePos[11], "UIMarsAntennaPilot").setDepth(4);
+         this.UiMarsTerraPilot = this.add.image(ConsolePos[12], ConsolePos[13], "UIMarsTerraPilot").setDepth(4);
+         this.UiMarsRocketPilot = this.add.image(ConsolePos[14], ConsolePos[15], "UIMarsRocketPilot").setDepth(4);
+         this.UiMarsMinePilot = this.add.image(ConsolePos[16], ConsolePos[17], "UIMarsMinePilot").setDepth(4);
 
          //boton para enviar mensaje de chat
          
-         this.UiMarsSndMsgBtn =  this.add.image(1267, 675, "UIMarsSndMsg").setDepth(4)
+         this.UiMarsSndMsgBtn =  this.add.image(ConsolePos[18], ConsolePos[19], "UIMarsSndMsg").setDepth(4)
          .setInteractive()
          .on('pointerdown', () =>  this.UiMarsSndMsgBtn())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndMsgBtn, true) )
@@ -554,7 +574,7 @@ class SceneMars extends Phaser.Scene {
          .on('pointerout', () => this.Highlight(this.UiMarsSndMsgBtn, false) );
          
         //boton para enviar recursos
-         this.UiMarsSndResBtn = this.add.image(1443, 675, "UIMarsSndRes").setDepth(4)
+         this.UiMarsSndResBtn = this.add.image(ConsolePos[20], ConsolePos[21], "UIMarsSndRes").setDepth(4)
          .setInteractive()
          .on('pointerdown', () =>  this.UiMarsSndResBtn())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndResBtn, true) )
@@ -562,7 +582,7 @@ class SceneMars extends Phaser.Scene {
          .on('pointerout', () => this.Highlight(this.UiMarsSndResBtn, false) );
 
         //BOTON QUE ENVIA SEÑAL A TIERRA PARA RECIBIR PROVISIONES
-         this.UiMarsSndFoodBtn = this.add.image(1353, 675, "UIMarsSndFood").setDepth(4)
+         this.UiMarsSndFoodBtn = this.add.image(ConsolePos[22], ConsolePos[23], "UIMarsSndFood").setDepth(4)
          .setInteractive()
          .on('pointerdown', () =>  this.UiMarsSndFoodBtn())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndFoodBtn, true) )
@@ -570,11 +590,11 @@ class SceneMars extends Phaser.Scene {
          .on('pointerout', () => this.Highlight(this.UiMarsSndFoodBtn, false) );
 
         //caja para escribir mensajes
-         this.UiMarsMsgBox = this.add.image(1078, 680, "UIMarsMsgBox").setDepth(4);
+         this.UiMarsMsgBox = this.add.image(ConsolePos[24], ConsolePos[25], "UIMarsMsgBox").setDepth(4);
 
         //pantalla de mensajes del chat central 
-         this.UiMarsChatBox = this.add.image(1150, 419, "UIMarsChatBox").setDepth(4);
-
+         this.UiMarsChatBox = this.add.image(ConsolePos[26], ConsolePos[27], "UIMarsChatBox").setDepth(4);
+        //********************************                  ******************************************************************************** */
     
     }
     update(time, delta) {

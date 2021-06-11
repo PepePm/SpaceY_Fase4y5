@@ -398,7 +398,11 @@ class SceneBoot extends Phaser.Scene {
 
         ////console.log("Acabé");
 
-        this.scene.start('SceneMenu');
+<<<<<<< Updated upstream
+        this.scene.start('SceneEarth');
+=======
+        this.scene.start('SceneMars');
+>>>>>>> Stashed changes
         this.scene.stop('SceneLogos');
     }
 }
