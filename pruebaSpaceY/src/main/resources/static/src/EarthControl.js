@@ -254,42 +254,58 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         
 
         //ELEMENTOS DE LA CONSOLA DE LA TIERRA
-        this.UIEarthCons = scene.add.image(358, 447, "UIEarthCons").setDepth(4);
-        this.UIEarthTime = scene.add.image(451, 161, "UIEarthTime").setDepth(4);
-        this.UIEarthTerraform = scene.add.image(591, 155, "UIEarthTerraform").setDepth(4);
-        this.UIEarthAlerts = scene.add.image(213, 161, "UIEarthAlerts").setDepth(4);
-        this.UIEarthPilots = scene.add.image(591, 419, "UIEarthPilots").setDepth(4);
+        this.UIEarthCons = scene.add.image(357, 430, "UIEarthCons").setDepth(4);
+        this.UIEarthTime = scene.add.image(425, 145, "UIEarthTime").setDepth(4);
+        this.UIEarthTerraform = scene.add.image(580, 145, "UIEarthTerraform").setDepth(4);
+        this.UIEarthAlerts = scene.add.image(208, 145, "UIEarthAlerts").setDepth(4);
+
+        this.UiEarthPilots = scene.add.image(580, 355, "UIEarthPilots").setDepth(4);  //espacio para los pilotos de 
+        this.UiEarthSndBrkAntenaPilot = scene.add.image(133, 660, "UiEarthSndBrkAntenaPilot").setDepth(4)
+        .setInteractive()
+        .on('pointerdown', () =>  scene.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => scene.Highlight(this.UIEarthSndResBtn, true) )
+        .on('pointerover', () => scene.Highlight(this.UIEarthSndResBtn, true) )
+        .on('pointerout', () => scene.Highlight(this.UIEarthSndResBtn, false) );
+
+        this.UiEarthSndBrkTerraPilot = scene.add.image(243, 660, "UiEarthSndBrkTerraPilot").setDepth(4)
+        .setInteractive()
+        .on('pointerdown', () =>  scene.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => scene.Highlight(this.UIEarthSndResBtn, true) )
+        .on('pointerover', () => scene.Highlight(this.UIEarthSndResBtn, true) )
+        .on('pointerout', () => scene.Highlight(this.UIEarthSndResBtn, false) );
+
+    
+        this.UiEarthSndBrkRocketPilot = scene.add.image(352, 660, "UiEarthSndBrkRocketPilot").setDepth(4)
+        .setInteractive()
+        .on('pointerdown', () =>  scene.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => scene.Highlight(this.UIEarthSndResBtn, true) )
+        .on('pointerover', () => scene.Highlight(this.UIEarthSndResBtn, true) )
+        .on('pointerout', () => scene.Highlight(this.UIEarthSndResBtn, false) );
+
+        this.UiEarthSndBrkMine = scene.add.image(468, 660, "UiEarthSndBrkMinePilot").setDepth(4)
+        .setInteractive()
+        .on('pointerdown', () =>  scene.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => scene.Highlight(this.UIEarthSndResBtn, true) )
+        .on('pointerover', () => scene.Highlight(this.UIEarthSndResBtn, true) )
+        .on('pointerout', () => scene.Highlight(this.UIEarthSndResBtn, false) );
+
+        this.UIEarthNeedFoodPilot = scene.add.image(580, 290, "UIEarthNeedFoodPilot").setDepth(4);
+        this.UIEarthNeedResPilot = scene.add.image(580, 420, "UIEarthNeedResPilot").setDepth(4);
 
         //boton para enviar mensaje de chat
         
-        this.UIEarthSndMsgBtn =  scene.add.image(418, 693, "UIEarthSndMsg").setDepth(4)
+        this.UIEarthSndMsgBtn =  scene.add.image(480, 550, "UIEarthSndMsg").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  this.UIEarthSndMsgBtn())//this.Unload(this.unloadRocketBtn)
-        .on('pointerup', () => this.Highlight(this.UIEarthSndMsgBtn, true) )
-        .on('pointerover', () => this.Highlight(this.UIEarthSndMsgBtn, true) )
-        .on('pointerout', () => this.Highlight(this.UIEarthSndMsgBtn, false) );
-        
-       //boton para enviar recursos
-        this.UIEarthSndResBtn = scene.add.image(594, 693, "UIEarthSndRes").setDepth(4)
-        .setInteractive()
-        .on('pointerdown', () =>  this.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
-        .on('pointerup', () => this.Highlight(this.UIEarthSndResBtn, true) )
-        .on('pointerover', () => this.Highlight(this.UIEarthSndResBtn, true) )
-        .on('pointerout', () => this.Highlight(this.UIEarthSndResBtn, false) );
-
-       //BOTON QUE ENVIA SEÑAL A TIERRA PARA RECIBIR PROVISIONES
-        this.UIEarthSndFoodBtn = scene.add.image(504, 693, "UIEarthSndFood").setDepth(4)
-        .setInteractive()
-        .on('pointerdown', () =>  this.UIEarthSndFoodBtn())//this.Unload(this.unloadRocketBtn)
-        .on('pointerup', () => this.Highlight(this.UIEarthSndFoodBtn, true) )
-        .on('pointerover', () => this.Highlight(this.UIEarthSndFoodBtn, true) )
-        .on('pointerout', () => this.Highlight(this.UIEarthSndFoodBtn, false) );
+        .on('pointerdown', () =>  scene.UIEarthSndMsgBtn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => scene.Highlight(this.UIEarthSndMsgBtn, true) )
+        .on('pointerover', () => scene.Highlight(this.UIEarthSndMsgBtn, true) )
+        .on('pointerout', () => scene.Highlight(this.UIEarthSndMsgBtn, false) );
 
        //caja para escribir mensajes
-        this.UIEarthMsgBox = scene.add.image(229, 693, "UIEarthMsgBox").setDepth(4);
+        this.UIEarthMsgBox = scene.add.image(250, 550, "UIEarthMsgBox").setDepth(4);
 
        //pantalla de mensajes del chat central 
-        this.UIEarthChatBox = scene.add.image(310, 419, "UIEarthChatBox").setDepth(4);
+        this.UIEarthChatBox = scene.add.image(300, 355, "UIEarthChatBox").setDepth(4);
 
 
         
@@ -313,10 +329,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         
     }
 
-    Highlight(obj, b) {
-
-        b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);  
-    }
+   
 
     HighlightController(obj, b) {
 
@@ -964,6 +977,11 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             //onComplete: this.tweenLanzPuertaOut.bind(this)
         });
+    }
+
+    Highlight(obj, b) {
+
+        b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);  
     }
 }
 

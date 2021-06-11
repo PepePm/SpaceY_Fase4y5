@@ -130,17 +130,22 @@ class SceneBoot extends Phaser.Scene {
 
 
         //CONSOLA DE LA TIERRA
-        this.load.image("UIEarthCons", directory+"UI_Marte_Caja_naranja.png" );
-        this.load.image("UIEarthTime", directory+"UI_Marte_Tiempo.png" );
-        this.load.image("UIEarthTerraform", directory+"UI_Marte_Progreso_Terraformacion.png" );
-        this.load.image("UIEarthAlerts", directory+"UI_Marte_Caja_informativa.png" );
-        this.load.image("UIEarthPilots", directory+"UI_Marte_Contenedor_Pilotos.png" );
-        this.load.image("UIEarthSndMsg", directory+"UI_Marte_Boton_Enviar_Mensaje.png" );
-        this.load.image("UIEarthSndRes", directory+"UI_Marte_Boton_herramientas.png" );
-        this.load.image("UIEarthSndFood", directory+"UI_Marte_Boton_comida.png" );
-        this.load.image("UIEarthMsgBox", directory+"UI_Marte_Caja_texto.png" );
-        this.load.image("UIEarthChatBox", directory+"UI_Marte_Caja_Chat.png" );
-
+        this.load.image("UIEarthCons", directory+"UI_Tierra_Caja_Azul_con_Paneles.png" );
+        this.load.image("UIEarthTime", directory+"UI_Tierra_Tiempo-08.png" );
+        //this.load.image("UIEarthTerraform", directory+"UI_Marte_Progreso_Terraformacion.png" );//usar el de la tierra
+        this.load.image("UIEarthAlerts", directory+"UI_Tierra_Caja_informativa-08.png" );
+        this.load.image("UIEarthPilots", directory+"UI_Tierra_Contenedor_Pilotos-08.png" );
+        this.load.image("UiEarthSndBrkAntenaPilot", directory+"UI_Tierra_Boton_Maquina-11.png" );
+        this.load.image("UiEarthSndBrkTerraPilot", directory+"UI_Tierra_Boton_Maquina-10.png" );
+        this.load.image("UiEarthSndBrkRocketPilot", directory+"UI_Tierra_Boton_Maquina-09.png" );
+        this.load.image("UiEarthSndBrkMinePilot", directory+"UI_Tierra_Boton_Maquina-08.png" );
+        this.load.image("UIEarthNeedFoodPilot", directory+"UI_Tierra_Piloto_Mayonesa-12.png" );
+        this.load.image("UIEarthNeedResPilot", directory+"UI_Tierra_Piloto_Herramientas-12.png" );
+        this.load.image("UIEarthMsgBox", directory+"UI_Tierra_Caja_texto-08.png" );
+        this.load.image("UIEarthSndMsg", directory+"UI_Tierra_Boton_Enviar_Mensaje-08.png" );
+        this.load.image("UIEarthChatBox", directory+"UI_Tierra_Caja_Chat-08.png" );
+        
+    
 
         
         //TUTORIAL
@@ -392,7 +397,7 @@ class SceneBoot extends Phaser.Scene {
         });
 
         ////console.log("Acabé");
-        this.scene.start('SceneMars');
+        this.scene.start('SceneEarth');
         this.scene.stop('SceneLogos');
     }
 }
