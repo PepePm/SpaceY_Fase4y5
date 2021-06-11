@@ -162,7 +162,7 @@ var postIt;
 var postItExp;
 var isbig = false;
 
-
+var connection;
 class SceneMars extends Phaser.Scene {
     
     constructor() {
