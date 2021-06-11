@@ -538,6 +538,11 @@ class SceneMars extends Phaser.Scene {
          this.UiMarTerraform = this.add.image(1460, 155, "UIMarsTerraform").setDepth(4);
          this.UiMarsAlerts = this.add.image(1082, 161, "UIMarsAlerts").setDepth(4);
          this.UiMarsPilots = this.add.image(1460, 419, "UIMarsPilots").setDepth(4);
+         this.UiMarsAntenaPilot = this.add.image(1460, 265, "UIMarsAntennaPilot").setDepth(4);
+         this.UiMarsTerraPilot = this.add.image(1460, 365, "UIMarsTerraPilot").setDepth(4);
+         this.UiMarsRocketPilot = this.add.image(1460, 465, "UIMarsRocketPilot").setDepth(4);
+         this.UiMarsMinePilot = this.add.image(1460, 565, "UIMarsMinePilot").setDepth(4);
+
 
          //boton para enviar mensaje de chat
          
@@ -956,6 +961,10 @@ enterIconRestState(boton) {
     boton.y = boton.y-movTxt;
 }
 
+Highlight(obj, b) {
+
+    b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);  
+}
 
 }
 function genMeteors() {
