@@ -154,7 +154,7 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 					newNode.put("type", "error");
 					newNode.put("cause", "LobbyNotFound");
 					
-					session.sendMessage(new TextMessage(newNode.asText()));
+					session.sendMessage(new TextMessage(newNode.toString()));
 				}
 			break;
 			case "Sync":

@@ -560,7 +560,7 @@ class SceneEarth extends Phaser.Scene {
 
             console.log("HOLA");
 
-            //ACTUALIZACION DE LA INFORMACIOND E LA CONSOLA DE TIERRA
+            //ACTUALIZACION DE LA INFORMACION DE LA CONSOLA DE TIERRA
             switch (data["type"]) {
                 case "syncFoodPilot":
                     that.controlTierra.UIEarthNeedFoodPilot.setVisible(data["value"]);
@@ -987,10 +987,7 @@ class SceneEarth extends Phaser.Scene {
 
 
     easePilot(scene, boton, value) {
-
-        console.log("easePilotototototo");
-
-        if (value == true) {
+        if (value) {
             var scaleV = 1.3;
             scene.tweens.add({
                 targets: boton,

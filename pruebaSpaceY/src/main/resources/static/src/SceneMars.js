@@ -1058,10 +1058,7 @@ class SceneMars extends Phaser.Scene {
     }
 
     easePilot(scene, boton, value) {
-
-        console.log("easePilotototototo");
-
-        if (value == true) {
+        if (value) {
             var scaleV = 1.3;
             scene.tweens.add({
                 targets: boton,
