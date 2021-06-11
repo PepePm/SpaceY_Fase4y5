@@ -589,7 +589,7 @@ selectEarth(){
     election = "Earth";
 }
 
-selectEarth(){
+selectMars(){
     election = "Mars";
 }
 
