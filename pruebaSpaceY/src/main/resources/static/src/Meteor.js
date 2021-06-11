@@ -68,8 +68,6 @@ class Meteor {
                         maquinas[0].wear = 0;
                         maquinas[0].isBroken = true;
                         objCohete.obj.setTexture(maquinas[0].textureBreak);    
-                        ////console.log("TUPUTAMADREEEEEEEEEE,"+maquinas[0].location +","+ !maquinas[0].isSending+"," +!maquinas[0].isComing);
-                        ////console.log("JAJAJAJAJAJJAAJJAJAJAJJA");
                     }
                 }
                 else {
