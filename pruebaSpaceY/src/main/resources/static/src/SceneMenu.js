@@ -721,9 +721,9 @@ goJoin(){
                     break;
                 case "startGame":
                     if(data["gamemode"] == "Mars")
-                        that.startGame('SceneEarth');
-                    else
                         that.startGame('SceneMars');
+                    else
+                        that.startGame('SceneEarth');
                     break;
             }
             
