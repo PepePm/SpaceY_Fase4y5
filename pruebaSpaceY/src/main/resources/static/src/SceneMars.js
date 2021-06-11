@@ -173,8 +173,8 @@ class SceneMars extends Phaser.Scene {
 
     preload() {
 
-        gameLobbyID = "testing";
-        console.error("BORRA ESTO CUANDO ACABES DE HACER TESTEO");
+        //gameLobbyID = "testing";
+        //console.error("BORRA ESTO CUANDO ACABES DE HACER TESTEO");
         this.load.image('smoke', './Resources/smoke_particle.png');
 
         //CHAT POSTITIONS BEFORE - AFTER
