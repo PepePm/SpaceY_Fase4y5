@@ -1062,12 +1062,11 @@ class SceneMars extends Phaser.Scene {
             var scaleV = 1.3;
             scene.tweens.add({
                 targets: boton,
-                scaleX: boton.scaleX * scaleV,
-                scaleY: boton.scaleY * scaleV,
+                scale: scaleV,
                 delay: 0,
                 duration: 500,
                 ease: 'Circ.easeOut',
-                repeat: -1,
+                repeat: 4,
                 yoyo: true,
             });
         }

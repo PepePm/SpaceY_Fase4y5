@@ -996,12 +996,12 @@ class SceneEarth extends Phaser.Scene {
             var scaleV = 1.3;
             scene.tweens.add({
                 targets: boton,
-                scale: boton.scale * scaleV,
+                scale: scaleV,
                 //scaleY: boton.scaleY * scaleV,
                 delay: 0,
                 duration: 500,
                 ease: 'Circ.easeOut',
-                repeat: -1,
+                repeat: 4,
                 yoyo: true,
             });
         }
