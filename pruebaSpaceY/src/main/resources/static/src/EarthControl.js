@@ -255,6 +255,47 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             fill:'#D52020',
         }).setOrigin(0.5).setDepth(5).setVisible(false);
         
+
+        //ELEMENTOS DE LA CONSOLA DE LA TIERRA
+        this.UIEarthCons = scene.add.image(358, 447, "UIEarthCons").setDepth(4);
+        this.UIEarthTime = scene.add.image(451, 161, "UIEarthTime").setDepth(4);
+        this.UIEarthTerraform = scene.add.image(591, 155, "UIEarthTerraform").setDepth(4);
+        this.UIEarthAlerts = scene.add.image(213, 161, "UIEarthAlerts").setDepth(4);
+        this.UIEarthPilots = scene.add.image(591, 419, "UIEarthPilots").setDepth(4);
+
+        //boton para enviar mensaje de chat
+        
+        this.UIEarthSndMsgBtn =  scene.add.image(418, 693, "UIEarthSndMsg").setDepth(4)
+        .setInteractive()
+        .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => this.Highlight(this.UIEarthSndMsgBtn, true) )
+        .on('pointerover', () => this.Highlight(this.UIEarthSndMsgBtn, true) )
+        .on('pointerout', () => this.Highlight(this.UIEarthSndMsgBtn, false) );
+        
+       //boton para enviar recursos
+        this.UIEarthSndResBtn = scene.add.image(594, 693, "UIEarthSndRes").setDepth(4)
+        .setInteractive()
+        .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => this.Highlight(this.UIEarthSndResBtn, true) )
+        .on('pointerover', () => this.Highlight(this.UIEarthSndResBtn, true) )
+        .on('pointerout', () => this.Highlight(this.UIEarthSndResBtn, false) );
+
+       //BOTON QUE ENVIA SEÑAL A TIERRA PARA RECIBIR PROVISIONES
+        this.UIEarthSndFoodBtn = scene.add.image(504, 693, "UIEarthSndFood").setDepth(4)
+        .setInteractive()
+        .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => this.Highlight(this.UIEarthSndFoodBtn, true) )
+        .on('pointerover', () => this.Highlight(this.UIEarthSndFoodBtn, true) )
+        .on('pointerout', () => this.Highlight(this.UIEarthSndFoodBtn, false) );
+
+       //caja para escribir mensajes
+        this.UIEarthMsgBox = scene.add.image(229, 693, "UIEarthMsgBox").setDepth(4);
+
+       //pantalla de mensajes del chat central 
+        this.UIEarthChatBox = scene.add.image(310, 419, "UIEarthChatBox").setDepth(4);
+
+
+        
     }
 
     Update(delta) {

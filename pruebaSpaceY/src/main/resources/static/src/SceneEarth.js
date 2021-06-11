@@ -200,8 +200,10 @@ class SceneEarth extends Phaser.Scene {
 
     create() {
        
+          //PARTE CONSOLA 
           //Fondo Consola
           fondoConsola = this.add.image(407, 450, "fondoTierra").setDepth(1);
+
 
         //Valores iniciales recursos
         nCoheteMat = 150;

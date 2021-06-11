@@ -532,6 +532,44 @@ class SceneMars extends Phaser.Scene {
         //emitter.setEmitZone(emitZones[emitZoneIndex]); 
          //Añadimos fondo de marte
 
+         //ELEMENTOS DE LA CONSOLA DE MARTE
+         this.UiMarsCons = this.add.image(1227, 447, "UIMarsCons").setDepth(4);
+         this.UiMarsTime = this.add.image(1320, 161, "UIMarsTime").setDepth(4);
+         this.UiMarTerraform = this.add.image(1460, 155, "UIMarsTerraform").setDepth(4);
+         this.UiMarsAlerts = this.add.image(1082, 161, "UIMarsAlerts").setDepth(4);
+         this.UiMarsPilots = this.add.image(1460, 419, "UIMarsPilots").setDepth(4);
+
+         //boton para enviar mensaje de chat
+         
+         this.UiMarsSndMsgBtn =  this.add.image(1287, 693, "UIMarsSndMsg").setDepth(4)
+         .setInteractive()
+         .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+         .on('pointerup', () => this.Highlight(this.UiMarsSndMsgBtn, true) )
+         .on('pointerover', () => this.Highlight(this.UiMarsSndMsgBtn, true) )
+         .on('pointerout', () => this.Highlight(this.UiMarsSndMsgBtn, false) );
+         
+        //boton para enviar recursos
+         this.UiMarsSndResBtn = this.add.image(1463, 693, "UIMarsSndRes").setDepth(4)
+         .setInteractive()
+         .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+         .on('pointerup', () => this.Highlight(this.UiMarsSndResBtn, true) )
+         .on('pointerover', () => this.Highlight(this.UiMarsSndResBtn, true) )
+         .on('pointerout', () => this.Highlight(this.UiMarsSndResBtn, false) );
+
+        //BOTON QUE ENVIA SEÑAL A TIERRA PARA RECIBIR PROVISIONES
+         this.UiMarsSndFoodBtn = this.add.image(1373, 693, "UIMarsSndFood").setDepth(4)
+         .setInteractive()
+         .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+         .on('pointerup', () => this.Highlight(this.UiMarsSndFoodBtn, true) )
+         .on('pointerover', () => this.Highlight(this.UiMarsSndFoodBtn, true) )
+         .on('pointerout', () => this.Highlight(this.UiMarsSndFoodBtn, false) );
+
+        //caja para escribir mensajes
+         this.UiMarsMsgBox = this.add.image(1098, 693, "UIMarsMsgBox").setDepth(4);
+
+        //pantalla de mensajes del chat central 
+         this.UiMarsChatBox = this.add.image(1179, 419, "UIMarsChatBox").setDepth(4);
+
     
     }
     update(time, delta) {

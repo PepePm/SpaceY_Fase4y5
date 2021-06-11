@@ -112,6 +112,33 @@ class SceneBoot extends Phaser.Scene {
 
         this.load.image("pantallaFinal", directory+"ui_T_pantalla_aux.png" );
         
+        //CONSOLA DE MARTE
+        this.load.image("UIMarsCons", directory+"UI_Marte_Caja_naranja.png" );
+        this.load.image("UIMarsTime", directory+"UI_Marte_Tiempo.png" );
+        this.load.image("UIMarsTerraform", directory+"UI_Marte_Progreso_Terraformacion.png" );
+        this.load.image("UIMarsAlerts", directory+"UI_Marte_Caja_informativa.png" );
+        this.load.image("UIMarsPilots", directory+"UI_Marte_Contenedor_Pilotos.png" );
+        this.load.image("UIMarsSndMsg", directory+"UI_Marte_Boton_Enviar_Mensaje.png" );
+        this.load.image("UIMarsSndRes", directory+"UI_Marte_Boton_herramientas.png" );
+        this.load.image("UIMarsSndFood", directory+"UI_Marte_Boton_comida.png" );
+        this.load.image("UIMarsMsgBox", directory+"UI_Marte_Caja_texto.png" );
+        this.load.image("UIMarsChatBox", directory+"UI_Marte_Caja_Chat.png" );
+
+
+        //CONSOLA DE LA TIERRA
+        this.load.image("UIEarthCons", directory+"ui_T_pantalla_aux.png" );
+        this.load.image("UIEarthTime", directory+"ui_T_pantalla_aux.png" );
+        this.load.image("UIEarthTerraform", directory+"ui_T_pantalla_aux.png" );
+        this.load.image("UIEarthAlerts", directory+"ui_T_pantalla_aux.png" );
+        this.load.image("UIEarthPilots", directory+"ui_T_pantalla_aux.png" );
+        this.load.image("UIEarthSndMsg", directory+"ui_T_pantalla_aux.png" );
+        this.load.image("UIEarthSndRes", directory+"ui_T_pantalla_aux.png" );
+        this.load.image("UIEarthSndFood", directory+"ui_T_pantalla_aux.png" );
+        this.load.image("UIEarthMsgBox", directory+"ui_T_pantalla_aux.png" );
+        this.load.image("UIEarthChatBox", directory+"ui_T_pantalla_aux.png" );
+
+
+        
         //TUTORIAL
         this.load.image('tutoBck', directory +'tutorial__bck.jpg');
 
