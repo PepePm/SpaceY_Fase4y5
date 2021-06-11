@@ -671,6 +671,8 @@ goJoin(){
 
         var that = this;
         connection.onmessage = function(msg){
+            var data = JSON.parse(msg.data);
+            
            switch(data["type"]){
                 case "connected":
                     /*
