@@ -24,7 +24,11 @@ var loginTween;
 //Websocket
 var connection;
 
+//Elección de planeta antes de hostear
 var election;
+
+//ID del lobby al que voy a ir
+var gameLobbyID;
 
 class SceneMenu extends Phaser.Scene {
     
@@ -135,7 +139,7 @@ create() {
         yoyo: true,
         repeat: -1,
     });
-
+    
     this.earthLogo = this.add.image(game.config.width*7/8,game.config.height*1/4,'earthLogo').setScale(0.2);
     this.tweens.add({
         targets: this.earthLogo,
@@ -216,25 +220,25 @@ create() {
     this.backButton.setOrigin(0.5);
     
     //OPCION TIERRA
-    this.earthOption = this.add.image(game.config.width*5/8,game.config.height*1/4,'earthLogo').setScale(0.1)
+    this.earthOption = this.add.image(game.config.width*7/8,game.config.height*1/4,'earthLogo').setScale(0.2)
     .setInteractive()
     .on('pointerdown', () => this.selectEarth() )
-    .on('pointerup', () => this.Highlight(this.earthOption, true) )
-    .on('pointerover', () => this.Highlight(this.earthOption, true) )
-    .on('pointerout', () => this.Highlight(this.earthOption, false) );
+    //.on('pointerup', () => function(){if(selected != "Mars")this.Highlight(this.earthOption, true);} )
+    .on('pointerover', () => {if(election != "Mars")this.Highlight(this.earthOption, true);} )
+    .on('pointerout', () => {if(election != "Mars")this.Highlight(this.earthOption, false);} )
+    .setVisible(false);
     this.earthOption.setOrigin(0.5);
 
 
     //OPCION MARTE
-    this.marsOption = this.add.image(game.config.width*3/8,game.config.height*1/4,'spaceYlogo').setScale(0.04)
+    this.marsOption = this.add.image(300,game.config.height-300,'spaceYlogo').setScale(0.2)
     .setInteractive()
     .on('pointerdown', () => this.selectMars() )
-    .on('pointerup', () => this.Highlight(this.marsOption, true) )
-    .on('pointerover', () => this.Highlight(this.marsOption, true) )
-    .on('pointerout', () => this.Highlight(this.marsOption, false) );
+    //.on('pointerup', () => this.Highlight(this.marsOption, true) )
+    .on('pointerover', () => {if(election != "Earth")this.Highlight(this.marsOption, true);} )
+    .on('pointerout', () => {if(election != "Earth")this.Highlight(this.marsOption, false);} )
+    .setVisible(false);
     this.marsOption.setOrigin(0.5);
-
-    
 
     //*****************
 
@@ -526,9 +530,18 @@ create() {
 
     console.log(connection);*/
 }
-Highlight(obj, b) {
+Highlight(obj, b, selectPlanet) {
 
-    b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
+    if(selectPlanet == "Mars"){
+        obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
+        this.earthOption.tint =  Phaser.Display.Color.GetColor(200, 80, 80);
+    }
+    else if(selectPlanet == "Earth"){
+        obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
+        this.marsOption.tint =  Phaser.Display.Color.GetColor(200, 80, 80);
+    }
+    else
+        b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -542,6 +555,12 @@ goCreateJoinLobby(){
     this.easeMeOut(this.tutorialButton, this, 2);
     this.easeMeOut(this.optionsButton, this, 3);
     this.easeMeOut(this.contactButton, this, 4);
+    this.easeSelectionLogo(this.earthOption,this, 1);
+    this.easeSelectionLogo(this.marsOption,this, 2);
+    this.earthOption.setVisible(true);
+    this.marsOption.setVisible(true);
+    this.earthLogo.setVisible(false);
+    this.spaceYlogo.setVisible(false);
 
     this.hostButton.setInteractive = false;
     this.boxGameId.setVisible(true);
@@ -559,8 +578,11 @@ goCreateJoinLobby(){
 //Llamada desde el Back
 goBackToMenu(){
     //Si vuelvo al menú y había creado una conexión, la cierro
-    if(connection != undefined){
+    if(connection != undefined || gameLobbyID != undefined){
         connection.close();
+        //Borro el id del lobby al que iba a ir para tener buen control de los datos
+        gameLobbyID = undefined;
+        election = undefined;
     }
 
     this.playButton.setActive(true);
@@ -571,6 +593,10 @@ goBackToMenu(){
     this.easeMe(this.tutorialButton, this, 2);
     this.easeMe(this.optionsButton, this, 3);
     this.easeMe(this.contactButton, this, 4);
+    this.easeOutSelectionLogo(this.earthOption,this, 1);
+    this.easeOutSelectionLogo(this.marsOption,this, 2);
+    this.Highlight(this.earthOption, false);
+    this.Highlight(this.marsOption, false);
 
     this.lobbyCode.setVisible(false);
     this.boxGameId.setVisible(false);
@@ -587,10 +613,16 @@ goBackToMenu(){
 
 selectEarth(){
     election = "Earth";
+    this.Highlight(this.earthOption, true, "Earth");
+    //this.easeSelection(this.earthOption, this, true);
+    //this.easeSelection(this.marsOption, this, false);
 }
 
 selectMars(){
     election = "Mars";
+    this.Highlight(this.marsOption, true, "Mars");
+    //this.easeSelection(this.marsOption, this, true);
+    //this.easeSelection(this.earthOption, this, false);
 }
 
 //Llamada desde el Host
@@ -615,6 +647,7 @@ goHost(){
 			
             switch(data["type"]){
                 case "connected":
+                    gameLobbyID = data["lobbyID"];
                     texto.text = data["lobbyID"];
                     boton.setInteractive = false;
                     texto.setVisible(true);
@@ -631,6 +664,7 @@ goHost(){
                         gamemode: election,
                     }
                     connection.send(JSON.stringify(data));
+                    break;
 
             }
             
@@ -665,6 +699,7 @@ goJoin(){
 		        action: "Join",
                 lobbyID: code.getChildByName("lobbyID").value,
 		    }
+            gameLobbyID = code.getChildByName("lobbyID").value;
             //console.log("Codigo enviado: " + code.getChildByName("lobbyID").value);
 			connection.send(JSON.stringify(data));   
         }
@@ -795,10 +830,12 @@ enterIconRestState(boton) {
 //click
 startGame(nextScene) {
     sfx.sounds[0].play();
+    //Ciero la conexion del lobby
+    connection.close();
     if(election == "Mars")
-        this.Rocketeing(this.marsOption,this,game.config.width/2,900,2, nextScene);
+        this.Rocketeing(this.marsOption,this,this.marsOption.x,900,2, nextScene);
     else
-        this.Rocketeing(this.earthOption,this,game.config.width/2,900,2, nextScene);
+        this.Rocketeing(this.earthOption,this,this.earthOption.x,900,2, nextScene);
 }
 enterTutorial() {
     soundtrack.pistas[0].stop();
@@ -1256,6 +1293,95 @@ easeMeOut(boton,scene,nOp){
         //onComplete: this.EnterOnMachine.bind(this)
     });
 }
+
+easeSelectionLogo(logo,scene,nOp){
+    var endX;
+    var endY;
+    var scale;
+    switch (nOp)
+    {
+        //Altura logo tierra
+        case 1: endX = game.config.width*5/8; endY = game.config.height*1/4; scale = 0.1; break;  
+        //Altura logo marte
+        case 2: endX = game.config.width*3/8; endY = game.config.height*1/4; scale = 0.04; break;
+        default: break;
+        
+    }
+    scene.tweens.add({
+        targets: logo,
+        x: endX,
+        y: endY,
+        scaleX: scale,
+        scaleY: scale,
+        delay: 0,
+        //aplha: {start: game.config.width / 2, to: game.config.width / 8},
+        duration: 500,
+        ease: 'Circ.easeOut',
+        repeat: 0,
+        yoyo: false,
+        //delay:delay,
+
+        //onComplete: this.EnterOnMachine.bind(this)
+    });
+}
+
+easeOutSelectionLogo(logo,scene,nOp){
+    var endX;
+    var endY;
+    var scale = 0.2;
+    var that = this;
+    switch (nOp)
+    {
+        //Altura logo tierra
+        case 1: endX = game.config.width*7/8; endY = game.config.height*1/4; break;  
+        //Altura logo marte
+        case 2: endX = 300; endY = game.config.height-300; break;
+        default: break;
+    }
+    scene.tweens.add({
+        targets: logo,
+        x: endX,
+        y: endY,
+        scaleX: 0.2,
+        scaleY: 0.2,
+        delay: 0,
+        //aplha: {start: game.config.width / 2, to: game.config.width / 8},
+        duration: 500,
+        ease: 'Circ.easeOut',
+        repeat: 0,
+        yoyo: false,
+        //delay:delay,
+
+        onComplete: function(){
+            logo.setVisible(false);
+            that.earthLogo.setVisible(true);
+            that.spaceYlogo.setVisible(true);
+        }
+    });
+}
+
+/*
+easeSelection(boton,scene, value){
+    if(value == true)
+    {
+        var scale = boton.scale.x * 1.1;
+        myTween = 
+        scene.tweens.add({
+            targets: boton,
+            scaleX: scale,
+            scaleY: scale,
+            delay:0,
+            duration: 500,
+            ease: 'Circ.easeOut',
+            repeat: -1,
+            yoyo: true,
+        });
+    }
+    else{
+        myTween.stop();
+    }
+
+}*/
 
 }
 
