@@ -533,11 +533,11 @@ create() {
 Highlight(obj, b, selectPlanet) {
 
     if(selectPlanet == "Mars"){
-        obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
+        //obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
         this.earthOption.tint =  Phaser.Display.Color.GetColor(200, 80, 80);
     }
     else if(selectPlanet == "Earth"){
-        obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
+        //obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
         this.marsOption.tint =  Phaser.Display.Color.GetColor(200, 80, 80);
     }
     else
@@ -721,9 +721,9 @@ goJoin(){
                     break;
                 case "startGame":
                     if(data["gamemode"] == "Mars")
-                        that.startGame('SceneMars');
-                    else
                         that.startGame('SceneEarth');
+                    else
+                        that.startGame('SceneMars');
                     break;
             }
             
