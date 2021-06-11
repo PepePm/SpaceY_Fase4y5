@@ -55,8 +55,9 @@ class CommsMachine extends Machine {
 
     StartEvent() {
 
-        var rand = Phaser.Math.Between(0, 0);
-        rand === 0 ? this.AlertSandStorm() : this.AlertMeteorRain();  
+        var rand = Phaser.Math.Between(0, 2);
+        console.log(rand);
+        rand == 0 ? this.AlertSandStorm() : this.AlertMeteorRain();  
     }
 
     AlertSandStorm() {
@@ -92,8 +93,8 @@ class CommsMachine extends Machine {
     AlertMeteorRain() {
 
         //Avisar de meteoritos
-        if (!this.isBroken)
-            controlTierra.WarnEvent(0);
+        //if (!this.isBroken)
+            //controlTierra.WarnEvent(0); //Sync con tierra
         
         this.scene.time.addEvent({ delay: 2000, callback: this.MeteorRain, callbackScope: this});
     }

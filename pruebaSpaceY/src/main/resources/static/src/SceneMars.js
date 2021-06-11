@@ -419,7 +419,7 @@ class SceneMars extends Phaser.Scene {
 
         
         //Genera meteoritos cada x ms (TESTING)
-        var timedEvent = this.time.addEvent({ delay: 3000, callback: genMeteors, callbackScope: this, loop: true });
+        //var timedEvent = this.time.addEvent({ delay: 3000, callback: genMeteors, callbackScope: this, loop: true });
 
 
         //PARTÍCULAS TORMENTA
@@ -990,7 +990,7 @@ Highlight(obj, b) {
 function genMeteors() {
 
     //var delay = 0;
-    for(var i=0; i < 3; i++) {
+    for(var i=0; i < 2; i++) {
  
         meteoritos[i] = new Meteor(this);
     }
