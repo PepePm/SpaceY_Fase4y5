@@ -696,12 +696,10 @@ goHost(){
     else{
         if(userName == "Anon"){
             //Aviso de que se tiene que registrar
-            console.error("El usuario tiene que registrarse primero");
             this.tweenFadeIn(this.loginNeededWarning, this);
             this.tweenFadeOut(this.loginNeededWarning, this);
         }
         else if(election == undefined){
-            console.error("El usuario tiene que elegir un planeta");
             this.tweenFadeIn(this.planetElectionNeededWarning, this);
             this.tweenFadeOut(this.planetElectionNeededWarning, this);
         }
@@ -754,6 +752,9 @@ goJoin(){
         connection.onclose = function(){
             connection = undefined;
         }
+    }else{
+        this.tweenFadeIn(this.loginNeededWarning, this);
+        this.tweenFadeOut(this.loginNeededWarning, this);
     }
 }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
