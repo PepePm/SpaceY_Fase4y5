@@ -992,6 +992,7 @@ class SceneEarth extends Phaser.Scene {
 
     easePilot(scene, boton, value) {
 
+        //this.scene.time.addEvent({ delay: 1000*5, callback: this.SandStorm, callbackScope: this});
         if (value) {
             var scaleV = 1.3;
             scene.tweens.add({
