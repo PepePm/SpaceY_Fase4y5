@@ -240,6 +240,16 @@ create() {
     .setVisible(false);
     this.marsOption.setOrigin(0.5);
 
+    //TEXTO AVISO LOG NEEDED
+    this.loginNeededWarning = this.add.text(game.config.width/2, game.config.height/8, 'You need to be logged in' ,{ fill: '#FF0000',fontFamily:'menuFont',fontSize:'40px'})
+    .setVisible(false);
+    this.loginNeededWarning.setOrigin(0.5);
+
+    //TEXTO AVISO PLANET NEEDED
+    this.planetElectionNeededWarning = this.add.text(game.config.width/2, game.config.height/8, 'You need to choose a planet' ,{ fill: '#FF0000',fontFamily:'menuFont',fontSize:'40px'})
+    .setVisible(false);
+    this.planetElectionNeededWarning.setOrigin(0.5);
+
     //*****************
 
 
@@ -533,12 +543,14 @@ create() {
 Highlight(obj, b, selectPlanet) {
 
     if(selectPlanet == "Mars"){
-        //obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
-        this.earthOption.tint =  Phaser.Display.Color.GetColor(200, 80, 80);
+        obj.alpha = 1;
+        obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
+        this.earthOption.alpha =  0.4;
     }
     else if(selectPlanet == "Earth"){
-        //obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
-        this.marsOption.tint =  Phaser.Display.Color.GetColor(200, 80, 80);
+        obj.alpha = 1;
+        obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
+        this.marsOption.alpha = 0.4;
     }
     else
         b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
@@ -597,6 +609,8 @@ goBackToMenu(){
     this.easeOutSelectionLogo(this.marsOption,this, 2);
     this.Highlight(this.earthOption, false);
     this.Highlight(this.marsOption, false);
+    this.earthOption.alpha = 1;
+    this.marsOption.alpha = 1;
 
     this.lobbyCode.setVisible(false);
     this.boxGameId.setVisible(false);
@@ -683,6 +697,13 @@ goHost(){
         if(userName == "Anon"){
             //Aviso de que se tiene que registrar
             console.error("El usuario tiene que registrarse primero");
+            this.tweenFadeIn(this.loginNeededWarning, this);
+            this.tweenFadeOut(this.loginNeededWarning, this);
+        }
+        else if(election == undefined){
+            console.error("El usuario tiene que elegir un planeta");
+            this.tweenFadeIn(this.planetElectionNeededWarning, this);
+            this.tweenFadeOut(this.planetElectionNeededWarning, this);
         }
     }
 }
@@ -1360,6 +1381,40 @@ easeOutSelectionLogo(logo,scene,nOp){
         }
     });
 }
+
+//Fade del texto
+tweenFadeIn(texto, escena) {
+    var that = this;
+    escena.tweens.add({
+        targets: texto,
+        alpha: 0,
+        duration: 12000,
+        ease: 'Cubic.easeOut',
+        repeat: 0,
+        yoyo: false,
+
+        onStart: function () { texto.setVisible(true); texto.alpha = 1; },
+        onComplete: function () { texto.setVisible(false); },
+    });
+
+}
+
+tweenFadeOut(texto, escena) {
+
+    var that = this;
+    escena.tweens.add({
+        targets: texto,
+        alpha: 0,
+        duration: 10000,
+        ease: 'Cubic.easeOut',
+        repeat: 0,
+        yoyo: false,
+
+        onComplete: function () { texto.setVisible(false); texto.alpha = 1; },
+    });
+}
+
+
 
 /*
 easeSelection(boton,scene, value){
