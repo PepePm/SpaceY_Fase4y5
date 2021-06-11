@@ -621,9 +621,9 @@ goHost(){
                     break;
                 case "startGame":
                     if(data["gamemode"] == "Mars")
-                        that.startGame('sceneMars');
+                        that.startGame('SceneMars');
                     else
-                        that.startGame('sceneEarth');
+                        that.startGame('SceneEarth');
                     break;
                 case "playerJoined":
                     var data = {
@@ -672,7 +672,7 @@ goJoin(){
         var that = this;
         connection.onmessage = function(msg){
             var data = JSON.parse(msg.data);
-            
+
            switch(data["type"]){
                 case "connected":
                     /*
@@ -681,9 +681,9 @@ goJoin(){
                     break;
                 case "startGame":
                     if(data["gamemode"] == "Mars")
-                        that.startGame('sceneMars');
+                        that.startGame('SceneMars');
                     else
-                        that.startGame('sceneEarth');
+                        that.startGame('SceneEarth');
                     break;
             }
             
