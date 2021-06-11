@@ -255,6 +255,11 @@ create() {
     .setVisible(false);
     this.wrongCodeWarning.setOrigin(0.5);
 
+    //TEXTO AVISO YA ERES HOST; NO PUEDES HACER JOIN
+    this.alreadyHostWarning = this.add.text(game.config.width/2, game.config.height/8, 'You are already hosting' ,{ fill: '#FF0000',fontFamily:'menuFont',fontSize:'40px'})
+    .setVisible(false);
+    this.alreadyHostWarning.setOrigin(0.5);
+
     //*****************
 
 
@@ -746,7 +751,6 @@ goJoin(){
                     //Aviso de que no existe un lobby con esa ID
                     that.tweenFadeIn(that.wrongCodeWarning, that);
                     that.tweenFadeOut(that.wrongCodeWarning, that);
-                    // MOSTRAR UN MENSAJE DE QUE NO EXISTE EL LOBBY <<<<<<<<<<<<<<<-------------------------------<<<<<<<<<<<<<<<<<<<---------------------
                     connection.close();
                     break;
                 case "startGame":
@@ -754,7 +758,7 @@ goJoin(){
                     if(data["gamemode"] == "Mars")
                         that.startGame('SceneMars');
                     else
-                        that.startGame('SceneEarth');
+                        that.startGame('SceneEarth');333
                     break;
             }
             
@@ -763,9 +767,12 @@ goJoin(){
         connection.onclose = function(){
             connection = undefined;
         }
-    }else{
+    }else if(userName == "Anon"){
         this.tweenFadeIn(this.loginNeededWarning, this);
         this.tweenFadeOut(this.loginNeededWarning, this);
+    }else if(connection != undefined){
+        this.tweenFadeIn(this.alreadyHostWarning, this);
+        this.tweenFadeOut(this.alreadyHostWarning, this);
     }
 }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
