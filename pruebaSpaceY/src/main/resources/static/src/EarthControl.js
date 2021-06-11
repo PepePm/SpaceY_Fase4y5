@@ -339,7 +339,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
     }
     create() {
-        
+
     }
 
     Update(delta) {
@@ -360,7 +360,43 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
 
     }
+    /*
+    HandleOnMessage(msg) {
 
+        var data = JSON.parse(msg.data);
+
+        console.log("HOLA");
+
+        //ACTUALIZACION DE LA INFORMACION DE LA CONSOLA DE TIERRA
+        switch (data["type"]) {
+            case "syncFoodPilot":
+                this.UIEarthNeedFoodPilot.setVisible(data["value"]);
+                this.easePilot(this.scene, this.UIEarthNeedFoodPilot, data["value"]);
+                break;
+            case "syncResPilot":
+                this.UIEarthNeedResPilot.setVisible(data["value"]);
+                this.easePilot(this.scene, this.UiMarsMinePilot, data["value"]);
+                break;
+
+        }
+    }
+    easePilot(scene, boton, value) {
+        if (value) {
+            var scaleV = 1.3;
+            scene.tweens.add({
+                targets: boton,
+                scaleX: scaleV,
+                scaleY: scaleV,
+                delay: 0,
+                duration: 500,
+                ease: 'Circ.easeOut',
+                repeat: -1,
+                yoyo: true,
+            });
+        }
+
+    }
+    */
 
 
     HighlightController(obj, b) {
@@ -1013,6 +1049,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
         b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
     }
-    
+
 }
 

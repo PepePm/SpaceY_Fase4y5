@@ -272,6 +272,7 @@ class SceneEarth extends Phaser.Scene {
 
         //TIERRA    CREACION DE LOS ASSETS DE TIERRA
         controlTierra = new EarthControl(this, 0, 0, 8);
+
         //controlTierra.PushFromMars();
 
 
@@ -555,20 +556,23 @@ class SceneEarth extends Phaser.Scene {
 
 
         var that = this;
-        connection.onmessage = function (msg) {
-            var data = JSON.parse(msg.data);
+        var thatControlTierra = controlTierra;
 
-            console.log("HOLA");
+        console.log("HOLA1 " + controlTierra + " / " + thatControlTierra);
+
+        connection.onmessage = function (msg) {
+
+            var data = JSON.parse(msg.data);
 
             //ACTUALIZACION DE LA INFORMACION DE LA CONSOLA DE TIERRA
             switch (data["type"]) {
                 case "syncFoodPilot":
-                    that.controlTierra.UIEarthNeedFoodPilot.setVisible(data["value"]);
-                    that.easePilot(that, that.controlTierra.UiMarsAntenaPilot, data["value"]);
+                    controlTierra.UIEarthNeedFoodPilot.setVisible(data["value"]);
+                    that.easePilot(that, controlTierra.UIEarthNeedFoodPilot, data["value"]);
                     break;
                 case "syncResPilot":
-                    that.controlTierra.UIEarthNeedResPilot.setVisible(data["value"]);
-                    that.easePilot(that, that.controlTierra.UiMarsMinePilot, data["value"]);
+                    controlTierra.UIEarthNeedResPilot.setVisible(data["value"]);
+                    that.easePilot(that, controlTierra.UIEarthNeedResPilot, data["value"]);
                     break;
 
             }
@@ -987,12 +991,13 @@ class SceneEarth extends Phaser.Scene {
 
 
     easePilot(scene, boton, value) {
+
         if (value) {
             var scaleV = 1.3;
             scene.tweens.add({
                 targets: boton,
-                scaleX: boton.scaleX * scaleV,
-                scaleY: boton.scaleY * scaleV,
+                scale: boton.scale * scaleV,
+                //scaleY: boton.scaleY * scaleV,
                 delay: 0,
                 duration: 500,
                 ease: 'Circ.easeOut',
