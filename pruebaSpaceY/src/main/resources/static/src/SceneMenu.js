@@ -593,7 +593,7 @@ goHost(){
 //Llamada desde el Join
 goJoin(){
     var code = this.writeGameID;
-    if(userName=="Anon" && connection == undefined){
+    if(userName!="Anon" && connection == undefined){
         console.log("Hosting");
         connection = new WebSocket("ws://" + urlServer + "/lobbies");
 
