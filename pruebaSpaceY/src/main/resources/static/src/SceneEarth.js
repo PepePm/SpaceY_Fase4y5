@@ -3,8 +3,6 @@
 //const { default: Machine } = require("./Machine");
 
 //Variables
-var connection;
-
 //Directorio imágenes
 var directory = "./Resources/Game/";
 
@@ -545,9 +543,11 @@ class SceneEarth extends Phaser.Scene {
         console.log("GameSessionInnitiated");
         connection = new WebSocket("ws://" + urlServer + "/games");
 
+        console.log("conexión: " + connection);
+
         connection.onopen = function () {
             var data = {
-                action: "Create",
+                action: "Start",
                 lobbyID: gameLobbyID,
             }
             connection.send(JSON.stringify(data));
@@ -561,11 +561,11 @@ class SceneEarth extends Phaser.Scene {
             switch (data["type"]) {
                 case "syncFoodPilot":
                     that.controlTierra.UIEarthNeedFoodPilot.setVisible(data["value"]);
-                    easePilot(that.controlTierra, that.controlTierra.UiMarsAntenaPilot, data["value"]);
+                    that.easePilot(that, that.controlTierra.UiMarsAntenaPilot, data["value"]);
                     break;
                 case "syncResPilot":
                     that.controlTierra.UIEarthNeedResPilot.setVisible(data["value"]);
-                    easePilot(that.controlTierra, that.controlTierra.UiMarsMinePilot, data["value"]);
+                    that.easePilot(that, that.controlTierra.UiMarsMinePilot, data["value"]);
                     break;
 
             }
@@ -981,6 +981,28 @@ class SceneEarth extends Phaser.Scene {
         boton.x = boton.x - movTxt;
         boton.y = boton.y - movTxt;
     }
+
+
+    easePilot(scene, boton, value) {
+
+        console.log("easePilotototototo");
+
+        if (value == true) {
+            var scaleV = 1.3;
+            scene.tweens.add({
+                targets: boton,
+                scaleX: boton.scaleX * scaleV,
+                scaleY: boton.scaleY * scaleV,
+                delay: 0,
+                duration: 500,
+                ease: 'Circ.easeOut',
+                repeat: -1,
+                yoyo: true,
+            });
+        }
+
+    }
+
 }
 /*
 function genMeteors() {

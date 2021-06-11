@@ -1013,21 +1013,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
         b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
     }
-    easePilot(boton, scene, value) {
-        if (value == true) {
-            var scaleV = 1.3;
-            scene.tweens.add({
-                targets: boton,
-                scaleX: boton.scaleX * scaleV,
-                scaleY: boton.scaleY * scaleV,
-                delay: 0,
-                duration: 500,
-                ease: 'Circ.easeOut',
-                repeat: -1,
-                yoyo: true,
-            });
-        }
-
-    }
+    
 }
 

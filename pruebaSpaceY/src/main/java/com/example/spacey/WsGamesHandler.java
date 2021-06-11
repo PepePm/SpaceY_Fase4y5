@@ -83,7 +83,7 @@ public class WsGamesHandler extends TextWebSocketHandler {
 		switch(action) {
 			case "Start":
 				
-				semaforo.acquire();
+				//semaforo.acquire();
 				// Se añade un jugador de un lobby a su partida correspondiente.
 				// Si no existe la clave, se crea y se añade al jugador
 				if (!games.containsKey(lobbyID)) {
@@ -91,17 +91,19 @@ public class WsGamesHandler extends TextWebSocketHandler {
 					aux.add(session);
 					games.put(lobbyID, aux);
 					
-					session.sendMessage(new TextMessage("Te respeto: creas"));
+					//session.sendMessage(new TextMessage("Te respeto: creas"));
 				}
 				else { // Si existe, se añade al jugador al lobby existente
 					aux = games.get(lobbyID);
 					aux.add(session);
 					games.replace(lobbyID, aux);
 					
-					session.sendMessage(new TextMessage("Te respeto: existe y te unes"));
+					//session.sendMessage(new TextMessage("Te respeto: existe y te unes"));
 				}
 				
-				semaforo.release();
+				System.out.println("games: " + games.get(lobbyID));
+				
+				//semaforo.release();
 				
 				break;
 				
@@ -114,6 +116,10 @@ public class WsGamesHandler extends TextWebSocketHandler {
 				
 				// Se envía la información al cliente de la partida que no ha enviado el msg
 				// al servidor
+				
+				System.out.println("LobbyID: " + newNode.get("lobbyID").asText());
+				System.out.println("games: " + games.get(lobbyID));
+				
 				aux = games.get(lobbyID);
 				for (int i=0; i < aux.size(); i++) {
 					if (!aux.get(i).getId().equals(session.getId()))

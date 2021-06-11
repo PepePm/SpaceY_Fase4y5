@@ -162,11 +162,10 @@ var postIt;
 var postItExp;
 var isbig = false;
 
-var connection;
 class SceneMars extends Phaser.Scene {
-    
+
     constructor() {
-        
+
         super("SceneMars");
     }
 
@@ -178,23 +177,23 @@ class SceneMars extends Phaser.Scene {
 
         //CHAT POSTITIONS BEFORE - AFTER
         var chtOffset = 1000;
-   
+
         chatTween = [
-            game.config.width - 625, game.config.height-200,    //icono
-            game.config.width -300, game.config.height-380, //base
-            game.config.width -300, game.config.height-380, //frame
-            game.config.width -315, game.config.height-110, //write msg
-            game.config.width -55, game.config.height-110,  //send
-            game.config.width - 625, game.config.height-400,    //global
-        
+            game.config.width - 625, game.config.height - 200,    //icono
+            game.config.width - 300, game.config.height - 380, //base
+            game.config.width - 300, game.config.height - 380, //frame
+            game.config.width - 315, game.config.height - 110, //write msg
+            game.config.width - 55, game.config.height - 110,  //send
+            game.config.width - 625, game.config.height - 400,    //global
+
         ];
         chatPos = [
-            game.config.width-100,  chatTween[1],    //icono
-            chatTween[2]+chtOffset,  chatTween[3], //base
-            chatTween[4]+chtOffset,  chatTween[5], //frame
-            chatTween[6]+chtOffset,  chatTween[7], //write msg
-            chatTween[8]+chtOffset,  chatTween[9],  //send
-            game.config.width-100,  chatTween[11]  //global
+            game.config.width - 100, chatTween[1],    //icono
+            chatTween[2] + chtOffset, chatTween[3], //base
+            chatTween[4] + chtOffset, chatTween[5], //frame
+            chatTween[6] + chtOffset, chatTween[7], //write msg
+            chatTween[8] + chtOffset, chatTween[9],  //send
+            game.config.width - 100, chatTween[11]  //global
         ];
 
 
@@ -215,40 +214,37 @@ class SceneMars extends Phaser.Scene {
             1078, 680,  //caja de mensaje
             1150, 419,  //chatbox
         ];
-        
+
     }
 
-// ============================================ METODOS PARA PEDIR RECURSOS     =========================================
-    AskForFood()
-    {
+    // ============================================ METODOS PARA PEDIR RECURSOS     =========================================
+    AskForFood() {
         console.log("PIDIENDO COMIDITA");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
-            type:"syncFoodPilot",
-            value:true,
+            type: "syncFoodPilot",
+            value: true,
         }
         connection.send(JSON.stringify(data));
     }
-    SendChatMsg()
-    {
+    SendChatMsg() {
         console.log("EnviandoMensaje");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
-            type:"syncFoodPilot",
-            value:true,
+            type: "syncFoodPilot",
+            value: true,
         }
         connection.send(JSON.stringify(data));
     }
-    AskForResources()
-    {
+    AskForResources() {
         console.log("PIDIENDO RESOURCES");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
-            type:"syncResPilot",
-            value:true,
+            type: "syncResPilot",
+            value: true,
         }
         connection.send(JSON.stringify(data));
     }
@@ -258,133 +254,135 @@ class SceneMars extends Phaser.Scene {
         console.log("GameSessionInnitiated");
         connection = new WebSocket("ws://" + urlServer + "/games");
 
-        connection.onopen = function(){
+        console.log("conexión: " + connection);
+
+        connection.onopen = function () {
             var data = {
-		        action: "Create",
+                action: "Start",
                 lobbyID: gameLobbyID
-		    }
-			connection.send(JSON.stringify(data));   
+            }
+            connection.send(JSON.stringify(data));
         }
 
 
         var that = this;
-        connection.onmessage = function(msg){
+        connection.onmessage = function (msg) {
             var data = JSON.parse(msg.data);
-			//ACTUALIZACION DE LA INFORMACIOND DE LA CONSOLA DE MARTE
-            switch(data["type"]){
+
+            //ACTUALIZACION DE LA INFORMACIOND DE LA CONSOLA DE MARTE
+            switch (data["type"]) {
                 case "syncAntenaPilot":
-                    this.UiMarsAntenaPilot.setVisible(data["value"]);
-                    easePilot(this, this.UiMarsAntenaPilot, data["value"]);
+                    that.UiMarsAntenaPilot.setVisible(data["value"]);
+                    that.easePilot(that, that.UiMarsAntenaPilot, data["value"]);
                     break;
                 case "syncMinePilot":
-                    this.UiMarsMinePilot.setVisible(data["value"]);
-                    easePilot(this, this.UiMarsMinePilot, data["value"]);
+                    that.UiMarsMinePilot.setVisible(data["value"]);
+                    that.easePilot(that, that.UiMarsMinePilot, data["value"]);
                     break;
                 case "syncRocketPilot":
-                    this.UiMarsRocketPilot.setVisible(data["value"]);
-                    easePilot(this, this.UiMarsRocketPilot, data["value"]);
+                    that.UiMarsRocketPilot.setVisible(data["value"]);
+                    that.easePilot(that, that.UiMarsRocketPilot, data["value"]);
                     break;
                 case "syncTerraform":
-                    this.UiMarsTerraPilot.setVisible(data["value"]);
-                    easePilot(this, this.UiMarsTerraPilot, data["value"]);
+                    that.UiMarsTerraPilot.setVisible(data["value"]);
+                    that.easePilot(that, that.UiMarsTerraPilot, data["value"]);
                     break;
                 case "syncCharPos":
                     var data = {
                         action: "Sync",
                         lobbyID: gameLobbyID,
-                        type:"syncCharPos",
-                        value:marte.rotation,
+                        type: "syncCharPos",
+                        value: marte.rotation,
                     }
                     connection.send(JSON.stringify(data));
                     break;
 
             }
-            
+
         }
 
-        connection.onclose = function(){
+        connection.onclose = function () {
             connection = undefined;
         }
 
-        
+
         //**************************************************************************************************************************** */
 
-         //CHATBOX
-    //Chatbox icon
-    this.chatbutton = this.add.image(chatPos[0], chatPos[1],'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
-    .setScale(0.6);
-    this.chatbutton.setInteractive()
-    .on('pointerdown', () => this.MovinBoxes(this ,1))
-    .on('pointerover', () => this.enterIconHoverState(this.chatbutton, this))
-    .on('pointerout', () => this.enterIconRestState(this.chatbutton))
-    this.chatbutton.setOrigin(0.5);
+        //CHATBOX
+        //Chatbox icon
+        this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
+            .setScale(0.6);
+        this.chatbutton.setInteractive()
+            .on('pointerdown', () => this.MovinBoxes(this, 1))
+            .on('pointerover', () => this.enterIconHoverState(this.chatbutton, this))
+            .on('pointerout', () => this.enterIconRestState(this.chatbutton))
+        this.chatbutton.setOrigin(0.5);
 
-    //chatbox base
-    this.chatBase = this.add.image(chatPos[2], chatPos[3],'ChatBox_Base')
-    .setScale(0.8);
-    this.chatBase.setOrigin(0.5);
+        //chatbox base
+        this.chatBase = this.add.image(chatPos[2], chatPos[3], 'ChatBox_Base')
+            .setScale(0.8);
+        this.chatBase.setOrigin(0.5);
 
-    //chatbox write msg
-    this.chatWritter = this.add.image(chatPos[6], chatPos[7],'ChatBox_MsgBox')
-    .setScale(0.37);
-    this.chatWritter.setOrigin(0.5);
+        //chatbox write msg
+        this.chatWritter = this.add.image(chatPos[6], chatPos[7], 'ChatBox_MsgBox')
+            .setScale(0.37);
+        this.chatWritter.setOrigin(0.5);
 
-    //chatbox send
-    this.sendButton = this.add.image(chatPos[8], chatPos[9],'ChatBox_SendBtn')
-    .setScale(0.4);
-    this.sendButton.setInteractive()
-    .on('pointerdown', () => RestCreateMsg(this, userName))
-    .on('pointerover', () => this.enterIconHoverState(this.sendButton, this) )
-    .on('pointerout', () => this.enterIconRestState(this.sendButton))
-    this.sendButton.setOrigin(0.5);
-    this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter,this.sendButton, this.globalbutton];
+        //chatbox send
+        this.sendButton = this.add.image(chatPos[8], chatPos[9], 'ChatBox_SendBtn')
+            .setScale(0.4);
+        this.sendButton.setInteractive()
+            .on('pointerdown', () => RestCreateMsg(this, userName))
+            .on('pointerover', () => this.enterIconHoverState(this.sendButton, this))
+            .on('pointerout', () => this.enterIconRestState(this.sendButton))
+        this.sendButton.setOrigin(0.5);
+        this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter, this.sendButton, this.globalbutton];
 
-    var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
-    key_enter.on('down', () => RestCreateMsg(this, userName));
-    
-    
-    //Chatbox code
-    this.chatContent = [];
-    loadMsgs(this);
+        var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
+        key_enter.on('down', () => RestCreateMsg(this, userName));
 
-    this.chatText = this.add.text(game.config.width/6*4+10, game.config.height/5+10, this.chatContent, { fontSize:"25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
 
-    this.chatText.setMask(mask).setVisible(false);
+        //Chatbox code
+        this.chatContent = [];
+        loadMsgs(this);
 
-    var zone = this.add.zone(game.config.width/6*4+10, game.config.height/5+1, 320, game.config.height/5*3+5).setOrigin(0).setInteractive();
-    var that = this;
-    zone.on('pointermove', function (pointer) {
+        this.chatText = this.add.text(game.config.width / 6 * 4 + 10, game.config.height / 5 + 10, this.chatContent, { fontSize: "25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
 
-        if (pointer.isDown)
-        {
-            that.chatText.y += (pointer.velocity.y / 10);
+        this.chatText.setMask(mask).setVisible(false);
 
-            that.chatText.y = Phaser.Math.Clamp(that.chatText.y, (game.config.height/5+10)-(25*lineasChat), game.config.height/5+10);
-        }
+        var zone = this.add.zone(game.config.width / 6 * 4 + 10, game.config.height / 5 + 1, 320, game.config.height / 5 * 3 + 5).setOrigin(0).setInteractive();
+        var that = this;
+        zone.on('pointermove', function (pointer) {
 
-    });
+            if (pointer.isDown) {
+                that.chatText.y += (pointer.velocity.y / 10);
 
-    this.writeTextChat = this.add.dom(1280, 785).createFromCache('formChat').setVisible(false);
-    
-    var graphics = this.make.graphics();
-    graphics.fillRect(game.config.width/6*4+10, game.config.height/5+1, game.config.width/6*4+300, game.config.height/5*3+5);
-    var mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
+                that.chatText.y = Phaser.Math.Clamp(that.chatText.y, (game.config.height / 5 + 10) - (25 * lineasChat), game.config.height / 5 + 10);
+            }
+
+        });
+
+        this.writeTextChat = this.add.dom(1280, 785).createFromCache('formChat').setVisible(false);
+
+        var graphics = this.make.graphics();
+        graphics.fillRect(game.config.width / 6 * 4 + 10, game.config.height / 5 + 1, game.config.width / 6 * 4 + 300, game.config.height / 5 * 3 + 5);
+        var mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
 
         //LOBBY
         this.lobbyContent = ["Connected Users: "];
         loadLobby(this);
-    
-        this.lobbyText = this.add.text(game.config.width/6*4+10, game.config.height/5+10, this.lobbyContent,
-        {fontSize:"25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
+
+        this.lobbyText = this.add.text(game.config.width / 6 * 4 + 10, game.config.height / 5 + 10, this.lobbyContent,
+            { fontSize: "25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
         this.lobbyText.setMask(mask).setVisible(false).setDepth(1000);
-    
+
         this.numPlayers = updateUsers(this);
-        this.numPlayersTxt = this.add.text(game.config.width*3.25/4, (game.config.height/8)*6.8, "REGISTERED USERS: "+this.numPlayers, { fill: '#FFFFFF',fontFamily:'menuFont',fontSize:'40px' });
+        this.numPlayersTxt = this.add.text(game.config.width * 3.25 / 4, (game.config.height / 8) * 6.8, "REGISTERED USERS: " + this.numPlayers, { fill: '#FFFFFF', fontFamily: 'menuFont', fontSize: '40px' });
         this.numPlayersTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
-    
-        this.serverOnlineTxt = this.add.text(game.config.width*3.25/4, (game.config.height/8)*7.2, "SERVER ¿?", { fill: '#FFFFFF',fontFamily:'menuFont',fontSize:'40px' });
+
+        this.serverOnlineTxt = this.add.text(game.config.width * 3.25 / 4, (game.config.height / 8) * 7.2, "SERVER ¿?", { fill: '#FFFFFF', fontFamily: 'menuFont', fontSize: '40px' });
         this.serverOnlineTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
-    
+
         isServerOnline(this);
 
 
@@ -404,7 +402,7 @@ class SceneMars extends Phaser.Scene {
         sfx.sounds[12].volume = 0.3;
         sfx.sounds[2].volume = 0;
         sfx.sounds[8].volume = 0;
-        
+
         soundtrack.pistas[0].stop();
         soundtrack.pistas[1].play();
         soundtrack.pistas[3].play();
@@ -413,18 +411,18 @@ class SceneMars extends Phaser.Scene {
         sfx.sounds[2].play();
         sfx.sounds[8].play();
 
-        
-        
+
+
 
         //MARTE
         fondoMarte =
-        this.add.image(407, 450, "fondoMarte").setDepth(-2);
+            this.add.image(407, 450, "fondoMarte").setDepth(-2);
 
         //Fondo Consola
         fondoConsola = this.add.image(1202, 450, "fondoTierra").setDepth(1);
 
         //Inicialización planeta
-        marte = this.add.image(game.config.width/4, 1250, "marte").setScale(3).setDepth(-2);
+        marte = this.add.image(game.config.width / 4, 1250, "marte").setScale(3).setDepth(-2);
 
         //Cohete en Marte
         objCohete = new Rocket(this, marte.x, marte.y);
@@ -444,11 +442,11 @@ class SceneMars extends Phaser.Scene {
 
         //Nubes
         nubes = new Array(N_NUBES);
-        
-        for(var i=0; i<N_NUBES; i++) {
+
+        for (var i = 0; i < N_NUBES; i++) {
 
             nubes[i] = new Cloud(this);
-            
+
         }
 
         //
@@ -457,43 +455,43 @@ class SceneMars extends Phaser.Scene {
         //TIERRA    CREACION DE LOS ASSETS DE TIERRA
         //controlTierra = new EarthControl(this, 0, 0, 8);
         //controlTierra.PushFromMars();
-		
-		
-		
-		
-		// ui_M_actionbox: Tecla de acción
+
+
+
+
+        // ui_M_actionbox: Tecla de acción
         //
-		
-		// ui_M_dangerArrow                                         //NI IDEA OIGA                  ****************************************
-		alertaPeligroIz = this.add.image(665, 365, "alertaPeligro").setVisible(false);
-		
-		// ui_M_dangerArrow_1
-		alertaPeligroDc = this.add.image(144, 365, "alertaPeligro").setScale(-1,1).setVisible(false); // *************************************************(x=-1, y)FLIP EJE VERTICAL!
-    
+
+        // ui_M_dangerArrow                                         //NI IDEA OIGA                  ****************************************
+        alertaPeligroIz = this.add.image(665, 365, "alertaPeligro").setVisible(false);
+
+        // ui_M_dangerArrow_1
+        alertaPeligroDc = this.add.image(144, 365, "alertaPeligro").setScale(-1, 1).setVisible(false); // *************************************************(x=-1, y)FLIP EJE VERTICAL!
+
         //Contador tiempo restante
-        counter = new Counter(this, 10*60);
-        
-        
+        counter = new Counter(this, 10 * 60);
+
+
 
         //jugador
-        player = this.physics.add.sprite(marte.x,marte.y-620, 'stelonauta_idle').setScale(0.6);
-        
- 
+        player = this.physics.add.sprite(marte.x, marte.y - 620, 'stelonauta_idle').setScale(0.6);
+
+
         //Indicadores recursos
         indTerra = new ResourceIndicator(this, 401, 787, 3, nTerraformacion, MAX_TERRAFORMACION);
         indHam = new ResourceIndicator(this, 109, 74, 0, nComida_M, MAX_COMIDA);
         indRocas = new ResourceIndicator(this, 109, 166, 1, nRocas_M, MAX_ROCAS);
         indMat = new ResourceIndicator(this, 109, 256, 2, nMaterial_M, MAX_MATERIAL);
 
-        
-        
+
+
 
         //Cargamento cohete
-        objCoheteMat = new Bar(this, game.config.width/4 - 120, player.y - 100, nCoheteMat, MAX_COHETEMAT, 0.5, 0.5, coheteMat_color, true);
+        objCoheteMat = new Bar(this, game.config.width / 4 - 120, player.y - 100, nCoheteMat, MAX_COHETEMAT, 0.5, 0.5, coheteMat_color, true);
         objCoheteMat.obj.setRotation(-1.57);
 
         //Barra de carga
-        barraCarga = new Bar(this, player.x-40, player.y-50, nCarga, MAX_CARGA, 0.4, 0.4, -1, false);        
+        barraCarga = new Bar(this, player.x - 40, player.y - 50, nCarga, MAX_CARGA, 0.4, 0.4, -1, false);
 
         //Input events
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -508,14 +506,14 @@ class SceneMars extends Phaser.Scene {
         keyDev_victory = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M, false);
         keyDev_defeat = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N, false);
 
-        
+
         //Genera meteoritos cada x ms (TESTING)
         //var timedEvent = this.time.addEvent({ delay: 3000, callback: genMeteors, callbackScope: this, loop: true });
 
 
         //PARTÍCULAS TORMENTA
         emitterStorm = this.add.particles('polvo').createEmitter({
-            x: {min: 0, max: 1500},
+            x: { min: 0, max: 1500 },
             y: 0,
             blendMode: 'COLOR',
             scale: { start: 0.1, end: 0 },
@@ -526,7 +524,7 @@ class SceneMars extends Phaser.Scene {
             on: false
         });
 
-        
+
 
         //Cohete        [0]
         emitterMachines[0] = this.add.particles('smoke');
@@ -541,7 +539,7 @@ class SceneMars extends Phaser.Scene {
             lifespan: 2000,
             on: false
         });
-        
+
         emitterMachines[0].posX = emitterMachines[0].x;
         emitterMachines[0].posY = emitterMachines[0].y;
 
@@ -560,10 +558,10 @@ class SceneMars extends Phaser.Scene {
             lifespan: 2000,
             on: false
         });
-        
+
         emitterMachines[1].posX = emitterMachines[1].x;
         emitterMachines[1].posY = emitterMachines[1].y;
-    
+
 
         //Mina          [2]
         emitterMachines[2] = this.add.particles('smoke');
@@ -578,10 +576,10 @@ class SceneMars extends Phaser.Scene {
             lifespan: 2000,
             on: false
         });
-        
+
         emitterMachines[2].posX = emitterMachines[2].x;
         emitterMachines[2].posY = emitterMachines[2].y;
-    
+
 
         //Terraformador [3]
         emitterMachines[3] = this.add.particles('smoke');
@@ -596,7 +594,7 @@ class SceneMars extends Phaser.Scene {
             lifespan: 2000,
             on: false
         });
-        
+
         emitterMachines[3].posX = emitterMachines[3].x;
         emitterMachines[3].posY = emitterMachines[3].y;
 
@@ -605,25 +603,25 @@ class SceneMars extends Phaser.Scene {
         });
 
         //POST IT
-        postIt = this.add.image(game.config.width-90,100, "postIt").setDepth(7)
-        .setInteractive()
-        .on('pointerdown', () => OpenPostIt(postIt,this))
-        .on('pointerup', () => HighlightPostIt(postIt, true))
-        .on('pointerover', () => HighlightPostIt(postIt, true))
-        .on('pointerout', () => HighlightPostIt(postIt, false));	
-        
-        postItExp = this.add.image(game.config.width-100,100, "postItExp")
-        .setDepth(7)
-        .setScale(0.2)
-        .setInteractive()
-        .setVisible(false)
-        .on('pointerdown', () => OpenPostIt(postItExp,this))
-        .on('pointerup', () => HighlightPostIt(postItExp, true))
-        .on('pointerover', () => HighlightPostIt(postItExp, true))
-        .on('pointerout', () => HighlightPostIt(postItExp, false));
-        
-        
-    //*/
+        postIt = this.add.image(game.config.width - 90, 100, "postIt").setDepth(7)
+            .setInteractive()
+            .on('pointerdown', () => OpenPostIt(postIt, this))
+            .on('pointerup', () => HighlightPostIt(postIt, true))
+            .on('pointerover', () => HighlightPostIt(postIt, true))
+            .on('pointerout', () => HighlightPostIt(postIt, false));
+
+        postItExp = this.add.image(game.config.width - 100, 100, "postItExp")
+            .setDepth(7)
+            .setScale(0.2)
+            .setInteractive()
+            .setVisible(false)
+            .on('pointerdown', () => OpenPostIt(postItExp, this))
+            .on('pointerup', () => HighlightPostIt(postItExp, true))
+            .on('pointerover', () => HighlightPostIt(postItExp, true))
+            .on('pointerout', () => HighlightPostIt(postItExp, false));
+
+
+        //*/
         /*
         this.input.on('pointerDown', function (pointer) {
             //emitter.setPosition(Phaser.Math.Between(0, game.config.width), 0)
@@ -632,7 +630,7 @@ class SceneMars extends Phaser.Scene {
             //console.log("APAGA");
         });
         //*/
-    
+
         /*
         this.input.on('pointerdown', function (pointer) {
             emitZoneIndex = (emitZoneIndex + 1) % emitZones.length;
@@ -640,53 +638,53 @@ class SceneMars extends Phaser.Scene {
             emitter.explode();
         });
         //*/
-    
+
         //emitter.setEmitZone(emitZones[emitZoneIndex]); 
-         //Añadimos fondo de marte
+        //Añadimos fondo de marte
 
-         //*****************************                    ELEMENTOS DE LA CONSOLA DE MARTE        ***********************************
-         this.UiMarsCons = this.add.image(ConsolePos[0], ConsolePos[1], "UIMarsCons").setDepth(4);
-         this.UiMarsTime = this.add.image(ConsolePos[2], ConsolePos[3], "UIMarsTime").setDepth(4);
-         this.UiMarTerraform = this.add.image(ConsolePos[4], ConsolePos[5], "UIMarsTerraform").setDepth(4);
-         this.UiMarsAlerts = this.add.image(ConsolePos[6], ConsolePos[7], "UIMarsAlerts").setDepth(4);
-         this.UiMarsPilots = this.add.image(ConsolePos[8], ConsolePos[9], "UIMarsPilots").setDepth(4);
-         this.UiMarsAntenaPilot = this.add.image(ConsolePos[10], ConsolePos[11], "UIMarsAntennaPilot").setDepth(4);
-         this.UiMarsTerraPilot = this.add.image(ConsolePos[12], ConsolePos[13], "UIMarsTerraPilot").setDepth(4);
-         this.UiMarsRocketPilot = this.add.image(ConsolePos[14], ConsolePos[15], "UIMarsRocketPilot").setDepth(4);
-         this.UiMarsMinePilot = this.add.image(ConsolePos[16], ConsolePos[17], "UIMarsMinePilot").setDepth(4);
+        //*****************************                    ELEMENTOS DE LA CONSOLA DE MARTE        ***********************************
+        this.UiMarsCons = this.add.image(ConsolePos[0], ConsolePos[1], "UIMarsCons").setDepth(4);
+        this.UiMarsTime = this.add.image(ConsolePos[2], ConsolePos[3], "UIMarsTime").setDepth(4);
+        this.UiMarTerraform = this.add.image(ConsolePos[4], ConsolePos[5], "UIMarsTerraform").setDepth(4);
+        this.UiMarsAlerts = this.add.image(ConsolePos[6], ConsolePos[7], "UIMarsAlerts").setDepth(4);
+        this.UiMarsPilots = this.add.image(ConsolePos[8], ConsolePos[9], "UIMarsPilots").setDepth(4);
+        this.UiMarsAntenaPilot = this.add.image(ConsolePos[10], ConsolePos[11], "UIMarsAntennaPilot").setDepth(4);
+        this.UiMarsTerraPilot = this.add.image(ConsolePos[12], ConsolePos[13], "UIMarsTerraPilot").setDepth(4);
+        this.UiMarsRocketPilot = this.add.image(ConsolePos[14], ConsolePos[15], "UIMarsRocketPilot").setDepth(4);
+        this.UiMarsMinePilot = this.add.image(ConsolePos[16], ConsolePos[17], "UIMarsMinePilot").setDepth(4);
 
-         //boton para enviar mensaje de chat
-         
-         this.UiMarsSndMsgBtn =  this.add.image(ConsolePos[18], ConsolePos[19], "UIMarsSndMsg").setDepth(4)
-         .setInteractive()
-         .on('pointerdown', () =>  this.UiMarsSndMsgBtn())//this.Unload(this.unloadRocketBtn)
-         .on('pointerup', () => this.Highlight(this.UiMarsSndMsgBtn, true) )
-         .on('pointerover', () => this.Highlight(this.UiMarsSndMsgBtn, true) )
-         .on('pointerout', () => this.Highlight(this.UiMarsSndMsgBtn, false) );
-         
+        //boton para enviar mensaje de chat
+
+        this.UiMarsSndMsgBtn = this.add.image(ConsolePos[18], ConsolePos[19], "UIMarsSndMsg").setDepth(4)
+            .setInteractive()
+            .on('pointerdown', () => this.UiMarsSndMsgBtn())//this.Unload(this.unloadRocketBtn)
+            .on('pointerup', () => this.Highlight(this.UiMarsSndMsgBtn, true))
+            .on('pointerover', () => this.Highlight(this.UiMarsSndMsgBtn, true))
+            .on('pointerout', () => this.Highlight(this.UiMarsSndMsgBtn, false));
+
         //boton para enviar recursos
-         this.UiMarsSndResBtn = this.add.image(ConsolePos[20], ConsolePos[21], "UIMarsSndRes").setDepth(4)
-         .setInteractive()
-         .on('pointerdown', () =>  this.AskForResources())//this.Unload(this.unloadRocketBtn)
-         .on('pointerup', () => this.Highlight(this.UiMarsSndResBtn, true) )
-         .on('pointerover', () => this.Highlight(this.UiMarsSndResBtn, true) )
-         .on('pointerout', () => this.Highlight(this.UiMarsSndResBtn, false) );
+        this.UiMarsSndResBtn = this.add.image(ConsolePos[20], ConsolePos[21], "UIMarsSndRes").setDepth(4)
+            .setInteractive()
+            .on('pointerdown', () => this.AskForResources())//this.Unload(this.unloadRocketBtn)
+            .on('pointerup', () => this.Highlight(this.UiMarsSndResBtn, true))
+            .on('pointerover', () => this.Highlight(this.UiMarsSndResBtn, true))
+            .on('pointerout', () => this.Highlight(this.UiMarsSndResBtn, false));
 
         //BOTON QUE ENVIA SEÑAL A TIERRA PARA RECIBIR PROVISIONES
-         this.UiMarsSndFoodBtn = this.add.image(ConsolePos[22], ConsolePos[23], "UIMarsSndFood").setDepth(4)
-         .setInteractive()
-         .on('pointerdown', () =>  this.AskForFood())//this.Unload(this.unloadRocketBtn)
-         .on('pointerup', () => this.Highlight(this.UiMarsSndFoodBtn, true) )
-         .on('pointerover', () => this.Highlight(this.UiMarsSndFoodBtn, true) )
-         .on('pointerout', () => this.Highlight(this.UiMarsSndFoodBtn, false) );
+        this.UiMarsSndFoodBtn = this.add.image(ConsolePos[22], ConsolePos[23], "UIMarsSndFood").setDepth(4)
+            .setInteractive()
+            .on('pointerdown', () => this.AskForFood())//this.Unload(this.unloadRocketBtn)
+            .on('pointerup', () => this.Highlight(this.UiMarsSndFoodBtn, true))
+            .on('pointerover', () => this.Highlight(this.UiMarsSndFoodBtn, true))
+            .on('pointerout', () => this.Highlight(this.UiMarsSndFoodBtn, false));
 
         //caja para escribir mensajes
-         this.UiMarsMsgBox = this.add.image(ConsolePos[24], ConsolePos[25], "UIMarsMsgBox").setDepth(4);
+        this.UiMarsMsgBox = this.add.image(ConsolePos[24], ConsolePos[25], "UIMarsMsgBox").setDepth(4);
 
         //pantalla de mensajes del chat central 
-         this.UiMarsChatBox = this.add.image(ConsolePos[26], ConsolePos[27], "UIMarsChatBox").setDepth(4);
+        this.UiMarsChatBox = this.add.image(ConsolePos[26], ConsolePos[27], "UIMarsChatBox").setDepth(4);
         //**************************************************************************************************************** */
-    
+
     }
     update(time, delta) {
 
@@ -727,7 +725,7 @@ class SceneMars extends Phaser.Scene {
             //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
         }
         else if (key_right.isDown) {
-            
+
             //Rotación de los elementos de Marte
             updateRotations(-1, delta);
             //marte.rotation += -1*delta/1500*playerSpeed;
@@ -748,7 +746,7 @@ class SceneMars extends Phaser.Scene {
         else {
 
             player.anims.play('stelonauta_idle', true);
-            
+
         }
         //if(maquina[i].isRota == true)
         /*  emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
@@ -757,8 +755,8 @@ class SceneMars extends Phaser.Scene {
           emitterMachines[3].emitParticleAt(emitterMachines[3].posX, emitterMachines[3].posY);
         */
         ////console.log("Pos X: " + emitterMachines[0].posX + "\nPos Y: " + emitterMachines[0].posY);
-        
-        
+
+
         //SONIDOS DE CORRER EN MARTE
         if ((key_left.isDown || key_right.isDown) && !startSfxRun) {
             startSfxRun = true;
@@ -769,14 +767,14 @@ class SceneMars extends Phaser.Scene {
             sfx.sounds[3].stop();
         }
 
-        
+
 
         //Meteoritos en MARTE
-        for(var i=0; i < meteoritos.length; i++) {
- 
+        for (var i = 0; i < meteoritos.length; i++) {
+
             meteoritos[i].Update();
         }
-        
+
 
         //////////////////////////////
         //Interaccionar con máquinas//
@@ -786,12 +784,12 @@ class SceneMars extends Phaser.Scene {
 
             teclaAccion.setVisible(false);
         }
-        
+
         //Acciones de cada máquina
-        for(i = 0; i < 4; i++) {
+        for (i = 0; i < 4; i++) {
 
             maquinas[i].update(delta);
-            if(maquinas[i].isBroken == true)
+            if (maquinas[i].isBroken == true)
                 emitterMachines[i].emitParticleAt(emitterMachines[i].posX, emitterMachines[i].posY);
         }
 
@@ -799,23 +797,23 @@ class SceneMars extends Phaser.Scene {
         //Pasivas//
         ///////////
 
-        
+
         //Nubes
-        for(var i=0; i<N_NUBES; i++) {
+        for (var i = 0; i < N_NUBES; i++) {
             nubes[i].Update();
         }
 
         //Desgaste máquinas//(mejor en sus clases)
-        
-        
+
+
         //Desgaste hambre//
-        indHam.size = Phaser.Math.Clamp(indHam.size - delta/2500, 0, indHam.maxSize); 
+        indHam.size = Phaser.Math.Clamp(indHam.size - delta / 2500, 0, indHam.maxSize);
         indHam.Update();
-        
+
         if (indHam.size <= 0)
             DefeatCondition(this);
 
-        
+
         //TIERRA
         //controlTierra.Update(delta);
 
@@ -824,7 +822,7 @@ class SceneMars extends Phaser.Scene {
             PauseMenu(this);
             paused = true;
         }
-        if (key_pause.isUp){
+        if (key_pause.isUp) {
 
             paused = false;
         }
@@ -841,12 +839,10 @@ class SceneMars extends Phaser.Scene {
         //
     }
 
-    OpenChat(scene)
-{
-  
-   var nX = 0; var nY = 1;
-        for (let i = 0; i < scene.chatboxStuff.length; i++)
-        {
+    OpenChat(scene) {
+
+        var nX = 0; var nY = 1;
+        for (let i = 0; i < scene.chatboxStuff.length; i++) {
             scene.tweens.add({
                 targets: scene.chatboxStuff[i],
                 x: chatTween[nX],
@@ -856,53 +852,16 @@ class SceneMars extends Phaser.Scene {
                 duration: 100,
                 ease: 'Bounce.easeOut',
             });
-            nX+=2;nY+=2;
+            nX += 2; nY += 2;
         }
         chatBoxOut = true;
-    
-}
-ChatManager(scene,id)
-{
-    if(!chatBoxActive && chatBoxOut && !lobbyActive)
-    {
-        this.CloseChat(scene);
+
     }
-    if(chatBoxActive && !chatBoxOut && !lobbyActive)    //abrimos chat
-    {
-        scene.chatWritter.setVisible(true);
-        scene.sendButton.setVisible(true);
-        scene.chatText.setVisible(true);
-        scene.writeTextChat.setVisible(true);
-        scene.lobbyText.setVisible(false);
-        scene.numPlayersTxt.setVisible(false);
-        scene.serverOnlineTxt.setVisible(false);
-        this.OpenChat(scene);
-    }
-    if(!chatBoxActive && !chatBoxOut && lobbyActive)    //abrimos lobby
-    {
-        scene.chatWritter.setVisible(false);
-        scene.sendButton.setVisible(false);
-        scene.chatText.setVisible(false);
-        scene.writeTextChat.setVisible(false);
-        scene.lobbyText.setVisible(true);
-        scene.numPlayersTxt.setVisible(true);
-        scene.serverOnlineTxt.setVisible(true);
-        this.OpenChat(scene);
-    }
-    if(chatBoxActive && chatBoxOut && lobbyActive)
-    {
-        if(id == 0)
-        {
-            scene.chatWritter.setVisible(false);
-            scene.sendButton.setVisible(false);
-            scene.chatText.setVisible(false);
-            scene.writeTextChat.setVisible(false);
-            scene.lobbyText.setVisible(true);
-            scene.numPlayersTxt.setVisible(true);
-            scene.serverOnlineTxt.setVisible(true);
-            chatBoxActive = false;
+    ChatManager(scene, id) {
+        if (!chatBoxActive && chatBoxOut && !lobbyActive) {
+            this.CloseChat(scene);
         }
-        else
+        if (chatBoxActive && !chatBoxOut && !lobbyActive)    //abrimos chat
         {
             scene.chatWritter.setVisible(true);
             scene.sendButton.setVisible(true);
@@ -911,222 +870,245 @@ ChatManager(scene,id)
             scene.lobbyText.setVisible(false);
             scene.numPlayersTxt.setVisible(false);
             scene.serverOnlineTxt.setVisible(false);
-            lobbyActive = false;
+            this.OpenChat(scene);
+        }
+        if (!chatBoxActive && !chatBoxOut && lobbyActive)    //abrimos lobby
+        {
+            scene.chatWritter.setVisible(false);
+            scene.sendButton.setVisible(false);
+            scene.chatText.setVisible(false);
+            scene.writeTextChat.setVisible(false);
+            scene.lobbyText.setVisible(true);
+            scene.numPlayersTxt.setVisible(true);
+            scene.serverOnlineTxt.setVisible(true);
+            this.OpenChat(scene);
+        }
+        if (chatBoxActive && chatBoxOut && lobbyActive) {
+            if (id == 0) {
+                scene.chatWritter.setVisible(false);
+                scene.sendButton.setVisible(false);
+                scene.chatText.setVisible(false);
+                scene.writeTextChat.setVisible(false);
+                scene.lobbyText.setVisible(true);
+                scene.numPlayersTxt.setVisible(true);
+                scene.serverOnlineTxt.setVisible(true);
+                chatBoxActive = false;
+            }
+            else {
+                scene.chatWritter.setVisible(true);
+                scene.sendButton.setVisible(true);
+                scene.chatText.setVisible(true);
+                scene.writeTextChat.setVisible(true);
+                scene.lobbyText.setVisible(false);
+                scene.numPlayersTxt.setVisible(false);
+                scene.serverOnlineTxt.setVisible(false);
+                lobbyActive = false;
+            }
         }
     }
-}
-//sacar el chat 
-MovinBoxes(scene, id) 
-{
-    sfx.sounds[1].play();
+    //sacar el chat 
+    MovinBoxes(scene, id) {
+        sfx.sounds[1].play();
 
-    var nX = 0; var nY = 1;
-    switch(id)
-    {
-        case 0: // Abrir cerrar lobby 
-            lobbyActive = !lobbyActive;
-            this.ChatManager(scene,id);
-            break;
-        case 1: //abrir cerrar chatbox chatbox
-           
-            chatBoxActive = !chatBoxActive;
-            this.ChatManager(scene,id);
+        var nX = 0; var nY = 1;
+        switch (id) {
+            case 0: // Abrir cerrar lobby 
+                lobbyActive = !lobbyActive;
+                this.ChatManager(scene, id);
+                break;
+            case 1: //abrir cerrar chatbox chatbox
 
-            break;
-        case 2: //login loginBox,loginOption;
-        
-            
-            if(loginOut)    //guardar log in
-            {
-                
-                for (let i = 0; i < scene.loginStuff.length; i++)
+                chatBoxActive = !chatBoxActive;
+                this.ChatManager(scene, id);
+
+                break;
+            case 2: //login loginBox,loginOption;
+
+
+                if (loginOut)    //guardar log in
                 {
-                    scene.tweens.add({
-                        targets: scene.loginStuff[i],
-                        x: loginPos[nX],
-                        y: loginPos[nY],
-                        duration: 100,
-                        ease: 'Bounce.easeOut',
-                    });
-                    nX+=2;nY+=2;
+
+                    for (let i = 0; i < scene.loginStuff.length; i++) {
+                        scene.tweens.add({
+                            targets: scene.loginStuff[i],
+                            x: loginPos[nX],
+                            y: loginPos[nY],
+                            duration: 100,
+                            ease: 'Bounce.easeOut',
+                        });
+                        nX += 2; nY += 2;
+                    }
+                    loginOut = true;
+                    this.ShowLoginFields(scene, loginOut);
+
+                    this.accountText.setVisible(false);
+                    this.accountLogin.setVisible(false);
+                    this.accountLogin.setVisible(false);
+                    this.accountLogin.setActive(false);
                 }
-                loginOut = true;
-                this.ShowLoginFields(scene,loginOut);
-
-                this.accountText.setVisible(false);
-                this.accountLogin.setVisible(false);
-                this.accountLogin.setVisible(false);
-                this.accountLogin.setActive(false);
-            }
-            else if (!loginOut) //sacar log in
-            {
-                this.accountText.setVisible(true);
-                //this.accountLogin.setVisible(true);
-
-                for (let i = 0; i < scene.loginStuff.length; i++)
-
+                else if (!loginOut) //sacar log in
                 {
-                    scene.tweens.add({
-                        targets: scene.loginStuff[i],
-                        x: loginTween[nX],
-                        y: loginTween[nY],
-                        duration: 100,
-                        ease: 'Bounce.easeOut',
-                    });
-                    nX+=2;nY+=2;
+                    this.accountText.setVisible(true);
+                    //this.accountLogin.setVisible(true);
+
+                    for (let i = 0; i < scene.loginStuff.length; i++) {
+                        scene.tweens.add({
+                            targets: scene.loginStuff[i],
+                            x: loginTween[nX],
+                            y: loginTween[nY],
+                            duration: 100,
+                            ease: 'Bounce.easeOut',
+                        });
+                        nX += 2; nY += 2;
+                    }
+                    loginOut = false;
+
+                    this.ShowLoginFields(scene, loginOut);
                 }
-                loginOut = false;
 
-                this.ShowLoginFields(scene,loginOut);
-            }
-            
-            break;
-        case 3: //register registerBox, registerBtn, nextImg, prevImg;
-            
-            if(registerOut) //guardar register
-            {
-                this.regLogin.setVisible(false);
-                this.accountText.setColor("white");
-                this.accountText.setText('Please enter in your account');
+                break;
+            case 3: //register registerBox, registerBtn, nextImg, prevImg;
 
-                for (let i = 0; i<scene.registerStuff.length; i++)
-
+                if (registerOut) //guardar register
                 {
-                    scene.tweens.add({
-                        targets: scene.registerStuff[i],
-                        x: regisPos[nX],
-                        y: regisPos[nY],
-                        duration: 100,
-                        ease: 'Expo.easeOut',
-                    });
-                    nX+=2;nY+=2;
+                    this.regLogin.setVisible(false);
+                    this.accountText.setColor("white");
+                    this.accountText.setText('Please enter in your account');
+
+                    for (let i = 0; i < scene.registerStuff.length; i++) {
+                        scene.tweens.add({
+                            targets: scene.registerStuff[i],
+                            x: regisPos[nX],
+                            y: regisPos[nY],
+                            duration: 100,
+                            ease: 'Expo.easeOut',
+                        });
+                        nX += 2; nY += 2;
+                    }
+                    registerOut = false
+                    //this.ShowRegisternFields(scene,registerOn);
                 }
-                registerOut = false
-                //this.ShowRegisternFields(scene,registerOn);
-            }
-            else if(!registerOut) //sacar register
-            {
-                this.regLogin.setVisible(true);
-                for (let i = 0; i < scene.registerStuff.length; i++)
+                else if (!registerOut) //sacar register
                 {
-                    scene.tweens.add({
-                        targets: scene.registerStuff[i],
-                        x: regisTween[nX],
-                        y: regisTween[nY],
-                        duration: 100,
-                        ease: 'Expo.easeOut',
-                    });
-                    nX+=2;nY+=2;
+                    this.regLogin.setVisible(true);
+                    for (let i = 0; i < scene.registerStuff.length; i++) {
+                        scene.tweens.add({
+                            targets: scene.registerStuff[i],
+                            x: regisTween[nX],
+                            y: regisTween[nY],
+                            duration: 100,
+                            ease: 'Expo.easeOut',
+                        });
+                        nX += 2; nY += 2;
+                    }
+                    registerOut = true
+                    //this.ShowRegisternFields(scene,registerOn);
                 }
-                registerOut = true
-                //this.ShowRegisternFields(scene,registerOn);
-            }
-            
-            break;
+
+                break;
+        }
+
+
+
+
     }
-        
-
-       
-    
-}
-CloseChat(scene){
-    var nX = 0; var nY = 1; 
-    scene.chatWritter.setVisible(false);
-    scene.sendButton.setVisible(false);
-    scene.chatText.setVisible(false);
-    scene.writeTextChat.setVisible(false);
-    scene.lobbyText.setVisible(false);
-    scene.numPlayersTxt.setVisible(false);
-    scene.serverOnlineTxt.setVisible(false);
-    for (let i = 0; i < scene.chatboxStuff.length; i++)
-    {
-        scene.tweens.add({
-            targets: scene.chatboxStuff[i],
-            x: chatPos[nX],
-            y: chatPos[nY],
-            //delay: 100,
-            //aplha: {start: game.config.width / 2, to: game.config.width / 8},
-            duration: 100,
-            ease: 'Bounce.easeIn',
-        });
-        nX+=2;nY+=2;
+    CloseChat(scene) {
+        var nX = 0; var nY = 1;
+        scene.chatWritter.setVisible(false);
+        scene.sendButton.setVisible(false);
+        scene.chatText.setVisible(false);
+        scene.writeTextChat.setVisible(false);
+        scene.lobbyText.setVisible(false);
+        scene.numPlayersTxt.setVisible(false);
+        scene.serverOnlineTxt.setVisible(false);
+        for (let i = 0; i < scene.chatboxStuff.length; i++) {
+            scene.tweens.add({
+                targets: scene.chatboxStuff[i],
+                x: chatPos[nX],
+                y: chatPos[nY],
+                //delay: 100,
+                //aplha: {start: game.config.width / 2, to: game.config.width / 8},
+                duration: 100,
+                ease: 'Bounce.easeIn',
+            });
+            nX += 2; nY += 2;
+        }
+        chatBoxOut = false;
+        chatBoxActive = false;
+        lobbyActive = false;
     }
-    chatBoxOut = false;
-    chatBoxActive = false;
-    lobbyActive = false;
-}
-// ===============================          INTERACTIVIDAD  ===========================================================
+    // ===============================          INTERACTIVIDAD  ===========================================================
 
-enterIconHoverState(boton, scene){
-    
-    sfx.sounds[1].play();
-    boton.x = boton.x+movTxt;
-    boton.y = boton.y+movTxt;
-}
+    enterIconHoverState(boton, scene) {
 
-enterIconRestState(boton) {
-
-    boton.x = boton.x-movTxt;
-    boton.y = boton.y-movTxt;
-}
-
-Highlight(obj, b) {
-
-    b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);  
-}
-
-easePilot(boton,scene, value){
-    if(value == true)
-    {
-        var scaleV  = 1.3;
-        scene.tweens.add({
-            targets: boton,
-            scaleX: boton.scaleX * scaleV,
-            scaleY: boton.scaleY * scaleV,
-            delay:0,
-            duration: 500,
-            ease: 'Circ.easeOut',
-            repeat: -1,
-            yoyo: true,
-        });
+        sfx.sounds[1].play();
+        boton.x = boton.x + movTxt;
+        boton.y = boton.y + movTxt;
     }
-        
+
+    enterIconRestState(boton) {
+
+        boton.x = boton.x - movTxt;
+        boton.y = boton.y - movTxt;
     }
-//==============================================================================================================
+
+    Highlight(obj, b) {
+
+        b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
+    }
+
+    easePilot(scene, boton, value) {
+
+        console.log("easePilotototototo");
+
+        if (value == true) {
+            var scaleV = 1.3;
+            scene.tweens.add({
+                targets: boton,
+                scaleX: boton.scaleX * scaleV,
+                scaleY: boton.scaleY * scaleV,
+                delay: 0,
+                duration: 500,
+                ease: 'Circ.easeOut',
+                repeat: -1,
+                yoyo: true,
+            });
+        }
+
+    }
+    //==============================================================================================================
 }
 function genMeteors() {
 
     //var delay = 0;
-    for(var i=0; i < 2; i++) {
- 
+    for (var i = 0; i < 2; i++) {
+
         meteoritos[i] = new Meteor(this);
     }
 }
 
 function updateRotations(sign, delta) {
 
-    for(var i=0; i<N_NUBES; i++) {
-        nubes[i].obj.rotation += sign*delta/1000*playerSpeed;
+    for (var i = 0; i < N_NUBES; i++) {
+        nubes[i].obj.rotation += sign * delta / 1000 * playerSpeed;
     }
-    for(var i=0; i < meteoritos.length; i++) {
-        meteoritos[i].obj.rotation += sign*delta/1500*playerSpeed;
+    for (var i = 0; i < meteoritos.length; i++) {
+        meteoritos[i].obj.rotation += sign * delta / 1500 * playerSpeed;
     }
-    
-    marte.rotation+=sign*delta/1500*playerSpeed;
-    objCohete.obj.rotation+=sign*delta/1500*playerSpeed;
 
-    for (i=0; i<4; i++) {
+    marte.rotation += sign * delta / 1500 * playerSpeed;
+    objCohete.obj.rotation += sign * delta / 1500 * playerSpeed;
 
-        maquinas[i].obj.setRotation(maquinas[i].obj.rotation + sign*delta/1500*playerSpeed);
+    for (i = 0; i < 4; i++) {
+
+        maquinas[i].obj.setRotation(maquinas[i].obj.rotation + sign * delta / 1500 * playerSpeed);
         //Update sonidos
-        var beta = maquinas[i].obj.rotation < 0 ? maquinas[i].obj.rotation * -1: maquinas[i].obj.rotation ;
-        if(beta < 0.8)
-        {
-            var volumen = (0.8 - beta)/0.8;
-            if(volumen<0.02)
+        var beta = maquinas[i].obj.rotation < 0 ? maquinas[i].obj.rotation * -1 : maquinas[i].obj.rotation;
+        if (beta < 0.8) {
+            var volumen = (0.8 - beta) / 0.8;
+            if (volumen < 0.02)
                 volumen = 0;
-            switch(i)
-            {
+            switch (i) {
                 case 0: //Cohete
 
                     break;
@@ -1139,15 +1121,15 @@ function updateRotations(sign, delta) {
                     sfx.sounds[8].volume = volumen;
                     break;
             }
-            
+
         }
     }
 
-    sign===1 ? player.flipX = false : player.flipX = true;
+    sign === 1 ? player.flipX = false : player.flipX = true;
     player.anims.play('stelonauta_run', true);
 
     //Desgaste extra hambre
-    indHam.size = Phaser.Math.Clamp(indHam.size - delta/2500, 0, indHam.maxSize); 
+    indHam.size = Phaser.Math.Clamp(indHam.size - delta / 2500, 0, indHam.maxSize);
     indHam.Update();
 }
 
@@ -1157,7 +1139,7 @@ function DestroyOnScene(obj) {
 }
 
 //Acciones condiciones victoria/derrota
-function VictoryCondition(that)  {
+function VictoryCondition(that) {
 
     sfx.sounds.forEach(element => {
         element.stop();
@@ -1169,25 +1151,25 @@ function VictoryCondition(that)  {
     soundtrack.pistas[3].stop();
 
     isVictory = true;
-    
+
     that.scene.launch('SceneGameEnd');
     that.scene.pause('SceneGame');
 }
 
-function DefeatCondition(that){
+function DefeatCondition(that) {
     if (!isTutorial) {
 
         sfx.sounds.forEach(element => {
             element.stop();
         });
-    
+
         sfx.sounds[5].play();
-    
+
         isVictory = false;
-    
+
         soundtrack.pistas[1].stop();
         soundtrack.pistas[3].stop();
-    
+
         that.scene.launch('SceneGameEnd');
         that.scene.pause('SceneGame');
     }
@@ -1207,49 +1189,45 @@ function PauseMenu(that) {
 
 function HighlightPostIt(obj, b) {
 
-    b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);  
+    b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
     //if (!b) obj.add.image(game.config.width/2, game.config.height/2, "postIt");
 }
 
-function OpenPostIt(obj,scene) {
+function OpenPostIt(obj, scene) {
 
-    switch(obj)
-    {
-        case postIt : 
-        scene.tweens.add({
-            targets: obj,
-            scaleX: 10,
-            scaleY: 10,
-            duration: 50,
-            ease: 'Expo.easeIn',
-            onComplete: function ()
-            {
-                postIt.setVisible(false);
-                postItExp.setVisible(true);
-                postItExp.setScale(0.2);
-                postItExp.setPosition(game.config.width/2, game.config.height/2);
-            }
-        });
-        break;
-        case postItExp : 
-        scene.tweens.add({
-            targets: obj,
-            x:postIt.x,
-            y:postIt.y,
-            scaleX: 0,
-            scaleY: 0,
-            duration: 50,
-            ease: 'Expo.easeIn',
-            onComplete: function ()
-            {
-                postItExp.setVisible(false);
-                postIt.setVisible(true);
-            }
-        });
-        break;
+    switch (obj) {
+        case postIt:
+            scene.tweens.add({
+                targets: obj,
+                scaleX: 10,
+                scaleY: 10,
+                duration: 50,
+                ease: 'Expo.easeIn',
+                onComplete: function () {
+                    postIt.setVisible(false);
+                    postItExp.setVisible(true);
+                    postItExp.setScale(0.2);
+                    postItExp.setPosition(game.config.width / 2, game.config.height / 2);
+                }
+            });
+            break;
+        case postItExp:
+            scene.tweens.add({
+                targets: obj,
+                x: postIt.x,
+                y: postIt.y,
+                scaleX: 0,
+                scaleY: 0,
+                duration: 50,
+                ease: 'Expo.easeIn',
+                onComplete: function () {
+                    postItExp.setVisible(false);
+                    postIt.setVisible(true);
+                }
+            });
+            break;
     }
-    if(isbig)
-    {
+    if (isbig) {
         ////console.log('no soy grande');
         isbig = false;
         scene.tweens.add({
@@ -1258,14 +1236,12 @@ function OpenPostIt(obj,scene) {
             scaleY: 0,
             duration: 50,
             ease: 'Expo.easeIn',
-            onComplete: function ()
-            {
-                
+            onComplete: function () {
+
             }
         });
     }
-    else if (!isbig)
-    {
+    else if (!isbig) {
         isbig = true;
         scene.tweens.add({
             targets: obj,
@@ -1273,13 +1249,12 @@ function OpenPostIt(obj,scene) {
             scaleY: 1,
             duration: 50,
             ease: 'Expo.easeOut',
-            onComplete: function ()
-            {
-                
+            onComplete: function () {
+
             }
         });
     }
-    
+
 }
 
 
