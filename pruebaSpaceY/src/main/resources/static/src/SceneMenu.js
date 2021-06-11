@@ -24,6 +24,8 @@ var loginTween;
 //Websocket
 var connection;
 
+var election;
+
 class SceneMenu extends Phaser.Scene {
     
     constructor() {
@@ -179,6 +181,7 @@ create() {
     this.contactButton.setOrigin(0.5);
     this.easeMe(this.contactButton, this, 4);
 
+    //BOTONES HOST/JOIN/BACK
     //****************
 
     //Botones crear/unirse a partida
@@ -188,6 +191,7 @@ create() {
     .setVisible(false);
     this.lobbyCode.setOrigin(0.5);
 
+    //HOST
     this.hostButton = this.add.text((game.config.width/8)*3, -1000, 'Host' ,{ fill: '#FEDEBE',fontFamily:'menuFont',fontSize:'60px'})
     .setInteractive()
     .on('pointerdown', () => this.goHost() )
@@ -195,6 +199,7 @@ create() {
     .on('pointerout', () => this.enterIconRestState(this.hostButton) );
     this.hostButton.setOrigin(0.5);
     
+    //JOIN
     this.joinButton = this.add.text((game.config.width/2)*4, -1000, 'Join', { fill: '#FEDEBE',fontFamily:'menuFont',fontSize:'60px'})
     .setInteractive()
     .on('pointerdown', () => this.goJoin() )
@@ -202,6 +207,7 @@ create() {
     .on('pointerout', () => this.enterIconRestState(this.joinButton) );
     this.joinButton.setOrigin(0.5);
     
+    //BACK
     this.backButton = this.add.text(-1000, (game.config.height/8)*5, 'Back', { fill: '#FEDEBE',fontFamily:'menuFont',fontSize:'60px'})
     .setInteractive()
     .on('pointerdown', () => this.goBackToMenu() )
@@ -209,7 +215,25 @@ create() {
     .on('pointerout', () => this.enterIconRestState(this.backButton) );
     this.backButton.setOrigin(0.5);
     
-    
+    //OPCION TIERRA
+    this.earthOption = this.add.image(game.config.width*5/8,game.config.height*1/4,'earthLogo').setScale(0.1)
+    .setInteractive()
+    .on('pointerdown', () => this.selectEarth() )
+    .on('pointerup', () => this.Highlight(this.earthOption, true) )
+    .on('pointerover', () => this.Highlight(this.earthOption, true) )
+    .on('pointerout', () => this.Highlight(this.earthOption, false) );
+    this.earthOption.setOrigin(0.5);
+
+
+    //OPCION MARTE
+    this.marsOption = this.add.image(game.config.width*3/8,game.config.height*1/4,'spaceYlogo').setScale(0.04)
+    .setInteractive()
+    .on('pointerdown', () => this.selectMars() )
+    .on('pointerup', () => this.Highlight(this.marsOption, true) )
+    .on('pointerover', () => this.Highlight(this.marsOption, true) )
+    .on('pointerout', () => this.Highlight(this.marsOption, false) );
+    this.marsOption.setOrigin(0.5);
+
     
 
     //*****************
@@ -502,6 +526,10 @@ create() {
 
     console.log(connection);*/
 }
+Highlight(obj, b) {
+
+    b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 //Llamada desde el start
@@ -557,26 +585,54 @@ goBackToMenu(){
     this.easeMeOut(this.backButton, this, 3);
 }
 
+selectEarth(){
+    election = "Earth";
+}
+
+selectEarth(){
+    election = "Mars";
+}
+
 //Llamada desde el Host
 goHost(){
     var texto = this.lobbyCode;
     var boton = this.hostButton;
     console.log("Try host");
-    if(userName!="Anon" && connection == undefined){
+    if(userName!="Anon" && connection == undefined && election != undefined){
         console.log("Hosting");
         connection = new WebSocket("ws://" + urlServer + "/lobbies");
 
         connection.onopen = function(){
             var data = {
-		        action: "Create",
+		        action: "Create"
 		    }
 			connection.send(JSON.stringify(data));   
         }
 
         connection.onmessage = function(msg){
-            texto.text = msg.data;
-            boton.setInteractive = false;
-            texto.setVisible(true);
+            var data = JSON.parse(msg.data);
+			
+            switch(data["type"]){
+                case "connected":
+                    texto.text = data["lobbyID"];
+                    boton.setInteractive = false;
+                    texto.setVisible(true);
+                    break;
+                case "startGame":
+                    if(data["gamemode"] == "Mars")
+                        startGame('sceneMars');
+                    else
+                        startGame('sceneEarth');
+                    break;
+                case "playerJoined":
+                    var data = {
+                        action: "startGame",
+                        gamemode: election,
+                    }
+                    connection.send(JSON.stringify(data));
+
+            }
+            
         }
 
         connection.onclose = function(){
@@ -587,6 +643,12 @@ goHost(){
         /*connection.onmessage = function(msg){
             
         }*/
+    }
+    else{
+        if(userName == "Anon"){
+            //Aviso de que se tiene que registrar
+            console.error("El usuario tiene que registrarse primero");
+        }
     }
 }
 
@@ -607,9 +669,20 @@ goJoin(){
         }
 
         connection.onmessage = function(msg){
-            texto.text = msg.data;
-            boton.setInteractive = false;
-            texto.setVisible(true);
+           switch(data["type"]){
+                case "connected":
+                    /*
+                    por si queremos hacer algo cuando se conecte
+                    */
+                    break;
+                case "startGame":
+                    if(data["gamemode"] == "Mars")
+                        startGame('sceneMars');
+                    else
+                        startGame('sceneEarth');
+                    break;
+            }
+            
         }
 
         connection.onclose = function(){
@@ -711,9 +784,12 @@ enterIconRestState(boton) {
 }
 
 //click
-startGame() {
+startGame(nextScene) {
     sfx.sounds[0].play();
-    this.Rocketeing(this.playButton,this,game.config.width/2,900,2);
+    if(election == "Mars")
+        this.Rocketeing(this.marsOption,this,game.config.width/2,900,2, nextScene);
+    else
+        this.Rocketeing(this.earthOption,this,game.config.width/2,900,2, nextScene);
 }
 enterTutorial() {
     soundtrack.pistas[0].stop();
@@ -761,7 +837,7 @@ enterButtonRestState(boton) {
 }
 
  //USALO COMO ES DEBIDO PEPE :D
- Rocketeing (object,scene, xPos, yPos, shake)
+ Rocketeing (object,scene, xPos, yPos, shake, nextScene)
  {   
      var dir = 1;
      var loopTime = 10;
@@ -801,7 +877,7 @@ enterButtonRestState(boton) {
      this.optionsButton.setVisible(false);
      this.tutorialButton.setVisible(false);
      isTutorial = false;
-     var timedEvent = this.time.addEvent({ delay: yPos+500, callback: function(){this.scene.start('SceneGame'); isTutorial = false;}, callbackScope: this});
+     var timedEvent = this.time.addEvent({ delay: yPos+500, callback: function(){this.scene.start(nextScene); isTutorial = false;}, callbackScope: this});
  		//VAR CONNECTION POR AQUÍ
 }
 //Show login fields
