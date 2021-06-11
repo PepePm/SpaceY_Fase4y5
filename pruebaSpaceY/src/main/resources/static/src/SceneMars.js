@@ -162,15 +162,19 @@ var postIt;
 var postItExp;
 var isbig = false;
 
+var gameLobbyID;
 
 class SceneMars extends Phaser.Scene {
     
     constructor() {
-
+        
         super("SceneMars");
     }
 
     preload() {
+
+        gameLobbyID = "testing";
+        console.error("BORRA ESTO CUANDO ACABES DE HACER TESTEO");
         this.load.image('smoke', './Resources/smoke_particle.png');
 
         //CHAT POSTITIONS BEFORE - AFTER
@@ -215,8 +219,97 @@ class SceneMars extends Phaser.Scene {
         
     }
 
-    create() {
+// ============================================ METODOS PARA PEDIR RECURSOS     =========================================
+    AskForFood()
+    {
+        console.log("PIDIENDO COMIDITA");
+        var data = {
+            action: "Sync",
+            lobbyID: gameLobbyID,
+            type:"syncFoodPilot",
+            value:true,
+        }
+        connection.send(JSON.stringify(data));
+    }
+    SendChatMsg()
+    {
+        console.log("EnviandoMensaje");
+        var data = {
+            action: "Sync",
+            lobbyID: gameLobbyID,
+            type:"syncFoodPilot",
+            value:true,
+        }
+        connection.send(JSON.stringify(data));
+    }
+    AskForResources()
+    {
+        console.log("PIDIENDO RESOURCES");
+        var data = {
+            action: "Sync",
+            lobbyID: gameLobbyID,
+            type:"syncResPilot",
+            value:true,
+        }
+        connection.send(JSON.stringify(data));
+    }
 
+    create() {
+        //***************                                METODOS DE INTERACCION CON SERVIDOR               ************************* */
+        console.log("GameSessionInnitiated");
+        connection = new WebSocket("ws://" + urlServer + "/games");
+
+        connection.onopen = function(){
+            var data = {
+		        action: "Create",
+                lobbyID: gameLobbyID
+		    }
+			connection.send(JSON.stringify(data));   
+        }
+
+
+        var that = this;
+        connection.onmessage = function(msg){
+            var data = JSON.parse(msg.data);
+			//ACTUALIZACION DE LA INFORMACIOND DE LA CONSOLA DE MARTE
+            switch(data["type"]){
+                case "syncAntenaPilot":
+                    this.UiMarsAntenaPilot.setVisible(data["value"]);
+                    easePilot(this, this.UiMarsAntenaPilot, data["value"]);
+                    break;
+                case "syncMinePilot":
+                    this.UiMarsMinePilot.setVisible(data["value"]);
+                    easePilot(this, this.UiMarsMinePilot, data["value"]);
+                    break;
+                case "syncRocketPilot":
+                    this.UiMarsRocketPilot.setVisible(data["value"]);
+                    easePilot(this, this.UiMarsRocketPilot, data["value"]);
+                    break;
+                case "syncTerraform":
+                    this.UiMarsTerraPilot.setVisible(data["value"]);
+                    easePilot(this, this.UiMarsTerraPilot, data["value"]);
+                    break;
+                case "syncCharPos":
+                    var data = {
+                        action: "Sync",
+                        lobbyID: gameLobbyID,
+                        type:"syncCharPos",
+                        value:marte.rotation,
+                    }
+                    connection.send(JSON.stringify(data));
+                    break;
+
+            }
+            
+        }
+
+        connection.onclose = function(){
+            connection = undefined;
+            texto = "";
+        }
+
+        
+        //**************************************************************************************************************************** */
 
          //CHATBOX
     //Chatbox icon
@@ -576,7 +669,7 @@ class SceneMars extends Phaser.Scene {
         //boton para enviar recursos
          this.UiMarsSndResBtn = this.add.image(ConsolePos[20], ConsolePos[21], "UIMarsSndRes").setDepth(4)
          .setInteractive()
-         .on('pointerdown', () =>  this.UiMarsSndResBtn())//this.Unload(this.unloadRocketBtn)
+         .on('pointerdown', () =>  this.AskForResources())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndResBtn, true) )
          .on('pointerover', () => this.Highlight(this.UiMarsSndResBtn, true) )
          .on('pointerout', () => this.Highlight(this.UiMarsSndResBtn, false) );
@@ -584,7 +677,7 @@ class SceneMars extends Phaser.Scene {
         //BOTON QUE ENVIA SEÑAL A TIERRA PARA RECIBIR PROVISIONES
          this.UiMarsSndFoodBtn = this.add.image(ConsolePos[22], ConsolePos[23], "UIMarsSndFood").setDepth(4)
          .setInteractive()
-         .on('pointerdown', () =>  this.UiMarsSndFoodBtn())//this.Unload(this.unloadRocketBtn)
+         .on('pointerdown', () =>  this.AskForFood())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndFoodBtn, true) )
          .on('pointerover', () => this.Highlight(this.UiMarsSndFoodBtn, true) )
          .on('pointerout', () => this.Highlight(this.UiMarsSndFoodBtn, false) );
@@ -594,7 +687,7 @@ class SceneMars extends Phaser.Scene {
 
         //pantalla de mensajes del chat central 
          this.UiMarsChatBox = this.add.image(ConsolePos[26], ConsolePos[27], "UIMarsChatBox").setDepth(4);
-        //********************************                  ******************************************************************************** */
+        //**************************************************************************************************************** */
     
     }
     update(time, delta) {
@@ -964,9 +1057,7 @@ CloseChat(scene){
     chatBoxActive = false;
     lobbyActive = false;
 }
-//INTERACTIVIDAD
-
-
+// ===============================          INTERACTIVIDAD  ===========================================================
 
 enterIconHoverState(boton, scene){
     
@@ -986,6 +1077,24 @@ Highlight(obj, b) {
     b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);  
 }
 
+easePilot(boton,scene, value){
+    if(value == true)
+    {
+        var scaleV  = 1.3;
+        scene.tweens.add({
+            targets: boton,
+            scaleX: boton.scaleX * scaleV,
+            scaleY: boton.scaleY * scaleV,
+            delay:0,
+            duration: 500,
+            ease: 'Circ.easeOut',
+            repeat: -1,
+            yoyo: true,
+        });
+    }
+        
+    }
+//==============================================================================================================
 }
 function genMeteors() {
 
