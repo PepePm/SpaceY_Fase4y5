@@ -538,6 +538,47 @@ class SceneEarth extends Phaser.Scene {
 
         isServerOnline(this);
 
+
+        //***************                                METODOS DE INTERACCION CON SERVIDOR               ************************* */
+        console.log("GameSessionInnitiated");
+        connection = new WebSocket("ws://" + urlServer + "/games");
+
+        connection.onopen = function () {
+            var data = {
+                action: "Create"
+            }
+            connection.send(JSON.stringify(data));
+        }
+
+
+        var that = this;
+        connection.onmessage = function (msg) {
+            var data = JSON.parse(msg.data);
+            //ACTUALIZACION DE LA INFORMACIOND E LA CONSOLA DE TIERRA
+            switch (data["type"]) {
+                case "syncFoodPilot":
+                    that.controlTierra.UIEarthNeedFoodPilot.setVisible(data["value"]);
+                    easePilot(that.controlTierra, that.controlTierra.UiMarsAntenaPilot, data["value"]);
+                    break;
+                case "syncResPilot":
+                    that.controlTierra.UIEarthNeedResPilot.setVisible(data["value"]);
+                    easePilot(that.controlTierra, that.controlTierra.UiMarsMinePilot, data["value"]);
+                    break;
+
+            }
+
+        }
+
+        connection.onclose = function () {
+            connection = undefined;
+        }
+        // Metodo que avisa A MARTE sobre una máquina rota en funcion del ID de la máquina. 
+
+
+        //**************************************************************************************************************************** */
+
+
+
     }
     update(time, delta) {
 

@@ -199,7 +199,9 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 				
 				// Modos de juego para cada jugador
 				String playmode_host = hostNode.get("gamemode").asText();
-				String playmode_joined = (playmode_host == "Earth")? "Mars" : "Earth";
+				String playmode_joined = (playmode_host.equals("Earth"))? "Mars" : "Earth";
+				
+				System.out.println("host: " + playmode_host + " / joined: " + playmode_joined);
 				
 				// Se envía a cada jugador la acción de empezar partida con el modo de juego
 				// que se debe
