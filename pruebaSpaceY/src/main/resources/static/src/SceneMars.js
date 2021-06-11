@@ -533,20 +533,20 @@ class SceneMars extends Phaser.Scene {
          //Añadimos fondo de marte
 
          //ELEMENTOS DE LA CONSOLA DE MARTE
-         this.UiMarsCons = this.add.image(1227, 447, "UIMarsCons").setDepth(4);
-         this.UiMarsTime = this.add.image(1320, 161, "UIMarsTime").setDepth(4);
-         this.UiMarTerraform = this.add.image(1460, 155, "UIMarsTerraform").setDepth(4);
-         this.UiMarsAlerts = this.add.image(1082, 161, "UIMarsAlerts").setDepth(4);
-         this.UiMarsPilots = this.add.image(1460, 419, "UIMarsPilots").setDepth(4);
-         this.UiMarsAntenaPilot = this.add.image(1460, 265, "UIMarsAntennaPilot").setDepth(4);
-         this.UiMarsTerraPilot = this.add.image(1460, 365, "UIMarsTerraPilot").setDepth(4);
-         this.UiMarsRocketPilot = this.add.image(1460, 465, "UIMarsRocketPilot").setDepth(4);
-         this.UiMarsMinePilot = this.add.image(1460, 565, "UIMarsMinePilot").setDepth(4);
+         this.UiMarsCons = this.add.image(1207, 447, "UIMarsCons").setDepth(4);
+         this.UiMarsTime = this.add.image(1280, 165, "UIMarsTime").setDepth(4);
+         this.UiMarTerraform = this.add.image(1430, 155, "UIMarsTerraform").setDepth(4);
+         this.UiMarsAlerts = this.add.image(1065, 166, "UIMarsAlerts").setDepth(4);
+         this.UiMarsPilots = this.add.image(1435, 419, "UIMarsPilots").setDepth(4);
+         this.UiMarsAntenaPilot = this.add.image(1435, 265, "UIMarsAntennaPilot").setDepth(4);
+         this.UiMarsTerraPilot = this.add.image(1435, 365, "UIMarsTerraPilot").setDepth(4);
+         this.UiMarsRocketPilot = this.add.image(1435, 465, "UIMarsRocketPilot").setDepth(4);
+         this.UiMarsMinePilot = this.add.image(1435, 565, "UIMarsMinePilot").setDepth(4);
 
 
          //boton para enviar mensaje de chat
          
-         this.UiMarsSndMsgBtn =  this.add.image(1287, 693, "UIMarsSndMsg").setDepth(4)
+         this.UiMarsSndMsgBtn =  this.add.image(1267, 675, "UIMarsSndMsg").setDepth(4)
          .setInteractive()
          .on('pointerdown', () =>  this.UiMarsSndMsgBtn())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndMsgBtn, true) )
@@ -554,7 +554,7 @@ class SceneMars extends Phaser.Scene {
          .on('pointerout', () => this.Highlight(this.UiMarsSndMsgBtn, false) );
          
         //boton para enviar recursos
-         this.UiMarsSndResBtn = this.add.image(1463, 693, "UIMarsSndRes").setDepth(4)
+         this.UiMarsSndResBtn = this.add.image(1443, 675, "UIMarsSndRes").setDepth(4)
          .setInteractive()
          .on('pointerdown', () =>  this.UiMarsSndResBtn())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndResBtn, true) )
@@ -562,7 +562,7 @@ class SceneMars extends Phaser.Scene {
          .on('pointerout', () => this.Highlight(this.UiMarsSndResBtn, false) );
 
         //BOTON QUE ENVIA SEÑAL A TIERRA PARA RECIBIR PROVISIONES
-         this.UiMarsSndFoodBtn = this.add.image(1373, 693, "UIMarsSndFood").setDepth(4)
+         this.UiMarsSndFoodBtn = this.add.image(1353, 675, "UIMarsSndFood").setDepth(4)
          .setInteractive()
          .on('pointerdown', () =>  this.UiMarsSndFoodBtn())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndFoodBtn, true) )
@@ -570,10 +570,10 @@ class SceneMars extends Phaser.Scene {
          .on('pointerout', () => this.Highlight(this.UiMarsSndFoodBtn, false) );
 
         //caja para escribir mensajes
-         this.UiMarsMsgBox = this.add.image(1098, 693, "UIMarsMsgBox").setDepth(4);
+         this.UiMarsMsgBox = this.add.image(1078, 680, "UIMarsMsgBox").setDepth(4);
 
         //pantalla de mensajes del chat central 
-         this.UiMarsChatBox = this.add.image(1179, 419, "UIMarsChatBox").setDepth(4);
+         this.UiMarsChatBox = this.add.image(1150, 419, "UIMarsChatBox").setDepth(4);
 
     
     }

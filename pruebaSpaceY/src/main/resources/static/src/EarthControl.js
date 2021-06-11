@@ -264,58 +264,58 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         
 
         //ELEMENTOS DE LA CONSOLA DE LA TIERRA
-        this.UIEarthCons = scene.add.image(357, 430, "UIEarthCons").setDepth(4);
-        this.UIEarthTime = scene.add.image(425, 145, "UIEarthTime").setDepth(4);
-        this.UIEarthTerraform = scene.add.image(580, 145, "UIEarthTerraform").setDepth(4);
-        this.UIEarthAlerts = scene.add.image(208, 145, "UIEarthAlerts").setDepth(4);
+        this.UIEarthCons = scene.add.image(407, 430, "UIEarthCons").setDepth(4);
+        this.UIEarthTime = scene.add.image(475, 145, "UIEarthTime").setDepth(4);
+        this.UIEarthTerraform = scene.add.image(630, 145, "UIEarthTerraform").setDepth(4);
+        this.UIEarthAlerts = scene.add.image(258, 145, "UIEarthAlerts").setDepth(4);
 
-        this.UiEarthPilots = scene.add.image(580, 355, "UIEarthPilots").setDepth(4);  //espacio para los pilotos de 
-        this.UiEarthSndBrkAntenaPilot = scene.add.image(133, 660, "UiEarthSndBrkAntenaPilot").setDepth(4)
+        this.UiEarthPilots = scene.add.image(630, 355, "UIEarthPilots").setDepth(4);  //espacio para los pilotos de 
+        this.UiEarthSndBrkAntenaPilot = scene.add.image(183, 660, "UiEarthSndBrkAntenaPilot").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  scene.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
-        .on('pointerup', () => scene.Highlight(this.UIEarthSndResBtn, true) )
-        .on('pointerover', () => scene.Highlight(this.UIEarthSndResBtn, true) )
-        .on('pointerout', () => scene.Highlight(this.UIEarthSndResBtn, false) );
+        .on('pointerdown', () =>  this.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, true) )
+        .on('pointerover', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, true) )
+        .on('pointerout', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, false) );
 
-        this.UiEarthSndBrkTerraPilot = scene.add.image(243, 660, "UiEarthSndBrkTerraPilot").setDepth(4)
+        this.UiEarthSndBrkTerraPilot = scene.add.image(293, 660, "UiEarthSndBrkTerraPilot").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  scene.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
-        .on('pointerup', () => scene.Highlight(this.UIEarthSndResBtn, true) )
-        .on('pointerover', () => scene.Highlight(this.UIEarthSndResBtn, true) )
-        .on('pointerout', () => scene.Highlight(this.UIEarthSndResBtn, false) );
+        .on('pointerdown', () =>  this.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => this.Highlight(this.UiEarthSndBrkTerraPilot, true) )
+        .on('pointerover', () => this.Highlight(this.UiEarthSndBrkTerraPilot, true) )
+        .on('pointerout', () => this.Highlight(this.UiEarthSndBrkTerraPilot, false) );
 
     
-        this.UiEarthSndBrkRocketPilot = scene.add.image(352, 660, "UiEarthSndBrkRocketPilot").setDepth(4)
+        this.UiEarthSndBrkRocketPilot = scene.add.image(402, 660, "UiEarthSndBrkRocketPilot").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  scene.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
-        .on('pointerup', () => scene.Highlight(this.UIEarthSndResBtn, true) )
-        .on('pointerover', () => scene.Highlight(this.UIEarthSndResBtn, true) )
-        .on('pointerout', () => scene.Highlight(this.UIEarthSndResBtn, false) );
+        .on('pointerdown', () =>  this.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => this.Highlight(this.UiEarthSndBrkRocketPilot, true) )
+        .on('pointerover', () => this.Highlight(this.UiEarthSndBrkRocketPilot, true) )
+        .on('pointerout', () => this.Highlight(this.UiEarthSndBrkRocketPilot, false) );
 
-        this.UiEarthSndBrkMine = scene.add.image(468, 660, "UiEarthSndBrkMinePilot").setDepth(4)
+        this.UiEarthSndBrkMine = scene.add.image(518, 660, "UiEarthSndBrkMinePilot").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  scene.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
-        .on('pointerup', () => scene.Highlight(this.UIEarthSndResBtn, true) )
-        .on('pointerover', () => scene.Highlight(this.UIEarthSndResBtn, true) )
-        .on('pointerout', () => scene.Highlight(this.UIEarthSndResBtn, false) );
+        .on('pointerdown', () =>  this.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => this.Highlight(this.UiEarthSndBrkMine, true) )
+        .on('pointerover', () => this.Highlight(this.UiEarthSndBrkMine, true) )
+        .on('pointerout', () => this.Highlight(this.UiEarthSndBrkMine, false) );
 
-        this.UIEarthNeedFoodPilot = scene.add.image(580, 290, "UIEarthNeedFoodPilot").setDepth(4);
-        this.UIEarthNeedResPilot = scene.add.image(580, 420, "UIEarthNeedResPilot").setDepth(4);
+        this.UIEarthNeedFoodPilot = scene.add.image(630, 290, "UIEarthNeedFoodPilot").setDepth(4);
+        this.UIEarthNeedResPilot = scene.add.image(630, 420, "UIEarthNeedResPilot").setDepth(4);
 
         //boton para enviar mensaje de chat
         
-        this.UIEarthSndMsgBtn =  scene.add.image(480, 550, "UIEarthSndMsg").setDepth(4)
+        this.UIEarthSndMsgBtn =  scene.add.image(530, 550, "UIEarthSndMsg").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  scene.UIEarthSndMsgBtn())//this.Unload(this.unloadRocketBtn)
-        .on('pointerup', () => scene.Highlight(this.UIEarthSndMsgBtn, true) )
-        .on('pointerover', () => scene.Highlight(this.UIEarthSndMsgBtn, true) )
-        .on('pointerout', () => scene.Highlight(this.UIEarthSndMsgBtn, false) );
+        .on('pointerdown', () =>  this.UIEarthSndMsgBtn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerup', () => this.Highlight(this.UIEarthSndMsgBtn, true) )
+        .on('pointerover', () => this.Highlight(this.UIEarthSndMsgBtn, true) )
+        .on('pointerout', () => this.Highlight(this.UIEarthSndMsgBtn, false) );
 
        //caja para escribir mensajes
-        this.UIEarthMsgBox = scene.add.image(250, 550, "UIEarthMsgBox").setDepth(4);
+        this.UIEarthMsgBox = scene.add.image(300, 550, "UIEarthMsgBox").setDepth(4);
 
        //pantalla de mensajes del chat central 
-        this.UIEarthChatBox = scene.add.image(300, 355, "UIEarthChatBox").setDepth(4);
+        this.UIEarthChatBox = scene.add.image(350, 355, "UIEarthChatBox").setDepth(4);
 
 
         

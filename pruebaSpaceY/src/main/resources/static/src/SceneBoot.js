@@ -113,7 +113,7 @@ class SceneBoot extends Phaser.Scene {
         this.load.image("pantallaFinal", directory+"ui_T_pantalla_aux.png" );
         
         //CONSOLA DE MARTE
-        this.load.image("UIMarsCons", directory+"UI_Marte_Caja_naranja.png" );
+        this.load.image("UIMarsCons", directory+"UI_Marte_Caja_Naranja_Paneles.png" );
         this.load.image("UIMarsTime", directory+"UI_Marte_Tiempo.png" );
         this.load.image("UIMarsTerraform", directory+"UI_Marte_Progreso_Terraformacion.png" );
         this.load.image("UIMarsAlerts", directory+"UI_Marte_Caja_informativa.png" );
@@ -398,7 +398,7 @@ class SceneBoot extends Phaser.Scene {
 
         ////console.log("Acabé");
 
-        this.scene.start('SceneMenu');
+        this.scene.start('SceneMars');
         this.scene.stop('SceneLogos');
     }
 }
