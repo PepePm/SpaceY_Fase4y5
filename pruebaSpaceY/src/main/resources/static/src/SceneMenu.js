@@ -720,6 +720,7 @@ goJoin(){
                     connection.close();
                     break;
                 case "startGame":
+                    election = data["gamemode"];
                     if(data["gamemode"] == "Mars")
                         that.startGame('SceneMars');
                     else
