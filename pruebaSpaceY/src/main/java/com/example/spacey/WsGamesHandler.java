@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Semaphore;
 
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -25,6 +26,8 @@ public class WsGamesHandler extends TextWebSocketHandler {
 	private Map<String, List<WebSocketSession>> games = new ConcurrentHashMap<>();
 	
 	private ObjectMapper mapper = new ObjectMapper();
+	
+	private Semaphore semaforo = new Semaphore(1);
 	
     // Se ejecuta cuando se ha establecido la conexión con el cliente
 	@Override
@@ -80,6 +83,7 @@ public class WsGamesHandler extends TextWebSocketHandler {
 		switch(action) {
 			case "Start":
 				
+				semaforo.acquire();
 				// Se añade un jugador de un lobby a su partida correspondiente.
 				// Si no existe la clave, se crea y se añade al jugador
 				if (!games.containsKey(lobbyID)) {
@@ -96,6 +100,9 @@ public class WsGamesHandler extends TextWebSocketHandler {
 					
 					session.sendMessage(new TextMessage("Te respeto: existe y te unes"));
 				}
+				
+				semaforo.release();
+				
 				break;
 				
 			case "Sync":

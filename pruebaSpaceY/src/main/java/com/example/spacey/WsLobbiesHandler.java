@@ -20,6 +20,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.util.concurrent.Semaphore;
+
 
 public class WsLobbiesHandler extends TextWebSocketHandler {
 
@@ -27,6 +29,8 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 	private Map<String, WebSocketSession> hosts = new ConcurrentHashMap<>();
 	// Mapa que almacena lobbies completos (clave->usuario host, valor->usuario invitado)
 	private Map<WebSocketSession, WebSocketSession> lobbies = new ConcurrentHashMap<>();
+	
+	
 	
 	
 	private ObjectMapper mapper = new ObjectMapper();

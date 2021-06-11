@@ -545,7 +545,8 @@ class SceneEarth extends Phaser.Scene {
 
         connection.onopen = function () {
             var data = {
-                action: "Create"
+                action: "Create",
+                lobbyID: gameLobbyID,
             }
             connection.send(JSON.stringify(data));
         }
