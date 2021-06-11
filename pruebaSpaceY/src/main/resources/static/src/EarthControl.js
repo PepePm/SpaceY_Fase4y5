@@ -213,14 +213,24 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 fontStyle:'bold',
             }).setOrigin(0.5).setDepth(5);
         }*/
-
-        /*
-        this.wearTxt[0].setPosition(this.controlRocket.x, this.controlRocket.y).setVisible(false);
+        /*this.wearTxt[0].setPosition(this.controlRocket.x, this.controlRocket.y).setVisible(false);
         this.wearTxt[1].setPosition(this.controlTerr.x, this.controlTerr.y).setVisible(false);
         this.wearTxt[2].setPosition(this.controlCom.x, this.controlCom.y).setVisible(false);
-        this.wearTxt[3].setPosition(this.controlMina.x, this.controlMina.y).setVisible(false);
-        */
+        this.wearTxt[3].setPosition(this.controlMina.x, this.controlMina.y).setVisible(false);*/
 
+        // Texto con los desgastes de las máquinas
+        this.wearTxt = new Array(4);
+        
+        this.wearTxt[0] = new WearMachineTxt(scene, this.controlRocket.x, this.controlRocket.y); // Cohete
+        this.wearTxt[1] = new WearMachineTxt(scene, this.controlTerr.x, this.controlTerr.y); // Terraformador
+        this.wearTxt[2] = new WearMachineTxt(scene, this.controlCom.x, this.controlCom.y); // Comunicaciones
+        this.wearTxt[3] = new WearMachineTxt(scene, this.controlMina.x, this.controlMina.y); // Mina
+
+        this.wearTxt[0].txt.setVisible(false);
+        this.wearTxt[1].txt.setVisible(false);
+        this.wearTxt[2].txt.setVisible(false);
+        this.wearTxt[3].txt.setVisible(false);
+        
 
         this.comboNums = new Array(8);
         this.TxtComboNums = scene.add.text(this.controlKey.x, this.controlKey.y+2, "00000000",{
@@ -312,15 +322,16 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
     }
 
     Update(delta) {
-
-        /*
-        if (objCohete.goLand)
-            controlTierra.Land(delta);
         
+        // Iniciar que el cohete despegue
         if (this.goTakeOff)
             controlTierra.TakeOff(delta);
+        /*  
+        //NO HACE FALTA: CUANDO HAGAMOS SIGNAL DE QUE HA LLEGADO EL COHETE SE HACE
+        if (objCohete.goLand)
+            controlTierra.Land(delta);
 
-        //Desgaste textos
+        //Desgaste textos NO HACE FALTA: SINCRONIZADO POR LA CLASE wearTxt.js
         for (var i=0; i < 4; i++) {
             this.wearTxt[i].setText(Math.round((maquinas[i].wear/maquinas[i].maxWear)*100)+"%");
         }
@@ -333,7 +344,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
     HighlightController(obj, b) {
 
-        if (maquinas[2].isBroken) {
+        if (this.wearTxt[2].wear <= 0) { //Si la antena de comunicación está rota, no te da info
 
             this.HighlightError(obj, b)
         }
@@ -650,7 +661,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             });break;
         }
 
-        if (!maquinas[2].isBroken) {
+        if (this.wearTxt[2].wear > 0) { // Si la antena no está rota
 
             if (this.actualComboNum != null)
                 this.actualComboNum.destroy();
@@ -663,16 +674,17 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
                 nrand = Phaser.Math.Between(0,9);
                 switch(nrand) {
-                    case 0: this.comboNums[i] = 96; break;
-                    case 1: this.comboNums[i] = 97; break;
-                    case 2: this.comboNums[i] = 98; break;
-                    case 3: this.comboNums[i] = 99; break;
-                    case 4: this.comboNums[i] = 100; break;
-                    case 5: this.comboNums[i] = 101; break;
-                    case 6: this.comboNums[i] = 102; break;
-                    case 7: this.comboNums[i] = 103; break;
-                    case 8: this.comboNums[i] = 104; break;
-                    case 9: this.comboNums[i] = 105; break;
+                    //Con numpad 96 - 105
+                    case 0: this.comboNums[i] = 48; break; 
+                    case 1: this.comboNums[i] = 49; break;
+                    case 2: this.comboNums[i] = 50; break;
+                    case 3: this.comboNums[i] = 51; break;
+                    case 4: this.comboNums[i] = 52; break;
+                    case 5: this.comboNums[i] = 53; break;
+                    case 6: this.comboNums[i] = 54; break;
+                    case 7: this.comboNums[i] = 55; break;
+                    case 8: this.comboNums[i] = 56; break;
+                    case 9: this.comboNums[i] = 57; break;
                 }
 
                 nums[i] = nrand;
@@ -758,26 +770,23 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             //onStart: function () {that.wearTxt[that.nWear].setVisible(true); that.wearTxt[that.nWear].alpha = 1;},
             onComplete: function() {that.TxtEvents.setVisible(false); that.TxtEvents.alpha = 1; sfx.sounds[14].stop();},
         });
-
-        var rand = Phaser.Math.Between((1000*60),(1000*60)*2.5);
-        maquinas[2].event = this.scene.time.addEvent({ delay: rand, callback: maquinas[2].StartEvent, callbackScope: maquinas[2]});
     }
 
     //Mostrar estado máquina
     tweenShowWearIN() {
 
-        this.wearTxt[this.nWear].setVisible(true);
+        this.wearTxt[this.nWear].txt.setVisible(true);
         var that = this;
         this.scene.tweens.add({
-            targets: this.wearTxt[this.nWear],
+            targets: this.wearTxt[this.nWear].txt,
             alpha: 0,
             duration: 12000,
             ease: 'Cubic.easeOut',
             repeat: 0,
             yoyo: false,
 
-            onStart: function () {that.wearTxt[that.nWear].setVisible(true); that.wearTxt[that.nWear].alpha = 1;},
-            onComplete: function() {that.wearTxt[that.nWear].setVisible(false);},
+            onStart: function () {that.wearTxt[that.nWear].txt.setVisible(true); that.wearTxt[that.nWear].txt.alpha = 1;},
+            onComplete: function() {that.wearTxt[that.nWear].txt.setVisible(false);},
         });
         
     }

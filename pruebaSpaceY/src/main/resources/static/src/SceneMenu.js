@@ -21,6 +21,9 @@ var regisTween;
 var loginPos;
 var loginTween;
 
+//Websocket
+var connection;
+
 class SceneMenu extends Phaser.Scene {
     
     constructor() {
@@ -181,7 +184,10 @@ create() {
     //Botones crear/unirse a partida
     this.boxGameId = this.add.image((game.config.width/2)*4, -1000, "Login_Field").setScale(0.1,0.18).setDepth(0).setVisible(true);
     this.writeGameID = this.add.dom((game.config.width/2)*4, -1000).createFromCache('formLobby').setVisible(true).setDepth(0);
-    
+    this.lobbyCode = this.add.text(game.config.width/2, (game.config.height/8)*3.5, 'CODIGINHO' ,{ fill: '#FEB600',fontFamily:'menuFont',fontSize:'60px'})
+    .setVisible(false);
+    this.lobbyCode.setOrigin(0.5);
+
     this.hostButton = this.add.text((game.config.width/8)*3, -1000, 'Host' ,{ fill: '#FEDEBE',fontFamily:'menuFont',fontSize:'60px'})
     .setInteractive()
     .on('pointerdown', () => this.goHost() )
@@ -455,7 +461,7 @@ create() {
     //                  vvvv Imagen marte vvvv
     //this.userImg = this.add.image(regisPos[10], regisPos[11],'userImages', this.regUserImgNum).setScale(0.16).setOrigin(0.5);
 
-    this.regLogin = this.add.dom(275, 330).createFromCache('formLobby').setVisible(false);
+    this.regLogin = this.add.dom(275, 330).createFromCache('formReg').setVisible(false);
 
 
     //Timer
@@ -509,7 +515,7 @@ goCreateJoinLobby(){
     this.easeMeOut(this.optionsButton, this, 3);
     this.easeMeOut(this.contactButton, this, 4);
 
-
+    this.hostButton.setInteractive = false;
     this.boxGameId.setVisible(true);
     this.writeGameID.setVisible(true);
     this.hostButton.setActive(true);
@@ -524,6 +530,11 @@ goCreateJoinLobby(){
 
 //Llamada desde el Back
 goBackToMenu(){
+    //Si vuelvo al menú y había creado una conexión, la cierro
+    if(connection != undefined){
+        connection.close();
+    }
+
     this.playButton.setActive(true);
     this.tutorialButton.setActive(true);
     this.optionsButton.setActive(true);
@@ -533,6 +544,7 @@ goBackToMenu(){
     this.easeMe(this.optionsButton, this, 3);
     this.easeMe(this.contactButton, this, 4);
 
+    this.lobbyCode.setVisible(false);
     this.boxGameId.setVisible(false);
     this.writeGameID.setVisible(false);
     this.hostButton.setActive(false);
@@ -547,12 +559,63 @@ goBackToMenu(){
 
 //Llamada desde el Host
 goHost(){
+    var texto = this.lobbyCode;
+    var boton = this.hostButton;
+    console.log("Try host");
+    if(userName!="Anon" && connection == undefined){
+        console.log("Hosting");
+        connection = new WebSocket("ws://" + urlServer + "/lobbies");
 
+        connection.onopen = function(){
+            var data = {
+		        action: "Create",
+		    }
+			connection.send(JSON.stringify(data));   
+        }
+
+        connection.onmessage = function(msg){
+            texto.text = msg.data;
+            boton.setInteractive = false;
+            texto.setVisible(true);
+        }
+
+        connection.onclose = function(){
+            connection = undefined;
+            texto = "";
+        }
+
+        /*connection.onmessage = function(msg){
+            
+        }*/
+    }
 }
 
 //Llamada desde el Join
 goJoin(){
+    var code = this.writeGameID;
+    if(userName!="Anon" && connection == undefined){
+        console.log("Hosting");
+        connection = new WebSocket("ws://" + urlServer + "/lobbies");
 
+        connection.onopen = function(){
+            var data = {
+		        action: "Join",
+                lobbyID: code.getChildByName("lobbyID").value,
+		    }
+            //console.log("Codigo enviado: " + code.getChildByName("lobbyID").value);
+			connection.send(JSON.stringify(data));   
+        }
+
+        connection.onmessage = function(msg){
+            texto.text = msg.data;
+            boton.setInteractive = false;
+            texto.setVisible(true);
+        }
+
+        connection.onclose = function(){
+            connection = undefined;
+        }
+    }
 }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -270,7 +270,7 @@ class SceneEarth extends Phaser.Scene {
 
         //TIERRA    CREACION DE LOS ASSETS DE TIERRA
         controlTierra = new EarthControl(this, 0, 0, 8);
-        controlTierra.PushFromMars();
+        //controlTierra.PushFromMars();
 		
 		
 		
