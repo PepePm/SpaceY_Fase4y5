@@ -75,7 +75,7 @@ public class WsGamesHandler extends TextWebSocketHandler {
 		String action = newNode.get("action").asText();
 		
 		// ID del lobby
-		String lobbyID = newNode.get("lobbyID").asText();
+		String lobbyID = newNode.get("lobbyID").asText().toUpperCase();
 		
 		//Lista auxiliar
 		List<WebSocketSession> aux;
@@ -101,7 +101,8 @@ public class WsGamesHandler extends TextWebSocketHandler {
 					//session.sendMessage(new TextMessage("Te respeto: existe y te unes"));
 				}
 				
-				System.out.println("games: " + games.get(lobbyID));
+				System.out.println("start_ lobbyID: " + lobbyID);
+				System.out.println("start_ games: " + games.get(lobbyID));
 				
 				//semaforo.release();
 				
@@ -117,8 +118,8 @@ public class WsGamesHandler extends TextWebSocketHandler {
 				// Se envía la información al cliente de la partida que no ha enviado el msg
 				// al servidor
 				
-				System.out.println("LobbyID: " + newNode.get("lobbyID").asText());
-				System.out.println("games: " + games.get(lobbyID));
+				System.out.println("sync_ lobbyID: " + newNode.get("lobbyID").asText());
+				System.out.println("sync_ games: " + games.get(lobbyID));
 				
 				aux = games.get(lobbyID);
 				for (int i=0; i < aux.size(); i++) {
@@ -159,13 +160,15 @@ public class WsGamesHandler extends TextWebSocketHandler {
 	private String GetHashId(String initID) {
 		
 		// Recoge la id del cliente y le quita los guiones, para evitar errores
-		String sessionID = initID.replaceAll("-", "");
-		//System.out.println("id: " + sessionID + "\n");
-		
-		// Crea un identificador unico en base al id del cliente
-		Hashids hashids = new Hashids(sessionID);
-		String idLobby = hashids.encode(123456);
-		
-		return idLobby;
+				String sessionID = initID.replaceAll("-", "");
+				//System.out.println("id: " + sessionID + "\n");
+				
+				// Crea un identificador unico en base al id del cliente
+				Hashids hashids = new Hashids(sessionID, 5, "0123456789ABCDEF");
+				String idLobby = hashids.encode(1);
+				
+				System.out.println("id: " + idLobby + "\n");
+				
+				return idLobby;
 	}
 }

@@ -557,6 +557,9 @@ class SceneEarth extends Phaser.Scene {
         var that = this;
         connection.onmessage = function (msg) {
             var data = JSON.parse(msg.data);
+
+            console.log("HOLA");
+
             //ACTUALIZACION DE LA INFORMACIOND E LA CONSOLA DE TIERRA
             switch (data["type"]) {
                 case "syncFoodPilot":
