@@ -250,6 +250,11 @@ create() {
     .setVisible(false);
     this.planetElectionNeededWarning.setOrigin(0.5);
 
+    //TEXTO AVISO HOST INEXISTENTE
+    this.wrongCodeWarning = this.add.text(game.config.width/2, game.config.height/8, 'Wrong code: Lobby not found' ,{ fill: '#FF0000',fontFamily:'menuFont',fontSize:'40px'})
+    .setVisible(false);
+    this.wrongCodeWarning.setOrigin(0.5);
+
     //*****************
 
 
@@ -590,11 +595,13 @@ goCreateJoinLobby(){
 //Llamada desde el Back
 goBackToMenu(){
     //Si vuelvo al menú y había creado una conexión, la cierro
-    if(connection != undefined || gameLobbyID != undefined){
+    if(connection != undefined){
         connection.close();
-        //Borro el id del lobby al que iba a ir para tener buen control de los datos
+    }
+
+    //Borro el id del lobby al que iba a ir para tener buen control de los datos
+    if(gameLobbyID != undefined){
         gameLobbyID = undefined;
-        election = undefined;
     }
 
     this.playButton.setActive(true);
@@ -700,6 +707,7 @@ goHost(){
             this.tweenFadeOut(this.loginNeededWarning, this);
         }
         else if(election == undefined){
+            //Aviso de que tiene que elegir un planeta
             this.tweenFadeIn(this.planetElectionNeededWarning, this);
             this.tweenFadeOut(this.planetElectionNeededWarning, this);
         }
@@ -735,6 +743,9 @@ goJoin(){
                     break;
                 case "error":
                     console.error("Error en la conexión: " + data["cause"]);
+                    //Aviso de que no existe un lobby con esa ID
+                    that.tweenFadeIn(that.wrongCodeWarning, that);
+                    that.tweenFadeOut(that.wrongCodeWarning, that);
                     // MOSTRAR UN MENSAJE DE QUE NO EXISTE EL LOBBY <<<<<<<<<<<<<<<-------------------------------<<<<<<<<<<<<<<<<<<<---------------------
                     connection.close();
                     break;
