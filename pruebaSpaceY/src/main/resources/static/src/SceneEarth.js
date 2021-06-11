@@ -3,6 +3,8 @@
 //const { default: Machine } = require("./Machine");
 
 //Variables
+var connection;
+
 //Directorio imágenes
 var directory = "./Resources/Game/";
 
@@ -572,6 +574,7 @@ class SceneEarth extends Phaser.Scene {
 
         connection.onclose = function () {
             connection = undefined;
+            console.log("cerré");
         }
         // Metodo que avisa A MARTE sobre una máquina rota en funcion del ID de la máquina. 
 
