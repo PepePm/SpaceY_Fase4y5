@@ -361,7 +361,7 @@ class SceneBoot extends Phaser.Scene {
         });
 
         ////console.log("Acabé");
-        this.scene.start('SceneEarth');
+        this.scene.start('SceneMenu');
         this.scene.stop('SceneLogos');
     }
 }
