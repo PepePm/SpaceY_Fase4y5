@@ -144,7 +144,7 @@ create() {
     //ASIGNACION DE METODO
     this.playButton = this.add.text((game.config.width/8)*3, -1000, 'Play', { fill: '#FEDEBE',fontFamily:'menuFont',fontSize:'60px'})
     .setInteractive()
-    .on('pointerdown', () => this.startGame() )
+    .on('pointerdown', () => this.goCreateJoinLobby() )
     .on('pointerover', () => this.enterIconHoverState(this.playButton, this) )
     .on('pointerout', () => this.enterIconRestState(this.playButton) );
     this.playButton.setOrigin(0.5);
@@ -175,6 +175,38 @@ create() {
     .on('pointerout', () => this.enterIconRestState(this.contactButton) );
     this.contactButton.setOrigin(0.5);
     this.easeMe(this.contactButton, this, 4);
+
+    //****************
+
+    //Botones crear/unirse a partida
+    this.boxGameId = this.add.image((game.config.width/2)*4, -1000, "Login_Field").setScale(0.1,0.18).setDepth(0).setVisible(true);
+    this.writeGameID = this.add.dom((game.config.width/2)*4, -1000).createFromCache('formLobby').setVisible(true).setDepth(0);
+    
+    this.hostButton = this.add.text((game.config.width/8)*3, -1000, 'Host' ,{ fill: '#FEDEBE',fontFamily:'menuFont',fontSize:'60px'})
+    .setInteractive()
+    .on('pointerdown', () => this.goHost() )
+    .on('pointerover', () => this.enterIconHoverState(this.hostButton, this) )
+    .on('pointerout', () => this.enterIconRestState(this.hostButton) );
+    this.hostButton.setOrigin(0.5);
+    
+    this.joinButton = this.add.text((game.config.width/2)*4, -1000, 'Join', { fill: '#FEDEBE',fontFamily:'menuFont',fontSize:'60px'})
+    .setInteractive()
+    .on('pointerdown', () => this.goJoin() )
+    .on('pointerover', () => this.enterIconHoverState(this.joinButton, this) )
+    .on('pointerout', () => this.enterIconRestState(this.joinButton) );
+    this.joinButton.setOrigin(0.5);
+    
+    this.backButton = this.add.text(-1000, (game.config.height/8)*5, 'Back', { fill: '#FEDEBE',fontFamily:'menuFont',fontSize:'60px'})
+    .setInteractive()
+    .on('pointerdown', () => this.goBackToMenu() )
+    .on('pointerover', () => this.enterIconHoverState(this.backButton, this) )
+    .on('pointerout', () => this.enterIconRestState(this.backButton) );
+    this.backButton.setOrigin(0.5);
+    
+    
+    
+
+    //*****************
 
 
 
@@ -418,6 +450,13 @@ create() {
     this.regLogin = this.add.dom(275, 330).createFromCache('formReg').setVisible(false);
     //this.regLogin.addListener('click');
 
+    //SelectMarsImg
+    this.regUserImgNum = 1;
+    //                  vvvv Imagen marte vvvv
+    //this.userImg = this.add.image(regisPos[10], regisPos[11],'userImages', this.regUserImgNum).setScale(0.16).setOrigin(0.5);
+
+    this.regLogin = this.add.dom(275, 330).createFromCache('formLobby').setVisible(false);
+
 
     //Timer
     this.event = this.time.addEvent({ delay: 300, callback: this.UpdateServer, callbackScope: this, loop: true});
@@ -458,6 +497,64 @@ create() {
     console.log(connection);*/
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
+//Llamada desde el start
+goCreateJoinLobby(){
+    this.playButton.setActive(false);
+    this.tutorialButton.setActive(false);
+    this.optionsButton.setActive(false);
+    this.contactButton.setActive(false);
+    this.easeMeOut(this.playButton, this, 1);
+    this.easeMeOut(this.tutorialButton, this, 2);
+    this.easeMeOut(this.optionsButton, this, 3);
+    this.easeMeOut(this.contactButton, this, 4);
+
+
+    this.boxGameId.setVisible(true);
+    this.writeGameID.setVisible(true);
+    this.hostButton.setActive(true);
+    this.joinButton.setActive(true);
+    this.backButton.setActive(true);
+    this.easeMe(this.hostButton, this, 1);
+    this.easeMe(this.joinButton, this, 2);
+    this.easeMe(this.boxGameId, this, 5);
+    this.easeMe(this.writeGameID, this, 6);
+    this.easeMe(this.backButton, this, 3);
+}
+
+//Llamada desde el Back
+goBackToMenu(){
+    this.playButton.setActive(true);
+    this.tutorialButton.setActive(true);
+    this.optionsButton.setActive(true);
+    this.contactButton.setActive(true);
+    this.easeMe(this.playButton, this, 1);
+    this.easeMe(this.tutorialButton, this, 2);
+    this.easeMe(this.optionsButton, this, 3);
+    this.easeMe(this.contactButton, this, 4);
+
+    this.boxGameId.setVisible(false);
+    this.writeGameID.setVisible(false);
+    this.hostButton.setActive(false);
+    this.joinButton.setActive(false);
+    this.backButton.setActive(false);
+    this.easeMeOut(this.hostButton, this, 1);
+    this.easeMeOut(this.joinButton, this, 2);
+    this.easeMeOut(this.boxGameId, this, 5);
+    this.easeMeOut(this.writeGameID, this, 6);
+    this.easeMeOut(this.backButton, this, 3);
+}
+
+//Llamada desde el Host
+goHost(){
+
+}
+
+//Llamada desde el Join
+goJoin(){
+
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 RegNextImg(dir){
 
@@ -945,9 +1042,55 @@ easeMe(boton,scene,nOp){
     switch (nOp)
     {
         case 1: endX = game.config.width / 2; endY = (game.config.height/8)*3; break;  
+        //Altura boton Play
+        case 1: endX = game.config.width / 2; endY = (game.config.height/8)*3; break;
+        //Altura boton Tutorial
         case 2: endX = game.config.width / 2; endY = (game.config.height/8)*4; break;
+        //Altura boton Options
         case 3: endX = game.config.width / 2; endY = (game.config.height/8)*5; break;
+        //Altura boton contacts
         case 4: endX = game.config.width / 2; endY = (game.config.height/8)*6; break;
+        //this.boxgameId
+        case 5: endX = game.config.width/2; endY = (game.config.height/16)*9; break;
+        //this.writeGameID
+        case 6: endX = game.config.width/2; endY = (game.config.height/50)*29; break;
+        default: break;
+        
+    }
+    scene.tweens.add({
+        targets: boton,
+        x: endX,
+        y: endY,
+        delay: nOp * 100,
+        //aplha: {start: game.config.width / 2, to: game.config.width / 8},
+        duration: 500,
+        ease: 'Circ.easeOut',
+        repeat: 0,
+        yoyo: false,
+        //delay:delay,
+
+        //onComplete: this.EnterOnMachine.bind(this)
+    });
+}
+
+//EASINGS INVERTIDOS
+easeMeOut(boton,scene,nOp){
+    var endX;
+    var endY;
+    switch (nOp)
+    {
+        //Altura boton Play
+        case 1: endX = (game.config.width/8)*3; endY = -1000; break;
+        //Altura boton Tutorial
+        case 2: endX = (game.config.width/2)*4; endY = -1000; break;
+        //Altura boton Options
+        case 3: endX = -1000; endY = (game.config.height/8)*5; break;
+        //Altura boton contacts
+        case 4: endX = game.config.width + 1000; endY = (game.config.height/8)*6; break;
+        //this.boxgameId
+        case 5: endX = (game.config.width/2)*4; endY = -1000; break;
+        //this.writeGameID
+        case 6: endX = (game.config.width/2)*4; endY = -1000; break;
         default: break;
     }
     scene.tweens.add({
