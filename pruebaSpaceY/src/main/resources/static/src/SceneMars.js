@@ -162,7 +162,6 @@ var postIt;
 var postItExp;
 var isbig = false;
 
-var gameLobbyID;
 
 class SceneMars extends Phaser.Scene {
     
@@ -305,7 +304,6 @@ class SceneMars extends Phaser.Scene {
 
         connection.onclose = function(){
             connection = undefined;
-            texto = "";
         }
 
         
