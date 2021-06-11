@@ -679,6 +679,11 @@ goJoin(){
                     por si queremos hacer algo cuando se conecte
                     */
                     break;
+                case "error":
+                    console.error("Error en la conexión: " + data["cause"]);
+                    // MOSTRAR UN MENSAJE DE QUE NO EXISTE EL LOBBY <<<<<<<<<<<<<<<-------------------------------<<<<<<<<<<<<<<<<<<<---------------------
+                    connection.close();
+                    break;
                 case "startGame":
                     if(data["gamemode"] == "Mars")
                         that.startGame('SceneMars');
