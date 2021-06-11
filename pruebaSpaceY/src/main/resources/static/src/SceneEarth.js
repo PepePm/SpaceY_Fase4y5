@@ -102,7 +102,7 @@ var ddrBtnMat;
 var ddrBtnO2;
 var ddrBtnComida;
 var controlBase;
-var controlKey;	
+var controlKey;
 var controlPass;
 var controlTerr;
 var controlMina;
@@ -167,7 +167,7 @@ var isbig = false;
 
 
 class SceneEarth extends Phaser.Scene {
-    
+
     constructor() {
 
         super("SceneEarth");
@@ -178,33 +178,33 @@ class SceneEarth extends Phaser.Scene {
 
         //CHAT POSTITIONS BEFORE - AFTER
         var chtOffset = 1000;
-   
+
         chatTween = [
-            game.config.width - 625, game.config.height-200,    //icono
-            game.config.width -300, game.config.height-380, //base
-            game.config.width -300, game.config.height-380, //frame
-            game.config.width -315, game.config.height-110, //write msg
-            game.config.width -55, game.config.height-110,  //send
-            game.config.width - 625, game.config.height-400,    //global
-        
+            game.config.width - 625, game.config.height - 200,    //icono
+            game.config.width - 300, game.config.height - 380, //base
+            game.config.width - 300, game.config.height - 380, //frame
+            game.config.width - 315, game.config.height - 110, //write msg
+            game.config.width - 55, game.config.height - 110,  //send
+            game.config.width - 625, game.config.height - 400,    //global
+
         ];
         chatPos = [
-            game.config.width-100,  chatTween[1],    //icono
-            chatTween[2]+chtOffset,  chatTween[3], //base
-            chatTween[4]+chtOffset,  chatTween[5], //frame
-            chatTween[6]+chtOffset,  chatTween[7], //write msg
-            chatTween[8]+chtOffset,  chatTween[9],  //send
-            game.config.width-100,  chatTween[11]  //global
+            game.config.width - 100, chatTween[1],    //icono
+            chatTween[2] + chtOffset, chatTween[3], //base
+            chatTween[4] + chtOffset, chatTween[5], //frame
+            chatTween[6] + chtOffset, chatTween[7], //write msg
+            chatTween[8] + chtOffset, chatTween[9],  //send
+            game.config.width - 100, chatTween[11]  //global
         ];
 
-        
+
     }
 
     create() {
-       
-          //PARTE CONSOLA 
-          //Fondo Consola
-          fondoConsola = this.add.image(407, 450, "fondoTierra").setDepth(1);
+
+        //PARTE CONSOLA 
+        //Fondo Consola
+        fondoConsola = this.add.image(407, 450, "fondoTierra").setDepth(1);
 
 
         //Valores iniciales recursos
@@ -223,7 +223,7 @@ class SceneEarth extends Phaser.Scene {
         sfx.sounds[12].volume = 0.3;
         sfx.sounds[2].volume = 0;
         sfx.sounds[8].volume = 0;
-        
+
         soundtrack.pistas[0].stop();
         soundtrack.pistas[1].play();
         soundtrack.pistas[3].play();
@@ -232,11 +232,11 @@ class SceneEarth extends Phaser.Scene {
         //sfx.sounds[2].play();
         //sfx.sounds[8].play();
 
-        
-        
+
+
 
         //MARTE
-		// ui_M_bck
+        // ui_M_bck
         //fondoMarte = this.add.image(407, 450, "fondoMarte").setDepth(-2);
 
         //Inicialización planeta
@@ -260,7 +260,7 @@ class SceneEarth extends Phaser.Scene {
 
         //Nubes
         //nubes = new Array(N_NUBES);
-        
+
         /*for(var i=0; i<N_NUBES; i++) {
 
             nubes[i] = new Cloud(this);
@@ -273,36 +273,36 @@ class SceneEarth extends Phaser.Scene {
         //TIERRA    CREACION DE LOS ASSETS DE TIERRA
         controlTierra = new EarthControl(this, 0, 0, 8);
         //controlTierra.PushFromMars();
-		
-		
-		
-		
-		// ui_M_actionbox: Tecla de acción
+
+
+
+
+        // ui_M_actionbox: Tecla de acción
         //
-		
-		// ui_M_dangerArrow                                         //NI IDEA OIGA                  ****************************************
-		alertaPeligroIz = this.add.image(665, 365, "alertaPeligro").setVisible(false);
-		
-		// ui_M_dangerArrow_1
-		alertaPeligroDc = this.add.image(144, 365, "alertaPeligro").setScale(-1,1).setVisible(false); // *************************************************(x=-1, y)FLIP EJE VERTICAL!
-    
+
+        // ui_M_dangerArrow                                         //NI IDEA OIGA                  ****************************************
+        alertaPeligroIz = this.add.image(665, 365, "alertaPeligro").setVisible(false);
+
+        // ui_M_dangerArrow_1
+        alertaPeligroDc = this.add.image(144, 365, "alertaPeligro").setScale(-1, 1).setVisible(false); // *************************************************(x=-1, y)FLIP EJE VERTICAL!
+
         //Contador tiempo restante
-        counter = new Counter(this, 10*60);
-        
-        
+        counter = new Counter(this, 10 * 60);
+
+
 
         //jugador
         //player = this.physics.add.sprite(marte.x,marte.y-620, 'stelonauta_idle').setScale(0.6);
-        
- 
+
+
         //Indicadores recursos
         //indTerra = new ResourceIndicator(this, 401, 787, 3, nTerraformacion, MAX_TERRAFORMACION);
         //indHam = new ResourceIndicator(this, 109, 74, 0, nComida_M, MAX_COMIDA);
         //indRocas = new ResourceIndicator(this, 109, 166, 1, nRocas_M, MAX_ROCAS);
         //indMat = new ResourceIndicator(this, 109, 256, 2, nMaterial_M, MAX_MATERIAL);
 
-        
-        
+
+
 
         //Cargamento cohete
         //objCoheteMat = new Bar(this, game.config.width/4 - 120, player.y - 100, nCoheteMat, MAX_COHETEMAT, 0.5, 0.5, coheteMat_color, true);
@@ -324,7 +324,7 @@ class SceneEarth extends Phaser.Scene {
         keyDev_victory = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M, false);
         keyDev_defeat = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N, false);
 
-        
+
         //Genera meteoritos cada x ms (TESTING)
         //var timedEvent = this.time.addEvent({ delay: 3000, callback: genMeteors, callbackScope: this, loop: true });
 
@@ -342,7 +342,7 @@ class SceneEarth extends Phaser.Scene {
             on: false
         });*/
 
-        
+
 
         //Cohete        [0]
         /*emitterMachines[0] = this.add.particles('smoke');
@@ -421,25 +421,25 @@ class SceneEarth extends Phaser.Scene {
         });*/
 
         //POST IT
-        postIt = this.add.image(game.config.width-90,100, "postIt").setDepth(7)
-        .setInteractive()
-        .on('pointerdown', () => OpenPostIt(postIt,this))
-        .on('pointerup', () => HighlightPostIt(postIt, true))
-        .on('pointerover', () => HighlightPostIt(postIt, true))
-        .on('pointerout', () => HighlightPostIt(postIt, false));	
-        
-        postItExp = this.add.image(game.config.width-100,100, "postItExp")
-        .setDepth(7)
-        .setScale(0.2)
-        .setInteractive()
-        .setVisible(false)
-        .on('pointerdown', () => OpenPostIt(postItExp,this))
-        .on('pointerup', () => HighlightPostIt(postItExp, true))
-        .on('pointerover', () => HighlightPostIt(postItExp, true))
-        .on('pointerout', () => HighlightPostIt(postItExp, false));
-        
-        
-    //*/
+        postIt = this.add.image(game.config.width - 90, 100, "postIt").setDepth(7)
+            .setInteractive()
+            .on('pointerdown', () => OpenPostIt(postIt, this))
+            .on('pointerup', () => HighlightPostIt(postIt, true))
+            .on('pointerover', () => HighlightPostIt(postIt, true))
+            .on('pointerout', () => HighlightPostIt(postIt, false));
+
+        postItExp = this.add.image(game.config.width - 100, 100, "postItExp")
+            .setDepth(7)
+            .setScale(0.2)
+            .setInteractive()
+            .setVisible(false)
+            .on('pointerdown', () => OpenPostIt(postItExp, this))
+            .on('pointerup', () => HighlightPostIt(postItExp, true))
+            .on('pointerover', () => HighlightPostIt(postItExp, true))
+            .on('pointerout', () => HighlightPostIt(postItExp, false));
+
+
+        //*/
         /*
         this.input.on('pointerDown', function (pointer) {
             //emitter.setPosition(Phaser.Math.Between(0, game.config.width), 0)
@@ -448,7 +448,7 @@ class SceneEarth extends Phaser.Scene {
             //console.log("APAGA");
         });
         //*/
-    
+
         /*
         this.input.on('pointerdown', function (pointer) {
             emitZoneIndex = (emitZoneIndex + 1) % emitZones.length;
@@ -456,126 +456,93 @@ class SceneEarth extends Phaser.Scene {
             emitter.explode();
         });
         //*/
-    
+
         //emitter.setEmitZone(emitZones[emitZoneIndex]); 
 
 
-        
-    //CHATBOX
-     //Chatbox icon
-     this.chatbutton = this.add.image(chatPos[0], chatPos[1],'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
-     .setScale(0.6);
-     this.chatbutton.setInteractive()
-     .on('pointerdown', () => this.MovinBoxes(this ,1))
-     .on('pointerover', () => this.enterIconHoverState(this.chatbutton, this))
-     .on('pointerout', () => this.enterIconRestState(this.chatbutton))
-     this.chatbutton.setOrigin(0.5);
- 
-     //chatbox base
-     this.chatBase = this.add.image(chatPos[2], chatPos[3],'ChatBox_Base')
-     .setScale(0.8);
-     this.chatBase.setOrigin(0.5);
- 
-     //chatbox write msg
-     this.chatWritter = this.add.image(chatPos[6], chatPos[7],'ChatBox_MsgBox')
-     .setScale(0.37);
-     this.chatWritter.setOrigin(0.5);
- 
-     //chatbox send
-     this.sendButton = this.add.image(chatPos[8], chatPos[9],'ChatBox_SendBtn')
-     .setScale(0.4);
-     this.sendButton.setInteractive()
-     .on('pointerdown', () => RestCreateMsg(this, userName))
-     .on('pointerover', () => this.enterIconHoverState(this.sendButton, this) )
-     .on('pointerout', () => this.enterIconRestState(this.sendButton))
-     this.sendButton.setOrigin(0.5);
-     this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter,this.sendButton, this.globalbutton];
- 
-     var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
-     key_enter.on('down', () => RestCreateMsg(this, userName));
-     
-     
-     //Chatbox code
-     this.chatContent = [];
-     loadMsgs(this);
- 
-     this.chatText = this.add.text(game.config.width/6*4+10, game.config.height/5+10, this.chatContent, { fontSize:"25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
- 
-     this.chatText.setMask(mask).setVisible(false);
- 
-     var zone = this.add.zone(game.config.width/6*4+10, game.config.height/5+1, 320, game.config.height/5*3+5).setOrigin(0).setInteractive();
-     var that = this;
-     zone.on('pointermove', function (pointer) {
- 
-         if (pointer.isDown)
-         {
-             that.chatText.y += (pointer.velocity.y / 10);
- 
-             that.chatText.y = Phaser.Math.Clamp(that.chatText.y, (game.config.height/5+10)-(25*lineasChat), game.config.height/5+10);
-         }
- 
-     });
- 
-     this.writeTextChat = this.add.dom(1280, 785).createFromCache('formChat').setVisible(false);
-     
-     var graphics = this.make.graphics();
-     graphics.fillRect(game.config.width/6*4+10, game.config.height/5+1, game.config.width/6*4+300, game.config.height/5*3+5);
-     var mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
- 
-         //LOBBY
-         this.lobbyContent = ["Connected Users: "];
-         loadLobby(this);
-     
-         this.lobbyText = this.add.text(game.config.width/6*4+10, game.config.height/5+10, this.lobbyContent,
-         {fontSize:"25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
-         this.lobbyText.setMask(mask).setVisible(false).setDepth(1000);
-     
-         this.numPlayers = updateUsers(this);
-         this.numPlayersTxt = this.add.text(game.config.width*3.25/4, (game.config.height/8)*6.8, "REGISTERED USERS: "+this.numPlayers, { fill: '#FFFFFF',fontFamily:'menuFont',fontSize:'40px' });
-         this.numPlayersTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
-     
-         this.serverOnlineTxt = this.add.text(game.config.width*3.25/4, (game.config.height/8)*7.2, "SERVER ¿?", { fill: '#FFFFFF',fontFamily:'menuFont',fontSize:'40px' });
-         this.serverOnlineTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
-     
-         isServerOnline(this);
- 
-      
-         WarnFixMachine(machineId)
-         {
-             var typeToSync;
-             switch(machineId){
-                case "Antena":
-                    typeToSync = "syncAntenaPilot";
-                     break;
-                 
-                case "Mine":
-                    typeToSync = "syncMinePilot";
-                    break;
-                
-                case "Rocket":
-                    typeToSync = "syncRocketPilot";
-                    break;
 
-                case "Terraform":
-                    typeToSync = "syncTerraform";
-                     break;
-             }
-            console.log("Solicitando arreglar máquina");
-            var data = {
-                action: "Sync",
-                lobbyID: gameLobbyID,
-                type:typeToSync,
-                value:true,
+        //CHATBOX
+        //Chatbox icon
+        this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
+            .setScale(0.6);
+        this.chatbutton.setInteractive()
+            .on('pointerdown', () => this.MovinBoxes(this, 1))
+            .on('pointerover', () => this.enterIconHoverState(this.chatbutton, this))
+            .on('pointerout', () => this.enterIconRestState(this.chatbutton))
+        this.chatbutton.setOrigin(0.5);
+
+        //chatbox base
+        this.chatBase = this.add.image(chatPos[2], chatPos[3], 'ChatBox_Base')
+            .setScale(0.8);
+        this.chatBase.setOrigin(0.5);
+
+        //chatbox write msg
+        this.chatWritter = this.add.image(chatPos[6], chatPos[7], 'ChatBox_MsgBox')
+            .setScale(0.37);
+        this.chatWritter.setOrigin(0.5);
+
+        //chatbox send
+        this.sendButton = this.add.image(chatPos[8], chatPos[9], 'ChatBox_SendBtn')
+            .setScale(0.4);
+        this.sendButton.setInteractive()
+            .on('pointerdown', () => RestCreateMsg(this, userName))
+            .on('pointerover', () => this.enterIconHoverState(this.sendButton, this))
+            .on('pointerout', () => this.enterIconRestState(this.sendButton))
+        this.sendButton.setOrigin(0.5);
+        this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter, this.sendButton, this.globalbutton];
+
+        var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
+        key_enter.on('down', () => RestCreateMsg(this, userName));
+
+
+        //Chatbox code
+        this.chatContent = [];
+        loadMsgs(this);
+
+        this.chatText = this.add.text(game.config.width / 6 * 4 + 10, game.config.height / 5 + 10, this.chatContent, { fontSize: "25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
+
+        this.chatText.setMask(mask).setVisible(false);
+
+        var zone = this.add.zone(game.config.width / 6 * 4 + 10, game.config.height / 5 + 1, 320, game.config.height / 5 * 3 + 5).setOrigin(0).setInteractive();
+        var that = this;
+        zone.on('pointermove', function (pointer) {
+
+            if (pointer.isDown) {
+                that.chatText.y += (pointer.velocity.y / 10);
+
+                that.chatText.y = Phaser.Math.Clamp(that.chatText.y, (game.config.height / 5 + 10) - (25 * lineasChat), game.config.height / 5 + 10);
             }
-            connection.send(JSON.stringify(data));
-         }
- 
-    
+
+        });
+
+        this.writeTextChat = this.add.dom(1280, 785).createFromCache('formChat').setVisible(false);
+
+        var graphics = this.make.graphics();
+        graphics.fillRect(game.config.width / 6 * 4 + 10, game.config.height / 5 + 1, game.config.width / 6 * 4 + 300, game.config.height / 5 * 3 + 5);
+        var mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
+
+        //LOBBY
+        this.lobbyContent = ["Connected Users: "];
+        loadLobby(this);
+
+        this.lobbyText = this.add.text(game.config.width / 6 * 4 + 10, game.config.height / 5 + 10, this.lobbyContent,
+            { fontSize: "25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
+        this.lobbyText.setMask(mask).setVisible(false).setDepth(1000);
+
+        this.numPlayers = updateUsers(this);
+        this.numPlayersTxt = this.add.text(game.config.width * 3.25 / 4, (game.config.height / 8) * 6.8, "REGISTERED USERS: " + this.numPlayers, { fill: '#FFFFFF', fontFamily: 'menuFont', fontSize: '40px' });
+        this.numPlayersTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
+
+        this.serverOnlineTxt = this.add.text(game.config.width * 3.25 / 4, (game.config.height / 8) * 7.2, "SERVER ¿?", { fill: '#FFFFFF', fontFamily: 'menuFont', fontSize: '40px' });
+        this.serverOnlineTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
+
+        isServerOnline(this);
+
     }
     update(time, delta) {
 
 
-        controlTierra.pantallaPlano.rotation+=delta/16000;
+        controlTierra.pantallaPlano.rotation += delta / 16000;
         //DEBUG PARTICULAS
         /*if (key_left.isDown) {
             //Apaga
@@ -641,7 +608,7 @@ class SceneEarth extends Phaser.Scene {
           emitterMachines[3].emitParticleAt(emitterMachines[3].posX, emitterMachines[3].posY);
         */
         ////console.log("Pos X: " + emitterMachines[0].posX + "\nPos Y: " + emitterMachines[0].posY);
-        
+
         /*
         //SONIDOS DE CORRER EN MARTE
         if ((key_left.isDown || key_right.isDown) && !startSfxRun) {
@@ -690,7 +657,7 @@ class SceneEarth extends Phaser.Scene {
         }*/
 
         //Desgaste máquinas//(mejor en sus clases)
-        
+
         /*
         //Desgaste hambre//
         indHam.size = Phaser.Math.Clamp(indHam.size - delta/2500, 0, indHam.maxSize); 
@@ -708,7 +675,7 @@ class SceneEarth extends Phaser.Scene {
             PauseMenu(this);
             paused = true;
         }
-        if (key_pause.isUp){
+        if (key_pause.isUp) {
 
             paused = false;
         }
@@ -725,36 +692,59 @@ class SceneEarth extends Phaser.Scene {
         //*/
     }
 
-    
+    WarnFixMachine(machineId) {
+        var typeToSync;
+        switch (machineId) {
+            case "Antena":
+                typeToSync = "syncAntenaPilot";
+                break;
 
+            case "Mine":
+                typeToSync = "syncMinePilot";
+                break;
 
-    OpenChat(scene)
-    {
-      
-       var nX = 0; var nY = 1;
-            for (let i = 0; i < scene.chatboxStuff.length; i++)
-            {
-                scene.tweens.add({
-                    targets: scene.chatboxStuff[i],
-                    x: chatTween[nX],
-                    y: chatTween[nY],
-                    //delay: 100,
-                    //aplha: {start: game.config.width / 2, to: game.config.width / 8},
-                    duration: 100,
-                    ease: 'Bounce.easeOut',
-                });
-                nX+=2;nY+=2;
-            }
-            chatBoxOut = true;
-        
+            case "Rocket":
+                typeToSync = "syncRocketPilot";
+                break;
+
+            case "Terraform":
+                typeToSync = "syncTerraform";
+                break;
+        }
+        console.log("Solicitando arreglar máquina");
+        var data = {
+            action: "Sync",
+            lobbyID: gameLobbyID,
+            type: typeToSync,
+            value: true,
+        }
+        connection.send(JSON.stringify(data));
     }
-    ChatManager(scene,id)
-    {
-        if(!chatBoxActive && chatBoxOut && !lobbyActive)
-        {
+
+
+    OpenChat(scene) {
+
+        var nX = 0; var nY = 1;
+        for (let i = 0; i < scene.chatboxStuff.length; i++) {
+            scene.tweens.add({
+                targets: scene.chatboxStuff[i],
+                x: chatTween[nX],
+                y: chatTween[nY],
+                //delay: 100,
+                //aplha: {start: game.config.width / 2, to: game.config.width / 8},
+                duration: 100,
+                ease: 'Bounce.easeOut',
+            });
+            nX += 2; nY += 2;
+        }
+        chatBoxOut = true;
+
+    }
+    ChatManager(scene, id) {
+        if (!chatBoxActive && chatBoxOut && !lobbyActive) {
             this.CloseChat(scene);
         }
-        if(chatBoxActive && !chatBoxOut && !lobbyActive)    //abrimos chat
+        if (chatBoxActive && !chatBoxOut && !lobbyActive)    //abrimos chat
         {
             scene.chatWritter.setVisible(true);
             scene.sendButton.setVisible(true);
@@ -765,7 +755,7 @@ class SceneEarth extends Phaser.Scene {
             scene.serverOnlineTxt.setVisible(false);
             this.OpenChat(scene);
         }
-        if(!chatBoxActive && !chatBoxOut && lobbyActive)    //abrimos lobby
+        if (!chatBoxActive && !chatBoxOut && lobbyActive)    //abrimos lobby
         {
             scene.chatWritter.setVisible(false);
             scene.sendButton.setVisible(false);
@@ -776,10 +766,8 @@ class SceneEarth extends Phaser.Scene {
             scene.serverOnlineTxt.setVisible(true);
             this.OpenChat(scene);
         }
-        if(chatBoxActive && chatBoxOut && lobbyActive)
-        {
-            if(id == 0)
-            {
+        if (chatBoxActive && chatBoxOut && lobbyActive) {
+            if (id == 0) {
                 scene.chatWritter.setVisible(false);
                 scene.sendButton.setVisible(false);
                 scene.chatText.setVisible(false);
@@ -789,8 +777,7 @@ class SceneEarth extends Phaser.Scene {
                 scene.serverOnlineTxt.setVisible(true);
                 chatBoxActive = false;
             }
-            else
-            {
+            else {
                 scene.chatWritter.setVisible(true);
                 scene.sendButton.setVisible(true);
                 scene.chatText.setVisible(true);
@@ -803,31 +790,28 @@ class SceneEarth extends Phaser.Scene {
         }
     }
     //sacar el chat 
-    MovinBoxes(scene, id) 
-    {
+    MovinBoxes(scene, id) {
         sfx.sounds[1].play();
-    
+
         var nX = 0; var nY = 1;
-        switch(id)
-        {
+        switch (id) {
             case 0: // Abrir cerrar lobby 
                 lobbyActive = !lobbyActive;
-                this.ChatManager(scene,id);
+                this.ChatManager(scene, id);
                 break;
             case 1: //abrir cerrar chatbox chatbox
-               
+
                 chatBoxActive = !chatBoxActive;
-                this.ChatManager(scene,id);
-    
+                this.ChatManager(scene, id);
+
                 break;
             case 2: //login loginBox,loginOption;
-            
-                
-                if(loginOut)    //guardar log in
+
+
+                if (loginOut)    //guardar log in
                 {
-                    
-                    for (let i = 0; i < scene.loginStuff.length; i++)
-                    {
+
+                    for (let i = 0; i < scene.loginStuff.length; i++) {
                         scene.tweens.add({
                             targets: scene.loginStuff[i],
                             x: loginPos[nX],
@@ -835,11 +819,11 @@ class SceneEarth extends Phaser.Scene {
                             duration: 100,
                             ease: 'Bounce.easeOut',
                         });
-                        nX+=2;nY+=2;
+                        nX += 2; nY += 2;
                     }
                     loginOut = true;
-                    this.ShowLoginFields(scene,loginOut);
-    
+                    this.ShowLoginFields(scene, loginOut);
+
                     this.accountText.setVisible(false);
                     this.accountLogin.setVisible(false);
                     this.accountLogin.setVisible(false);
@@ -849,10 +833,8 @@ class SceneEarth extends Phaser.Scene {
                 {
                     this.accountText.setVisible(true);
                     //this.accountLogin.setVisible(true);
-    
-                    for (let i = 0; i < scene.loginStuff.length; i++)
-    
-                    {
+
+                    for (let i = 0; i < scene.loginStuff.length; i++) {
                         scene.tweens.add({
                             targets: scene.loginStuff[i],
                             x: loginTween[nX],
@@ -860,25 +842,23 @@ class SceneEarth extends Phaser.Scene {
                             duration: 100,
                             ease: 'Bounce.easeOut',
                         });
-                        nX+=2;nY+=2;
+                        nX += 2; nY += 2;
                     }
                     loginOut = false;
-    
-                    this.ShowLoginFields(scene,loginOut);
+
+                    this.ShowLoginFields(scene, loginOut);
                 }
-                
+
                 break;
             case 3: //register registerBox, registerBtn, nextImg, prevImg;
-                
-                if(registerOut) //guardar register
+
+                if (registerOut) //guardar register
                 {
                     this.regLogin.setVisible(false);
                     this.accountText.setColor("white");
                     this.accountText.setText('Please enter in your account');
-    
-                    for (let i = 0; i<scene.registerStuff.length; i++)
-    
-                    {
+
+                    for (let i = 0; i < scene.registerStuff.length; i++) {
                         scene.tweens.add({
                             targets: scene.registerStuff[i],
                             x: regisPos[nX],
@@ -886,16 +866,15 @@ class SceneEarth extends Phaser.Scene {
                             duration: 100,
                             ease: 'Expo.easeOut',
                         });
-                        nX+=2;nY+=2;
+                        nX += 2; nY += 2;
                     }
                     registerOut = false
                     //this.ShowRegisternFields(scene,registerOn);
                 }
-                else if(!registerOut) //sacar register
+                else if (!registerOut) //sacar register
                 {
                     this.regLogin.setVisible(true);
-                    for (let i = 0; i < scene.registerStuff.length; i++)
-                    {
+                    for (let i = 0; i < scene.registerStuff.length; i++) {
                         scene.tweens.add({
                             targets: scene.registerStuff[i],
                             x: regisTween[nX],
@@ -903,21 +882,21 @@ class SceneEarth extends Phaser.Scene {
                             duration: 100,
                             ease: 'Expo.easeOut',
                         });
-                        nX+=2;nY+=2;
+                        nX += 2; nY += 2;
                     }
                     registerOut = true
                     //this.ShowRegisternFields(scene,registerOn);
                 }
-                
+
                 break;
         }
-            
-    
-           
-        
+
+
+
+
     }
-    CloseChat(scene){
-        var nX = 0; var nY = 1; 
+    CloseChat(scene) {
+        var nX = 0; var nY = 1;
         scene.chatWritter.setVisible(false);
         scene.sendButton.setVisible(false);
         scene.chatText.setVisible(false);
@@ -925,8 +904,7 @@ class SceneEarth extends Phaser.Scene {
         scene.lobbyText.setVisible(false);
         scene.numPlayersTxt.setVisible(false);
         scene.serverOnlineTxt.setVisible(false);
-        for (let i = 0; i < scene.chatboxStuff.length; i++)
-        {
+        for (let i = 0; i < scene.chatboxStuff.length; i++) {
             scene.tweens.add({
                 targets: scene.chatboxStuff[i],
                 x: chatPos[nX],
@@ -936,27 +914,27 @@ class SceneEarth extends Phaser.Scene {
                 duration: 100,
                 ease: 'Bounce.easeIn',
             });
-            nX+=2;nY+=2;
+            nX += 2; nY += 2;
         }
         chatBoxOut = false;
         chatBoxActive = false;
         lobbyActive = false;
     }
     //INTERACTIVIDAD
-    
-    
-    
-    enterIconHoverState(boton, scene){
-        
+
+
+
+    enterIconHoverState(boton, scene) {
+
         sfx.sounds[1].play();
-        boton.x = boton.x+movTxt;
-        boton.y = boton.y+movTxt;
+        boton.x = boton.x + movTxt;
+        boton.y = boton.y + movTxt;
     }
-    
+
     enterIconRestState(boton) {
-    
-        boton.x = boton.x-movTxt;
-        boton.y = boton.y-movTxt;
+
+        boton.x = boton.x - movTxt;
+        boton.y = boton.y - movTxt;
     }
 }
 /*
@@ -1023,7 +1001,7 @@ function DestroyOnScene(obj) {
 }
 
 //Acciones condiciones victoria/derrota
-function VictoryCondition(that)  {
+function VictoryCondition(that) {
 
     sfx.sounds.forEach(element => {
         element.stop();
@@ -1035,25 +1013,25 @@ function VictoryCondition(that)  {
     soundtrack.pistas[3].stop();
 
     isVictory = true;
-    
+
     that.scene.launch('SceneGameEnd');
     that.scene.pause('SceneGame');
 }
 
-function DefeatCondition(that){
+function DefeatCondition(that) {
     if (!isTutorial) {
 
         sfx.sounds.forEach(element => {
             element.stop();
         });
-    
+
         sfx.sounds[5].play();
-    
+
         isVictory = false;
-    
+
         soundtrack.pistas[1].stop();
         soundtrack.pistas[3].stop();
-    
+
         that.scene.launch('SceneGameEnd');
         that.scene.pause('SceneGame');
     }
@@ -1073,52 +1051,48 @@ function PauseMenu(that) {
 
 function HighlightPostIt(obj, b) {
 
-    b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);  
+    b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
     //if (!b) obj.add.image(game.config.width/2, game.config.height/2, "postIt");
 }
-function WarningSignal(warning, ){
+function WarningSignal(warning,) {
     //recibimos uin tipo de mensaje y en función de su contenido enviamos una señal al terminal de marte
     //
 }
-function OpenPostIt(obj,scene) {
+function OpenPostIt(obj, scene) {
 
-    switch(obj)
-    {
-        case postIt : 
-        scene.tweens.add({
-            targets: obj,
-            scaleX: 10,
-            scaleY: 10,
-            duration: 50,
-            ease: 'Expo.easeIn',
-            onComplete: function ()
-            {
-                postIt.setVisible(false);
-                postItExp.setVisible(true);
-                postItExp.setScale(0.2);
-                postItExp.setPosition(game.config.width/2, game.config.height/2);
-            }
-        });
-        break;
-        case postItExp : 
-        scene.tweens.add({
-            targets: obj,
-            x:postIt.x,
-            y:postIt.y,
-            scaleX: 0,
-            scaleY: 0,
-            duration: 50,
-            ease: 'Expo.easeIn',
-            onComplete: function ()
-            {
-                postItExp.setVisible(false);
-                postIt.setVisible(true);
-            }
-        });
-        break;
+    switch (obj) {
+        case postIt:
+            scene.tweens.add({
+                targets: obj,
+                scaleX: 10,
+                scaleY: 10,
+                duration: 50,
+                ease: 'Expo.easeIn',
+                onComplete: function () {
+                    postIt.setVisible(false);
+                    postItExp.setVisible(true);
+                    postItExp.setScale(0.2);
+                    postItExp.setPosition(game.config.width / 2, game.config.height / 2);
+                }
+            });
+            break;
+        case postItExp:
+            scene.tweens.add({
+                targets: obj,
+                x: postIt.x,
+                y: postIt.y,
+                scaleX: 0,
+                scaleY: 0,
+                duration: 50,
+                ease: 'Expo.easeIn',
+                onComplete: function () {
+                    postItExp.setVisible(false);
+                    postIt.setVisible(true);
+                }
+            });
+            break;
     }
-    if(isbig)
-    {
+    if (isbig) {
         ////console.log('no soy grande');
         isbig = false;
         scene.tweens.add({
@@ -1127,14 +1101,12 @@ function OpenPostIt(obj,scene) {
             scaleY: 0,
             duration: 50,
             ease: 'Expo.easeIn',
-            onComplete: function ()
-            {
-                
+            onComplete: function () {
+
             }
         });
     }
-    else if (!isbig)
-    {
+    else if (!isbig) {
         isbig = true;
         scene.tweens.add({
             targets: obj,
@@ -1142,12 +1114,11 @@ function OpenPostIt(obj,scene) {
             scaleY: 1,
             duration: 50,
             ease: 'Expo.easeOut',
-            onComplete: function ()
-            {
-                
+            onComplete: function () {
+
             }
         });
     }
-    
+
 }
 
