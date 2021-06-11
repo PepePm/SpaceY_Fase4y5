@@ -540,7 +540,35 @@ class SceneEarth extends Phaser.Scene {
          isServerOnline(this);
  
       
- 
+         WarnFixMachine(machineId)
+         {
+             var typeToSync;
+             switch(machineId){
+                case "Antena":
+                    typeToSync = "syncAntenaPilot";
+                     break;
+                 
+                case "Mine":
+                    typeToSync = "syncMinePilot";
+                    break;
+                
+                case "Rocket":
+                    typeToSync = "syncRocketPilot";
+                    break;
+
+                case "Terraform":
+                    typeToSync = "syncTerraform";
+                     break;
+             }
+            console.log("Solicitando arreglar máquina");
+            var data = {
+                action: "Sync",
+                lobbyID: gameLobbyID,
+                type:typeToSync,
+                value:true,
+            }
+            connection.send(JSON.stringify(data));
+         }
  
     
     }

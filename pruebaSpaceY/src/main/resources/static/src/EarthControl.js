@@ -290,14 +290,14 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         this.UiEarthPilots = scene.add.image(ConsolePos[8],ConsolePos[9], "UIEarthPilots").setDepth(4);  //espacio para los pilotos de 
         this.UiEarthSndBrkAntenaPilot = scene.add.image(ConsolePos[10],ConsolePos[11], "UiEarthSndBrkAntenaPilot").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  this.WarnFixMachine("Antena"))//this.Unload(this.unloadRocketBtn)
+        .on('pointerdown', () =>  scene.WarnFixMachine("Antena"))//this.Unload(this.unloadRocketBtn)
         .on('pointerup', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, true) )
         .on('pointerover', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, true) )
         .on('pointerout', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, false) );
 
         this.UiEarthSndBrkTerraPilot = scene.add.image(ConsolePos[12],ConsolePos[13], "UiEarthSndBrkTerraPilot").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () => this.WarnFixMachine("Terraform"))//this.Unload(this.unloadRocketBtn)
+        .on('pointerdown', () => scene.WarnFixMachine("Terraform"))//this.Unload(this.unloadRocketBtn)
         .on('pointerup', () => this.Highlight(this.UiEarthSndBrkTerraPilot, true) )
         .on('pointerover', () => this.Highlight(this.UiEarthSndBrkTerraPilot, true) )
         .on('pointerout', () => this.Highlight(this.UiEarthSndBrkTerraPilot, false) );
@@ -305,14 +305,14 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
     
         this.UiEarthSndBrkRocketPilot = scene.add.image(ConsolePos[14],ConsolePos[15], "UiEarthSndBrkRocketPilot").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  this.WarnFixMachine("Rocket"))//this.Unload(this.unloadRocketBtn)
+        .on('pointerdown', () =>  scene.WarnFixMachine("Rocket"))//this.Unload(this.unloadRocketBtn)
         .on('pointerup', () => this.Highlight(this.UiEarthSndBrkRocketPilot, true) )
         .on('pointerover', () => this.Highlight(this.UiEarthSndBrkRocketPilot, true) )
         .on('pointerout', () => this.Highlight(this.UiEarthSndBrkRocketPilot, false) );
 
         this.UiEarthSndBrkMine = scene.add.image(ConsolePos[16],ConsolePos[17], "UiEarthSndBrkMinePilot").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  this.WarnFixMachine("Mine"))//this.Unload(this.unloadRocketBtn)
+        .on('pointerdown', () =>  scene.WarnFixMachine("Mine"))//this.Unload(this.unloadRocketBtn)
         .on('pointerup', () => this.Highlight(this.UiEarthSndBrkMine, true) )
         .on('pointerover', () => this.Highlight(this.UiEarthSndBrkMine, true) )
         .on('pointerout', () => this.Highlight(this.UiEarthSndBrkMine, false) );
@@ -375,35 +375,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
              texto = "";
          }
          // Metodo que avisa A MARTE sobre una máquina rota en funcion del ID de la máquina. 
-         WarnFixMachine(machineId)
-         {
-             var typeToSync;
-             switch(machineId){
-                case "Antena":
-                    typeToSync = "syncAntenaPilot";
-                     break;
-                 
-                case "Mine":
-                    typeToSync = "syncMinePilot";
-                    break;
-                
-                case "Rocket":
-                    typeToSync = "syncRocketPilot";
-                    break;
 
-                case "Terraform":
-                    typeToSync = "syncTerraform";
-                     break;
-             }
-            console.log("Solicitando arreglar máquina");
-            var data = {
-                action: "Sync",
-                lobbyID: gameLobbyID,
-                type:typeToSync,
-                value:true,
-            }
-            connection.send(JSON.stringify(data));
-         }
          
          //**************************************************************************************************************************** */
     }
