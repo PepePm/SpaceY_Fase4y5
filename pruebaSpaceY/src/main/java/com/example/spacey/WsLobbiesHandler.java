@@ -102,30 +102,55 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 				// cliente
 				String lobbyID = GetHashId(session.getId());
 				hosts.put(lobbyID, session);
-				session.sendMessage(new TextMessage(lobbyID));
+				
+				
+				// Devuelve al host el id de su lobby
+				ObjectNode connectedNode = mapper.createObjectNode();
+				connectedNode.put("type", "connected");
+				connectedNode.put("lobbyID", lobbyID);
+				
+				session.sendMessage(new TextMessage(connectedNode.toString()));
 			break;	
 			case "Join":
 				// Busca si en el mapa de hosts hay un lobby abierto con una id especificada
-				newNode.put("lobbyID", node.get("lobbyID").asText());
+				newNode.put("lobbyID", node.get("lobbyID").asText().toUpperCase());
+				
+				/*System.out.println("id recibido: " + newNode.get("lobbyID").asText() + "\n");
 				
 				System.out.println("Hosts buscando invitado:");
 				hosts.forEach((k, v)->{
 					System.out.println("Host con clave: " + k + " -> " + v);
-				});
+				});*/
 					
 				// ID del lobby del host a comprobar
 				WebSocketSession hostUser = hosts.get(newNode.get("lobbyID").asText());
 				
-				System.out.println("hostUser: " + hostUser);
+				
+				//System.out.println("hostUser: " + hostUser);
 				
 				// Si existe el lobby con ese id,
 				if (hostUser != null) {
 					// Crea un lobby en el mapa de lobbies con ambos jugadores
 					lobbies.put(hostUser, session);
 					// Borra del mapa hosts al user, ya que ya ha dejado de buscar invitado
-					hosts.remove(hostUser);
+					hosts.remove(newNode.get("lobbyID").asText());
+					
+					System.out.println("Existe el lobby con id: " + newNode.get("lobbyID"));
+					
+					//Notifica al host de que se ha unido el otro jugador
+					ObjectNode infoNode = mapper.createObjectNode();
+					infoNode.put("type", "playerJoined");
+					hostUser.sendMessage(new TextMessage(infoNode.toString()));
+					
 				}else{
 					System.out.println("No existe el lobby con id: " + newNode.get("lobbyID"));
+					
+					// Notifica al usuario de que no existe ese lobby
+					newNode = mapper.createObjectNode();
+					newNode.put("type", "error");
+					newNode.put("cause", "LobbyNotFound");
+					
+					session.sendMessage(new TextMessage(newNode.asText()));
 				}
 			break;
 			case "Sync":
@@ -161,6 +186,39 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 					
 				
 			break;
+			
+			case "startGame":
+				//Llamado por el host para iniciar la partida y administrar los modos
+				// de juego de cada jugador.
+				// Información del msg recibido
+				JsonNode hostNode = mapper.readTree(message.getPayload());
+				
+				// Usuarios de la partida
+				WebSocketSession host = session;
+				WebSocketSession joinedUser = lobbies.get(host);
+				
+				// Modos de juego para cada jugador
+				String playmode_host = hostNode.get("gamemode").asText();
+				String playmode_joined = (playmode_host == "Earth")? "Mars" : "Earth";
+				
+				// Se envía a cada jugador la acción de empezar partida con el modo de juego
+				// que se debe
+				// Al host
+				ObjectNode msgNode = mapper.createObjectNode();
+				msgNode.put("type", "startGame");
+				msgNode.put("gamemode", playmode_host);
+				
+				host.sendMessage(new TextMessage(msgNode.toString()));
+				
+				// Al otro usuario
+				msgNode = mapper.createObjectNode();
+				msgNode.put("type", "startGame");
+				msgNode.put("gamemode", playmode_joined);
+				
+				joinedUser.sendMessage(new TextMessage(msgNode.toString()));
+				
+				
+			break;
 		}
 		
 		/*// Recoge la información del JSON
@@ -183,8 +241,10 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 		//System.out.println("id: " + sessionID + "\n");
 		
 		// Crea un identificador unico en base al id del cliente
-		Hashids hashids = new Hashids(sessionID);
-		String idLobby = hashids.encode(123456);
+		Hashids hashids = new Hashids(sessionID, 5, "0123456789ABCDEF");
+		String idLobby = hashids.encode(1);
+		
+		System.out.println("id: " + idLobby + "\n");
 		
 		return idLobby;
 	}

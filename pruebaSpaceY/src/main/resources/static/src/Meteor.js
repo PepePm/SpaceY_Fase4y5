@@ -8,6 +8,7 @@ class Meteor {
         this.obj.z = 0;
         this.obj.rotation = this.rotation;
         this.obj.setOrigin(0.5, 6);
+        this.obj.setDepth(-2);
         this.incr = 0;
         this.areaCol = 0.1;
 
