@@ -459,7 +459,7 @@ class SceneEarth extends Phaser.Scene {
 
 
         
-         //CHATBOX
+    //CHATBOX
      //Chatbox icon
      this.chatbutton = this.add.image(chatPos[0], chatPos[1],'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
      .setScale(0.6);

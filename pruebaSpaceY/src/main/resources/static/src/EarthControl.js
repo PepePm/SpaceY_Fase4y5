@@ -222,9 +222,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         */
 
 
-
-
-
         this.comboNums = new Array(8);
         this.TxtComboNums = scene.add.text(this.controlKey.x, this.controlKey.y+2, "00000000",{
             fontSize:'35px',
@@ -267,7 +264,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         
         this.UIEarthSndMsgBtn =  scene.add.image(418, 693, "UIEarthSndMsg").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerdown', () =>  this.UIEarthSndMsgBtn())//this.Unload(this.unloadRocketBtn)
         .on('pointerup', () => this.Highlight(this.UIEarthSndMsgBtn, true) )
         .on('pointerover', () => this.Highlight(this.UIEarthSndMsgBtn, true) )
         .on('pointerout', () => this.Highlight(this.UIEarthSndMsgBtn, false) );
@@ -275,7 +272,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
        //boton para enviar recursos
         this.UIEarthSndResBtn = scene.add.image(594, 693, "UIEarthSndRes").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerdown', () =>  this.UIEarthSndResBtn())//this.Unload(this.unloadRocketBtn)
         .on('pointerup', () => this.Highlight(this.UIEarthSndResBtn, true) )
         .on('pointerover', () => this.Highlight(this.UIEarthSndResBtn, true) )
         .on('pointerout', () => this.Highlight(this.UIEarthSndResBtn, false) );
@@ -283,7 +280,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
        //BOTON QUE ENVIA SEÑAL A TIERRA PARA RECIBIR PROVISIONES
         this.UIEarthSndFoodBtn = scene.add.image(504, 693, "UIEarthSndFood").setDepth(4)
         .setInteractive()
-        .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+        .on('pointerdown', () =>  this.UIEarthSndFoodBtn())//this.Unload(this.unloadRocketBtn)
         .on('pointerup', () => this.Highlight(this.UIEarthSndFoodBtn, true) )
         .on('pointerover', () => this.Highlight(this.UIEarthSndFoodBtn, true) )
         .on('pointerout', () => this.Highlight(this.UIEarthSndFoodBtn, false) );

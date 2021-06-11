@@ -126,16 +126,16 @@ class SceneBoot extends Phaser.Scene {
 
 
         //CONSOLA DE LA TIERRA
-        this.load.image("UIEarthCons", directory+"ui_T_pantalla_aux.png" );
-        this.load.image("UIEarthTime", directory+"ui_T_pantalla_aux.png" );
-        this.load.image("UIEarthTerraform", directory+"ui_T_pantalla_aux.png" );
-        this.load.image("UIEarthAlerts", directory+"ui_T_pantalla_aux.png" );
-        this.load.image("UIEarthPilots", directory+"ui_T_pantalla_aux.png" );
-        this.load.image("UIEarthSndMsg", directory+"ui_T_pantalla_aux.png" );
-        this.load.image("UIEarthSndRes", directory+"ui_T_pantalla_aux.png" );
-        this.load.image("UIEarthSndFood", directory+"ui_T_pantalla_aux.png" );
-        this.load.image("UIEarthMsgBox", directory+"ui_T_pantalla_aux.png" );
-        this.load.image("UIEarthChatBox", directory+"ui_T_pantalla_aux.png" );
+        this.load.image("UIEarthCons", directory+"UI_Marte_Caja_naranja.png" );
+        this.load.image("UIEarthTime", directory+"UI_Marte_Tiempo.png" );
+        this.load.image("UIEarthTerraform", directory+"UI_Marte_Progreso_Terraformacion.png" );
+        this.load.image("UIEarthAlerts", directory+"UI_Marte_Caja_informativa.png" );
+        this.load.image("UIEarthPilots", directory+"UI_Marte_Contenedor_Pilotos.png" );
+        this.load.image("UIEarthSndMsg", directory+"UI_Marte_Boton_Enviar_Mensaje.png" );
+        this.load.image("UIEarthSndRes", directory+"UI_Marte_Boton_herramientas.png" );
+        this.load.image("UIEarthSndFood", directory+"UI_Marte_Boton_comida.png" );
+        this.load.image("UIEarthMsgBox", directory+"UI_Marte_Caja_texto.png" );
+        this.load.image("UIEarthChatBox", directory+"UI_Marte_Caja_Chat.png" );
 
 
         
@@ -388,7 +388,7 @@ class SceneBoot extends Phaser.Scene {
         });
 
         ////console.log("Acabé");
-        this.scene.start('SceneMenu');
+        this.scene.start('SceneEarth');
         this.scene.stop('SceneLogos');
     }
 }

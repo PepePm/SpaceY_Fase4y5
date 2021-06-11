@@ -543,7 +543,7 @@ class SceneMars extends Phaser.Scene {
          
          this.UiMarsSndMsgBtn =  this.add.image(1287, 693, "UIMarsSndMsg").setDepth(4)
          .setInteractive()
-         .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+         .on('pointerdown', () =>  this.UiMarsSndMsgBtn())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndMsgBtn, true) )
          .on('pointerover', () => this.Highlight(this.UiMarsSndMsgBtn, true) )
          .on('pointerout', () => this.Highlight(this.UiMarsSndMsgBtn, false) );
@@ -551,7 +551,7 @@ class SceneMars extends Phaser.Scene {
         //boton para enviar recursos
          this.UiMarsSndResBtn = this.add.image(1463, 693, "UIMarsSndRes").setDepth(4)
          .setInteractive()
-         .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+         .on('pointerdown', () =>  this.UiMarsSndResBtn())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndResBtn, true) )
          .on('pointerover', () => this.Highlight(this.UiMarsSndResBtn, true) )
          .on('pointerout', () => this.Highlight(this.UiMarsSndResBtn, false) );
@@ -559,7 +559,7 @@ class SceneMars extends Phaser.Scene {
         //BOTON QUE ENVIA SEÑAL A TIERRA PARA RECIBIR PROVISIONES
          this.UiMarsSndFoodBtn = this.add.image(1373, 693, "UIMarsSndFood").setDepth(4)
          .setInteractive()
-         .on('pointerdown', () =>  this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+         .on('pointerdown', () =>  this.UiMarsSndFoodBtn())//this.Unload(this.unloadRocketBtn)
          .on('pointerup', () => this.Highlight(this.UiMarsSndFoodBtn, true) )
          .on('pointerover', () => this.Highlight(this.UiMarsSndFoodBtn, true) )
          .on('pointerout', () => this.Highlight(this.UiMarsSndFoodBtn, false) );
