@@ -546,9 +546,9 @@ class SceneEarth extends Phaser.Scene {
                     console.log("recibiendo cohete de marte");
 
                     controlTierra.tweenLanzPuertaExtIn();
-                    controlTierra.goLand = data["value"];
-                    this.tweenLanzPuertaExtIn();
-                    this.objCohete.goLand = data["value"];
+                    controlTierra.goLand = true;
+                    //this.tweenLanzPuertaExtIn();
+                    //this.objCohete.goLand = data["value"];
                     break;
                 case "syncAntenaWear":
                     controlTierra.wearTxt[2].ChangeValue(data["value"]);

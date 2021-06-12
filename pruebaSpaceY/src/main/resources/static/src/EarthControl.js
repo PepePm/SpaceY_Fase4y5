@@ -63,6 +63,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         this.rocket = scene.add.sprite(957, -400, "movimientoCohete", 7).setScale(1.3).setDepth(2);
         this.rocketY = 400;
         this.goTakeOff = false;
+        this.goLand = false;
         this.typeOfLoad = 0; //0->Roca, 1->Comida/material
 
         //Botón para descargar rocas
@@ -356,12 +357,12 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         // Iniciar que el cohete despegue
         if (this.goTakeOff)
             controlTierra.TakeOff(delta);
-        /*  
+         
         //NO HACE FALTA: CUANDO HAGAMOS SIGNAL DE QUE HA LLEGADO EL COHETE SE HACE
-        if (objCohete.goLand)
+        if (this.goLand)
             controlTierra.Land(delta);
 
-        //Desgaste textos NO HACE FALTA: SINCRONIZADO POR LA CLASE wearTxt.js
+        /*//Desgaste textos NO HACE FALTA: SINCRONIZADO POR LA CLASE wearTxt.js
         for (var i=0; i < 4; i++) {
             this.wearTxt[i].setText(Math.round((maquinas[i].wear/maquinas[i].maxWear)*100)+"%");
         }
@@ -432,7 +433,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.rocket.y = this.rocketY;
             this.PushFromMars();
-            objCohete.goLand = false;
+            this.goLand = false;
 
             this.rocket.anims.play("movimientoCoheteReverse");
         }
