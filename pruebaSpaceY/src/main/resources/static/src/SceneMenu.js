@@ -711,6 +711,7 @@ class SceneMenu extends Phaser.Scene {
             connection.onclose = function () {
                 connection = undefined;
                 texto = ""; 
+                console.log("Cerrando conexión del HOST");
             }
 
             /*connection.onmessage = function(msg){
@@ -778,6 +779,7 @@ class SceneMenu extends Phaser.Scene {
 
             connection.onclose = function () {
                 connection = undefined;
+                console.log("Cerrando conexión del JOIN");
             }
         } else if (userName == "Anon") {
             this.tweenFadeIn(this.loginNeededWarning, this);
@@ -881,6 +883,7 @@ class SceneMenu extends Phaser.Scene {
 
     //click
     startGame(nextScene) {
+        connection.close();
         sfx.sounds[0].play();
         
         clientGamemode = nextScene;
@@ -977,7 +980,6 @@ class SceneMenu extends Phaser.Scene {
         isTutorial = false;
         var that = this;
         var timedEvent = this.time.addEvent({ delay: yPos + 500, callback: function () {
-            connection.close();
 
             isTutorial = false;
 
