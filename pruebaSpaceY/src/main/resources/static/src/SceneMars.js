@@ -271,6 +271,45 @@ class SceneMars extends Phaser.Scene {
 
             //ACTUALIZACION DE LA INFORMACIOND DE LA CONSOLA DE MARTE
             switch (data["type"]) {
+                //Me piden estado de alguna máquina
+                case "syncAntenaWear":
+                    var data = {
+                        action: "Sync",
+                        lobbyID: gameLobbyID,
+                        type: "syncAntenaWear",
+                        value: maquinas[2].wear,
+                    }
+                    connection.send(JSON.stringify(data));
+                    break;
+                case "syncMineWear":
+                    var data = {
+                        action: "Sync",
+                        lobbyID: gameLobbyID,
+                        type: "syncMineWear",
+                        value: maquinas[3].wear,
+                    }
+                    connection.send(JSON.stringify(data));
+                    break;
+                case "syncRocketWear":
+                    var data = {
+                        action: "Sync",
+                        lobbyID: gameLobbyID,
+                        type: "syncRocketWear",
+                        value: maquinas[0].wear,
+                    }
+                    connection.send(JSON.stringify(data));
+                    break;
+                case "syncTerraformWear":
+                    var data = {
+                        action: "Sync",
+                        lobbyID: gameLobbyID,
+                        type: "syncTerraformerWear",
+                        value: maquinas[1].wear,
+                    }
+                    connection.send(JSON.stringify(data));
+                    break;
+                //
+                //Me dicen que actualize el piloto de alguna máquina
                 case "syncAntenaPilot":
                     that.UiMarsAntenaPilot.setVisible(data["value"]);
                     that.easePilot(that, that.UiMarsAntenaPilot, data["value"]);
@@ -283,10 +322,11 @@ class SceneMars extends Phaser.Scene {
                     that.UiMarsRocketPilot.setVisible(data["value"]);
                     that.easePilot(that, that.UiMarsRocketPilot, data["value"]);
                     break;
-                case "syncTerraform":
+                case "syncTerraformPilot":
                     that.UiMarsTerraPilot.setVisible(data["value"]);
                     that.easePilot(that, that.UiMarsTerraPilot, data["value"]);
                     break;
+                //Actualizar rotación   ------------>Realmente necesario? No es mejor cada vez que me mueva en el update?
                 case "syncCharPos":
                     var data = {
                         action: "Sync",

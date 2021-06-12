@@ -236,6 +236,9 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         this.wearTxt[2].setPosition(this.controlCom.x, this.controlCom.y).setVisible(false);
         this.wearTxt[3].setPosition(this.controlMina.x, this.controlMina.y).setVisible(false);*/
 
+
+        this.nWear = 0;
+
         // Texto con los desgastes de las máquinas
         this.wearTxt = new Array(4);
 
@@ -243,6 +246,8 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         this.wearTxt[1] = new WearMachineTxt(scene, this.controlTerr.x, this.controlTerr.y); // Terraformador
         this.wearTxt[2] = new WearMachineTxt(scene, this.controlCom.x, this.controlCom.y); // Comunicaciones
         this.wearTxt[3] = new WearMachineTxt(scene, this.controlMina.x, this.controlMina.y); // Mina
+
+        console.log("wearTxt: " + this.wearTxt + " nWear: " + this.nWear + " this.wearTxt[this.nWear]: " +  this.wearTxt[this.nWear].txt);
 
         this.wearTxt[0].txt.setVisible(false);
         this.wearTxt[1].txt.setVisible(false);
@@ -257,7 +262,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             fill: '#ffffff',
         }).setOrigin(0.5).setDepth(5).setVisible(false);
 
-        this.nWear = 0;
+        
 
         //Combo números
         this.actualComboNum;
@@ -679,6 +684,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         //JUICEEE
         switch (n) {
             case 0:
+                this.scene.getMachineWear(n);
                 this.obj = this.controlRocket;
                 this.scene.tweens.add({
                     targets: this.obj,
@@ -690,6 +696,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 });
                 break;
             case 1:
+                this.scene.getMachineWear(n);
                 this.obj = this.controlTerr;
                 this.scene.tweens.add({
                     targets: this.obj,
@@ -700,6 +707,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                     yoyo: true
                 }); break;
             case 2:
+                this.scene.getMachineWear(n);
                 this.obj = this.controlCom;
                 this.scene.tweens.add({
                     targets: this.obj,
@@ -711,6 +719,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 });
                 break;
             case 3:
+                this.scene.getMachineWear(n);
                 this.obj = this.controlMina;
                 this.scene.tweens.add({
                     targets: this.obj,
@@ -835,9 +844,11 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
     //Mostrar estado máquina
     tweenShowWearIN() {
-
-        this.wearTxt[this.nWear].txt.setVisible(true);
         var that = this;
+        //console.log("wearTxt: " + this.wearTxt + " nWear: " + this.nWear + " this.wearTxt[this.nWear]: " +  this.wearTxt[this.nWear]);
+        this.wearTxt[this.nWear].txt.setVisible(true);
+        
+        
         this.scene.tweens.add({
             targets: this.wearTxt[this.nWear].txt,
             alpha: 0,
@@ -1056,3 +1067,69 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
 }
 
+/*
+POR SI PIERDO MIS COSITAS LAS DEJO COMENTADITAS -JD
+Esto va en SceneEarth
+
+                case "syncAntenaWear":
+                    controlTierra.wearTxt[2] = data["value"];
+                    // valor a mostrar(desgaste de la máquina) = data["value"]
+                    break;
+                case "syncMineWear":
+                    controlTierra.wearTxt[3] = data["value"];
+                    // valor a mostrar(desgaste de la máquina) = data["value"]
+                    break;
+                case "syncRocketWear":
+                    controlTierra.wearTxt[0] = data["value"];
+                    // valor a mostrar(desgaste de la máquina) = data["value"]
+                    break;
+                case "syncTerraformWear":
+                    controlTierra.wearTxt[1] = data["value"];
+                    // valor a mostrar(desgaste de la máquina) = data["value"]
+                    break;
+
+
+
+
+
+
+
+
+    getMachineWear(machineId){
+        var typeToSync;
+        switch (machineId) {
+            case 2://Antena
+                typeToSync = "syncAntenaWear";
+                break;
+
+            case 3://Mine
+                typeToSync = "syncMineWear";
+                break;
+
+            case 0://Rocket
+                typeToSync = "syncRocketWear";
+                break;
+
+            case 1://Terraform
+                typeToSync = "syncTerraformWear";
+                break;
+        }
+        console.log("Solicitando estado de máquina");
+        var data = {
+            action: "Sync",
+            lobbyID: gameLobbyID,
+            type: typeToSync,
+            value: true,
+        }
+        connection.send(JSON.stringify(data));
+    }
+
+
+
+
+
+            case "Terraform":
+                typeToSync = "syncTerraform";
+                typeToSync = "syncTerraformPilot";
+                break;
+*/

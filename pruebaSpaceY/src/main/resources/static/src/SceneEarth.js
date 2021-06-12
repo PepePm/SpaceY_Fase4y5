@@ -548,7 +548,22 @@ class SceneEarth extends Phaser.Scene {
                     console.log("recibiendo cohete de marte");
                     this.tweenLanzPuertaExtIn();
                     this.objCohete.goLand = data["value"];
-
+                    break;
+                case "syncAntenaWear":
+                    controlTierra.wearTxt[2] = data["value"];
+                    // valor a mostrar(desgaste de la máquina) = data["value"]
+                    break;
+                case "syncMineWear":
+                    controlTierra.wearTxt[3] = data["value"];
+                    // valor a mostrar(desgaste de la máquina) = data["value"]
+                    break;
+                case "syncRocketWear":
+                    controlTierra.wearTxt[0] = data["value"];
+                    // valor a mostrar(desgaste de la máquina) = data["value"]
+                    break;
+                case "syncTerraformWear":
+                    controlTierra.wearTxt[1] = data["value"];
+                    // valor a mostrar(desgaste de la máquina) = data["value"]
                     break;
                         
                 
@@ -720,6 +735,35 @@ class SceneEarth extends Phaser.Scene {
 
     }
 
+    getMachineWear(machineId){
+        var typeToSync;
+        switch (machineId) {
+            case 2://Antena
+                typeToSync = "syncAntenaWear";
+                break;
+
+            case 3://Mine
+                typeToSync = "syncMineWear";
+                break;
+
+            case 0://Rocket
+                typeToSync = "syncRocketWear";
+                break;
+
+            case 1://Terraform
+                typeToSync = "syncTerraformWear";
+                break;
+        }
+        console.log("Solicitando estado de máquina");
+        var data = {
+            action: "Sync",
+            lobbyID: gameLobbyID,
+            type: typeToSync,
+            value: true,
+        }
+        connection.send(JSON.stringify(data));
+    }
+
     WarnFixMachine(machineId) {
         var typeToSync;
         switch (machineId) {
@@ -736,7 +780,7 @@ class SceneEarth extends Phaser.Scene {
                 break;
 
             case "Terraform":
-                typeToSync = "syncTerraform";
+                typeToSync = "syncTerraformPilot";
                 break;
         }
         console.log("Solicitando arreglar máquina");
