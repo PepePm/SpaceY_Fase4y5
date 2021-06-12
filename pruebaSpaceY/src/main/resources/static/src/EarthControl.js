@@ -681,7 +681,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
     CheckWear(n) {
         var obj;
-        //JUICEEE
         switch (n) {
             case 0:
                 this.scene.getMachineWear(n);

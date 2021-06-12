@@ -551,19 +551,19 @@ class SceneEarth extends Phaser.Scene {
                     this.objCohete.goLand = data["value"];
                     break;
                 case "syncAntenaWear":
-                    controlTierra.wearTxt[2] = data["value"];
+                    controlTierra.wearTxt[2].ChangeValue(data["value"]);
                     // valor a mostrar(desgaste de la máquina) = data["value"]
                     break;
                 case "syncMineWear":
-                    controlTierra.wearTxt[3] = data["value"];
+                    controlTierra.wearTxt[3].ChangeValue(data["value"]);
                     // valor a mostrar(desgaste de la máquina) = data["value"]
                     break;
                 case "syncRocketWear":
-                    controlTierra.wearTxt[0] = data["value"];
+                    controlTierra.wearTxt[0].ChangeValue(data["value"]);
                     // valor a mostrar(desgaste de la máquina) = data["value"]
                     break;
                 case "syncTerraformWear":
-                    controlTierra.wearTxt[1] = data["value"];
+                    controlTierra.wearTxt[1].ChangeValue(data["value"]);
                     // valor a mostrar(desgaste de la máquina) = data["value"]
                     break;
                         
