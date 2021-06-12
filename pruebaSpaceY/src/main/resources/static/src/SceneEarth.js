@@ -110,12 +110,14 @@ var controlRocket;
 var controlCom;
 var pantalla;
 var pantallaPlano;
-
+var posicionMapa;
 
 
 
 var startSfxRun = false;
 /////////////////////
+
+var positionOffset;
 
 
 
@@ -165,6 +167,7 @@ class SceneEarth extends Phaser.Scene {
 
     create() {
 
+        positionOffset = -1.57;
         this.paused = false;
 
         //PARTE CONSOLA 
@@ -566,6 +569,12 @@ class SceneEarth extends Phaser.Scene {
                     controlTierra.wearTxt[1].ChangeValue(data["value"]);
                     // valor a mostrar(desgaste de la máquina) = data["value"]
                     break;
+                case "syncCharPos":
+                    console.log("Rotacion marte: " + data["value"]);
+                    positionOffset = data["value"];
+                    console.log("Rotacion posicoin: " + controlTierra.posicionMapa.rotation);
+                    // valor a mostrar(desgaste de la máquina) = data["value"]
+                    break;
                         
                 
 
@@ -596,6 +605,10 @@ class SceneEarth extends Phaser.Scene {
     update(time, delta) {
 
         controlTierra.pantallaPlano.rotation += delta / 16000;
+        controlTierra.posicionMapa.rotation += delta / 16000;
+        controlTierra.posicionMapa.rotation += positionOffset;
+        positionOffset = 0;
+        
         //DEBUG PARTICULAS
         /*if (key_left.isDown) {
             //Apaga

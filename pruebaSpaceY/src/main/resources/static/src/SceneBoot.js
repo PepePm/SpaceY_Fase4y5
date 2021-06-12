@@ -92,6 +92,7 @@ class SceneBoot extends Phaser.Scene {
         this.load.image("controlCom", directory+"ui_T_control_COM.png" );
         this.load.image("pantalla", directory+"ui_T_pantalla.png" );
         this.load.image("pantallaMapa", directory+"ui_T_pantalla_plano.png" );
+        this.load.image("posicionMapa", directory+"map_position.png" );
         this.load.image("rocket", directory+"ui_T_rocket.png" );
         this.load.image("antena", directory+"antena.png" );
         this.load.image("mina", directory+"mina.png" );

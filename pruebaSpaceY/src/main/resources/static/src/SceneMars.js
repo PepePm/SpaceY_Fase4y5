@@ -777,6 +777,14 @@ class SceneMars extends Phaser.Scene {
             emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
             emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
             //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
+
+            var data = {
+                action: "Sync",
+                lobbyID: gameLobbyID,
+                type: "syncCharPos",
+                value: marte.rotation,
+            }
+            connection.send(JSON.stringify(data));
         }
         else if (key_right.isDown) {
 
@@ -796,6 +804,14 @@ class SceneMars extends Phaser.Scene {
             emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
             emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
             //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
+            
+            var data = {
+                action: "Sync",
+                lobbyID: gameLobbyID,
+                type: "syncCharPos",
+                value: marte.rotation,
+            }
+            connection.send(JSON.stringify(data));
         }
         else {
 
