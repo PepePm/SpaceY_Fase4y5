@@ -1,12 +1,12 @@
 
 var gamePaused = false;
+var key_pausemenu;
 
 class ScenePause extends Phaser.Scene {
 
     constructor() {
 
         super("ScenePause");
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
 
     preload(){
@@ -21,6 +21,7 @@ class ScenePause extends Phaser.Scene {
     create() {
 
         this.paused = true;
+        key_pausemenu = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC, false);
 
         this.fondo = this.add.rectangle(game.config.width/2, game.config.height/2, game.config.width, game.config.height, Phaser.Display.Color.GetColor(0, 0, 0)).setAlpha(0.5);
 
@@ -142,18 +143,18 @@ class ScenePause extends Phaser.Scene {
     update(delta) {
 
         /*console.log("key_pause: " + key_pause.isDown + " gamePaused: " + gamePaused + " this.paused: " + 
-            this.paused);
+            this.paused);*/
 
-        if (key_pause.isDown && gamePaused && !this.paused) {
+        if (key_pausemenu.isDown && gamePaused && !this.paused) {
 
             console.log("cerrar pausa");
             this.paused = true;
             this.GoBackGame();
         }
-        if (key_pause.isUp) {
+        if (key_pausemenu.isUp) {
 
             this.paused = false;
-        }*/
+        }//*/
     }
 
     Highlight(obj, b) {
