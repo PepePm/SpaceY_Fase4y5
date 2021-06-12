@@ -161,6 +161,7 @@ var postIt;
 var postItExp;
 var isbig = false;
 
+
 class SceneMars extends Phaser.Scene {
 
     constructor() {
@@ -821,13 +822,13 @@ class SceneMars extends Phaser.Scene {
             DefeatCondition(this);
 
 
-        //TIERRA
-        //controlTierra.Update(delta);
+        //MARTE
 
-        if (key_pause.isDown && !this.paused) {
+        if (key_pause.isDown && !gamePaused && !this.paused) {
 
-            PauseMenu(this);
             this.paused = true;
+            PauseMenu(this);
+            gamePaused = true;
         }
         if (key_pause.isUp) {
 
@@ -1182,7 +1183,6 @@ function PauseMenu(that) {
     sfx.sounds.forEach(element => {
         element.pause();
     });
-    console.log("yeah");
     soundtrack.pistas[1].pause();
     soundtrack.pistas[3].pause();
 

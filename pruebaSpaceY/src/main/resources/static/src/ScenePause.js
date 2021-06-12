@@ -1,9 +1,12 @@
 
+var gamePaused = false;
+
 class ScenePause extends Phaser.Scene {
 
     constructor() {
 
         super("ScenePause");
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
 
     preload(){
@@ -17,7 +20,7 @@ class ScenePause extends Phaser.Scene {
 
     create() {
 
-        this.paused = false;
+        this.paused = true;
 
         this.fondo = this.add.rectangle(game.config.width/2, game.config.height/2, game.config.width, game.config.height, Phaser.Display.Color.GetColor(0, 0, 0)).setAlpha(0.5);
 
@@ -33,7 +36,7 @@ class ScenePause extends Phaser.Scene {
         this.menuBaseTweenIN = this.tweens.add({
             targets: [this.menuBase,this.BtnBackToGame, this.BtnOptions, this.BtnBackToMenu],
             x:game.config.width/2,
-            duration: 1500,
+            duration: 1000,
             ease: 'Cubic.easeOut',
             repeat: 0,
             yoyo: false,
@@ -137,15 +140,20 @@ class ScenePause extends Phaser.Scene {
     }
 
     update(delta) {
-        if (key_pause.isDown && !this.paused) {
 
-            this.GoBackGame();
+        /*console.log("key_pause: " + key_pause.isDown + " gamePaused: " + gamePaused + " this.paused: " + 
+            this.paused);
+
+        if (key_pause.isDown && gamePaused && !this.paused) {
+
+            console.log("cerrar pausa");
             this.paused = true;
+            this.GoBackGame();
         }
         if (key_pause.isUp) {
 
             this.paused = false;
-        }
+        }*/
     }
 
     Highlight(obj, b) {
@@ -185,13 +193,16 @@ class ScenePause extends Phaser.Scene {
         this.menuBaseTweenOUT = this.tweens.add({
             targets: [this.menuBase,this.BtnBackToGame, this.BtnOptions, this.BtnBackToMenu],
             x:3*game.config.width/2,
-            duration: 1500,
+            duration: 1000,
             ease: 'Cubic.easeOut',
             repeat: 0,
             yoyo: false,
             delay: 0,
 
             onComplete: function() {
+
+                gamePaused = false;
+                
 
                 sfx.sounds.forEach(element => {
                     element.resume();
@@ -201,13 +212,15 @@ class ScenePause extends Phaser.Scene {
                 soundtrack.pistas[3].resume();
 
                 if (!isTutorial) {
-                    that.scene.resume("SceneGame");
+                    that.scene.resume(clientGamemode);
                 }
                 else{
                     that.scene.resume("SceneTutorial");
                 }
                 
                 that.scene.stop("ScenePause");
+
+                console.log("clientGamemode: " + clientGamemode);
             },
         });
     }

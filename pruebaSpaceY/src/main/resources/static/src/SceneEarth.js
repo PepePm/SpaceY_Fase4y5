@@ -153,7 +153,6 @@ var startSfxRun = false;
 /////////////////////
 
 var isVictory = false;
-var paused = false;
 
 
 //Particulas
@@ -201,6 +200,8 @@ class SceneEarth extends Phaser.Scene {
     }
 
     create() {
+
+        this.paused = false;
 
         //PARTE CONSOLA 
         //Fondo Consola
@@ -730,14 +731,15 @@ class SceneEarth extends Phaser.Scene {
         //TIERRA
         controlTierra.Update(delta);
 
-        if (key_pause.isDown && !paused) {
+        if (key_pause.isDown && !gamePaused && !this.paused) {
 
+            this.paused = true;
             PauseMenu(this);
-            paused = true;
+            gamePaused = true;
         }
         if (key_pause.isUp) {
 
-            paused = false;
+            this.paused = false;
         }
 
         /*//////////////////////////DEBUG

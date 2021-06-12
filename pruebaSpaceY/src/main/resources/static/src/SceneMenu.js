@@ -31,6 +31,9 @@ var election;
 //ID del lobby al que voy a ir
 var gameLobbyID;
 
+// Escena en el gamemode actual
+var clientGamemode;
+
 //True si hay dos jugadores en el lobby
 //var lobbyFull = false;
 
@@ -880,6 +883,8 @@ class SceneMenu extends Phaser.Scene {
     startGame(nextScene) {
         sfx.sounds[0].play();
         
+        clientGamemode = nextScene;
+
         if (election == "Mars")
             this.Rocketeing(this.marsOption, this, this.marsOption.x, 900, 2, nextScene);
         else
