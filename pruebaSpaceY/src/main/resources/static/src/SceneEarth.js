@@ -535,8 +535,6 @@ class SceneEarth extends Phaser.Scene {
                     controlTierra.counter.Sync(data["value"]);
                     break;
                 case "syncGameEnd":
-
-                    
                     var victoria = data["value"];
                     console.log("gameend valor: " + victoria);
                     if(victoria == "true"){
@@ -545,8 +543,15 @@ class SceneEarth extends Phaser.Scene {
                     else{
                         DefeatCondition(that);
                     }
+                    break;
+                case "syncRocketToEarth":
+                    console.log("recibiendo cohete de marte");
+                    this.tweenLanzPuertaExtIn();
+                    this.objCohete.goLand = data["value"];
+
+                    break;
                         
-                break;
+                
 
             }
 

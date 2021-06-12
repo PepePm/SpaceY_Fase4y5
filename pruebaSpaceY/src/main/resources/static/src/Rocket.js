@@ -19,13 +19,25 @@ class Rocket {
 
         if (this.val > 2.5) {
 
+            //si el cohete ha salido de la pantalla 
+
             controlTierra.tweenLanzPuertaExtIn();
+            //controlTierra.tweenLanzPuertaExtIn();   //tierra abre compuerta y entra cohete 
             estacionTransporte.isSending = false;
             estacionTransporte.location = 1;
             this.goLand = true;
 
             //Aterriza en tierra
             sfx.sounds[12].play();
+            //ENVIAMOS MENSAJE AL SERVIDOR PARA ATERRIZAR COHETE
+            var data = {
+                action: "Sync",
+                lobbyID: gameLobbyID,
+                type: "syncRocketToEarth",
+                value: true,
+            }
+            connection.send(JSON.stringify(data));
+            console.log("enviando cohete a tierra");
         }
     }
 

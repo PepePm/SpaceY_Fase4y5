@@ -296,6 +296,10 @@ class SceneMars extends Phaser.Scene {
                     }
                     connection.send(JSON.stringify(data));
                     break;
+                case "syncRocketToMars" : 
+                    //ATERRIZAR COHETE
+                    that.estacionTransporte.isComing = true;
+                break;
 
             }
 
