@@ -111,48 +111,12 @@ var controlCom;
 var pantalla;
 var pantallaPlano;
 
-//Barra terraformación                              //MOVER Y HACER GRANDE  ************************************************************
-var nTerraformacion = 0;
-var indTerra;
-var MAX_TERRAFORMACION = 1600;
-var txtTerraformacion;
 
-//Barra cargamento cohete
-var objCohete;
-var nCoheteMat = 150;
-var objCoheteMat;
-var MAX_COHETEMAT = 350;
-var txtCoheteMat;   //Porcentaje de cuanto has llenado el cohete en MARTE
-var spdCargarCohete = 0.25; //velocidad de carga del cohete 
-var coheteMat_color = Phaser.Display.Color.GetColor(150, 103, 34);
-
-//Recursos Marte
-var nComida_M = 75;
-var objComida_M;
-var MAX_COMIDA = 150;
-var txtComida_M;
-
-var nRocas_M = 30;
-var objRocas_M;
-var MAX_ROCAS = 200;
-var txtRocas_M;
-
-var nMaterial_M = 20;
-var objMaterial_M;
-var MAX_MATERIAL = 100;
-var txtMaterial_M;
-
-//Barra carga en MARTE
-//var repairBar_color = Phaser.Display.Color.GetColor(160, 190, 55);
-//var repairBar_color2 = Phaser.Display.Color.GetColor(225, 164, 13);
-
-//Recursos Tierra
 
 
 var startSfxRun = false;
 /////////////////////
 
-var isVictory = false;
 
 
 //Particulas
@@ -206,13 +170,6 @@ class SceneEarth extends Phaser.Scene {
         //PARTE CONSOLA 
         //Fondo Consola
         fondoConsola = this.add.image(407, 450, "fondoTierra").setDepth(1);
-
-
-        //Valores iniciales recursos
-        nCoheteMat = 150;
-        nComida_M = 75;
-        nRocas_M = 30;
-        nMaterial_M = 20;
 
 
 
@@ -577,6 +534,19 @@ class SceneEarth extends Phaser.Scene {
                 case "syncCounter":
                     controlTierra.counter.Sync(data["value"]);
                     break;
+                case "syncGameEnd":
+
+                    
+                    var victoria = data["value"];
+                    console.log("gameend valor: " + victoria);
+                    if(victoria == "true"){
+                        VictoryCondition(that);
+                    }
+                    else{
+                        DefeatCondition(that);
+                    }
+                        
+                break;
 
             }
 
@@ -743,16 +713,6 @@ class SceneEarth extends Phaser.Scene {
             this.paused = false;
         }
 
-        /*//////////////////////////DEBUG
-        if (keyDev_victory.isDown) {
-
-            DefeatCondition(this);
-        }
-        if (keyDev_defeat.isDown) {
-
-            VictoryCondition(this);
-        }
-        //*/
     }
 
     WarnFixMachine(machineId) {
@@ -1079,6 +1039,7 @@ function updateRotations(sign, delta) {
     indHam.Update();
 }
 */
+/*
 function DestroyOnScene(obj) {
 
     obj.destroy();
@@ -1205,4 +1166,4 @@ function OpenPostIt(obj, scene) {
     }
 
 }
-
+*///QUITAR SI ALGO FALLA DE ESTAS FUNCS

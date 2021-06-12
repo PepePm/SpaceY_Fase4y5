@@ -14,6 +14,8 @@ class SceneGameEnd extends Phaser.Scene {
 
         this.fondo = this.add.rectangle(game.config.width/2, game.config.height/2, game.config.width, game.config.height, Phaser.Display.Color.GetColor(0, 0, 0)).setAlpha(0.5);
 
+        console.log(isVictory);
+
         //Fondo
         if (isVictory) {
 
@@ -57,6 +59,16 @@ class SceneGameEnd extends Phaser.Scene {
         .on('pointerup', () => this.Highlight(this.BtnBackToMenu, true) )
         .on('pointerover', () => this.Over(this.BtnBackToMenu, true) )
         .on('pointerout', () => this.Highlight(this.BtnBackToMenu, false) );
+
+
+        var that = this;
+        connection.onclose = function(){
+            connection = undefined;
+            gameLobbyID = undefined;
+            that.scene.stop(clientGamemode);
+            that.scene.stop("ScenePause"); // METER ESTO EN MENU DE PAUSA (?)
+            that.scene.start("SceneMenu");
+        }
     }
 
     update(delta) {
@@ -84,15 +96,16 @@ class SceneGameEnd extends Phaser.Scene {
 
         if (!isTutorial) {
 
-            this.scene.stop(clientGamemode);
+            //this.scene.stop(clientGamemode);
             connection.close();
         }
         else{
 
             this.scene.stop("SceneTutorial");
             isTutorial = false;
+            this.scene.start("SceneMenu");
         }
-        this.scene.start("SceneMenu");
+        
         soundtrack.pistas[0].play();
         
     }

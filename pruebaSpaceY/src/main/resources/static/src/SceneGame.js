@@ -669,7 +669,7 @@ function DestroyOnScene(obj) {
 }
 
 //Acciones condiciones victoria/derrota
-function VictoryCondition(that)  {
+/*function VictoryCondition(that)  {
 
     sfx.sounds.forEach(element => {
         element.stop();
@@ -793,5 +793,5 @@ function OpenPostIt(obj,scene) {
 
 
     
-}
+}*/
 

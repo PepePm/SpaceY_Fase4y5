@@ -50,7 +50,8 @@ class Meteor {
         //Colisión con el jugador
         if (this.obj.rotation < this.areaCol/2 && this.obj.rotation > -this.areaCol/2) {
 
-            DefeatCondition(this.scene);
+            //DefeatCondition(this.scene);
+            SyncGameEnd(this.scene, false);
         }
 
         //Colisión con máquinas

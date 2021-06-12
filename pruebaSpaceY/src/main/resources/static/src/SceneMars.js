@@ -822,7 +822,8 @@ class SceneMars extends Phaser.Scene {
         indHam.Update();
 
         if (indHam.size <= 0 && !this.called)
-            DefeatCondition(this);
+            SyncGameEnd(this, false);
+            //DefeatCondition(this);
 
 
         //MARTE
@@ -839,13 +840,13 @@ class SceneMars extends Phaser.Scene {
         }
 
         //////////////////////////DEBUG
-        if (keyDev_victory.isDown) {
-
-            DefeatCondition(this);
-        }
         if (keyDev_defeat.isDown) {
 
-            VictoryCondition(this);
+            SyncGameEnd(this, false);
+        }
+        if (keyDev_victory.isDown) {
+
+            SyncGameEnd(this, true);
         }
         //
     }
@@ -1148,6 +1149,33 @@ function DestroyOnScene(obj) {
     obj.destroy();
 }
 
+function SyncGameEnd(that, victory) {
+    if (victory){
+
+        // Sync VictoryCondition SEND
+        var data = {
+            action: "Sync",
+            lobbyID: gameLobbyID,
+            type: "syncGameEnd",
+            value: true,
+        }
+        connection.send(JSON.stringify(data));
+        VictoryCondition(that);
+    }
+    else{
+
+        // Sync DefeatCondition SEND
+        var data = {
+            action: "Sync",
+            lobbyID: gameLobbyID,
+            type: "syncGameEnd",
+            value: false,
+        }
+        connection.send(JSON.stringify(data));
+        DefeatCondition(that);
+    }
+}
+
 //Acciones condiciones victoria/derrota
 function VictoryCondition(that) {
 
@@ -1161,6 +1189,7 @@ function VictoryCondition(that) {
     soundtrack.pistas[3].stop();
 
     isVictory = true;
+    console.log("isvictory: " + isVictory);
 
     that.scene.launch('SceneGameEnd');
     that.scene.pause('SceneGame');
@@ -1176,6 +1205,7 @@ function DefeatCondition(that) {
         sfx.sounds[5].play();
 
         isVictory = false;
+        console.log("isderrota: " + isVictory);
 
         soundtrack.pistas[1].stop();
         soundtrack.pistas[3].stop();

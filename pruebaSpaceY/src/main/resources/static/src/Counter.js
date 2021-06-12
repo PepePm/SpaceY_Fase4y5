@@ -26,6 +26,8 @@ class Counter{
         }).setOrigin(0.5);
         this.textSeconds.depth = 1001;
 
+        this.sync = sync;
+
         if (!sync)
             // Each 1000 ms call onEvent
             this.timedEvent = scene.time.addEvent({ delay: 1000, callback: countDown, callbackScope: this, loop: true });
@@ -39,7 +41,11 @@ class Counter{
     formatTimeMinutes(seconds){
         if (seconds <= 0) {
 
-            DefeatCondition(this.scene);
+            if (!this.sync)
+                DefeatCondition(this.scene);
+            else
+                SyncGameEnd(this.scene, false);
+           
             this.stop = true;
         }
 

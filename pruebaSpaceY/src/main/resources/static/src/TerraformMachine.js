@@ -39,8 +39,10 @@ class TerraformMachine extends Machine {
                             this.obj.anims.play("movimientoTerraformador");
 
                         //Comprobar que se cumple la condición de victoria
-                        if (indTerra.size >= indTerra.maxSize)
-                            VictoryCondition(this.scene);
+                        if (indTerra.size >= indTerra.maxSize){
+                            SyncGameEnd(this.scene, true);
+                        }
+                            
                     }
                 }
                 else if (key_up.isUp) {
