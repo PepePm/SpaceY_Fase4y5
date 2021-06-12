@@ -150,7 +150,6 @@ var startSfxRun = false;
 /////////////////////
 
 var isVictory = false;
-var paused = false;
 
 
 //Particulas
@@ -303,10 +302,19 @@ class SceneMars extends Phaser.Scene {
 
         connection.onclose = function () {
             connection = undefined;
+            gameLobbyID = undefined;
+
+            that.scene.stop("SceneGame");
+            that.scene.stop("ScenePause"); // METER ESTO EN MENU DE PAUSA (?)
+            that.scene.start("SceneMenu");
+
+            console.log("chapo");
         }
 
 
         //**************************************************************************************************************************** */
+
+        this.paused = false;
 
         //CHATBOX
         //Chatbox icon
@@ -688,7 +696,6 @@ class SceneMars extends Phaser.Scene {
     }
     update(time, delta) {
 
-
         //controlTierra.pantallaPlano.rotation+=delta/16000;
         //DEBUG PARTICULAS
         /*if (key_left.isDown) {
@@ -817,14 +824,14 @@ class SceneMars extends Phaser.Scene {
         //TIERRA
         //controlTierra.Update(delta);
 
-        if (key_pause.isDown && !paused) {
+        if (key_pause.isDown && !this.paused) {
 
             PauseMenu(this);
-            paused = true;
+            this.paused = true;
         }
         if (key_pause.isUp) {
 
-            paused = false;
+            this.paused = false;
         }
 
         //////////////////////////DEBUG
@@ -1175,7 +1182,7 @@ function PauseMenu(that) {
     sfx.sounds.forEach(element => {
         element.pause();
     });
-
+    console.log("yeah");
     soundtrack.pistas[1].pause();
     soundtrack.pistas[3].pause();
 

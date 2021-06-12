@@ -50,6 +50,7 @@ public class WsGamesHandler extends TextWebSocketHandler {
 				for (int i=0; i < aux.size(); i++) {
 					try {
 						aux.get(i).close();
+						System.out.println("Chapo la partida " + k + " a " + aux.get(i));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -58,6 +59,8 @@ public class WsGamesHandler extends TextWebSocketHandler {
 				return;
 			}	
 		});
+		
+		
 	}
 	
 	// Se ejecuta cuando un cliente envía un mensaje al server

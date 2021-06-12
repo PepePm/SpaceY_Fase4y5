@@ -59,8 +59,18 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		
-		// Elimina al usuario del mapa de hosts si estuviera
-		hosts.remove(session.getId());
+		// Elimina al usuario del mapa de hosts, si estuviera
+		if (hosts.containsValue(session)) {
+			hosts.forEach((k, v)->{
+				
+				if (v.equals(session)) {
+					hosts.remove(k);
+					System.out.println("Elimino lobby sin invitado, lobbyID: " + k);
+				}
+					
+			});
+		}
+		
 		
 		// Busca si se encuentra en un lobby y los desconecta a ambos
 		// Si es invitado
@@ -70,7 +80,18 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 				
 				// Lo borra del lobby
 				if (v.equals(session)) {
+					System.out.println("Elimino al invitado " + lobbies.get(k) + " del lobby " + k );
 					lobbies.remove(k);
+					
+					// Avisa al host para de que se desconectó el otro cliente
+					ObjectNode newNode = mapper.createObjectNode();
+					newNode.put("type", "otherClientDisconnected");
+					try {
+						k.sendMessage(new TextMessage(newNode.toString()));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					return;
 				}
 					
@@ -80,6 +101,7 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 			
 			// Elimina el lobby; Toma al otro cliente del lobby y cierra su conexion
 			WebSocketSession otherClient = lobbies.get(session);
+			System.out.println("Elimino al host " + session + " y al invitado " + otherClient);
 			lobbies.remove(session);
 			otherClient.close();
 		}

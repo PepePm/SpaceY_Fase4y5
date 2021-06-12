@@ -197,7 +197,7 @@ class SceneEarth extends Phaser.Scene {
             game.config.width - 100, chatTween[11]  //global
         ];
 
-
+        
     }
 
     create() {
@@ -541,6 +541,7 @@ class SceneEarth extends Phaser.Scene {
 
 
         //***************                                METODOS DE INTERACCION CON SERVIDOR               ************************* */
+        
         console.log("GameSessionInnitiated");
         connection = new WebSocket("ws://" + urlServer + "/games");
 
@@ -581,8 +582,16 @@ class SceneEarth extends Phaser.Scene {
 
         connection.onclose = function () {
             connection = undefined;
-            console.log("cerré");
+            gameLobbyID = undefined;
+
+            that.scene.stop("SceneGame");
+            that.scene.stop("ScenePause"); // METER ESTO EN MENU DE PAUSA (?)
+            that.scene.start("SceneMenu");
+
+            console.log("chapo");
         }
+
+
         // Metodo que avisa A MARTE sobre una máquina rota en funcion del ID de la máquina. 
 
 
@@ -592,7 +601,6 @@ class SceneEarth extends Phaser.Scene {
 
     }
     update(time, delta) {
-
 
         controlTierra.pantallaPlano.rotation += delta / 16000;
         //DEBUG PARTICULAS

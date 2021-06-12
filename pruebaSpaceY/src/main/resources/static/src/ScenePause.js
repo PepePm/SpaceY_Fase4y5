@@ -17,6 +17,8 @@ class ScenePause extends Phaser.Scene {
 
     create() {
 
+        this.paused = false;
+
         this.fondo = this.add.rectangle(game.config.width/2, game.config.height/2, game.config.width, game.config.height, Phaser.Display.Color.GetColor(0, 0, 0)).setAlpha(0.5);
 
         //Opciones
@@ -132,11 +134,18 @@ class ScenePause extends Phaser.Scene {
         .on('pointerup', () => this.Highlight(this.OptionsOutBtn, true) )
         .on('pointerover', () => this.Over(this.OptionsOutBtn, true) )
         .on('pointerout', () => this.Highlight(this.OptionsOutBtn, false) );
-
     }
 
     update(delta) {
+        if (key_pause.isDown && !this.paused) {
 
+            this.GoBackGame();
+            this.paused = true;
+        }
+        if (key_pause.isUp) {
+
+            this.paused = false;
+        }
     }
 
     Highlight(obj, b) {
@@ -234,6 +243,7 @@ class ScenePause extends Phaser.Scene {
     GoBackMenu() {
         if (!isTutorial) {
             this.scene.stop("SceneGame");
+            connection.close();
         }
         else {
             this.scene.stop("SceneTutorial");
