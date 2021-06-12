@@ -338,7 +338,12 @@ class SceneMars extends Phaser.Scene {
                     break;
                 case "syncRocketToMars" : 
                     //ATERRIZAR COHETE
-                    that.estacionTransporte.isComing = true;
+                    estacionTransporte.isComing = true;
+                    //Coger Makelele
+                    myArray = JSON.parse(data["value"]);
+                    objCohete.comLoad = Number(myArray[0]);
+                    console.log("He obtenido"+ objCohete.comLoad  +" de comida");
+                    objCohete.comMat = Number(myArray[1]);
                 break;
 
             }

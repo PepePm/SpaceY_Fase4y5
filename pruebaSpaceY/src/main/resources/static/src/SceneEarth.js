@@ -546,10 +546,13 @@ class SceneEarth extends Phaser.Scene {
                     }
                     break;
                 case "syncRocketToEarth":
-                    console.log("recibiendo cohete de marte");
+                   
 
                     controlTierra.tweenLanzPuertaExtIn();
                     controlTierra.goLand = true;
+                    console.log("recibiendo cohete de marte");
+                    //SINCRONIZAR CARGA DE MATERIALES 
+                    
                     //this.tweenLanzPuertaExtIn();
                     //this.objCohete.goLand = data["value"];
                     break;

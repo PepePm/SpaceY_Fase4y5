@@ -438,6 +438,8 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             this.goLand = false;
 
             this.rocket.anims.play("movimientoCoheteReverse");
+            this.objCohete = new Rocket (this.scene, this.rocket.x, this.rocket.y); //creamos un cohete nuevo
+            console.log("he creado uncohete");
         }
     }
 
@@ -448,10 +450,20 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.rocket.y = -600;
             this.goTakeOff = false;
-            estacionTransporte.isComing = true;
-            estacionTransporte.loadOfEarth = true;
+            //estacionTransporte.isComing = true;
+            //estacionTransporte.loadOfEarth = true;
             //Aterriza en marte
             sfx.sounds[12].play();
+            //enviamos la comida del cohete y los materiales añadidos para sincronizarlos con el otro cohete 
+            var data = {
+                action: "Sync",
+                lobbyID: gameLobbyID,
+                type: "syncRocketToMars",
+                value:[ this.objCohete.comLoad,this.objCohete.matLoad],
+            }
+            connection.send(JSON.stringify(data));
+            this.objCohete = undefined; //destruimos el cohete 
+            console.log("he borrado uncohete");
         }
     }
 
@@ -604,11 +616,13 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             this.newPayloadType = n;
             if (this.newPayloadType === 1) {
 
-                objCohete.comLoad += MAX_COMIDA * 0.05;
+                this.objCohete.comLoad += MAX_COMIDA * 0.05;
+                console.log("he añadido COMIDA");
             }
             else {
 
-                objCohete.matLoad += MAX_MATERIAL * 0.05;
+                this.objCohete.matLoad += MAX_MATERIAL * 0.05;
+                console.log("he añadido MATERIAL");
             }
 
             this.wait = true;
