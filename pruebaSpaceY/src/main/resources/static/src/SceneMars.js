@@ -124,7 +124,7 @@ var spdCargarCohete = 0.25; //velocidad de carga del cohete
 var coheteMat_color = Phaser.Display.Color.GetColor(150, 103, 34);
 
 //Recursos Marte
-var nComida_M = 75;
+var nComida_M = 10; //Comida inicial
 var objComida_M;
 var MAX_COMIDA = 150;
 var txtComida_M;
@@ -694,6 +694,8 @@ class SceneMars extends Phaser.Scene {
         this.UiMarsChatBox = this.add.image(ConsolePos[26], ConsolePos[27], "UIMarsChatBox").setDepth(4);
         //**************************************************************************************************************** */
 
+        this.called = false;
+
     }
     update(time, delta) {
 
@@ -769,6 +771,7 @@ class SceneMars extends Phaser.Scene {
         if ((key_left.isDown || key_right.isDown) && !startSfxRun) {
             startSfxRun = true;
             sfx.sounds[3].play();
+            console.log("Audio caminando");
         }
         if (key_left.isUp && key_right.isUp) {
             startSfxRun = false;
@@ -818,7 +821,7 @@ class SceneMars extends Phaser.Scene {
         indHam.size = Phaser.Math.Clamp(indHam.size - delta / 2500, 0, indHam.maxSize);
         indHam.Update();
 
-        if (indHam.size <= 0)
+        if (indHam.size <= 0 && !this.called)
             DefeatCondition(this);
 
 
@@ -915,6 +918,8 @@ class SceneMars extends Phaser.Scene {
         }
     }
     //sacar el chat 
+
+/*
     MovinBoxes(scene, id) {
         sfx.sounds[1].play();
 
@@ -1020,6 +1025,7 @@ class SceneMars extends Phaser.Scene {
 
 
     }
+    */
     CloseChat(scene) {
         var nX = 0; var nY = 1;
         scene.chatWritter.setVisible(false);
@@ -1048,7 +1054,7 @@ class SceneMars extends Phaser.Scene {
     // ===============================          INTERACTIVIDAD  ===========================================================
 
     enterIconHoverState(boton, scene) {
-
+        console.log("Sonidito de hover un boton");
         sfx.sounds[1].play();
         boton.x = boton.x + movTxt;
         boton.y = boton.y + movTxt;
@@ -1162,7 +1168,7 @@ function VictoryCondition(that) {
 
 function DefeatCondition(that) {
     if (!isTutorial) {
-
+        that.called = true;
         sfx.sounds.forEach(element => {
             element.stop();
         });
