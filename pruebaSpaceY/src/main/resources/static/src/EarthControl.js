@@ -338,6 +338,9 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
         }
 
+        //Contador tiempo restante
+        this.counter = new Counter(this.scene, 335, 97, 416, 97, 10 * 60, true);
+
     }
     create() {
 

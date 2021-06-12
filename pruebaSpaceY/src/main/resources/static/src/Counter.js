@@ -1,12 +1,12 @@
 class Counter{
-    constructor(scene, initTime) {
+    constructor(scene, xM, yM, xS, yS, initTime, sync) {
         
         // ui_M_horas
 		//timerHoras = this.add.image(553, 97, "timeHoras");
 		// ui_M_minutos
-        this.timerMinutos = scene.add.image(635, 97, "timerMinutos");
+        this.timerMinutos = scene.add.image(xM, yM, "timerMinutos").setDepth(1000);
 		// ui_M_segundos
-		this.timerSegundos = scene.add.image(716, 97, "timerSegundos");
+		this.timerSegundos = scene.add.image(xS, yS, "timerSegundos").setDepth(1000);
 
         // 2:30 in seconds
         this.initialTime = initTime;
@@ -17,16 +17,18 @@ class Counter{
             fontStyle:'bold',
             fill:'#ffffff',
         }).setOrigin(0.5);
-        //this.textMinutes.depth = 3;
+        this.textMinutes.depth = 1001;
 
         this.textSeconds = scene.add.text(this.timerSegundos.x+1, this.timerSegundos.y+7,this.formatTimeSeconds(this.initialTime),{
             fontSize:'50px',
             fontStyle:'bold',
             fill:'#ffffff',
         }).setOrigin(0.5);
+        this.textSeconds.depth = 1001;
 
-        // Each 1000 ms call onEvent
-        this.timedEvent = scene.time.addEvent({ delay: 1000, callback: countDown, callbackScope: this, loop: true });
+        if (!sync)
+            // Each 1000 ms call onEvent
+            this.timedEvent = scene.time.addEvent({ delay: 1000, callback: countDown, callbackScope: this, loop: true });
 
         this.stop = false;
 
@@ -58,6 +60,11 @@ class Counter{
         return `${partInSeconds}`;
     }
 
+    Sync(time){
+        this.textMinutes.setText(this.formatTimeMinutes(time));
+        this.textSeconds.setText(this.formatTimeSeconds(time));
+    }
+
 }
 
 function countDown ()
@@ -67,6 +74,16 @@ function countDown ()
         this.initialTime -= 1; // One second
         this.textMinutes.setText(this.formatTimeMinutes(this.initialTime));
         this.textSeconds.setText(this.formatTimeSeconds(this.initialTime));
+
+        //sync
+        console.log("Sync tiempo");
+        var data = {
+            action: "Sync",
+            lobbyID: gameLobbyID,
+            type: "syncCounter",
+            value: this.initialTime,
+        }
+        connection.send(JSON.stringify(data));
     }
     
 }

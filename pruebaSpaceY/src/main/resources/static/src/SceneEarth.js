@@ -288,8 +288,6 @@ class SceneEarth extends Phaser.Scene {
         // ui_M_dangerArrow_1
         alertaPeligroDc = this.add.image(144, 365, "alertaPeligro").setScale(-1, 1).setVisible(false); // *************************************************(x=-1, y)FLIP EJE VERTICAL!
 
-        //Contador tiempo restante
-        counter = new Counter(this, 10 * 60);
 
 
 
@@ -575,6 +573,9 @@ class SceneEarth extends Phaser.Scene {
                 case "syncResPilot":
                     controlTierra.UIEarthNeedResPilot.setVisible(data["value"]);
                     that.easePilot(that, controlTierra.UIEarthNeedResPilot, data["value"]);
+                    break;
+                case "syncCounter":
+                    controlTierra.counter.Sync(data["value"]);
                     break;
 
             }

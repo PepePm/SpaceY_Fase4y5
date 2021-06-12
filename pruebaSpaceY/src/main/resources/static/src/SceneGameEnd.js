@@ -81,10 +81,11 @@ class SceneGameEnd extends Phaser.Scene {
     }
 
     GoBack() {
-        
+
         if (!isTutorial) {
 
-            this.scene.stop("SceneGame");
+            this.scene.stop(clientGamemode);
+            connection.close();
         }
         else{
 
