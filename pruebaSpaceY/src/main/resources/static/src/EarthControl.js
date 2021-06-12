@@ -282,60 +282,61 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
 
         //ELEMENTOS DE LA CONSOLA DE LA TIERRA
-        this.UIEarthCons = scene.add.image(ConsolePos[0], ConsolePos[1], "UIEarthCons").setDepth(4);
-        this.UIEarthTime = scene.add.image(ConsolePos[2], ConsolePos[3], "UIEarthTime").setDepth(4);
-        this.UIEarthTerraform = scene.add.image(ConsolePos[4], ConsolePos[5], "UIEarthTerraform").setDepth(4);
-        this.UIEarthAlerts = scene.add.image(ConsolePos[6], ConsolePos[7], "UIEarthAlerts").setDepth(4);
+        if(!isTutorial){
+            this.UIEarthCons = scene.add.image(ConsolePos[0], ConsolePos[1], "UIEarthCons").setDepth(4);
+            this.UIEarthTime = scene.add.image(ConsolePos[2], ConsolePos[3], "UIEarthTime").setDepth(4);
+            this.UIEarthTerraform = scene.add.image(ConsolePos[4], ConsolePos[5], "UIEarthTerraform").setDepth(4);
+            this.UIEarthAlerts = scene.add.image(ConsolePos[6], ConsolePos[7], "UIEarthAlerts").setDepth(4);
+        
+            this.UiEarthPilots = scene.add.image(ConsolePos[8], ConsolePos[9], "UIEarthPilots").setDepth(4);  //espacio para los pilotos de 
+            this.UiEarthSndBrkAntenaPilot = scene.add.image(ConsolePos[10], ConsolePos[11], "UiEarthSndBrkAntenaPilot").setDepth(4)
+                .setInteractive()
+                .on('pointerdown', () => scene.WarnFixMachine("Antena"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerup', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, true))
+                .on('pointerover', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, true))
+                .on('pointerout', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, false));
 
-        this.UiEarthPilots = scene.add.image(ConsolePos[8], ConsolePos[9], "UIEarthPilots").setDepth(4);  //espacio para los pilotos de 
-        this.UiEarthSndBrkAntenaPilot = scene.add.image(ConsolePos[10], ConsolePos[11], "UiEarthSndBrkAntenaPilot").setDepth(4)
-            .setInteractive()
-            .on('pointerdown', () => scene.WarnFixMachine("Antena"))//this.Unload(this.unloadRocketBtn)
-            .on('pointerup', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, true))
-            .on('pointerover', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, true))
-            .on('pointerout', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, false));
-
-        this.UiEarthSndBrkTerraPilot = scene.add.image(ConsolePos[12], ConsolePos[13], "UiEarthSndBrkTerraPilot").setDepth(4)
-            .setInteractive()
-            .on('pointerdown', () => scene.WarnFixMachine("Terraform"))//this.Unload(this.unloadRocketBtn)
-            .on('pointerup', () => this.Highlight(this.UiEarthSndBrkTerraPilot, true))
-            .on('pointerover', () => this.Highlight(this.UiEarthSndBrkTerraPilot, true))
-            .on('pointerout', () => this.Highlight(this.UiEarthSndBrkTerraPilot, false));
-
-
-        this.UiEarthSndBrkRocketPilot = scene.add.image(ConsolePos[14], ConsolePos[15], "UiEarthSndBrkRocketPilot").setDepth(4)
-            .setInteractive()
-            .on('pointerdown', () => scene.WarnFixMachine("Rocket"))//this.Unload(this.unloadRocketBtn)
-            .on('pointerup', () => this.Highlight(this.UiEarthSndBrkRocketPilot, true))
-            .on('pointerover', () => this.Highlight(this.UiEarthSndBrkRocketPilot, true))
-            .on('pointerout', () => this.Highlight(this.UiEarthSndBrkRocketPilot, false));
-
-        this.UiEarthSndBrkMine = scene.add.image(ConsolePos[16], ConsolePos[17], "UiEarthSndBrkMinePilot").setDepth(4)
-            .setInteractive()
-            .on('pointerdown', () => scene.WarnFixMachine("Mine"))//this.Unload(this.unloadRocketBtn)
-            .on('pointerup', () => this.Highlight(this.UiEarthSndBrkMine, true))
-            .on('pointerover', () => this.Highlight(this.UiEarthSndBrkMine, true))
-            .on('pointerout', () => this.Highlight(this.UiEarthSndBrkMine, false));
-
-        this.UIEarthNeedFoodPilot = scene.add.image(ConsolePos[18], ConsolePos[19], "UIEarthNeedFoodPilot").setDepth(4);
-        this.UIEarthNeedResPilot = scene.add.image(ConsolePos[20], ConsolePos[21], "UIEarthNeedResPilot").setDepth(4);
-
-        //boton para enviar mensaje de chat
-
-        this.UIEarthSndMsgBtn = scene.add.image(ConsolePos[22], ConsolePos[23], "UIEarthSndMsg").setDepth(4)
-            .setInteractive()
-            .on('pointerdown', () => this.UIEarthSndMsgBtn())//this.Unload(this.unloadRocketBtn)
-            .on('pointerup', () => this.Highlight(this.UIEarthSndMsgBtn, true))
-            .on('pointerover', () => this.Highlight(this.UIEarthSndMsgBtn, true))
-            .on('pointerout', () => this.Highlight(this.UIEarthSndMsgBtn, false));
-
-        //caja para escribir mensajes
-        this.UIEarthMsgBox = scene.add.image(ConsolePos[24], ConsolePos[25], "UIEarthMsgBox").setDepth(4);
-
-        //pantalla de mensajes del chat central 
-        this.UIEarthChatBox = scene.add.image(ConsolePos[26], ConsolePos[27], "UIEarthChatBox").setDepth(4);
+            this.UiEarthSndBrkTerraPilot = scene.add.image(ConsolePos[12], ConsolePos[13], "UiEarthSndBrkTerraPilot").setDepth(4)
+                .setInteractive()
+                .on('pointerdown', () => scene.WarnFixMachine("Terraform"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerup', () => this.Highlight(this.UiEarthSndBrkTerraPilot, true))
+                .on('pointerover', () => this.Highlight(this.UiEarthSndBrkTerraPilot, true))
+                .on('pointerout', () => this.Highlight(this.UiEarthSndBrkTerraPilot, false));
 
 
+            this.UiEarthSndBrkRocketPilot = scene.add.image(ConsolePos[14], ConsolePos[15], "UiEarthSndBrkRocketPilot").setDepth(4)
+                .setInteractive()
+                .on('pointerdown', () => scene.WarnFixMachine("Rocket"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerup', () => this.Highlight(this.UiEarthSndBrkRocketPilot, true))
+                .on('pointerover', () => this.Highlight(this.UiEarthSndBrkRocketPilot, true))
+                .on('pointerout', () => this.Highlight(this.UiEarthSndBrkRocketPilot, false));
+
+            this.UiEarthSndBrkMine = scene.add.image(ConsolePos[16], ConsolePos[17], "UiEarthSndBrkMinePilot").setDepth(4)
+                .setInteractive()
+                .on('pointerdown', () => scene.WarnFixMachine("Mine"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerup', () => this.Highlight(this.UiEarthSndBrkMine, true))
+                .on('pointerover', () => this.Highlight(this.UiEarthSndBrkMine, true))
+                .on('pointerout', () => this.Highlight(this.UiEarthSndBrkMine, false));
+
+            this.UIEarthNeedFoodPilot = scene.add.image(ConsolePos[18], ConsolePos[19], "UIEarthNeedFoodPilot").setDepth(4);
+            this.UIEarthNeedResPilot = scene.add.image(ConsolePos[20], ConsolePos[21], "UIEarthNeedResPilot").setDepth(4);
+
+            //boton para enviar mensaje de chat
+
+            this.UIEarthSndMsgBtn = scene.add.image(ConsolePos[22], ConsolePos[23], "UIEarthSndMsg").setDepth(4)
+                .setInteractive()
+                .on('pointerdown', () => this.UIEarthSndMsgBtn())//this.Unload(this.unloadRocketBtn)
+                .on('pointerup', () => this.Highlight(this.UIEarthSndMsgBtn, true))
+                .on('pointerover', () => this.Highlight(this.UIEarthSndMsgBtn, true))
+                .on('pointerout', () => this.Highlight(this.UIEarthSndMsgBtn, false));
+
+            //caja para escribir mensajes
+            this.UIEarthMsgBox = scene.add.image(ConsolePos[24], ConsolePos[25], "UIEarthMsgBox").setDepth(4);
+
+            //pantalla de mensajes del chat central 
+            this.UIEarthChatBox = scene.add.image(ConsolePos[26], ConsolePos[27], "UIEarthChatBox").setDepth(4);
+
+        }
 
     }
     create() {
