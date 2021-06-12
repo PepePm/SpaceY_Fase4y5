@@ -116,7 +116,7 @@ var txtTerraformacion;
 
 //Barra cargamento cohete
 var objCohete;
-var nCoheteMat = 150;
+var nCoheteMat;
 var objCoheteMat;
 var MAX_COHETEMAT = 350;
 var txtCoheteMat;   //Porcentaje de cuanto has llenado el cohete en MARTE
@@ -403,9 +403,9 @@ class SceneMars extends Phaser.Scene {
 
 
         //Valores iniciales recursos
-        nCoheteMat = 150;
+        nCoheteMat = MAX_COHETEMAT;
         nComida_M = 75;
-        nRocas_M = 30;
+        nRocas_M = 200;
         nMaterial_M = 20;
 
         sfx.sounds[2].loop = sfx.loop;  //NI IDEA OIGA                  ****************************************
@@ -795,10 +795,10 @@ class SceneMars extends Phaser.Scene {
         //Interaccionar con máquinas//
         //////////////////////////////
         //Mostrar tecla interacción
-        if (!(maquinas[0].canInteract() || maquinas[1].canInteract() || maquinas[2].canInteract() || maquinas[3].canInteract()) && maquinas[0].isSending) {
+        /*if (!(maquinas[0].canInteract() || maquinas[1].canInteract() || maquinas[2].canInteract() || maquinas[3].canInteract()) && maquinas[0].isSending) {
 
             teclaAccion.setVisible(false);
-        }
+        }*/
 
         //Acciones de cada máquina
         for (i = 0; i < 4; i++) {

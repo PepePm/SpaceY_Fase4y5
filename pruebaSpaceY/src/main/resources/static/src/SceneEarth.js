@@ -513,9 +513,7 @@ class SceneEarth extends Phaser.Scene {
 
 
         var that = this;
-        var thatControlTierra = controlTierra;
 
-        console.log("HOLA1 " + controlTierra + " / " + thatControlTierra);
 
         connection.onmessage = function (msg) {
 
@@ -546,8 +544,8 @@ class SceneEarth extends Phaser.Scene {
                     break;
                 case "syncRocketToEarth":
                     console.log("recibiendo cohete de marte");
-                    this.tweenLanzPuertaExtIn();
-                    this.objCohete.goLand = data["value"];
+                    controlTierra.tweenLanzPuertaExtIn();
+                    controlTierra.goLand = data["value"];
 
                     break;
                         

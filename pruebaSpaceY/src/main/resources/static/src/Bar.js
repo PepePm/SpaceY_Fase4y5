@@ -3,7 +3,7 @@ class Bar {
 
         this.obj = scene.add.sprite(x, y, "barra").setDepth(5);
 
-        this.n = n; //no me acuerdo
+        this.n = n; //cantidad inicial
         this.max = max; //valor maximo 
         
         this.obj.setOrigin(0, 0.5);
