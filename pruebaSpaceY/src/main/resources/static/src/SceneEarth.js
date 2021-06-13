@@ -77,6 +77,7 @@ var chatTween;
 
 //Tierra
 var controlTierra;
+var weatherControl;
 
 var fondoTierra;
 var fondoConsola;
@@ -233,6 +234,10 @@ class SceneEarth extends Phaser.Scene {
 
         //TIERRA    CREACION DE LOS ASSETS DE TIERRA
         controlTierra = new EarthControl(this, 0, 0, 8);
+
+        //Control metereología
+        weatherControl = new Weather(this);
+        weatherControl.Start();
 
         //controlTierra.PushFromMars();
 
@@ -501,10 +506,10 @@ class SceneEarth extends Phaser.Scene {
 
         //***************                                METODOS DE INTERACCION CON SERVIDOR               ************************* */
         
-        console.log("GameSessionInnitiated");
+        //console.log("GameSessionInnitiated");
         connection = new WebSocket("ws://" + urlServer + "/games");
 
-        console.log("conexión: " + connection);
+        //console.log("conexión: " + connection);
 
         connection.onopen = function () {
             var data = {
@@ -537,7 +542,7 @@ class SceneEarth extends Phaser.Scene {
                     break;
                 case "syncGameEnd":
                     var victoria = data["value"];
-                    console.log("gameend valor: " + victoria);
+                    //console.log("gameend valor: " + victoria);
                     if(victoria == "true"){
                         VictoryCondition(that);
                     }
@@ -550,7 +555,7 @@ class SceneEarth extends Phaser.Scene {
 
                     controlTierra.tweenLanzPuertaExtIn();
                     controlTierra.goLand = true;
-                    console.log("recibiendo cohete de marte");
+                    //console.log("recibiendo cohete de marte");
                     //SINCRONIZAR CARGA DE MATERIALES 
                     
                     //this.tweenLanzPuertaExtIn();
@@ -581,8 +586,12 @@ class SceneEarth extends Phaser.Scene {
                 //Porcentaje de terraformación actual
                 case "syncTerraformState":
                     terraformLevel = Number(data["value"]);
-                    console.log("Nivel de terraformación: "+ terraformLevel);
+                    //console.log("Nivel de terraformación: "+ terraformLevel);
                     controlTierra.UIEarthTerraform.setScale(terraformLevel);
+                    break;
+                case "syncCommsBroken":
+                    console.log("commsBroken " + data["value"]);
+                    weatherControl.commsBroken = data["value"];
                     break;
                 
 
@@ -598,7 +607,7 @@ class SceneEarth extends Phaser.Scene {
             that.scene.stop("ScenePause"); // METER ESTO EN MENU DE PAUSA (?)
             that.scene.start("SceneMenu");
 
-            console.log("chapo");
+            //console.log("chapo");
         }
 
 
@@ -779,7 +788,7 @@ class SceneEarth extends Phaser.Scene {
                 typeToSync = "syncTerraformWear";
                 break;
         }
-        console.log("Solicitando estado de máquina");
+        //console.log("Solicitando estado de máquina");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
@@ -808,7 +817,7 @@ class SceneEarth extends Phaser.Scene {
                 typeToSync = "syncTerraformPilot";
                 break;
         }
-        console.log("Solicitando arreglar máquina");
+        //console.log("Solicitando arreglar máquina");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,

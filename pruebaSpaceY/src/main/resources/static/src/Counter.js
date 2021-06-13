@@ -82,7 +82,7 @@ function countDown ()
         this.textSeconds.setText(this.formatTimeSeconds(this.initialTime));
 
         //sync
-        console.log("Sync tiempo");
+        //console.log("Sync tiempo");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,

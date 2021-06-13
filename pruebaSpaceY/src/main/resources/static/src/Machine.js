@@ -42,6 +42,8 @@ class Machine {//extends Phaser.GameObjects.Sprite {
             break;
             
         }
+        this.nMachine = nMachine;
+
         this.typeMachine = nMachine; //0->cohete , 1->terraformador , 2->comunicaciones , 3->mina
         this.area = 0.15;
 
@@ -87,6 +89,11 @@ class Machine {//extends Phaser.GameObjects.Sprite {
             if(this.typeMachine === 0)
                 objCohete.obj.setTexture(this.textureBreak);  
             this.eventWear.paused = true;
+
+            //Sync comunicaciones rota
+            if (this.nMachine == 2){
+                this.SyncCommsBroken();
+            }
         }
         else {
 
@@ -113,8 +120,17 @@ class Machine {//extends Phaser.GameObjects.Sprite {
         this.wear = 100;
         this.obj.setTexture(this.textureNormal);
         if(this.typeMachine === 0)
-            objCohete.obj.setTexture(this.textureNormal);  
+            objCohete.obj.setTexture(this.textureNormal);
+
+        //Sync comunicaciones reparadas
+        if (this.nMachine == 2){
+            this.SyncCommsBroken();
+        }
+            
         this.eventWear.paused = false;
     }
+
+
+    
 }
 

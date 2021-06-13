@@ -14,7 +14,7 @@ class SceneGameEnd extends Phaser.Scene {
 
         this.fondo = this.add.rectangle(game.config.width/2, game.config.height/2, game.config.width, game.config.height, Phaser.Display.Color.GetColor(0, 0, 0)).setAlpha(0.5);
 
-        console.log(isVictory);
+        //console.log(isVictory);
 
         //Fondo
         if (isVictory) {

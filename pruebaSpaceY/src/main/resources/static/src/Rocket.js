@@ -37,7 +37,7 @@ class Rocket {
                 value: true,
             }
             connection.send(JSON.stringify(data));
-            console.log("enviando cohete a tierra");
+            //console.log("enviando cohete a tierra");
         }
     }
 

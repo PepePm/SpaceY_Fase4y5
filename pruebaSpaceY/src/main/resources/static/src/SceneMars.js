@@ -219,7 +219,7 @@ class SceneMars extends Phaser.Scene {
 
     // ============================================ METODOS PARA PEDIR RECURSOS     =========================================
     AskForFood() {
-        console.log("PIDIENDO COMIDITA");
+        //console.log("PIDIENDO COMIDITA");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
@@ -229,7 +229,7 @@ class SceneMars extends Phaser.Scene {
         connection.send(JSON.stringify(data));
     }
     SendChatMsg() {
-        console.log("EnviandoMensaje");
+        //console.log("EnviandoMensaje");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
@@ -239,7 +239,7 @@ class SceneMars extends Phaser.Scene {
         connection.send(JSON.stringify(data));
     }
     AskForResources() {
-        console.log("PIDIENDO RESOURCES");
+        //console.log("PIDIENDO RESOURCES");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
@@ -251,10 +251,10 @@ class SceneMars extends Phaser.Scene {
 
     create() {
         //***************                                METODOS DE INTERACCION CON SERVIDOR               ************************* */
-        console.log("GameSessionInnitiated");
+        //console.log("GameSessionInnitiated");
         connection = new WebSocket("ws://" + urlServer + "/games");
 
-        console.log("conexión: " + connection);
+        //console.log("conexión: " + connection);
 
         connection.onopen = function () {
             var data = {
@@ -336,27 +336,32 @@ class SceneMars extends Phaser.Scene {
                     }
                     connection.send(JSON.stringify(data));
                     break;*/
-                case "syncRocketFoodToMars" : 
+                case "syncRocketFoodToMars":
                     //ATERRIZAR COHETE
                     estacionTransporte.isComing = true;
                     //Coger Makelele    
-                    console.log(data["value"]+"comidita");
+                    //console.log(data["value"] + "comidita");
                     objCohete.comLoad = Number(data["value"]);
-                    console.log("He obtenido"+ objCohete.comLoad  +" de comida");
-                break;
-                case "syncRocketResToMars" : 
+                    //console.log("He obtenido" + objCohete.comLoad + " de comida");
+                    break;
+                case "syncRocketResToMars":
                     //ATERRIZAR COHETE
                     estacionTransporte.isComing = true;
                     //Coger Makelele    
-                    console.log(data["value"]+"mats");
-                    objCohete.matLoad= Number(data["value"]);
-                    console.log("He obtenido"+ objCohete.matLoad  +" de comida");
-                break;
-
+                    //console.log(data["value"] + "mats");
+                    objCohete.matLoad = Number(data["value"]);
+                    //console.log("He obtenido" + objCohete.matLoad + " de comida");
+                    break;
+                case "syncStartSandstorm":
+                    maquinas[2].Sandstorm();
+                    break;
+                case "syncStartMeteorRain":
+                    maquinas[2].MeteorRain();
+                    break;
             }
 
         }
-        
+
 
         connection.onclose = function () {
             connection = undefined;
@@ -366,7 +371,7 @@ class SceneMars extends Phaser.Scene {
             that.scene.stop("ScenePause"); // METER ESTO EN MENU DE PAUSA (?)
             that.scene.start("SceneMenu");
 
-            console.log("chapo");
+            //console.log("chapo");
         }
 
 
@@ -504,7 +509,7 @@ class SceneMars extends Phaser.Scene {
         maquinas[2] = comunicaciones;
         maquinas[3] = mina;
 
-        maquinas[2].Start();
+        //maquinas[2].Start();
 
         //Nubes
         nubes = new Array(N_NUBES);
@@ -756,13 +761,13 @@ class SceneMars extends Phaser.Scene {
     }
     update(time, delta) {
         //Actualizo el porcentaje de terraformación
-        if(key_up.isDown){
-            console.log("Nivel terraform: " + indTerra.size);
+        if (key_up.isDown) {
+            //console.log("Nivel terraform: " + indTerra.size);
             var data = {
                 action: "Sync",
                 lobbyID: gameLobbyID,
                 type: "syncTerraformState",
-                value: indTerra.size/indTerra.maxSize,
+                value: indTerra.size / indTerra.maxSize,
             }
             connection.send(JSON.stringify(data));
         }
@@ -810,7 +815,7 @@ class SceneMars extends Phaser.Scene {
             connection.send(JSON.stringify(data));
         }
         else if (key_right.isDown) {
-            
+
             var marteLastRot = marte.rotation;
 
             //Rotación de los elementos de Marte
@@ -829,7 +834,7 @@ class SceneMars extends Phaser.Scene {
             emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
             emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
             //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
-            
+
             var data = {
                 action: "Sync",
                 lobbyID: gameLobbyID,
@@ -856,7 +861,7 @@ class SceneMars extends Phaser.Scene {
         if ((key_left.isDown || key_right.isDown) && !startSfxRun) {
             startSfxRun = true;
             sfx.sounds[3].play();
-            console.log("Audio caminando");
+            //console.log("Audio caminando");
         }
         if (key_left.isUp && key_right.isUp) {
             startSfxRun = false;
@@ -908,7 +913,7 @@ class SceneMars extends Phaser.Scene {
 
         if (indHam.size <= 0 && !this.called)
             SyncGameEnd(this, false);
-            //DefeatCondition(this);
+        //DefeatCondition(this);
 
 
         //MARTE
@@ -1005,113 +1010,113 @@ class SceneMars extends Phaser.Scene {
     }
     //sacar el chat 
 
-/*
-    MovinBoxes(scene, id) {
-        sfx.sounds[1].play();
-
-        var nX = 0; var nY = 1;
-        switch (id) {
-            case 0: // Abrir cerrar lobby 
-                lobbyActive = !lobbyActive;
-                this.ChatManager(scene, id);
-                break;
-            case 1: //abrir cerrar chatbox chatbox
-
-                chatBoxActive = !chatBoxActive;
-                this.ChatManager(scene, id);
-
-                break;
-            case 2: //login loginBox,loginOption;
-
-
-                if (loginOut)    //guardar log in
-                {
-
-                    for (let i = 0; i < scene.loginStuff.length; i++) {
-                        scene.tweens.add({
-                            targets: scene.loginStuff[i],
-                            x: loginPos[nX],
-                            y: loginPos[nY],
-                            duration: 100,
-                            ease: 'Bounce.easeOut',
-                        });
-                        nX += 2; nY += 2;
+    /*
+        MovinBoxes(scene, id) {
+            sfx.sounds[1].play();
+    
+            var nX = 0; var nY = 1;
+            switch (id) {
+                case 0: // Abrir cerrar lobby 
+                    lobbyActive = !lobbyActive;
+                    this.ChatManager(scene, id);
+                    break;
+                case 1: //abrir cerrar chatbox chatbox
+    
+                    chatBoxActive = !chatBoxActive;
+                    this.ChatManager(scene, id);
+    
+                    break;
+                case 2: //login loginBox,loginOption;
+    
+    
+                    if (loginOut)    //guardar log in
+                    {
+    
+                        for (let i = 0; i < scene.loginStuff.length; i++) {
+                            scene.tweens.add({
+                                targets: scene.loginStuff[i],
+                                x: loginPos[nX],
+                                y: loginPos[nY],
+                                duration: 100,
+                                ease: 'Bounce.easeOut',
+                            });
+                            nX += 2; nY += 2;
+                        }
+                        loginOut = true;
+                        this.ShowLoginFields(scene, loginOut);
+    
+                        this.accountText.setVisible(false);
+                        this.accountLogin.setVisible(false);
+                        this.accountLogin.setVisible(false);
+                        this.accountLogin.setActive(false);
                     }
-                    loginOut = true;
-                    this.ShowLoginFields(scene, loginOut);
-
-                    this.accountText.setVisible(false);
-                    this.accountLogin.setVisible(false);
-                    this.accountLogin.setVisible(false);
-                    this.accountLogin.setActive(false);
-                }
-                else if (!loginOut) //sacar log in
-                {
-                    this.accountText.setVisible(true);
-                    //this.accountLogin.setVisible(true);
-
-                    for (let i = 0; i < scene.loginStuff.length; i++) {
-                        scene.tweens.add({
-                            targets: scene.loginStuff[i],
-                            x: loginTween[nX],
-                            y: loginTween[nY],
-                            duration: 100,
-                            ease: 'Bounce.easeOut',
-                        });
-                        nX += 2; nY += 2;
+                    else if (!loginOut) //sacar log in
+                    {
+                        this.accountText.setVisible(true);
+                        //this.accountLogin.setVisible(true);
+    
+                        for (let i = 0; i < scene.loginStuff.length; i++) {
+                            scene.tweens.add({
+                                targets: scene.loginStuff[i],
+                                x: loginTween[nX],
+                                y: loginTween[nY],
+                                duration: 100,
+                                ease: 'Bounce.easeOut',
+                            });
+                            nX += 2; nY += 2;
+                        }
+                        loginOut = false;
+    
+                        this.ShowLoginFields(scene, loginOut);
                     }
-                    loginOut = false;
-
-                    this.ShowLoginFields(scene, loginOut);
-                }
-
-                break;
-            case 3: //register registerBox, registerBtn, nextImg, prevImg;
-
-                if (registerOut) //guardar register
-                {
-                    this.regLogin.setVisible(false);
-                    this.accountText.setColor("white");
-                    this.accountText.setText('Please enter in your account');
-
-                    for (let i = 0; i < scene.registerStuff.length; i++) {
-                        scene.tweens.add({
-                            targets: scene.registerStuff[i],
-                            x: regisPos[nX],
-                            y: regisPos[nY],
-                            duration: 100,
-                            ease: 'Expo.easeOut',
-                        });
-                        nX += 2; nY += 2;
+    
+                    break;
+                case 3: //register registerBox, registerBtn, nextImg, prevImg;
+    
+                    if (registerOut) //guardar register
+                    {
+                        this.regLogin.setVisible(false);
+                        this.accountText.setColor("white");
+                        this.accountText.setText('Please enter in your account');
+    
+                        for (let i = 0; i < scene.registerStuff.length; i++) {
+                            scene.tweens.add({
+                                targets: scene.registerStuff[i],
+                                x: regisPos[nX],
+                                y: regisPos[nY],
+                                duration: 100,
+                                ease: 'Expo.easeOut',
+                            });
+                            nX += 2; nY += 2;
+                        }
+                        registerOut = false
+                        //this.ShowRegisternFields(scene,registerOn);
                     }
-                    registerOut = false
-                    //this.ShowRegisternFields(scene,registerOn);
-                }
-                else if (!registerOut) //sacar register
-                {
-                    this.regLogin.setVisible(true);
-                    for (let i = 0; i < scene.registerStuff.length; i++) {
-                        scene.tweens.add({
-                            targets: scene.registerStuff[i],
-                            x: regisTween[nX],
-                            y: regisTween[nY],
-                            duration: 100,
-                            ease: 'Expo.easeOut',
-                        });
-                        nX += 2; nY += 2;
+                    else if (!registerOut) //sacar register
+                    {
+                        this.regLogin.setVisible(true);
+                        for (let i = 0; i < scene.registerStuff.length; i++) {
+                            scene.tweens.add({
+                                targets: scene.registerStuff[i],
+                                x: regisTween[nX],
+                                y: regisTween[nY],
+                                duration: 100,
+                                ease: 'Expo.easeOut',
+                            });
+                            nX += 2; nY += 2;
+                        }
+                        registerOut = true
+                        //this.ShowRegisternFields(scene,registerOn);
                     }
-                    registerOut = true
-                    //this.ShowRegisternFields(scene,registerOn);
-                }
-
-                break;
+    
+                    break;
+            }
+    
+    
+    
+    
         }
-
-
-
-
-    }
-    */
+        */
     CloseChat(scene) {
         var nX = 0; var nY = 1;
         scene.chatWritter.setVisible(false);
@@ -1140,7 +1145,7 @@ class SceneMars extends Phaser.Scene {
     // ===============================          INTERACTIVIDAD  ===========================================================
 
     enterIconHoverState(boton, scene) {
-        console.log("Sonidito de hover un boton");
+        //console.log("Sonidito de hover un boton");
         sfx.sounds[1].play();
         boton.x = boton.x + movTxt;
         boton.y = boton.y + movTxt;
@@ -1175,8 +1180,9 @@ class SceneMars extends Phaser.Scene {
     //==============================================================================================================
 }
 function genMeteors() {
-
+    
     //var delay = 0;
+    //console.log("genero meteoros")
     for (var i = 0; i < 1; i++) {
 
         meteoritos[i] = new Meteor(this);
@@ -1235,7 +1241,7 @@ function DestroyOnScene(obj) {
 }
 
 function SyncGameEnd(that, victory) {
-    if (victory){
+    if (victory) {
 
         // Sync VictoryCondition SEND
         var data = {
@@ -1247,7 +1253,7 @@ function SyncGameEnd(that, victory) {
         connection.send(JSON.stringify(data));
         VictoryCondition(that);
     }
-    else{
+    else {
 
         // Sync DefeatCondition SEND
         var data = {
@@ -1274,7 +1280,7 @@ function VictoryCondition(that) {
     soundtrack.pistas[3].stop();
 
     isVictory = true;
-    console.log("isvictory: " + isVictory);
+    //console.log("isvictory: " + isVictory);
 
     that.scene.launch('SceneGameEnd');
     that.scene.pause('SceneGame');
@@ -1290,7 +1296,7 @@ function DefeatCondition(that) {
         sfx.sounds[5].play();
 
         isVictory = false;
-        console.log("isderrota: " + isVictory);
+        //console.log("isderrota: " + isVictory);
 
         soundtrack.pistas[1].stop();
         soundtrack.pistas[3].stop();

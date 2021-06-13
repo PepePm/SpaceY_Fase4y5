@@ -458,7 +458,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.rocket.anims.play("movimientoCoheteReverse");
             this.objCohete = new Rocket (this.scene, this.rocket.x, this.rocket.y); //creamos un cohete nuevo
-            console.log("he creado un cohete");
+            //console.log("he creado un cohete");
         }
     }
 
@@ -474,8 +474,8 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             //Aterriza en marte
             sfx.sounds[12].play();
             //enviamos la comida del cohete y los materiales añadidos para sincronizarlos con el otro cohete 
-            console.log("comida enviada" + this.objCohete.comLoad);
-            console.log("comida enviada" + this.objCohete.matLoad);
+            //console.log("comida enviada" + this.objCohete.comLoad);
+            //console.log("comida enviada" + this.objCohete.matLoad);
             var comida = {
                 action: "Sync",
                 lobbyID: gameLobbyID,
@@ -647,12 +647,12 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             if (this.newPayloadType === 1) {
 
                 this.objCohete.comLoad += MAX_COMIDA * 0.05;
-                console.log("he añadido COMIDA");
+                //console.log("he añadido COMIDA");
             }
             else {
 
                 this.objCohete.matLoad += MAX_MATERIAL * 0.05;
-                console.log("he añadido MATERIAL");
+                //console.log("he añadido MATERIAL");
             }
 
             this.wait = true;
@@ -852,8 +852,8 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 repeat: 22,
                 yoyo: true,
 
-                //onStart: function () {that.wearTxt[that.nWear].setVisible(true); that.wearTxt[that.nWear].alpha = 1;},
-                onComplete: function () { that.tweenTxtEventsOUT(); },
+                //onStart: function () {that.TxtEvents.setVisible(true);},
+                //onComplete: function () { that.tweenTxtEventsOUT(); },
             });
         }
         else {
@@ -866,7 +866,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 repeat: 35,
                 yoyo: true,
 
-                //onStart: function () {that.wearTxt[that.nWear].setVisible(true); that.wearTxt[that.nWear].alpha = 1;},
+                //onStart: function () {that.TxtEvents.setVisible(true);},
                 //onComplete: function() {that.tweenTxtEventsOUT()},
             });
         }
@@ -884,7 +884,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             yoyo: false,
 
             //onStart: function () {that.wearTxt[that.nWear].setVisible(true); that.wearTxt[that.nWear].alpha = 1;},
-            onComplete: function () { that.TxtEvents.setVisible(false); that.TxtEvents.alpha = 1; sfx.sounds[14].stop(); },
+            onComplete: function () {that.TxtEvents.setVisible(false); that.TxtEvents.alpha = 1; sfx.sounds[14].stop();},
         });
     }
 

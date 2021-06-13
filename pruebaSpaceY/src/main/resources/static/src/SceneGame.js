@@ -607,7 +607,7 @@ class SceneGame extends Phaser.Scene {
 
     
 }
-
+/*
 function genMeteors() {
 
     //var delay = 0;

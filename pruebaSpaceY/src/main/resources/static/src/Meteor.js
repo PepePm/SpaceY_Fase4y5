@@ -79,6 +79,9 @@ class Meteor {
                     maquinas[i].obj.anims.stop();
                     maquinas[i].obj.setTexture(maquinas[i].textureBreak);
                     maquinas[i].eventWear.paused = true;
+
+                    if (i===2)
+                        maquinas[i].SyncCommsBroken();
                 }
                 
             }

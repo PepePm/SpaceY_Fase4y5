@@ -8,7 +8,7 @@ class CommsMachine extends Machine {
     
         this.keyIndicator = new KeyIndicator(scene, marte.x, 400, "R");
 
-        this.event;
+        
     }
 
     update(delta){
@@ -47,28 +47,9 @@ class CommsMachine extends Machine {
         }
     }
 
-    Start() {
+    
 
-        var rand = 1000;//Phaser.Math.Between((1000*60),(1000*60)*2);
-        this.event = this.scene.time.addEvent({ delay: rand, callback: this.StartEvent, callbackScope: this});
-    }
-
-    StartEvent() {
-
-        var rand = Phaser.Math.Between(0, 1);// poner a 1
-        console.log(rand);
-        rand == 0 ? this.AlertSandStorm() : this.AlertMeteorRain();  
-    }
-
-    AlertSandStorm() {
-        //Avisar de tormenta
-        if (!this.isBroken) //      play    :       https://www.youtube.com/watch?v=y6120QOlsfU
-            //controlTierra.WarnEvent(1); //signal a TIERRA de tormenta acercándose... EN TIERRA ENVIAR MENSAJE DE LA TORMENTA !!
-
-        this.scene.time.addEvent({ delay: 1000*5, callback: this.SandStorm, callbackScope: this});
-    }
-
-    SandStorm() {
+    Sandstorm() {
 
         //Activar tormenta
         emitterStorm.on = true;
@@ -87,16 +68,6 @@ class CommsMachine extends Machine {
         }
         emitterStorm.on = false;
         playerSpeed = 1;
-        //controlTierra.tweenTxtEventsOUT();    // enviar signal a tierra para acabar la tormenta de arena
-    }
-
-    AlertMeteorRain() {
-
-        //Avisar de meteoritos
-        //if (!this.isBroken)
-            //controlTierra.WarnEvent(0); //Sync con tierra
-        
-        this.scene.time.addEvent({ delay: 2000, callback: this.MeteorRain, callbackScope: this});
     }
 
     MeteorRain() {
@@ -143,6 +114,18 @@ class CommsMachine extends Machine {
             this.repairBar.n = 0;
             this.repairBar.Update();
         }
+    }
+
+
+    SyncCommsBroken(){
+        console.log("Comms rota: " + this.isBroken);
+        var data = {
+            action: "Sync",
+            lobbyID: gameLobbyID,
+            type: "syncCommsBroken",
+            value: this.isBroken,
+        }
+        connection.send(JSON.stringify(data));
     }
 
 }
