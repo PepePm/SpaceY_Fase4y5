@@ -263,7 +263,7 @@ class ScenePause extends Phaser.Scene {
             this.scene.stop("SceneTutorial");
             isTutorial = false;
         }
-        
+        gamePaused = false;
         this.scene.stop("ScenePause");
         this.scene.start("SceneMenu");
         soundtrack.pistas[0].play();
