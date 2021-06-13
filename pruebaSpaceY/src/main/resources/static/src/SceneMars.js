@@ -269,6 +269,11 @@ class SceneMars extends Phaser.Scene {
 
 
         var that = this;
+        var MinePilot = false;
+        var TerraPilot = false;
+        var AntenaPilot = false;
+        var RocketPilot = false;
+
         connection.onmessage = function (msg) {
             var data = JSON.parse(msg.data);
 
@@ -314,20 +319,44 @@ class SceneMars extends Phaser.Scene {
                 //
                 //Me dicen que actualize el piloto de alguna máquina
                 case "syncAntenaPilot":
-                    that.UiMarsAntenaPilot.setVisible(data["value"]);
-                    that.easePilot(that, that.UiMarsAntenaPilot, data["value"]);
+                    if(AntenaPilot != true){
+                        AntenaPilot = true;
+                        that.UiMarsAntenaPilot.setVisible(data["value"]);
+                        that.easePilot(that, that.UiMarsAntenaPilot, data["value"]);
+                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: AntenaPilot = false, callbackScope: this});
+                    }
+                    
                     break;
                 case "syncMinePilot":
-                    that.UiMarsMinePilot.setVisible(data["value"]);
-                    that.easePilot(that, that.UiMarsMinePilot, data["value"]);
+                    if (MinePilot != true)
+                    {
+                        MinePilot = true;
+                        that.UiMarsMinePilot.setVisible(data["value"]);
+                        that.easePilot(that, that.UiMarsMinePilot, data["value"]);
+                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: MinePilot = false, callbackScope: this});
+                    }
+                    
                     break;
                 case "syncRocketPilot":
-                    that.UiMarsRocketPilot.setVisible(data["value"]);
-                    that.easePilot(that, that.UiMarsRocketPilot, data["value"]);
+                    if(RocketPilot != true)
+                    {
+                        RocketPilot = true;
+                        that.UiMarsRocketPilot.setVisible(data["value"]);
+                        that.easePilot(that, that.UiMarsRocketPilot, data["value"]);
+                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: RocketPilot = false, callbackScope: this});
+
+                    }
+                   
                     break;
                 case "syncTerraformPilot":
-                    that.UiMarsTerraPilot.setVisible(data["value"]);
-                    that.easePilot(that, that.UiMarsTerraPilot, data["value"]);
+                    if(TerraPilot != true)
+                    {
+                        TerraPilot = true;
+                        that.UiMarsTerraPilot.setVisible(data["value"]);
+                        that.easePilot(that, that.UiMarsTerraPilot, data["value"]);
+                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: TerraPilot = false, callbackScope: this});
+                    }
+                    
                     break;
                 //Actualizar rotación   ------------>Realmente necesario? No es mejor cada vez que me mueva en el update?
                 /*case "syncCharPos":
