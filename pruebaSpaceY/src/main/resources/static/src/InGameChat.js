@@ -12,7 +12,7 @@ class InGameChat {
             }).setOrigin(0).setDepth(1004);
 
         var graphics = this.scene.make.graphics();
-        graphics.fillRect(x, y, x + w, y + h);
+        graphics.fillRect(x, y, w, h);
         var mask = new Phaser.Display.Masks.GeometryMask(this.scene, graphics);
         this.chat.setMask(mask);
     }
