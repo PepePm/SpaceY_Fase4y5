@@ -81,6 +81,7 @@ function countDown ()
         this.textMinutes.setText(this.formatTimeMinutes(this.initialTime));
         this.textSeconds.setText(this.formatTimeSeconds(this.initialTime));
 
+        
         //sync
         //console.log("Sync tiempo");
         var data = {
@@ -90,6 +91,7 @@ function countDown ()
             value: this.initialTime,
         }
         connection.send(JSON.stringify(data));
+    
     }
     
 }
