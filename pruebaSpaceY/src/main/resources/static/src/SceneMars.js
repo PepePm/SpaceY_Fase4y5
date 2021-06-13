@@ -418,7 +418,7 @@ class SceneMars extends Phaser.Scene {
 
         //CHATBOX
         //Chat del lobby
-        this.chat = new InGameChat(this, game.config.width / 8*5, game.config.height / 5 + 60, 10, 10);
+        this.chat = new InGameChat(this, game.config.width / 10*6 -7, game.config.height / 5 + 45, 402, 387);
 
         //Chatbox icon
         this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
@@ -473,7 +473,7 @@ class SceneMars extends Phaser.Scene {
 
         });
 
-        this.writeTextChat = this.add.dom(1130, 680).createFromCache('formChatMars').setVisible(true);
+        this.writeTextChat = this.add.dom(1075, 670).createFromCache('formChatMars').setVisible(true);
 
         
 
