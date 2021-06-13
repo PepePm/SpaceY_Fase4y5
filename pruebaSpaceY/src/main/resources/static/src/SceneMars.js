@@ -250,6 +250,9 @@ class SceneMars extends Phaser.Scene {
     }
 
     create() {
+
+        
+
         //***************                                METODOS DE INTERACCION CON SERVIDOR               ************************* */
         //console.log("GameSessionInnitiated");
         connection = new WebSocket("ws://" + urlServer + "/games");
@@ -358,6 +361,9 @@ class SceneMars extends Phaser.Scene {
                 case "syncStartMeteorRain":
                     maquinas[2].MeteorRain();
                     break;
+                case "syncLobbyMsgs":
+                    that.chat.UpdateMessages(data["value"]);
+                    break;
             }
 
         }
@@ -375,11 +381,16 @@ class SceneMars extends Phaser.Scene {
         }
 
 
+        
+
         //**************************************************************************************************************************** */
 
         this.paused = false;
 
         //CHATBOX
+        //Chat del lobby
+        this.chat = new InGameChat(this, game.config.width / 8*5, game.config.height / 5 + 60, 10, 10);
+
         //Chatbox icon
         this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
             .setScale(0.6);
@@ -400,26 +411,26 @@ class SceneMars extends Phaser.Scene {
         this.chatWritter.setOrigin(0.5);
 
         //chatbox send
-        this.sendButton = this.add.image(chatPos[8], chatPos[9], 'ChatBox_SendBtn')
+        /*this.sendButton = this.add.image(chatPos[8], chatPos[9], 'ChatBox_SendBtn')
             .setScale(0.4);
         this.sendButton.setInteractive()
-            .on('pointerdown', () => RestCreateMsg(this, userName))
+            .on('pointerdown', () => this.chat.SendMessage())
             .on('pointerover', () => this.enterIconHoverState(this.sendButton, this))
             .on('pointerout', () => this.enterIconRestState(this.sendButton))
-        this.sendButton.setOrigin(0.5);
+        this.sendButton.setOrigin(0.5);*/
         this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter, this.sendButton, this.globalbutton];
 
         var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
-        key_enter.on('down', () => RestCreateMsg(this, userName));
+        key_enter.on('down', () => this.chat.SendMessage());
 
 
         //Chatbox code
-        this.chatContent = [];
-        loadMsgs(this);
+        //this.chatContent = [];
+        //loadMsgs(this);
 
-        this.chatText = this.add.text(game.config.width / 6 * 4 + 10, game.config.height / 5 + 10, this.chatContent, { fontSize: "25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
+        //this.chatText = this.add.text(game.config.width / 6 * 4 + 10, game.config.height / 5 + 10, this.chatContent, { fontSize: "25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
 
-        this.chatText.setMask(mask).setVisible(false);
+        //this.chatText.setMask(mask).setVisible(false);
 
         var zone = this.add.zone(game.config.width / 6 * 4 + 10, game.config.height / 5 + 1, 320, game.config.height / 5 * 3 + 5).setOrigin(0).setInteractive();
         var that = this;
@@ -433,36 +444,16 @@ class SceneMars extends Phaser.Scene {
 
         });
 
-        this.writeTextChat = this.add.dom(1280, 785).createFromCache('formChat').setVisible(false);
+        this.writeTextChat = this.add.dom(1130, 680).createFromCache('formIngameChat').setVisible(true);
 
-        var graphics = this.make.graphics();
-        graphics.fillRect(game.config.width / 6 * 4 + 10, game.config.height / 5 + 1, game.config.width / 6 * 4 + 300, game.config.height / 5 * 3 + 5);
-        var mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
-
-        //LOBBY
-        this.lobbyContent = ["Connected Users: "];
-        loadLobby(this);
-
-        this.lobbyText = this.add.text(game.config.width / 6 * 4 + 10, game.config.height / 5 + 10, this.lobbyContent,
-            { fontSize: "25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
-        this.lobbyText.setMask(mask).setVisible(false).setDepth(1000);
-
-        this.numPlayers = updateUsers(this);
-        this.numPlayersTxt = this.add.text(game.config.width * 3.25 / 4, (game.config.height / 8) * 6.8, "REGISTERED USERS: " + this.numPlayers, { fill: '#FFFFFF', fontFamily: 'menuFont', fontSize: '40px' });
-        this.numPlayersTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
-
-        this.serverOnlineTxt = this.add.text(game.config.width * 3.25 / 4, (game.config.height / 8) * 7.2, "SERVER ¿?", { fill: '#FFFFFF', fontFamily: 'menuFont', fontSize: '40px' });
-        this.serverOnlineTxt.setOrigin(0.5).setVisible(false).setDepth(1000);
-
-        isServerOnline(this);
-
+        
 
 
 
 
         //Valores iniciales recursos
         nCoheteMat = MAX_COHETEMAT;
-        nComida_M = 75;
+        nComida_M = 90000000000;
         nRocas_M = 200;
         nMaterial_M = 20;
 
@@ -728,7 +719,7 @@ class SceneMars extends Phaser.Scene {
 
         this.UiMarsSndMsgBtn = this.add.image(ConsolePos[18], ConsolePos[19], "UIMarsSndMsg").setDepth(4)
             .setInteractive()
-            .on('pointerdown', () => this.UiMarsSndMsgBtn())//this.Unload(this.unloadRocketBtn)
+            .on('pointerdown', () => this.chat.SendMessage())//this.Unload(this.unloadRocketBtn)
             .on('pointerup', () => this.Highlight(this.UiMarsSndMsgBtn, true))
             .on('pointerover', () => this.Highlight(this.UiMarsSndMsgBtn, true))
             .on('pointerout', () => this.Highlight(this.UiMarsSndMsgBtn, false));

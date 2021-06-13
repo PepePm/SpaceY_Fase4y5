@@ -352,7 +352,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.UIEarthSndMsgBtn = scene.add.image(ConsolePos[22], ConsolePos[23], "UIEarthSndMsg").setDepth(4)
                 .setInteractive()
-                .on('pointerdown', () => this.UIEarthSndMsgBtn())//this.Unload(this.unloadRocketBtn)
+                .on('pointerdown', () => scene.chat.SendMessage())//this.Unload(this.unloadRocketBtn)
                 .on('pointerup', () => this.Highlight(this.UIEarthSndMsgBtn, true))
                 .on('pointerover', () => this.Highlight(this.UIEarthSndMsgBtn, true))
                 .on('pointerout', () => this.Highlight(this.UIEarthSndMsgBtn, false));
