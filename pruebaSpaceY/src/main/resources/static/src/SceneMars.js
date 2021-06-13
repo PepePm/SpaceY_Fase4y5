@@ -471,7 +471,7 @@ class SceneMars extends Phaser.Scene {
 
         });
 
-        this.writeTextChat = this.add.dom(1075, 670).createFromCache('formChatMars').setVisible(true);
+        this.writeTextChat = this.add.dom(1075, 670).createFromCache('formChatMars').setVisible(true).setDepth(7);
         this.writeTextChat.getChildByName('Chat').onclick = function(){SwitchInputs(false)};
 
         this.input.mouse.disableContextMenu();
@@ -801,6 +801,14 @@ class SceneMars extends Phaser.Scene {
                 value: indTerra.size / indTerra.maxSize,
             }
             connection.send(JSON.stringify(data));
+        }
+        
+
+        if(gamePaused){
+            this.writeTextChat.setVisible(false);
+        }
+        else{
+            this.writeTextChat.setVisible(true);
         }
         //controlTierra.pantallaPlano.rotation+=delta/16000;
         //DEBUG PARTICULAS

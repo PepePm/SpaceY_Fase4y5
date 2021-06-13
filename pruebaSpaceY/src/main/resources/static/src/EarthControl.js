@@ -375,7 +375,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
     }
 
     Update(delta) {
-
         // Iniciar que el cohete despegue
         if (this.goTakeOff)
             controlTierra.TakeOff(delta);
