@@ -364,7 +364,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             this.UIEarthChatBox = scene.add.image(ConsolePos[26], ConsolePos[27], "UIEarthChatBox").setDepth(4);
 
             //Contador tiempo restante
-            this.counter = new Counter(this.scene, 335, 97, 416, 97, 10 * 60, true);
+            this.counter = new Counter(this.scene, 434, 143, 516, 143, 10 * 60, true);
         }
 
         

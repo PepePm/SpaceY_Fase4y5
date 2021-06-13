@@ -535,7 +535,7 @@ class SceneMars extends Phaser.Scene {
         alertaPeligroDc = this.add.image(144, 365, "alertaPeligro").setScale(-1, 1).setVisible(false); // *************************************************(x=-1, y)FLIP EJE VERTICAL!
 
         //Contador tiempo restante
-        counter = new Counter(this, 635, 97, 716, 97, 10 * 60, false);
+        counter = new Counter(this, 1240, 160, 1320, 160, 10 * 60, false);
 
 
 
