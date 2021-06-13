@@ -359,7 +359,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
     }
     create() {
-
+        
     }
 
     Update(delta) {
@@ -447,7 +447,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.rocket.anims.play("movimientoCoheteReverse");
             this.objCohete = new Rocket (this.scene, this.rocket.x, this.rocket.y); //creamos un cohete nuevo
-            console.log("he creado uncohete");
+            console.log("he creado un cohete");
         }
     }
 
@@ -471,6 +471,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 type: "syncRocketFoodToMars",
                 value:this.objCohete.comLoad,
             }
+
             connection.send(JSON.stringify(comida));
             var materials = {
                 action: "Sync",
@@ -479,8 +480,9 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 value:this.objCohete.matLoad,
             }
             connection.send(JSON.stringify(materials));
+
             this.objCohete = undefined; //destruimos el cohete 
-            console.log("he borrado uncohete");
+            //console.log("he borrado uncohete");
         }
     }
 

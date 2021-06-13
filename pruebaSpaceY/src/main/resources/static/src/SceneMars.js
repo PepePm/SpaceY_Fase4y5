@@ -327,7 +327,7 @@ class SceneMars extends Phaser.Scene {
                     that.easePilot(that, that.UiMarsTerraPilot, data["value"]);
                     break;
                 //Actualizar rotación   ------------>Realmente necesario? No es mejor cada vez que me mueva en el update?
-                case "syncCharPos":
+                /*case "syncCharPos":
                     var data = {
                         action: "Sync",
                         lobbyID: gameLobbyID,
@@ -335,7 +335,7 @@ class SceneMars extends Phaser.Scene {
                         value: marte.rotation,
                     }
                     connection.send(JSON.stringify(data));
-                    break;
+                    break;*/
                 case "syncRocketFoodToMars" : 
                     //ATERRIZAR COHETE
                     estacionTransporte.isComing = true;
@@ -356,6 +356,7 @@ class SceneMars extends Phaser.Scene {
             }
 
         }
+        
 
         connection.onclose = function () {
             connection = undefined;
@@ -1176,7 +1177,7 @@ class SceneMars extends Phaser.Scene {
 function genMeteors() {
 
     //var delay = 0;
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 1; i++) {
 
         meteoritos[i] = new Meteor(this);
     }

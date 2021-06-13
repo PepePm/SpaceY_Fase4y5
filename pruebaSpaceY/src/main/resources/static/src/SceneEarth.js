@@ -605,8 +605,6 @@ class SceneEarth extends Phaser.Scene {
 
         //**************************************************************************************************************************** */
 
-
-
     }
     update(time, delta) {
 
@@ -1055,15 +1053,7 @@ class SceneEarth extends Phaser.Scene {
     }
 
 }
-/*
-function genMeteors() {
 
-    //var delay = 0;
-    for(var i=0; i < 3; i++) {
- 
-        meteoritos[i] = new Meteor(this);
-    }
-}*/
 /*
 function updateRotations(sign, delta) {
 
