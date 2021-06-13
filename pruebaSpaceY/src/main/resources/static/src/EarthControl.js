@@ -301,7 +301,18 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         if(!isTutorial){
             this.UIEarthCons = scene.add.image(ConsolePos[0], ConsolePos[1], "UIEarthCons").setDepth(4);
             this.UIEarthTime = scene.add.image(ConsolePos[2], ConsolePos[3], "UIEarthTime").setDepth(4);
-            this.UIEarthTerraform = scene.add.image(ConsolePos[4], ConsolePos[5], "UIEarthTerraform").setDepth(4);
+            this.UIEarthTerraform = scene.add.image(ConsolePos[4]+1, ConsolePos[5], "UIMarsTerraform").setDepth(4).setScale(0);
+            this.UIEarthTerraform.tint = Phaser.Display.Color.GetColor(0, 255, 80);
+
+            this.scene.tweens.add({
+                targets: this.UIEarthTerraform,
+                alpha: 0,
+                duration: 2000,
+                ease: 'Expo.easeIn',
+                repeat: -1,
+                yoyo: true
+            });
+
             this.UIEarthAlerts = scene.add.image(ConsolePos[6], ConsolePos[7], "UIEarthAlerts").setDepth(4);
         
             this.UiEarthPilots = scene.add.image(ConsolePos[8], ConsolePos[9], "UIEarthPilots").setDepth(4);  //espacio para los pilotos de 

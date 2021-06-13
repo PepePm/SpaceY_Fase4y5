@@ -755,14 +755,14 @@ class SceneMars extends Phaser.Scene {
 
     }
     update(time, delta) {
-
         //Actualizo el porcentaje de terraformación
         if(key_up.isDown){
+            console.log("Nivel terraform: " + indTerra.size);
             var data = {
                 action: "Sync",
                 lobbyID: gameLobbyID,
                 type: "syncTerraformState",
-                value: indTerra,
+                value: indTerra.size/indTerra.maxSize,
             }
             connection.send(JSON.stringify(data));
         }

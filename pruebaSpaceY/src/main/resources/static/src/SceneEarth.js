@@ -580,7 +580,9 @@ class SceneEarth extends Phaser.Scene {
                     break;
                 //Porcentaje de terraformación actual
                 case "syncTerraformState":
-                    terraformLevel = data["value"];
+                    terraformLevel = Number(data["value"]);
+                    console.log("Nivel de terraformación: "+ terraformLevel);
+                    controlTierra.UIEarthTerraform.setScale(terraformLevel);
                     break;
                 
 
