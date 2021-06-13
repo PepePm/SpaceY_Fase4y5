@@ -11,6 +11,7 @@ var chatBoxOut = false;
 //check active
 var registerOn = false, loginOn = false;
 var userName = "Anon";
+var userImgIndex = 0;
 
 var lineasChat = 0;
 
@@ -130,6 +131,9 @@ class SceneMenu extends Phaser.Scene {
     }
 
     create() {
+
+        
+        
 
         console.log("crear menu");
 
@@ -524,6 +528,15 @@ class SceneMenu extends Phaser.Scene {
         //Timer
         this.event = this.time.addEvent({ delay: 300, callback: this.UpdateServer, callbackScope: this, loop: true });
 
+        if(userName != "Anon"){
+            GetUserImg(this, userName)
+            this.userImage.setPosition(-400, loginPos[28]);
+            this.accountText.setColor("white");
+            this.accountText.setText('Welcome, ' + userName + " !");
+            this.logOutBtn.setPosition(-400, loginPos[24]);
+            this.logOutBtn.setVisible(true);
+            this.logOutBtn.setActive(true);
+        }
 
         /*window.addEventListener("beforeunload", function (e) {
             
