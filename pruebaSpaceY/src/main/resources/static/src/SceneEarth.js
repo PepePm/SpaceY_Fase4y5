@@ -428,7 +428,7 @@ class SceneEarth extends Phaser.Scene {
 
         //CHATBOX
         //Lobby chat
-        this.chat = new InGameChat(this, game.config.width / 9 -15, game.config.height / 5 + 50, 180, 55);
+        this.chat = new InGameChat(this, game.config.width / 9 -15, game.config.height / 5 + 50, 400, 265);
 
         //Chatbox icon
         this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
@@ -484,7 +484,7 @@ class SceneEarth extends Phaser.Scene {
 
         });
 
-        this.writeTextChat = this.add.dom(320, 550).createFromCache('formChatEarth').setVisible(true);
+        this.writeTextChat = this.add.dom(305, 550).createFromCache('formChatEarth').setVisible(true);
 
 
 
