@@ -269,10 +269,10 @@ class SceneMars extends Phaser.Scene {
 
 
         var that = this;
-        var MinePilot = false;
-        var TerraPilot = false;
-        var AntenaPilot = false;
-        var RocketPilot = false;
+        this.MinePilot = false;
+        this.TerraPilot = false;
+        this.AntenaPilot = false;
+        this.RocketPilot = false;
 
         connection.onmessage = function (msg) {
             var data = JSON.parse(msg.data);
@@ -317,44 +317,42 @@ class SceneMars extends Phaser.Scene {
                     connection.send(JSON.stringify(data));
                     break;
                 //
+
                 //Me dicen que actualize el piloto de alguna máquina
                 case "syncAntenaPilot":
-                    if(AntenaPilot != true){
-                        AntenaPilot = true;
+                    if(that.AntenaPilot == false){
+                        that.AntenaPilot = true;
                         that.UiMarsAntenaPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsAntenaPilot, data["value"]);
-                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: AntenaPilot = false, callbackScope: this});
+                        
                     }
                     
                     break;
                 case "syncMinePilot":
-                    if (MinePilot != true)
+                    if (that.MinePilot == false)
                     {
-                        MinePilot = true;
+                        that.MinePilot = true;
                         that.UiMarsMinePilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsMinePilot, data["value"]);
-                        that.event = that.scene.time.addEvent({ delay: 5*500, callback: MinePilot = false, callbackScope: this});
                     }
                     
                     break;
                 case "syncRocketPilot":
-                    if(RocketPilot != true)
+                    if(that.RocketPilot == false)
                     {
-                        RocketPilot = true;
+                        that.RocketPilot = true;
                         that.UiMarsRocketPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsRocketPilot, data["value"]);
-                        that.event = that.scene.time.addEvent({ delay: 5*500, callback: RocketPilot = false, callbackScope: this});
 
                     }
                    
                     break;
                 case "syncTerraformPilot":
-                    if(TerraPilot != true)
+                    if(that.TerraPilot == false)
                     {
-                        TerraPilot = true;
+                        that.TerraPilot = true;
                         that.UiMarsTerraPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsTerraPilot, data["value"]);
-                        that.event = that.scene.time.addEvent({ delay: 5*500, callback: TerraPilot = false, callbackScope: this});
                     }
                     
                     break;
@@ -974,6 +972,23 @@ class SceneMars extends Phaser.Scene {
         //
     }
 
+    //CONTROL DE LOS PILOTOS
+    ReturnAntenaPilot()
+    {
+        this.AntenaPilot = false;
+        console.log("las cosas de tocar funcionan");
+    }
+    ReturnMinePilot(){
+        this.MinePilot = false;
+    }
+    ReturnRocketPilot()
+    {
+        this.RocketPilot = false;
+        console.log("las cosas de tocar funcionan");
+    }
+    ReturnTerraPilot(){
+        this.TerraPilot = false;
+    }
     OpenChat(scene) {
 
         var nX = 0; var nY = 1;
@@ -1202,10 +1217,17 @@ class SceneMars extends Phaser.Scene {
                 targets: boton,
                 scale: scaleV,
                 delay: 0,
-                duration: 500,
+                duration: 100,
                 ease: 'Circ.easeOut',
                 repeat: 4,
                 yoyo: true,
+                onComplete:()=>
+                {
+                    if(boton == this.UiMarsMinePilot) this.ReturnMinePilot();
+                    else if(boton == this.UiMarsTerraPilot)this.ReturnTerraPilot();
+                    else if(boton == this.UiMarsAntenaPilot)this.ReturnAntenaPilot();
+                    else if(boton == this.UiMarsRocketPilot)this.ReturnRocketPilot();
+                },
             });
         }
 

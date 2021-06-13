@@ -156,6 +156,10 @@ class SceneEarth extends Phaser.Scene {
     }
 
     create() {
+        var that = this;
+        this.foodPilot = false;
+        this.resPilot = false;
+
 
         positionOffset = 0;
         this.paused = false;
@@ -511,11 +515,9 @@ class SceneEarth extends Phaser.Scene {
         }
 
 
-        var that = this;
-        var foodPilot = false;
-        var resPilot = false;
+    
 
-
+       
         connection.onmessage = function (msg) {
 
             var data = JSON.parse(msg.data);
@@ -524,20 +526,28 @@ class SceneEarth extends Phaser.Scene {
             switch (data["type"]) {
                 case "syncFoodPilot":
                     controlTierra.UIEarthNeedFoodPilot.setVisible(data["value"]);
-                    if(foodPilot != true)
+                    console.log("pidiendo comida");
+                    if(that.foodPilot == false)
                     {
-                        foodPilot = true;
+                        console.log("activando piloto");
+                        that.foodPilot = true;
                         that.easePilot(that, controlTierra.UIEarthNeedFoodPilot, data["value"]);
-                        that.event = that.scene.time.addEvent({ delay: 5*500, callback: foodPilot = false, callbackScope: this});
+                        //that.event = that.time.addEvent({ delay: 5*500, callback: that.ReturnFoodPilot, callbackScope: that});
+
+                
                     }  
                     break;
                 case "syncResPilot":
                     controlTierra.UIEarthNeedResPilot.setVisible(data["value"]);
-                    if(resPilot != true)
+                    console.log("pìdiendo recursos");
+                    if(that.resPilot == false)
                     {
-                        resPilot = true;
+                        console.log("activando piloto res");
+                        that.resPilot = true;
                         that.easePilot(that, controlTierra.UIEarthNeedResPilot, data["value"]);
-                        that.event = that.scene.time.addEvent({ delay: 5*500, callback: resPilot = false, callbackScope: this});
+                        //that.event = that.time.addEvent({ delay: 5*500, callback: that.ReturnResPilot, callbackScope: that});
+
+        
                     }
                     
                     break;
@@ -778,6 +788,15 @@ class SceneEarth extends Phaser.Scene {
             this.paused = false;
         }
 
+    }
+    //ACTUALIZACIOND EL VALOR DE LOS PILOTOS PARA QUE NO COLAPSE CON SPAMMEO 
+    ReturnFoodPilot()
+    {
+        this.foodPilot = false;
+        console.log("las cosas de tocar funcionan");
+    }
+    ReturnResPilot(){
+        this.resPilot = false;
     }
 
     getMachineWear(machineId){
@@ -1057,6 +1076,7 @@ class SceneEarth extends Phaser.Scene {
 
     easePilot(scene, boton, value) {
 
+
         //this.scene.time.addEvent({ delay: 1000*5, callback: this.SandStorm, callbackScope: this});
         if (value) {
             var scaleV = 1.3;
@@ -1065,10 +1085,15 @@ class SceneEarth extends Phaser.Scene {
                 scale: scaleV,
                 //scaleY: boton.scaleY * scaleV,
                 delay: 0,
-                duration: 500,
+                duration: 100,
                 ease: 'Circ.easeOut',
                 repeat: 4,
                 yoyo: true,
+                onComplete:()=>
+                {
+                    if(boton == controlTierra.UIEarthNeedFoodPilot) this.ReturnFoodPilot();
+                    else if(boton == controlTierra.UIEarthNeedResPilot)this.ReturnResPilot();
+                },
             });
         }
 
