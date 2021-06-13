@@ -730,7 +730,7 @@ function moverMascara(mask,scene) //x fposX, y = fposYcmask o smask
         //onComplete: this.EnterOnMachine.bind(this)
     });
 }
-/*
+
 function setRotations(rot,index)
 {
     for(var i=0; i<N_NUBES; i++) {
@@ -773,7 +773,6 @@ function setRotations(rot,index)
 
 
 }
-*/
 
  
         
