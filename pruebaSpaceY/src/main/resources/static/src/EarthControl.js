@@ -464,14 +464,21 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             sfx.sounds[12].play();
             //enviamos la comida del cohete y los materiales añadidos para sincronizarlos con el otro cohete 
             console.log("comida enviada" + this.objCohete.comLoad);
-            var data = {
+            console.log("comida enviada" + this.objCohete.matLoad);
+            var comida = {
                 action: "Sync",
                 lobbyID: gameLobbyID,
-                type: "syncRocketToMars",
-                value:[this.objCohete.comLoad,
-                     this.objCohete.matLoad],
+                type: "syncRocketFoodToMars",
+                value:this.objCohete.comLoad,
             }
-            connection.send(JSON.stringify(data));
+            connection.send(JSON.stringify(comida));
+            var materials = {
+                action: "Sync",
+                lobbyID: gameLobbyID,
+                type: "syncRocketResToMars",
+                value:this.objCohete.matLoad,
+            }
+            connection.send(JSON.stringify(materials));
             this.objCohete = undefined; //destruimos el cohete 
             console.log("he borrado uncohete");
         }
