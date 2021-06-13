@@ -157,8 +157,8 @@ var emitterStorm;
 var emitterMachines = []; // 0 - Cohete || 1 - Radio || 2 - Mina || 3 - Terraformador
 
 //POST ITS
-var postIt;
-var postItExp;
+var postItMars;
+var postItExpMars;
 var isbig = false;
 
 
@@ -674,22 +674,22 @@ class SceneMars extends Phaser.Scene {
         });
 
         //POST IT
-        postIt = this.add.image(game.config.width - 90, 100, "postIt").setDepth(7)
+        postItMars = this.add.image(game.config.width - 90, 100, "postIt").setDepth(7)
             .setInteractive()
-            .on('pointerdown', () => OpenPostIt(postIt, this))
-            .on('pointerup', () => HighlightPostIt(postIt, true))
-            .on('pointerover', () => HighlightPostIt(postIt, true))
-            .on('pointerout', () => HighlightPostIt(postIt, false));
+            .on('pointerdown', () => OpenPostIt(postItMars, this))
+            .on('pointerup', () => HighlightPostIt(postItMars, true))
+            .on('pointerover', () => HighlightPostIt(postItMars, true))
+            .on('pointerout', () => HighlightPostIt(postItMars, false));
 
-        postItExp = this.add.image(game.config.width - 100, 100, "postItExp")
+        postItExpMars = this.add.image(game.config.width - 100, 100, "UIMarsTuto")
             .setDepth(7)
             .setScale(0.2)
             .setInteractive()
             .setVisible(false)
-            .on('pointerdown', () => OpenPostIt(postItExp, this))
-            .on('pointerup', () => HighlightPostIt(postItExp, true))
-            .on('pointerover', () => HighlightPostIt(postItExp, true))
-            .on('pointerout', () => HighlightPostIt(postItExp, false));
+            .on('pointerdown', () => OpenPostIt(postItExpMars, this))
+            .on('pointerup', () => HighlightPostIt(postItExpMars, true))
+            .on('pointerover', () => HighlightPostIt(postItExpMars, true))
+            .on('pointerout', () => HighlightPostIt(postItExpMars, false));
 
 
         //*/
@@ -1326,7 +1326,7 @@ function HighlightPostIt(obj, b) {
 function OpenPostIt(obj, scene) {
 
     switch (obj) {
-        case postIt:
+        case postItMars:
             scene.tweens.add({
                 targets: obj,
                 scaleX: 10,
@@ -1334,25 +1334,25 @@ function OpenPostIt(obj, scene) {
                 duration: 50,
                 ease: 'Expo.easeIn',
                 onComplete: function () {
-                    postIt.setVisible(false);
-                    postItExp.setVisible(true);
-                    postItExp.setScale(0.2);
-                    postItExp.setPosition(game.config.width / 2, game.config.height / 2);
+                    postItMars.setVisible(false);
+                    postItExpMars.setVisible(true);
+                    postItExpMars.setScale(0.2);
+                    postItExpMars.setPosition(game.config.width / 2, game.config.height / 2);
                 }
             });
             break;
-        case postItExp:
+        case postItExpMars:
             scene.tweens.add({
                 targets: obj,
-                x: postIt.x,
-                y: postIt.y,
+                x: postItMars.x,
+                y: postItMars.y,
                 scaleX: 0,
                 scaleY: 0,
                 duration: 50,
                 ease: 'Expo.easeIn',
                 onComplete: function () {
-                    postItExp.setVisible(false);
-                    postIt.setVisible(true);
+                    postItExpMars.setVisible(false);
+                    postItMars.setVisible(true);
                 }
             });
             break;

@@ -127,8 +127,8 @@ var positionOffset;
 //var emitterMachines = []; // 0 - Cohete || 1 - Radio || 2 - Mina || 3 - Terraformador
 
 //POST ITS
-var postIt;
-var postItExp;
+var postItEarth;
+var postItExpEarth;
 var isbig = false;
 
 
@@ -386,22 +386,22 @@ class SceneEarth extends Phaser.Scene {
         });*/
 
         //POST IT
-        postIt = this.add.image(game.config.width - 90, 100, "postIt").setDepth(7)
+        postItEarth = this.add.image(game.config.width - 90, 100, "postIt").setDepth(7)
             .setInteractive()
-            .on('pointerdown', () => OpenPostIt(postIt, this))
-            .on('pointerup', () => HighlightPostIt(postIt, true))
-            .on('pointerover', () => HighlightPostIt(postIt, true))
-            .on('pointerout', () => HighlightPostIt(postIt, false));
+            .on('pointerdown', () => OpenPostIt(postItEarth, this))
+            .on('pointerup', () => HighlightPostIt(postItEarth, true))
+            .on('pointerover', () => HighlightPostIt(postItEarth, true))
+            .on('pointerout', () => HighlightPostIt(postItEarth, false));
 
-        postItExp = this.add.image(game.config.width - 100, 100, "postItExp")
+        postItExpEarth = this.add.image(game.config.width - 100, 100, "UIEarthTuto")
             .setDepth(7)
             .setScale(0.2)
             .setInteractive()
             .setVisible(false)
-            .on('pointerdown', () => OpenPostIt(postItExp, this))
-            .on('pointerup', () => HighlightPostIt(postItExp, true))
-            .on('pointerover', () => HighlightPostIt(postItExp, true))
-            .on('pointerout', () => HighlightPostIt(postItExp, false));
+            .on('pointerdown', () => OpenPostIt(postItExpEarth, this))
+            .on('pointerup', () => HighlightPostIt(postItExpEarth, true))
+            .on('pointerover', () => HighlightPostIt(postItExpEarth, true))
+            .on('pointerout', () => HighlightPostIt(postItExpEarth, false));
 
 
         //*/
@@ -1177,11 +1177,11 @@ function HighlightPostIt(obj, b) {
 function WarningSignal(warning,) {
     //recibimos uin tipo de mensaje y en función de su contenido enviamos una señal al terminal de marte
     //
-}
+}*/
 function OpenPostIt(obj, scene) {
 
     switch (obj) {
-        case postIt:
+        case postItEarth:
             scene.tweens.add({
                 targets: obj,
                 scaleX: 10,
@@ -1189,25 +1189,25 @@ function OpenPostIt(obj, scene) {
                 duration: 50,
                 ease: 'Expo.easeIn',
                 onComplete: function () {
-                    postIt.setVisible(false);
-                    postItExp.setVisible(true);
-                    postItExp.setScale(0.2);
-                    postItExp.setPosition(game.config.width / 2, game.config.height / 2);
+                    postItEarth.setVisible(false);
+                    postItExpEarth.setVisible(true);
+                    postItExpEarth.setScale(0.2);
+                    postItExpEarth.setPosition(game.config.width / 2, game.config.height / 2);
                 }
             });
             break;
-        case postItExp:
+        case postItExpEarth:
             scene.tweens.add({
                 targets: obj,
-                x: postIt.x,
-                y: postIt.y,
+                x: postItEarth.x,
+                y: postItEarth.y,
                 scaleX: 0,
                 scaleY: 0,
                 duration: 50,
                 ease: 'Expo.easeIn',
                 onComplete: function () {
-                    postItExp.setVisible(false);
-                    postIt.setVisible(true);
+                    postItExpEarth.setVisible(false);
+                    postItEarth.setVisible(true);
                 }
             });
             break;
@@ -1241,4 +1241,4 @@ function OpenPostIt(obj, scene) {
     }
 
 }
-*///QUITAR SI ALGO FALLA DE ESTAS FUNCS
+///QUITAR SI ALGO FALLA DE ESTAS FUNCS
