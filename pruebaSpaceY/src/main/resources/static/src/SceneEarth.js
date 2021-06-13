@@ -521,6 +521,8 @@ class SceneEarth extends Phaser.Scene {
 
 
         var that = this;
+        var foodPilot = false;
+        var resPilot = false;
 
 
         connection.onmessage = function (msg) {
@@ -531,11 +533,22 @@ class SceneEarth extends Phaser.Scene {
             switch (data["type"]) {
                 case "syncFoodPilot":
                     controlTierra.UIEarthNeedFoodPilot.setVisible(data["value"]);
-                    that.easePilot(that, controlTierra.UIEarthNeedFoodPilot, data["value"]);
+                    if(foodPilot != true)
+                    {
+                        foodPilot = true;
+                        that.easePilot(that, controlTierra.UIEarthNeedFoodPilot, data["value"]);
+                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: foodPilot = false, callbackScope: this});
+                    }  
                     break;
                 case "syncResPilot":
                     controlTierra.UIEarthNeedResPilot.setVisible(data["value"]);
-                    that.easePilot(that, controlTierra.UIEarthNeedResPilot, data["value"]);
+                    if(resPilot != true)
+                    {
+                        resPilot = true;
+                        that.easePilot(that, controlTierra.UIEarthNeedResPilot, data["value"]);
+                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: resPilot = false, callbackScope: this});
+                    }
+                    
                     break;
                 case "syncCounter":
                     controlTierra.counter.Sync(data["value"]);
