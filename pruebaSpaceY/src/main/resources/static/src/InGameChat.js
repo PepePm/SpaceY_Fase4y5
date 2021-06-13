@@ -20,6 +20,10 @@ class InGameChat {
     SendMessage(){
 
         var message = this.scene.writeTextChat.getChildByName('Chat').value;
+        console.log(message);
+        if(message == "")
+            return;
+
         this.scene.writeTextChat.getChildByName('Chat').value = "";
         var newMessage = userName + ": " + message;
 

@@ -449,6 +449,8 @@ class SceneEarth extends Phaser.Scene {
             .setScale(0.37);
         this.chatWritter.setOrigin(0.5);
 
+        var that = this;
+
         //chatbox send
         /*this.sendButton = this.add.image(chatPos[8], chatPos[9], 'ChatBox_SendBtn')
             .setScale(0.4);
@@ -459,9 +461,16 @@ class SceneEarth extends Phaser.Scene {
         this.sendButton.setOrigin(0.5);*/
         this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter, this.sendButton, this.globalbutton];
 
+        this.writeTextChat = this.add.dom(295, 550).createFromCache('formChatEarth').setVisible(true);
+        
         var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
-        key_enter.on('down', () => this.chat.SendMessage());
+        key_enter.on('down', () => {this.chat.SendMessage(); this.writeTextChat.getChildByName('Chat').blur();});
 
+
+        this.input.mouse.disableContextMenu();
+        this.input.on('pointerdown', function (pointer) {
+            that.writeTextChat.getChildByName('Chat').blur();
+        });
 
         //Chatbox code
         
@@ -473,7 +482,7 @@ class SceneEarth extends Phaser.Scene {
         //this.chatText.setMask(mask).setVisible(false);
 
         var zone = this.add.zone(game.config.width / 6 * 4 + 10, game.config.height / 5 + 1, 320, game.config.height / 5 * 3 + 5).setOrigin(0).setInteractive();
-        var that = this;
+        
         zone.on('pointermove', function (pointer) {
 
             if (pointer.isDown) {
@@ -484,7 +493,7 @@ class SceneEarth extends Phaser.Scene {
 
         });
 
-        this.writeTextChat = this.add.dom(305, 550).createFromCache('formChatEarth').setVisible(true);
+        
 
 
 
@@ -622,6 +631,8 @@ class SceneEarth extends Phaser.Scene {
 
     }
     update(time, delta) {
+
+        var pointer = this.input.activePointer;
 
         controlTierra.pantallaPlano.rotation += delta / 16000;
         //controlTierra.posicionMapa.rotation += delta / 16000;
