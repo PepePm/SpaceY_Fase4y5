@@ -112,7 +112,7 @@ var pantalla;
 var pantallaPlano;
 var posicionMapa;
 
-
+var terraformLevel = 0;
 
 var startSfxRun = false;
 /////////////////////
@@ -578,7 +578,10 @@ class SceneEarth extends Phaser.Scene {
                     //console.log("Rotacion posicoin: " + controlTierra.posicionMapa.rotation);
                     // valor a mostrar(desgaste de la máquina) = data["value"]
                     break;
-                        
+                //Porcentaje de terraformación actual
+                case "syncTerraformState":
+                    terraformLevel = data["value"];
+                    break;
                 
 
             }

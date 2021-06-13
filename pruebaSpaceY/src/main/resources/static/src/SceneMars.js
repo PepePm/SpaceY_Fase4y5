@@ -748,6 +748,16 @@ class SceneMars extends Phaser.Scene {
     }
     update(time, delta) {
 
+        //Actualizo el porcentaje de terraformación
+        if(key_up.isDown){
+            var data = {
+                action: "Sync",
+                lobbyID: gameLobbyID,
+                type: "syncTerraformState",
+                value: indTerra,
+            }
+            connection.send(JSON.stringify(data));
+        }
         //controlTierra.pantallaPlano.rotation+=delta/16000;
         //DEBUG PARTICULAS
         /*if (key_left.isDown) {
