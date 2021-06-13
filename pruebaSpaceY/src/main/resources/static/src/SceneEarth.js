@@ -388,7 +388,7 @@ class SceneEarth extends Phaser.Scene {
         //POST IT
         postItEarth = this.add.image(game.config.width - 90, 100, "postIt").setDepth(7)
             .setInteractive()
-            .on('pointerdown', () => OpenPostIt(postItEarth, this))
+            .on('pointerdown', () => OpenPostItEarth(postItEarth, this))
             .on('pointerup', () => HighlightPostIt(postItEarth, true))
             .on('pointerover', () => HighlightPostIt(postItEarth, true))
             .on('pointerout', () => HighlightPostIt(postItEarth, false));
@@ -398,7 +398,7 @@ class SceneEarth extends Phaser.Scene {
             .setScale(0.2)
             .setInteractive()
             .setVisible(false)
-            .on('pointerdown', () => OpenPostIt(postItExpEarth, this))
+            .on('pointerdown', () => OpenPostItEarth(postItExpEarth, this))
             .on('pointerup', () => HighlightPostIt(postItExpEarth, true))
             .on('pointerover', () => HighlightPostIt(postItExpEarth, true))
             .on('pointerout', () => HighlightPostIt(postItExpEarth, false));
@@ -1178,7 +1178,7 @@ function WarningSignal(warning,) {
     //recibimos uin tipo de mensaje y en función de su contenido enviamos una señal al terminal de marte
     //
 }*/
-function OpenPostIt(obj, scene) {
+function OpenPostItEarth(obj, scene) {
 
     switch (obj) {
         case postItEarth:

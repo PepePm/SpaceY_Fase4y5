@@ -4,9 +4,9 @@ class Counter{
         // ui_M_horas
 		//timerHoras = this.add.image(553, 97, "timeHoras");
 		// ui_M_minutos
-        this.timerMinutos = scene.add.image(xM, yM, "timerMinutos").setDepth(1000);
+        this.timerMinutos = scene.add.image(xM, yM, "timerMinutos").setDepth(5);
 		// ui_M_segundos
-		this.timerSegundos = scene.add.image(xS, yS, "timerSegundos").setDepth(1000);
+		this.timerSegundos = scene.add.image(xS, yS, "timerSegundos").setDepth(5);
 
         // 2:30 in seconds
         this.initialTime = initTime;
@@ -17,14 +17,14 @@ class Counter{
             fontStyle:'bold',
             fill:'#ffffff',
         }).setOrigin(0.5);
-        this.textMinutes.depth = 1001;
+        this.textMinutes.depth = 6;
 
         this.textSeconds = scene.add.text(this.timerSegundos.x+1, this.timerSegundos.y+7,this.formatTimeSeconds(this.initialTime),{
             fontSize:'50px',
             fontStyle:'bold',
             fill:'#ffffff',
         }).setOrigin(0.5);
-        this.textSeconds.depth = 1001;
+        this.textSeconds.depth = 6;
 
         this.sync = sync;
 

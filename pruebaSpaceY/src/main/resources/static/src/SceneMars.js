@@ -676,7 +676,7 @@ class SceneMars extends Phaser.Scene {
         //POST IT
         postItMars = this.add.image(game.config.width - 90, 100, "postIt").setDepth(7)
             .setInteractive()
-            .on('pointerdown', () => OpenPostIt(postItMars, this))
+            .on('pointerdown', () => OpenPostItMars(postItMars, this))
             .on('pointerup', () => HighlightPostIt(postItMars, true))
             .on('pointerover', () => HighlightPostIt(postItMars, true))
             .on('pointerout', () => HighlightPostIt(postItMars, false));
@@ -686,7 +686,7 @@ class SceneMars extends Phaser.Scene {
             .setScale(0.2)
             .setInteractive()
             .setVisible(false)
-            .on('pointerdown', () => OpenPostIt(postItExpMars, this))
+            .on('pointerdown', () => OpenPostItMars(postItExpMars, this))
             .on('pointerup', () => HighlightPostIt(postItExpMars, true))
             .on('pointerover', () => HighlightPostIt(postItExpMars, true))
             .on('pointerout', () => HighlightPostIt(postItExpMars, false));
@@ -1323,7 +1323,7 @@ function HighlightPostIt(obj, b) {
     //if (!b) obj.add.image(game.config.width/2, game.config.height/2, "postIt");
 }
 
-function OpenPostIt(obj, scene) {
+function OpenPostItMars(obj, scene) {
 
     switch (obj) {
         case postItMars:
