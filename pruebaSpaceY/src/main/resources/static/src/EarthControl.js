@@ -455,11 +455,13 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             //Aterriza en marte
             sfx.sounds[12].play();
             //enviamos la comida del cohete y los materiales añadidos para sincronizarlos con el otro cohete 
+            console.log("comida enviada" + this.objCohete.comLoad);
             var data = {
                 action: "Sync",
                 lobbyID: gameLobbyID,
                 type: "syncRocketToMars",
-                value:[ this.objCohete.comLoad,this.objCohete.matLoad],
+                value:[this.objCohete.comLoad,
+                     this.objCohete.matLoad],
             }
             connection.send(JSON.stringify(data));
             this.objCohete = undefined; //destruimos el cohete 
