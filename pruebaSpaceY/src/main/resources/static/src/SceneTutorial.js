@@ -242,7 +242,7 @@ class SceneTutorial extends Phaser.Scene {
 		alertaPeligroDc = this.add.image(144, 365, "alertaPeligro").setScale(-1,1).setVisible(false); // *************************************************FLIP EJE VERTICAL!
     
         //Contador tiempo restante
-        counter = new Counter(this, 10*60);
+        //counter = new Counter(this, 10*60);
         
         
 
@@ -479,6 +479,7 @@ class SceneTutorial extends Phaser.Scene {
             
         }
         controlTierra.pantallaPlano.rotation+=delta/16000;
+        controlTierra.posicionMapa.rotation+=delta/16000;
         //DEBUG PARTICULAS
         /*if (key_left.isDown) {
             //Apaga

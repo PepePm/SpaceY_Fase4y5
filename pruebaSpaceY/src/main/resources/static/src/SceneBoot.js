@@ -5,7 +5,7 @@ var soundtrack = undefined;
 //"http://193.161.193.99:63511";
 //79.146.8.198:8080
 
-var urlServer = "79.146.8.198:8080";
+var urlServer = "79.146.47.38:8080";
 
 class SceneBoot extends Phaser.Scene {
     
