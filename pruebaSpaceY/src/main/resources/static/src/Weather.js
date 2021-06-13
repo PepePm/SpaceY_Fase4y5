@@ -9,7 +9,7 @@ class Weather {
 
     Start() {
 
-        var rand = 4000;//Phaser.Math.Between((1000*60),(1000*60)*2);
+        var rand = Phaser.Math.Between((1000*60),(1000*60)*2);
         this.event = this.scene.time.addEvent({ delay: rand, callback: this.StartEvent, callbackScope: this});
     }
 

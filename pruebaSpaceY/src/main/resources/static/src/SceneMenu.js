@@ -133,9 +133,9 @@ class SceneMenu extends Phaser.Scene {
     create() {
 
         
-        
+        key_pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC, false);
 
-        console.log("crear menu");
+
 
         soundtrack.pistas[1].stop();
         soundtrack.pistas[3].stop();

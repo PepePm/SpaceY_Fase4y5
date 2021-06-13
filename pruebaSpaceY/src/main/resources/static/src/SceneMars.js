@@ -418,7 +418,7 @@ class SceneMars extends Phaser.Scene {
 
         //CHATBOX
         //Chat del lobby
-        this.chat = new InGameChat(this, game.config.width / 10*6 -7, game.config.height / 5 + 45, 402, 387);
+        this.chat = new InGameChat(this, game.config.width / 10*6 -7, game.config.height / 5 + 45, 402, 387, 15);
 
         //Chatbox icon
         this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
@@ -461,28 +461,40 @@ class SceneMars extends Phaser.Scene {
 
         //this.chatText.setMask(mask).setVisible(false);
 
-        var zone = this.add.zone(game.config.width / 6 * 4 + 10, game.config.height / 5 + 1, 320, game.config.height / 5 * 3 + 5).setOrigin(0).setInteractive();
+        var zone = this.add.zone(800, 300, 400, 400).setOrigin(0).setInteractive();
         var that = this;
         zone.on('pointermove', function (pointer) {
 
             if (pointer.isDown) {
-                that.chatText.y += (pointer.velocity.y / 10);
+                that.chat.chat.y += (pointer.velocity.y / 10);
 
-                that.chatText.y = Phaser.Math.Clamp(that.chatText.y, (game.config.height / 5 + 10) - (25 * lineasChat), game.config.height / 5 + 10);
+                that.chat.chat.y = Phaser.Math.Clamp(that.chat.chat.y, (game.config.height / 5 + 10) - (25 * that.chat.lineasChat), game.config.height / 5 + 10);
             }
 
         });
 
         this.writeTextChat = this.add.dom(1075, 670).createFromCache('formChatMars').setVisible(true);
+        this.writeTextChat.getChildByName('Chat').onclick = function(){SwitchInputs(false)};
 
-        
+        this.input.mouse.disableContextMenu();
+        this.input.on('pointerdown', function (pointer) {
+            that.writeTextChat.getChildByName('Chat').blur();
+            SwitchInputs(true);
+        });
+
+        this.input.keyboard.on('keydown', function (event) {
+            if(event.key == " "){
+                that.writeTextChat.getChildByName('Chat').value += " ";
+            }
+        });
+
 
 
 
 
         //Valores iniciales recursos
         nCoheteMat = MAX_COHETEMAT;
-        nComida_M = 90000000000;
+        nComida_M = 9000;
         nRocas_M = 200;
         nMaterial_M = 20;
 
@@ -597,6 +609,7 @@ class SceneMars extends Phaser.Scene {
         keyDev_victory = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M, false);
         keyDev_defeat = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N, false);
 
+        
 
         //Genera meteoritos cada x ms (TESTING)
         //var timedEvent = this.time.addEvent({ delay: 3000, callback: genMeteors, callbackScope: this, loop: true });
@@ -1407,5 +1420,17 @@ function OpenPostItMars(obj, scene) {
 
 }
 
+function SwitchInputs(value){
 
+    key_left.enabled = value;
+    key_right.enabled = value;
+    key_up.enabled = value;
+    key_down.enabled = value;
+    key_interact.enabled = value;
+    key_repair.enabled = value;
+    key_pause.enabled = value;
+
+    keyDev_victory.enabled = value;
+    keyDev_defeat.enabled = value;
+}
 

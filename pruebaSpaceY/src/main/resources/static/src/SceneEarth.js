@@ -17,17 +17,6 @@ var toDestroy;          //NI IDEA OIGA                  ************************
 var movTxt = 2;    //Píxeles que se mueve el texto al hacer hovering
 var counter;    //contador de 
 
-//Inputs
-var key_left;
-var key_right;
-var key_up;
-var key_down;
-var key_interact;
-var key_repair;
-var key_pause;
-
-var keyDev_victory;
-var keyDev_defeat;
 
 //Objetos
 //Marte
@@ -428,7 +417,7 @@ class SceneEarth extends Phaser.Scene {
 
         //CHATBOX
         //Lobby chat
-        this.chat = new InGameChat(this, game.config.width / 9 -15, game.config.height / 5 + 50, 400, 265);
+        this.chat = new InGameChat(this, game.config.width / 9 -15, game.config.height / 5 + 50, 400, 265, 10);
 
         //Chatbox icon
         this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
@@ -464,12 +453,18 @@ class SceneEarth extends Phaser.Scene {
         this.writeTextChat = this.add.dom(295, 550).createFromCache('formChatEarth').setVisible(true);
         
         var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
-        key_enter.on('down', () => {this.chat.SendMessage(); this.writeTextChat.getChildByName('Chat').blur();});
+        key_enter.on('down', () => {this.chat.SendMessage();});
 
 
         this.input.mouse.disableContextMenu();
         this.input.on('pointerdown', function (pointer) {
             that.writeTextChat.getChildByName('Chat').blur();
+        });
+
+        this.input.keyboard.on('keydown', function (event) {
+            if(event.key == " "){
+                that.writeTextChat.getChildByName('Chat').value += " ";
+            }
         });
 
         //Chatbox code
@@ -481,14 +476,15 @@ class SceneEarth extends Phaser.Scene {
 
         //this.chatText.setMask(mask).setVisible(false);
 
-        var zone = this.add.zone(game.config.width / 6 * 4 + 10, game.config.height / 5 + 1, 320, game.config.height / 5 * 3 + 5).setOrigin(0).setInteractive();
+        //Zona arrastrar chat
+        var zone = this.add.zone(100, 300, 300, 350).setOrigin(0).setInteractive();
         
         zone.on('pointermove', function (pointer) {
 
             if (pointer.isDown) {
-                that.chatText.y += (pointer.velocity.y / 10);
+                that.chat.chat.y += (pointer.velocity.y / 10);
 
-                that.chatText.y = Phaser.Math.Clamp(that.chatText.y, (game.config.height / 5 + 10) - (25 * lineasChat), game.config.height / 5 + 10);
+                that.chat.chat.y = Phaser.Math.Clamp(that.chat.chat.y, (game.config.height / 5 + 10) - (25 * that.chat.lineasChat), game.config.height / 5 + 10);
             }
 
         });

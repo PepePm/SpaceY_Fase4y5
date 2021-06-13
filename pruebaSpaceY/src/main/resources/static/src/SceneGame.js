@@ -17,17 +17,6 @@ var toDestroy;
 var movTxt = 2;    //Píxeles que se mueve el texto al hacer hovering
 var counter;
 
-//Inputs
-var key_left;
-var key_right;
-var key_up;
-var key_down;
-var key_interact;
-var key_repair;
-var key_pause;
-
-var keyDev_victory;
-var keyDev_defeat;
 
 //Objetos
 //Marte
