@@ -333,7 +333,7 @@ class SceneMars extends Phaser.Scene {
                         MinePilot = true;
                         that.UiMarsMinePilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsMinePilot, data["value"]);
-                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: MinePilot = false, callbackScope: this});
+                        that.event = that.scene.time.addEvent({ delay: 5*500, callback: MinePilot = false, callbackScope: this});
                     }
                     
                     break;
@@ -343,7 +343,7 @@ class SceneMars extends Phaser.Scene {
                         RocketPilot = true;
                         that.UiMarsRocketPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsRocketPilot, data["value"]);
-                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: RocketPilot = false, callbackScope: this});
+                        that.event = that.scene.time.addEvent({ delay: 5*500, callback: RocketPilot = false, callbackScope: this});
 
                     }
                    
@@ -354,7 +354,7 @@ class SceneMars extends Phaser.Scene {
                         TerraPilot = true;
                         that.UiMarsTerraPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsTerraPilot, data["value"]);
-                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: TerraPilot = false, callbackScope: this});
+                        that.event = that.scene.time.addEvent({ delay: 5*500, callback: TerraPilot = false, callbackScope: this});
                     }
                     
                     break;
@@ -473,7 +473,7 @@ class SceneMars extends Phaser.Scene {
 
         });
 
-        this.writeTextChat = this.add.dom(1130, 680).createFromCache('formIngameChat').setVisible(true);
+        this.writeTextChat = this.add.dom(1130, 680).createFromCache('formChatMars').setVisible(true);
 
         
 

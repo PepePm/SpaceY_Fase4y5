@@ -9,7 +9,7 @@ class InGameChat {
                 fontFamily: 'menuFont', 
                 color: 'white',
                 wordWrap: { width: 450 } 
-            }).setOrigin(0).setDepth(4);
+            }).setOrigin(0).setDepth(1004);
 
         var graphics = this.scene.make.graphics();
         graphics.fillRect(x, y, x + w, y + h);

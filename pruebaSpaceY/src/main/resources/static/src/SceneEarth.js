@@ -428,7 +428,7 @@ class SceneEarth extends Phaser.Scene {
 
         //CHATBOX
         //Lobby chat
-        this.chat = new InGameChat(this, game.config.width / 9 -15, game.config.height / 5 + 50, 130, 80);
+        this.chat = new InGameChat(this, game.config.width / 9 -15, game.config.height / 5 + 50, 150, 72);
 
         //Chatbox icon
         this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
@@ -484,7 +484,7 @@ class SceneEarth extends Phaser.Scene {
 
         });
 
-        this.writeTextChat = this.add.dom(340, 550).createFromCache('formIngameChat').setVisible(true);
+        this.writeTextChat = this.add.dom(330, 550).createFromCache('formChatEarth').setVisible(true);
 
 
 
@@ -523,7 +523,7 @@ class SceneEarth extends Phaser.Scene {
                     {
                         foodPilot = true;
                         that.easePilot(that, controlTierra.UIEarthNeedFoodPilot, data["value"]);
-                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: foodPilot = false, callbackScope: this});
+                        that.event = that.scene.time.addEvent({ delay: 5*500, callback: foodPilot = false, callbackScope: this});
                     }  
                     break;
                 case "syncResPilot":
@@ -532,7 +532,7 @@ class SceneEarth extends Phaser.Scene {
                     {
                         resPilot = true;
                         that.easePilot(that, controlTierra.UIEarthNeedResPilot, data["value"]);
-                        this.event = that.scene.time.addEvent({ delay: 5*500, callback: resPilot = false, callbackScope: this});
+                        that.event = that.scene.time.addEvent({ delay: 5*500, callback: resPilot = false, callbackScope: this});
                     }
                     
                     break;
