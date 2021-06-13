@@ -229,7 +229,8 @@ class SceneBoot extends Phaser.Scene {
         this.load.html('nameform', './src/Assets/nameform.html');
         this.load.html('formReg', './src/Assets/formRegistro.html');
         this.load.html('formChat', './src/Assets/formChat.html');
-        this.load.html('formIngameChat', './src/Assets/formIngameChat.html');
+        this.load.html('formChatMars', './src/Assets/formIngameChatMars.html');
+        this.load.html('formChatEarth', './src/Assets/formIngameChatEarth.html');
         this.load.html('formLobby', './src/Assets/formLobby.html');
 
         var progressBox = this.add.graphics();
