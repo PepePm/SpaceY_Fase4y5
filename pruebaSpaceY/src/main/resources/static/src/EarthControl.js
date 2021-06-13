@@ -51,6 +51,14 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         this.pantallaPlano = scene.add.image(1337, 227, "pantallaMapa").setDepth(2);
         // posicionMapa
         this.posicionMapa = scene.add.image(1337, 227, "posicionMapa").setDepth(2).setScale(0.2);
+        this.scene.tweens.add({
+            targets: this.posicionMapa,
+            alpha: 0,
+            duration: 500,
+            ease: 'Expo.easeIn',
+            repeat: -1,
+            yoyo: true
+        });
         // ui_T_Paqueteria_pasarela
         this.paqPasarela = scene.add.image(1056, 561, "paqueteriaPasarela").setDepth(2);////Tubo3
 

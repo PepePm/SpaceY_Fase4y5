@@ -303,7 +303,7 @@ class SceneMars extends Phaser.Scene {
                     var data = {
                         action: "Sync",
                         lobbyID: gameLobbyID,
-                        type: "syncTerraformerWear",
+                        type: "syncTerraformWear",
                         value: maquinas[1].wear,
                     }
                     connection.send(JSON.stringify(data));
@@ -792,6 +792,8 @@ class SceneMars extends Phaser.Scene {
             connection.send(JSON.stringify(data));
         }
         else if (key_right.isDown) {
+            
+            var marteLastRot = marte.rotation;
 
             //Rotación de los elementos de Marte
             updateRotations(-1, delta);

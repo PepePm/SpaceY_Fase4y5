@@ -167,7 +167,7 @@ class SceneEarth extends Phaser.Scene {
 
     create() {
 
-        positionOffset = -1.57;
+        positionOffset = 0;
         this.paused = false;
 
         //PARTE CONSOLA 
@@ -573,9 +573,9 @@ class SceneEarth extends Phaser.Scene {
                     // valor a mostrar(desgaste de la máquina) = data["value"]
                     break;
                 case "syncCharPos":
-                    console.log("Rotacion marte: " + data["value"]);
-                    positionOffset = data["value"];
-                    console.log("Rotacion posicoin: " + controlTierra.posicionMapa.rotation);
+                    //console.log("Rotacion marte: " + data["value"]);
+                    positionOffset = Number(data["value"]);
+                    //console.log("Rotacion posicoin: " + controlTierra.posicionMapa.rotation);
                     // valor a mostrar(desgaste de la máquina) = data["value"]
                     break;
                         
@@ -608,9 +608,14 @@ class SceneEarth extends Phaser.Scene {
     update(time, delta) {
 
         controlTierra.pantallaPlano.rotation += delta / 16000;
-        controlTierra.posicionMapa.rotation += delta / 16000;
-        controlTierra.posicionMapa.rotation += positionOffset;
-        positionOffset = 0;
+        //controlTierra.posicionMapa.rotation += delta / 16000;
+        controlTierra.posicionMapa.rotation = -positionOffset - 3.14/2 + controlTierra.pantallaPlano.rotation;
+        //controlTierra.posicionMapa.rotation += delta / 16000;
+        
+        //controlTierra.posicionMapa.rotation += positionOffset;
+        //positionOffset = 0;
+
+        //console.log(controlTierra.posicionMapa.rotation);
         
         //DEBUG PARTICULAS
         /*if (key_left.isDown) {
