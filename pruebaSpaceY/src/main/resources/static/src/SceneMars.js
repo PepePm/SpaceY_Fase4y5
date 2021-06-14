@@ -230,16 +230,6 @@ class SceneMars extends Phaser.Scene {
         }
         connection.send(JSON.stringify(data));
     }
-    SendChatMsg() {
-        //console.log("EnviandoMensaje");
-        var data = {
-            action: "Sync",
-            lobbyID: gameLobbyID,
-            type: "syncFoodPilot",
-            value: true,
-        }
-        connection.send(JSON.stringify(data));
-    }
     AskForResources() {
         //console.log("PIDIENDO RESOURCES");
         var data = {
@@ -420,6 +410,8 @@ class SceneMars extends Phaser.Scene {
             connection = undefined;
             gameLobbyID = undefined;
 
+            soundtrack.pistas[0].play();
+
             that.scene.stop("SceneGame");
             that.scene.stop("ScenePause"); // METER ESTO EN MENU DE PAUSA (?)
             that.scene.start("SceneMenu");
@@ -439,7 +431,7 @@ class SceneMars extends Phaser.Scene {
         this.chat = new InGameChat(this, game.config.width / 10*6 -7, game.config.height / 5 + 45, 402, 387, 15);
 
         //Chatbox icon
-        this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
+        /*this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
             .setScale(0.6);
         this.chatbutton.setInteractive()
             .on('pointerdown', () => this.MovinBoxes(this, 1))
@@ -455,7 +447,7 @@ class SceneMars extends Phaser.Scene {
         //chatbox write msg
         this.chatWritter = this.add.image(chatPos[6], chatPos[7], 'ChatBox_MsgBox')
             .setScale(0.37);
-        this.chatWritter.setOrigin(0.5);
+        this.chatWritter.setOrigin(0.5);*/
 
         //chatbox send
         /*this.sendButton = this.add.image(chatPos[8], chatPos[9], 'ChatBox_SendBtn')
@@ -1028,73 +1020,7 @@ class SceneMars extends Phaser.Scene {
     ReturnTerraPilot(){
         this.TerraPilot = false;
     }
-    OpenChat(scene) {
 
-        var nX = 0; var nY = 1;
-        for (let i = 0; i < scene.chatboxStuff.length; i++) {
-            scene.tweens.add({
-                targets: scene.chatboxStuff[i],
-                x: chatTween[nX],
-                y: chatTween[nY],
-                //delay: 100,
-                //aplha: {start: game.config.width / 2, to: game.config.width / 8},
-                duration: 100,
-                ease: 'Bounce.easeOut',
-            });
-            nX += 2; nY += 2;
-        }
-        chatBoxOut = true;
-
-    }
-    ChatManager(scene, id) {
-        if (!chatBoxActive && chatBoxOut && !lobbyActive) {
-            this.CloseChat(scene);
-        }
-        if (chatBoxActive && !chatBoxOut && !lobbyActive)    //abrimos chat
-        {
-            scene.chatWritter.setVisible(true);
-            scene.sendButton.setVisible(true);
-            scene.chatText.setVisible(true);
-            scene.writeTextChat.setVisible(true);
-            scene.lobbyText.setVisible(false);
-            scene.numPlayersTxt.setVisible(false);
-            scene.serverOnlineTxt.setVisible(false);
-            this.OpenChat(scene);
-        }
-        if (!chatBoxActive && !chatBoxOut && lobbyActive)    //abrimos lobby
-        {
-            scene.chatWritter.setVisible(false);
-            scene.sendButton.setVisible(false);
-            scene.chatText.setVisible(false);
-            scene.writeTextChat.setVisible(false);
-            scene.lobbyText.setVisible(true);
-            scene.numPlayersTxt.setVisible(true);
-            scene.serverOnlineTxt.setVisible(true);
-            this.OpenChat(scene);
-        }
-        if (chatBoxActive && chatBoxOut && lobbyActive) {
-            if (id == 0) {
-                scene.chatWritter.setVisible(false);
-                scene.sendButton.setVisible(false);
-                scene.chatText.setVisible(false);
-                scene.writeTextChat.setVisible(false);
-                scene.lobbyText.setVisible(true);
-                scene.numPlayersTxt.setVisible(true);
-                scene.serverOnlineTxt.setVisible(true);
-                chatBoxActive = false;
-            }
-            else {
-                scene.chatWritter.setVisible(true);
-                scene.sendButton.setVisible(true);
-                scene.chatText.setVisible(true);
-                scene.writeTextChat.setVisible(true);
-                scene.lobbyText.setVisible(false);
-                scene.numPlayersTxt.setVisible(false);
-                scene.serverOnlineTxt.setVisible(false);
-                lobbyActive = false;
-            }
-        }
-    }
     //sacar el chat 
 
     /*
@@ -1491,7 +1417,6 @@ function SwitchInputs(value){
     key_down.enabled = value;
     key_interact.enabled = value;
     key_repair.enabled = value;
-    key_pause.enabled = value;
 
     keyDev_victory.enabled = value;
     keyDev_defeat.enabled = value;

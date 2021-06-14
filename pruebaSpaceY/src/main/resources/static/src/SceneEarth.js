@@ -424,7 +424,7 @@ class SceneEarth extends Phaser.Scene {
         this.chat = new InGameChat(this, game.config.width / 9 -15, game.config.height / 5 + 50, 400, 265, 10);
 
         //Chatbox icon
-        this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
+        /*this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
             .setScale(0.6);
         this.chatbutton.setInteractive()
             .on('pointerdown', () => this.MovinBoxes(this, 1))
@@ -441,7 +441,7 @@ class SceneEarth extends Phaser.Scene {
         this.chatWritter = this.add.image(chatPos[6], chatPos[7], 'ChatBox_MsgBox')
             .setScale(0.37);
         this.chatWritter.setOrigin(0.5);
-
+        */
         var that = this;
 
         //chatbox send
@@ -613,6 +613,8 @@ class SceneEarth extends Phaser.Scene {
         connection.onclose = function () {
             connection = undefined;
             gameLobbyID = undefined;
+
+            soundtrack.pistas[0].play();
 
             that.scene.stop("SceneGame");
             that.scene.stop("ScenePause"); // METER ESTO EN MENU DE PAUSA (?)
@@ -868,204 +870,7 @@ class SceneEarth extends Phaser.Scene {
     }
 
 
-    OpenChat(scene) {
-
-        var nX = 0; var nY = 1;
-        for (let i = 0; i < scene.chatboxStuff.length; i++) {
-            scene.tweens.add({
-                targets: scene.chatboxStuff[i],
-                x: chatTween[nX],
-                y: chatTween[nY],
-                //delay: 100,
-                //aplha: {start: game.config.width / 2, to: game.config.width / 8},
-                duration: 100,
-                ease: 'Bounce.easeOut',
-            });
-            nX += 2; nY += 2;
-        }
-        chatBoxOut = true;
-
-    }
-    ChatManager(scene, id) {
-        if (!chatBoxActive && chatBoxOut && !lobbyActive) {
-            this.CloseChat(scene);
-        }
-        if (chatBoxActive && !chatBoxOut && !lobbyActive)    //abrimos chat
-        {
-            scene.chatWritter.setVisible(true);
-            scene.sendButton.setVisible(true);
-            scene.chatText.setVisible(true);
-            scene.writeTextChat.setVisible(true);
-            scene.lobbyText.setVisible(false);
-            scene.numPlayersTxt.setVisible(false);
-            scene.serverOnlineTxt.setVisible(false);
-            this.OpenChat(scene);
-        }
-        if (!chatBoxActive && !chatBoxOut && lobbyActive)    //abrimos lobby
-        {
-            scene.chatWritter.setVisible(false);
-            scene.sendButton.setVisible(false);
-            scene.chatText.setVisible(false);
-            scene.writeTextChat.setVisible(false);
-            scene.lobbyText.setVisible(true);
-            scene.numPlayersTxt.setVisible(true);
-            scene.serverOnlineTxt.setVisible(true);
-            this.OpenChat(scene);
-        }
-        if (chatBoxActive && chatBoxOut && lobbyActive) {
-            if (id == 0) {
-                scene.chatWritter.setVisible(false);
-                scene.sendButton.setVisible(false);
-                scene.chatText.setVisible(false);
-                scene.writeTextChat.setVisible(false);
-                scene.lobbyText.setVisible(true);
-                scene.numPlayersTxt.setVisible(true);
-                scene.serverOnlineTxt.setVisible(true);
-                chatBoxActive = false;
-            }
-            else {
-                scene.chatWritter.setVisible(true);
-                scene.sendButton.setVisible(true);
-                scene.chatText.setVisible(true);
-                scene.writeTextChat.setVisible(true);
-                scene.lobbyText.setVisible(false);
-                scene.numPlayersTxt.setVisible(false);
-                scene.serverOnlineTxt.setVisible(false);
-                lobbyActive = false;
-            }
-        }
-    }
-    //sacar el chat 
-    MovinBoxes(scene, id) {
-        sfx.sounds[1].play();
-
-        var nX = 0; var nY = 1;
-        switch (id) {
-            case 0: // Abrir cerrar lobby 
-                lobbyActive = !lobbyActive;
-                this.ChatManager(scene, id);
-                break;
-            case 1: //abrir cerrar chatbox chatbox
-
-                chatBoxActive = !chatBoxActive;
-                this.ChatManager(scene, id);
-
-                break;
-            case 2: //login loginBox,loginOption;
-
-
-                if (loginOut)    //guardar log in
-                {
-
-                    for (let i = 0; i < scene.loginStuff.length; i++) {
-                        scene.tweens.add({
-                            targets: scene.loginStuff[i],
-                            x: loginPos[nX],
-                            y: loginPos[nY],
-                            duration: 100,
-                            ease: 'Bounce.easeOut',
-                        });
-                        nX += 2; nY += 2;
-                    }
-                    loginOut = true;
-                    this.ShowLoginFields(scene, loginOut);
-
-                    this.accountText.setVisible(false);
-                    this.accountLogin.setVisible(false);
-                    this.accountLogin.setVisible(false);
-                    this.accountLogin.setActive(false);
-                }
-                else if (!loginOut) //sacar log in
-                {
-                    this.accountText.setVisible(true);
-                    //this.accountLogin.setVisible(true);
-
-                    for (let i = 0; i < scene.loginStuff.length; i++) {
-                        scene.tweens.add({
-                            targets: scene.loginStuff[i],
-                            x: loginTween[nX],
-                            y: loginTween[nY],
-                            duration: 100,
-                            ease: 'Bounce.easeOut',
-                        });
-                        nX += 2; nY += 2;
-                    }
-                    loginOut = false;
-
-                    this.ShowLoginFields(scene, loginOut);
-                }
-
-                break;
-            case 3: //register registerBox, registerBtn, nextImg, prevImg;
-
-                if (registerOut) //guardar register
-                {
-                    this.regLogin.setVisible(false);
-                    this.accountText.setColor("white");
-                    this.accountText.setText('Please enter in your account');
-
-                    for (let i = 0; i < scene.registerStuff.length; i++) {
-                        scene.tweens.add({
-                            targets: scene.registerStuff[i],
-                            x: regisPos[nX],
-                            y: regisPos[nY],
-                            duration: 100,
-                            ease: 'Expo.easeOut',
-                        });
-                        nX += 2; nY += 2;
-                    }
-                    registerOut = false
-                    //this.ShowRegisternFields(scene,registerOn);
-                }
-                else if (!registerOut) //sacar register
-                {
-                    this.regLogin.setVisible(true);
-                    for (let i = 0; i < scene.registerStuff.length; i++) {
-                        scene.tweens.add({
-                            targets: scene.registerStuff[i],
-                            x: regisTween[nX],
-                            y: regisTween[nY],
-                            duration: 100,
-                            ease: 'Expo.easeOut',
-                        });
-                        nX += 2; nY += 2;
-                    }
-                    registerOut = true
-                    //this.ShowRegisternFields(scene,registerOn);
-                }
-
-                break;
-        }
-
-
-
-
-    }
-    CloseChat(scene) {
-        var nX = 0; var nY = 1;
-        scene.chatWritter.setVisible(false);
-        scene.sendButton.setVisible(false);
-        scene.chatText.setVisible(false);
-        scene.writeTextChat.setVisible(false);
-        scene.lobbyText.setVisible(false);
-        scene.numPlayersTxt.setVisible(false);
-        scene.serverOnlineTxt.setVisible(false);
-        for (let i = 0; i < scene.chatboxStuff.length; i++) {
-            scene.tweens.add({
-                targets: scene.chatboxStuff[i],
-                x: chatPos[nX],
-                y: chatPos[nY],
-                //delay: 100,
-                //aplha: {start: game.config.width / 2, to: game.config.width / 8},
-                duration: 100,
-                ease: 'Bounce.easeIn',
-            });
-            nX += 2; nY += 2;
-        }
-        chatBoxOut = false;
-        chatBoxActive = false;
-        lobbyActive = false;
-    }
+    
     //INTERACTIVIDAD
 
 

@@ -51,7 +51,14 @@ class Machine {//extends Phaser.GameObjects.Sprite {
         this.wear = this.maxWear;
         this.wearPerc = 1;
         var rand = Phaser.Math.Linear(5000, 15000, Phaser.Math.Between(0,100)/100.0);
-        this.eventWear = scene.time.addEvent({ delay: rand, callback: this.updateWear, callbackScope: this, loop: true });
+        this.eventWear = scene.time.addEvent({ delay: rand, 
+            callback: function(){
+                if(this.nMachine != 0)
+                    this.updateWear();
+                else if(!objCohete.goLand)
+                    this.updateWear();
+            },
+            callbackScope: this, loop: true });
         this.isBroken = false;
 
         this.repairCost = MAX_MATERIAL*0.2;
