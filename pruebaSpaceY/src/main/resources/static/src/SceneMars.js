@@ -213,6 +213,8 @@ class SceneMars extends Phaser.Scene {
             1353, 675,  //boton necesito comida
             1078, 680,  //caja de mensaje
             1150, 419,  //chatbox
+            995, 166, //piloto tormenta
+            1110, 166, //piloto meteorito
         ];
 
     }
@@ -273,6 +275,8 @@ class SceneMars extends Phaser.Scene {
         this.TerraPilot = false;
         this.AntenaPilot = false;
         this.RocketPilot = false;
+        this.StormPilot = false;
+        this.MeteorPilot = false;
 
         connection.onmessage = function (msg) {
             var data = JSON.parse(msg.data);
@@ -391,10 +395,26 @@ class SceneMars extends Phaser.Scene {
                 case "syncLobbyMsgs":
                     that.chat.UpdateMessages(data["value"]);
                     break;
+                case "syncDangerStorm":
+                    if(that.StormPilot == false){
+                        that.StormPilot = true;
+                        that.UiStormPilot.setVisible(data["value"]);
+                        that.easePilot(that, that.UiStormPilot, data["value"]);
+                        
+                    }   //MOSTRAR POR CONSOLA EN LAS ALERTAS QUE SE VIENEN METEORITOS
+                    break;
+                case "syncDangerMeteor":
+                    if(that.MeteorPilot == false){
+                        that.MeteorPilot = true;
+                        that.UiMeteorPilot.setVisible(data["value"]);
+                        that.easePilot(that, that.UiMeteorPilot, data["value"]);
+                        
+                    }   //MOSTRAR POR CONSOLA EN LAS ALERTAS QUE SE VIENEN METEORITOS
+                    break;
             }
 
         }
-
+       
 
         connection.onclose = function () {
             connection = undefined;
@@ -754,7 +774,8 @@ class SceneMars extends Phaser.Scene {
         this.UiMarsTerraPilot = this.add.image(ConsolePos[12], ConsolePos[13], "UIMarsTerraPilot").setDepth(4);
         this.UiMarsRocketPilot = this.add.image(ConsolePos[14], ConsolePos[15], "UIMarsRocketPilot").setDepth(4);
         this.UiMarsMinePilot = this.add.image(ConsolePos[16], ConsolePos[17], "UIMarsMinePilot").setDepth(4);
-
+        this.UiStormPilot  = this.add.image(ConsolePos[28], ConsolePos[29], "UIMarsStormPilot").setDepth(4);
+        this.UiMeteorPilot = this.add.image(ConsolePos[30], ConsolePos[31], "UIMarsMeteorPilot").setDepth(4);
         //boton para enviar mensaje de chat
 
         this.UiMarsSndMsgBtn = this.add.image(ConsolePos[18], ConsolePos[19], "UIMarsSndMsg").setDepth(4)
@@ -981,6 +1002,16 @@ class SceneMars extends Phaser.Scene {
     }
 
     //CONTROL DE LOS PILOTOS
+    ReturnStormPilot()
+    {
+        this.StormPilot = false;
+        console.log("las cosas de tocar funcionan");
+    }
+    ReturnMeteorPilot()
+    {
+        this.MeteorPilot = false;
+        console.log("las cosas de tocar funcionan");
+    }
     ReturnAntenaPilot()
     {
         this.AntenaPilot = false;
@@ -1235,6 +1266,8 @@ class SceneMars extends Phaser.Scene {
                     else if(boton == this.UiMarsTerraPilot)this.ReturnTerraPilot();
                     else if(boton == this.UiMarsAntenaPilot)this.ReturnAntenaPilot();
                     else if(boton == this.UiMarsRocketPilot)this.ReturnRocketPilot();
+                    else if(boton == this.UiStormPilot)this.ReturnStormPilot();
+                    else if(boton == this.UiMeteorPilot)this.ReturnMeteorPilot();
                 },
             });
         }

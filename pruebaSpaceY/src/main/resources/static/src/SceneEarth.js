@@ -532,9 +532,6 @@ class SceneEarth extends Phaser.Scene {
                         console.log("activando piloto");
                         that.foodPilot = true;
                         that.easePilot(that, controlTierra.UIEarthNeedFoodPilot, data["value"]);
-                        //that.event = that.time.addEvent({ delay: 5*500, callback: that.ReturnFoodPilot, callbackScope: that});
-
-                
                     }  
                     break;
                 case "syncResPilot":
@@ -545,12 +542,10 @@ class SceneEarth extends Phaser.Scene {
                         console.log("activando piloto res");
                         that.resPilot = true;
                         that.easePilot(that, controlTierra.UIEarthNeedResPilot, data["value"]);
-                        //that.event = that.time.addEvent({ delay: 5*500, callback: that.ReturnResPilot, callbackScope: that});
-
-        
                     }
                     
                     break;
+
                 case "syncCounter":
                     controlTierra.counter.Sync(data["value"]);
                     break;
@@ -854,6 +849,12 @@ class SceneEarth extends Phaser.Scene {
 
             case "Terraform":
                 typeToSync = "syncTerraformPilot";
+                break;
+            case "DangerStorm":
+                typeToSync = "syncDangerStorm";
+                break;
+            case "DangerMeteor":
+                typeToSync = "syncDangerMeteor";
                 break;
         }
         //console.log("Solicitando arreglar máquina");
