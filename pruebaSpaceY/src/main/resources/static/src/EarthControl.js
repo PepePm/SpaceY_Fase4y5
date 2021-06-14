@@ -17,8 +17,8 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             530, 550,  //boton enviar mensaje 
             300, 550,  //caja de mensaje
             350, 355,  //chatbox
-            623,660,    //posicion botón tormenta
-            623,550,    //posicion botón meteoritos
+            630, 660,    //posicion botón tormenta
+            630,550,    //posicion botón meteoritos
         ];
 
         this.scene = scene;
