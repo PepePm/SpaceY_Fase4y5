@@ -315,6 +315,7 @@ class SceneMars extends Phaser.Scene {
                 //Me dicen que actualize el piloto de alguna máquina
                 case "syncAntenaPilot":
                     if(that.AntenaPilot == false){
+                        sfx.sounds[7].play();
                         that.AntenaPilot = true;
                         that.UiMarsAntenaPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsAntenaPilot, data["value"]);
@@ -325,6 +326,7 @@ class SceneMars extends Phaser.Scene {
                 case "syncMinePilot":
                     if (that.MinePilot == false)
                     {
+                        sfx.sounds[7].play();
                         that.MinePilot = true;
                         that.UiMarsMinePilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsMinePilot, data["value"]);
@@ -334,6 +336,7 @@ class SceneMars extends Phaser.Scene {
                 case "syncRocketPilot":
                     if(that.RocketPilot == false)
                     {
+                        sfx.sounds[7].play();
                         that.RocketPilot = true;
                         that.UiMarsRocketPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsRocketPilot, data["value"]);
@@ -344,6 +347,7 @@ class SceneMars extends Phaser.Scene {
                 case "syncTerraformPilot":
                     if(that.TerraPilot == false)
                     {
+                        sfx.sounds[7].play();
                         that.TerraPilot = true;
                         that.UiMarsTerraPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsTerraPilot, data["value"]);
@@ -387,6 +391,7 @@ class SceneMars extends Phaser.Scene {
                     break;
                 case "syncDangerStorm":
                     if(that.StormPilot == false){
+                        sfx.sounds[7].play();
                         that.StormPilot = true;
                         that.UiStormPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiStormPilot, data["value"]);
@@ -395,6 +400,7 @@ class SceneMars extends Phaser.Scene {
                     break;
                 case "syncDangerMeteor":
                     if(that.MeteorPilot == false){
+                        sfx.sounds[7].play();
                         that.MeteorPilot = true;
                         that.UiMeteorPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMeteorPilot, data["value"]);

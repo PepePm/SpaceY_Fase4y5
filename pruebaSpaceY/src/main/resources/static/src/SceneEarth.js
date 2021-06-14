@@ -526,10 +526,11 @@ class SceneEarth extends Phaser.Scene {
             switch (data["type"]) {
                 case "syncFoodPilot":
                     controlTierra.UIEarthNeedFoodPilot.setVisible(data["value"]);
-                    console.log("pidiendo comida");
+                    //console.log("pidiendo comida");
                     if(that.foodPilot == false)
                     {
-                        console.log("activando piloto");
+                        //console.log("activando piloto");
+                        sfx.sounds[7].play();
                         that.foodPilot = true;
                         that.easePilot(that, controlTierra.UIEarthNeedFoodPilot, data["value"]);
                     }  
@@ -539,7 +540,8 @@ class SceneEarth extends Phaser.Scene {
                     console.log("pìdiendo recursos");
                     if(that.resPilot == false)
                     {
-                        console.log("activando piloto res");
+                        //console.log("activando piloto res");
+                        sfx.sounds[7].play();
                         that.resPilot = true;
                         that.easePilot(that, controlTierra.UIEarthNeedResPilot, data["value"]);
                     }

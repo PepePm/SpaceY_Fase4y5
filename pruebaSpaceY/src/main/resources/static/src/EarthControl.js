@@ -932,7 +932,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         if (entrada)
             sfx.sounds[6].play();
         else
-            sfx.sounds[7].play();
+            sfx.sounds[9].play();
 
         var that = this;
         var thatEntrada = entrada;
