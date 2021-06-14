@@ -14,8 +14,8 @@ class Rocket {
 
     TakeOff(delta) {
 
-        this.val += delta/2300;
-        this.obj.setOrigin(0.5, 2.5+this.val);
+        this.val += delta / 2300;
+        this.obj.setOrigin(0.5, 2.5 + this.val);
 
         if (this.val > 2.5) {
 
@@ -29,6 +29,7 @@ class Rocket {
 
             //Aterriza en tierra
             sfx.sounds[12].play();
+
             //ENVIAMOS MENSAJE AL SERVIDOR PARA ATERRIZAR COHETE
             var data = {
                 action: "Sync",
@@ -43,13 +44,18 @@ class Rocket {
 
     Land(delta) {
 
+<<<<<<< Updated upstream
         this.val -= delta/2300;
         this.obj.setOrigin(0.5, 2.5+this.val);
         
+=======
+        this.val -= delta / 2300;
+        this.obj.setOrigin(0.5, 2.5 + this.val);
+>>>>>>> Stashed changes
         if (this.val <= 0) {
             this.goLand = false;
             this.val = 0;
-            this.obj.setOrigin(0.5, 2.5+this.val);
+            this.obj.setOrigin(0.5, 2.5 + this.val);
             estacionTransporte.isComing = false;
             estacionTransporte.location = 0;
             estacionTransporte.loadOfEarth = true;
@@ -58,46 +64,46 @@ class Rocket {
         }
     }
 
-    //USALO COMO ES DEBIDO PEPE :D
- Rocketeing (object,scene, xPos, yPos, shake)
- {   
-     var dir = 1;
-     var loopTime = 10;
-     var motion;    //landing - launching
-     shake = 2;   //distancia de meneo, numeros bajos plis < 5
-    
-     if(yPos<0){    //si está lanzandose
-         motion = 'Expo.easeOut';
+
+    Rocketeing(object, scene, xPos, yPos, shake) {
+        var dir = 1;
+        var loopTime = 10;
+        var motion;    //landing - launching
+        shake = 2;   //distancia de meneo, numeros bajos plis < 5
+
+        if (yPos < 0) {    //si está lanzandose
+            motion = 'Expo.easeOut';
         }
-    else{   //si aterriza
+        else {   //si aterriza
             motion = 'Expo.easeIn'
         }
-     scene.tweens.add({
-         targets: object,
-         props: {
-             x: { value: 
-                     function () { 
-                     return xPos + (dir*=-1 )*shake;
-                     },
-                 ease:'Linear',
-                 duration : loopTime, //cuanto mas bajo más potente
-                 yoyo: true,    //ida y vuelta
-                 repeat:-1,  // que se repita en bucle este ease en x
-                 },
- 
-             y: { 
-                 value: function () { 
-                     return object.y -= yPos; 
-                 },
-                 ease: motion,
-                 duration: yPos  //que el ease en y dure 3s
-                 },
-         },
-         duration:100,  //que todo el tween dure 
-         
-         
-     });
-     
- }
+        scene.tweens.add({
+            targets: object,
+            props: {
+                x: {
+                    value:
+                        function () {
+                            return xPos + (dir *= -1) * shake;
+                        },
+                    ease: 'Linear',
+                    duration: loopTime, //cuanto mas bajo más potente
+                    yoyo: true,    //ida y vuelta
+                    repeat: -1,  // que se repita en bucle este ease en x
+                },
+
+                y: {
+                    value: function () {
+                        return object.y -= yPos;
+                    },
+                    ease: motion,
+                    duration: yPos  //que el ease en y dure 3s
+                },
+            },
+            duration: 100,  //que todo el tween dure 
+
+
+        });
+
+    }
 
 }

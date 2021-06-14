@@ -171,7 +171,7 @@ class SceneEarth extends Phaser.Scene {
 
 
 
-        sfx.sounds[2].loop = sfx.loop;  //NI IDEA OIGA                  ****************************************
+        sfx.sounds[2].loop = sfx.loop;  
         sfx.sounds[3].loop = sfx.loop;
         sfx.sounds[8].loop = true;
         sfx.sounds[14].loop = true;
@@ -562,7 +562,7 @@ class SceneEarth extends Phaser.Scene {
                 case "syncRocketToEarth":
                    
 
-                    controlTierra.tweenLanzPuertaExtIn();
+                    controlTierra.tweenLanzPuertaExtIn(true);
                     controlTierra.goLand = true;
                     //console.log("recibiendo cohete de marte");
                     //SINCRONIZAR CARGA DE MATERIALES 
