@@ -243,7 +243,17 @@ class SceneMars extends Phaser.Scene {
 
     create() {
 
-        
+        this.UIMarsTerraform = this.add.image(1430, ConsolePos[5], "UIMarsTerraform").setDepth(4).setScale(0).setDepth(7);
+        this.UIMarsTerraform.tint = Phaser.Display.Color.GetColor(0, 255, 80);
+
+        this.tweens.add({
+            targets: this.UIMarsTerraform,
+            alpha: 0,
+            duration: 2000,
+            ease: 'Expo.easeIn',
+            repeat: -1,
+            yoyo: true
+        });
 
         //***************                                METODOS DE INTERACCION CON SERVIDOR               ************************* */
         //console.log("GameSessionInnitiated");
@@ -812,6 +822,7 @@ class SceneMars extends Phaser.Scene {
     update(time, delta) {
         //Actualizo el porcentaje de terraformación
         if (key_up.isDown) {
+            this.UIMarsTerraform.setScale(indTerra.size / indTerra.maxSize);
             //console.log("Nivel terraform: " + indTerra.size);
             var data = {
                 action: "Sync",
