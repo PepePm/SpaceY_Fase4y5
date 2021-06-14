@@ -488,7 +488,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             //estacionTransporte.isComing = true;
             //estacionTransporte.loadOfEarth = true;
             //Aterriza en marte
-            sfx.sounds[12].play();
+            //sfx.sounds[12].play();
             //enviamos la comida del cohete y los materiales añadidos para sincronizarlos con el otro cohete 
             //console.log("comida enviada" + this.objCohete.comLoad);
             //console.log("comida enviada" + this.objCohete.matLoad);
@@ -719,7 +719,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             yoyo: true
         });
         if (this.size === this.maxSize && this.typeOfLoad === 1 && !this.goTakeOff) {
-            sfx.sounds[11].play();
+            //sfx.sounds[7].play();
             obj.tint = Phaser.Display.Color.GetColor(255, 255, 255)
 
             var delay = 0;
@@ -732,7 +732,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             this.size = 0;
             this.typeOfLoad = -1;
 
-            this.tweenLanzPuertaExtIn()
+            this.tweenLanzPuertaExtIn(false)
 
             //Pulsar botón para cuenta atrás
             sfx.sounds[0].play();
@@ -927,8 +927,16 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
 
     //Compuerta lanzadera salida exterior
-    tweenLanzPuertaExtIn() {
+    tweenLanzPuertaExtIn(entrada) {
 
+        if (entrada)
+            sfx.sounds[6].play();
+        else
+            sfx.sounds[7].play();
+
+        var that = this;
+        var thatEntrada = entrada;
+        
         this.countLanz = 0;
         this.scene.tweens.add({
             targets: this.lanzPuertaOut,
@@ -938,12 +946,18 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             repeat: 0,
             yoyo: false,
 
-            onComplete: this.tweenLanzPuertaExtOut.bind(this)
+            onComplete: function(){that.tweenLanzPuertaExtOut(thatEntrada);}
         });
 
     }
 
-    tweenLanzPuertaExtOut() {
+    tweenLanzPuertaExtOut(entrada) {
+
+        if (entrada)
+            sfx.sounds[12].play();
+        else
+            sfx.sounds[11].play();
+        
 
         this.scene.tweens.add({
             targets: this.lanzPuertaOut,

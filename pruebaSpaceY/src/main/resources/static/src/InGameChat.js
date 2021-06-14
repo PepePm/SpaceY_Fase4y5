@@ -26,7 +26,7 @@ class InGameChat {
         var message = this.scene.writeTextChat.getChildByName('Chat').value;
 
         if(message == ""){
-            console.log("no envío mensajes vacíos");
+            //console.log("no envío mensajes vacíos");
             return;
         }
             
