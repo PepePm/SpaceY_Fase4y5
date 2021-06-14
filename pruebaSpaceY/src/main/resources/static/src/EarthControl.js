@@ -10,13 +10,15 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             630, 355,  //caja pilotos
             183, 660,    //piloto antena roto
             293, 660,  //piloto terraformador roto
-            402, 660, //piloto cohete roto
-            518, 660,  //piloto mine roto
+            403, 660, //piloto cohete roto
+            513, 660,  //piloto mine roto
             630, 290,  //boton enviar comida
             630, 420,  //boton enviar recursos
             530, 550,  //boton enviar mensaje 
             300, 550,  //caja de mensaje
             350, 355,  //chatbox
+            623,660,    //posicion botón tormenta
+            623,550,    //posicion botón meteoritos
         ];
 
         this.scene = scene;
@@ -314,7 +316,21 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             });
 
             this.UIEarthAlerts = scene.add.image(ConsolePos[6], ConsolePos[7], "UIEarthAlerts").setDepth(4);
-        
+            //botones de peligro 
+            this.UiMeteorDanger = scene.add.image(ConsolePos[28], ConsolePos[29], "UIEarthMeteorDanger").setDepth(4)
+            .setInteractive()
+                .on('pointerdown', () => scene.WarnFixMachine("DangerMeteor"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerup', () => this.Highlight(this.UiMeteorDanger, true))
+                .on('pointerover', () => this.Highlight(this.UiMeteorDanger, true))
+                .on('pointerout', () => this.Highlight(this.UiMeteorDanger, false));
+            this.UiStormDanger = scene.add.image(ConsolePos[30], ConsolePos[31], "UIEarthStormDanger").setDepth(4)
+            .setInteractive()
+                .on('pointerdown', () => scene.WarnFixMachine("DangerStorm"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerup', () => this.Highlight(this.UiStormDanger, true))
+                .on('pointerover', () => this.Highlight(this.UiStormDanger, true))
+                .on('pointerout', () => this.Highlight(this.UiStormDanger, false));
+
+            //PILOTOS DE LA
             this.UiEarthPilots = scene.add.image(ConsolePos[8], ConsolePos[9], "UIEarthPilots").setDepth(4);  //espacio para los pilotos de 
             this.UiEarthSndBrkAntenaPilot = scene.add.image(ConsolePos[10], ConsolePos[11], "UiEarthSndBrkAntenaPilot").setDepth(4)
                 .setInteractive()

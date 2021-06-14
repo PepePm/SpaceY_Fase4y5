@@ -129,6 +129,9 @@ class SceneBoot extends Phaser.Scene {
         this.load.image("UIMarsTerraPilot", directory+"UI_Marte_Piloto_Terraformador.png" );
         this.load.image("UIMarsAntennaPilot", directory+"UI_Marte_Piloto_Antena.png" );
         this.load.image("UIMarsTuto", directory+"TUTORIAL_MARTE.png" );
+        this.load.image("UIMarsStormPilot", directory+"UI_Mars_StormDangerPilot.png" );
+        this.load.image("UIMarsMeteorPilot", directory+"UI_Mars_MeteorDangerPilot.png" );
+        
 
 
         //CONSOLA DE LA TIERRA
@@ -147,7 +150,8 @@ class SceneBoot extends Phaser.Scene {
         this.load.image("UIEarthSndMsg", directory+"UI_Tierra_Boton_Enviar_Mensaje-08.png" );
         this.load.image("UIEarthChatBox", directory+"UI_Tierra_Caja_Chat-08.png" );
         this.load.image("UIEarthTuto", directory+"TUTORIAL_TIERRA.png" );
-        
+        this.load.image("UIEarthStormDanger", directory+"UI_Tierra_StormDanger.png" );
+        this.load.image("UIEarthMeteorDanger", directory+"UI_Tierra_MeteorDanger.png" );
     
 
         
