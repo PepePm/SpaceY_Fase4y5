@@ -27,22 +27,24 @@ class SceneOptions extends Phaser.Scene {
         var txt2 = (sfx == undefined) ? '0' : sfx.volume;
         var print0 = this.add.text(game.config.width/2 + 200, (game.config.height/8)*3 + 32, txt1); //porcentaje musica
         var print1 = this.add.text(game.config.width/2 + 200, (game.config.height/8)*4 + 32, txt2);//porcentaje sfx
-        
+        var that = this;
         //FONDO ANIMADO YEAH
         this.bckRadio = this.add.image(game.config.width/2, -2000,"radio");
         this.easeMe(this.bckRadio,this,1);
 
         //Altaoces animados
-        this.bckAltavoces = this.add.image(game.config.width/2, -2000,"altavoces");
+        this.bckAltavoces = this.add.image(game.config.width/2, -2000,"altavoces").setOrigin(0.5);
         this.easeMe(this.bckAltavoces,this,1);
-        this.tweens.add({
+        /*this.tweens.add({
             targets: this.bckAltavoces,
             scaleX: 1.1,
             scaleY: 1.1,
             duration: 800,
             ease: 'Elastic.easeOut',
-            repeat: -1,
-        });
+            //onComplete:function(){ },
+            //repeat:-1,
+        });*/
+        this.event = this.time.addEvent({ delay: 600, callback: Altavoz, callbackScope: this, loop: true});
         
 
 
@@ -215,4 +217,18 @@ easeMe(boton,scene,nOp) {
         //onComplete: this.EnterOnMachine.bind(this)
     });
 }
+
+}
+function Altavoz(){
+    var value = soundtrack.volume;
+    console.log("SAAAANIC");
+    this.tweens.add({
+        targets: this.bckAltavoces,
+        scaleX: 1.1 + value,
+        scaleY: 1.1 + value,
+        duration: 800,
+        ease: 'Elastic.easeOut',
+        repeat:-1,
+        onComplete: this.value = 0,
+    });
 }
