@@ -255,22 +255,22 @@ class SceneMenu extends Phaser.Scene {
         this.marsOption.setOrigin(0.5);
 
         //TEXTO AVISO LOG NEEDED
-        this.loginNeededWarning = this.add.text(game.config.width / 2, game.config.height / 8, 'You need to be logged in', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
+        this.loginNeededWarning = this.add.text(game.config.width / 2, game.config.height*2/ 8, 'You need to be logged in', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
             .setVisible(false);
         this.loginNeededWarning.setOrigin(0.5);
 
         //TEXTO AVISO PLANET NEEDED
-        this.planetElectionNeededWarning = this.add.text(game.config.width / 2, game.config.height / 8, 'You need to choose a planet', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
+        this.planetElectionNeededWarning = this.add.text(game.config.width / 2, game.config.height*2 / 8, 'You need to choose a planet', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
             .setVisible(false);
         this.planetElectionNeededWarning.setOrigin(0.5);
 
         //TEXTO AVISO HOST INEXISTENTE
-        this.wrongCodeWarning = this.add.text(game.config.width / 2, game.config.height / 8, 'Wrong code: Lobby not found', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
+        this.wrongCodeWarning = this.add.text(game.config.width / 2, game.config.height*2 / 8, 'Wrong code: Lobby not found', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
             .setVisible(false);
         this.wrongCodeWarning.setOrigin(0.5);
 
         //TEXTO AVISO YA ERES HOST; NO PUEDES HACER JOIN
-        this.alreadyHostWarning = this.add.text(game.config.width / 2, game.config.height / 8, 'You are already hosting', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
+        this.alreadyHostWarning = this.add.text(game.config.width / 2, game.config.height*2 / 8, 'You are already hosting', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
             .setVisible(false);
         this.alreadyHostWarning.setOrigin(0.5);
 
@@ -1288,9 +1288,9 @@ class SceneMenu extends Phaser.Scene {
             case 3: endX = game.config.width / 2; endY = (game.config.height / 8) * 5; break;
             //Altura boton contacts
             case 4: endX = game.config.width / 2; endY = (game.config.height / 8) * 6; break;
-            //this.boxgameId
+            //this.boxgameId >> sprite blanco caja
             case 5: endX = game.config.width / 2; endY = (game.config.height / 16) * 9; break;
-            //this.writeGameID
+            //this.writeGameID  >> texto de caja codigo join
             case 6: endX = game.config.width / 2; endY = (game.config.height / 50) * 29; break;
             default: break;
 
@@ -1352,9 +1352,9 @@ class SceneMenu extends Phaser.Scene {
         var scale;
         switch (nOp) {
             //Altura logo tierra
-            case 1: endX = game.config.width * 5 / 8; endY = game.config.height * 1 / 4; scale = 0.1; break;
+            case 1: endX = game.config.width * 5 / 8; endY = game.config.height * 3 / 8; scale = 0.1; break;
             //Altura logo marte
-            case 2: endX = game.config.width * 3 / 8; endY = game.config.height * 1 / 4; scale = 0.04; break;
+            case 2: endX = game.config.width * 3 / 8; endY = game.config.height * 3 / 8; scale = 0.04; break;
             default: break;
 
         }
