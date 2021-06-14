@@ -43,15 +43,8 @@ class Rocket {
     }
 
     Land(delta) {
-
-<<<<<<< Updated upstream
         this.val -= delta/2300;
         this.obj.setOrigin(0.5, 2.5+this.val);
-        
-=======
-        this.val -= delta / 2300;
-        this.obj.setOrigin(0.5, 2.5 + this.val);
->>>>>>> Stashed changes
         if (this.val <= 0) {
             this.goLand = false;
             this.val = 0;
