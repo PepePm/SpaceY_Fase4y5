@@ -539,7 +539,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
     StartTransform(n) {
         var obj;
-        //GIVE ME DA JUIIIIICEEEEE
+        sfx.sounds[0].play();
         switch (n) {
             case 0:
                 this.obj = this.ddrBtnMat;
@@ -744,6 +744,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
     CheckWear(n) {
         var obj;
+        sfx.sounds[0].play();
         switch (n) {
             case 0:
                 this.scene.getMachineWear(n);
@@ -972,7 +973,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
     //Compuerta lanzadera entrada rocas
     tweenLanzPuertaIn() {
-
+        sfx.sounds[0].play();
         if (this.size === this.maxSize && this.typeOfLoad === 0) {
 
             this.countLanz = 0;
