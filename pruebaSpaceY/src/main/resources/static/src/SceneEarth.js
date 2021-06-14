@@ -617,6 +617,9 @@ class SceneEarth extends Phaser.Scene {
             gameLobbyID = undefined;
 
             soundtrack.pistas[0].play();
+            sfx.sounds.forEach(element => {
+                element.stop();
+            });
 
             that.scene.stop("SceneGame");
             that.scene.stop("ScenePause"); // METER ESTO EN MENU DE PAUSA (?)
@@ -838,6 +841,7 @@ class SceneEarth extends Phaser.Scene {
 
     WarnFixMachine(machineId) {
         var typeToSync;
+        sfx.sounds[0].play();
         switch (machineId) {
             case "Antena":
                 typeToSync = "syncAntenaPilot";
@@ -1032,7 +1036,7 @@ function WarningSignal(warning,) {
     //
 }*/
 function OpenPostItEarth(obj, scene) {
-
+    sfx.sounds[0].play();
     switch (obj) {
         case postItEarth:
             scene.tweens.add({

@@ -222,6 +222,7 @@ class SceneMars extends Phaser.Scene {
     // ============================================ METODOS PARA PEDIR RECURSOS     =========================================
     AskForFood() {
         //console.log("PIDIENDO COMIDITA");
+        sfx.sounds[0].play();
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
@@ -232,6 +233,7 @@ class SceneMars extends Phaser.Scene {
     }
     AskForResources() {
         //console.log("PIDIENDO RESOURCES");
+        sfx.sounds[0].play();
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
@@ -1363,7 +1365,7 @@ function HighlightPostIt(obj, b) {
 }
 
 function OpenPostItMars(obj, scene) {
-
+    sfx.sounds[0].play();
     switch (obj) {
         case postItMars:
             scene.tweens.add({
