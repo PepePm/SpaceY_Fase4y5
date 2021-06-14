@@ -46,7 +46,7 @@ class Rocket {
 
         this.val -= delta/2300;
         this.obj.setOrigin(0.5, 2.5+this.val);
-        
+
         if (this.val <= 0) {
             this.goLand = false;
             this.val = 0;
