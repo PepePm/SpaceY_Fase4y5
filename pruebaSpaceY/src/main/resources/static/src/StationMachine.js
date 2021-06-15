@@ -42,7 +42,7 @@ class StationMachine extends Machine {
                     }
         
                     //Enviar recursos del cohete
-                    if (objCoheteMat.n === objCoheteMat.max && !this.isSending) {
+                    if (objCoheteMat.n >= objCoheteMat.max && !this.isSending) {
 
                         this.keyIndicator.changeKey("H");
 

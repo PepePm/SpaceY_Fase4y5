@@ -23,6 +23,14 @@ class SceneLogos extends Phaser.Scene {
 
     create() {
 
+        this.input.on('pointerdown', function() {
+				
+            if (game.sound.context.state === 'suspended') {
+                game.sound.context.resume();
+            }
+
+        });
+
         //logo1 = this.add.image(game.config.width/2, game.config.height/2, "logo1");
         this.bckMenu = this.add.image(game.config.width/2,game.config.height/2,'bckMenu').setScale(0.3);
         logo2 = this.add.image(game.config.width/2, 7*game.config.height/16, "logo2");

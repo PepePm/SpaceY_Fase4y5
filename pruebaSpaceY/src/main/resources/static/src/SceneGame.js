@@ -4,7 +4,7 @@
 
 //Variables
 //Directorio imágenes
-var directory = "./Resources/Game/";
+/*var directory = "./Resources/Game/";
 
 //Misceláneo
 var nCarga = 0;
@@ -141,7 +141,7 @@ var isbig = false;
 
 
 var connection;
-
+*/
 class SceneGame extends Phaser.Scene {
     
     constructor() {
@@ -256,7 +256,7 @@ class SceneGame extends Phaser.Scene {
 		alertaPeligroDc = this.add.image(144, 365, "alertaPeligro").setScale(-1,1).setVisible(false); // *************************************************FLIP EJE VERTICAL!
     
         //Contador tiempo restante
-        counter = new Counter(this, 10*60);
+        counter = new Counter(this, 15*60);
         
         
 

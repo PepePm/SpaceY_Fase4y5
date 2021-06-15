@@ -266,6 +266,7 @@ class SceneBoot extends Phaser.Scene {
             percentText.destroy();
             assetText.destroy();
         });
+        
 
         var width = this.cameras.main.width;
         var height = this.cameras.main.height;
@@ -307,6 +308,7 @@ class SceneBoot extends Phaser.Scene {
     }
 
     create() {
+
         sfx = {
             loop: true,
             volume: 0.5,
@@ -363,7 +365,7 @@ class SceneBoot extends Phaser.Scene {
         //Animaciones
         this.anims.create({
             key: 'stelonauta_idle',
-            frames: this.anims.generateFrameNumbers('stelonauta_idle', { start: 0, end: 59 }),
+            frames: this.anims.generateFrameNumbers('stelonauta_idle', { start: 0, end: 29 }),
             frameRate: 18,
             //repeat: 1,
         });
@@ -376,31 +378,31 @@ class SceneBoot extends Phaser.Scene {
 
         this.anims.create({
             key: 'movimientoTerraformador',
-            frames: this.anims.generateFrameNumbers('movimientoTerraformador', { start: 0, end: 10 }),
+            frames: this.anims.generateFrameNumbers('movimientoTerraformador', { start: 0, end: 8 }),
             frameRate: 10,
             repeat: -1,
         });
         this.anims.create({
             key: 'movimientoAntena',
-            frames: this.anims.generateFrameNumbers('movimientoAntena', { start: 0, end: 10 }),
+            frames: this.anims.generateFrameNumbers('movimientoAntena', { start: 0, end: 9 }),
             frameRate: 4,
             repeat: -1,
         });
         this.anims.create({
             key: 'movimientoMina',
-            frames: this.anims.generateFrameNumbers('movimientoMina', { start: 0, end: 10 }),
+            frames: this.anims.generateFrameNumbers('movimientoMina', { start: 0, end: 9 }),
             frameRate: 10,
             repeat: -1,
         });
         this.anims.create({
             key: 'movimientoCohete',
-            frames: this.anims.generateFrameNumbers('movimientoCohete', { start: 0, end: 8 }),
+            frames: this.anims.generateFrameNumbers('movimientoCohete', { start: 0, end: 7 }),
             frameRate: 15,
             repeat: 0,
         });
         this.anims.create({
             key: 'movimientoCoheteReverse',
-            frames: this.anims.generateFrameNumbers('movimientoCohete', { start: 8, end: 0 }),
+            frames: this.anims.generateFrameNumbers('movimientoCohete', { start: 7, end: 0 }),
             frameRate: 15,
             repeat: 0,
         });

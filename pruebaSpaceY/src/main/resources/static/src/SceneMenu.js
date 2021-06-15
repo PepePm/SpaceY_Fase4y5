@@ -132,7 +132,7 @@ class SceneMenu extends Phaser.Scene {
 
     create() {
 
-        
+
         key_pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC, false);
 
 
@@ -255,22 +255,22 @@ class SceneMenu extends Phaser.Scene {
         this.marsOption.setOrigin(0.5);
 
         //TEXTO AVISO LOG NEEDED
-        this.loginNeededWarning = this.add.text(game.config.width / 2, game.config.height*2/ 8, 'You need to be logged in', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
+        this.loginNeededWarning = this.add.text(game.config.width / 2, game.config.height * 2 / 8, 'You need to be logged in', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
             .setVisible(false);
         this.loginNeededWarning.setOrigin(0.5);
 
         //TEXTO AVISO PLANET NEEDED
-        this.planetElectionNeededWarning = this.add.text(game.config.width / 2, game.config.height*2 / 8, 'You need to choose a planet', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
+        this.planetElectionNeededWarning = this.add.text(game.config.width / 2, game.config.height * 2 / 8, 'You need to choose a planet', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
             .setVisible(false);
         this.planetElectionNeededWarning.setOrigin(0.5);
 
         //TEXTO AVISO HOST INEXISTENTE
-        this.wrongCodeWarning = this.add.text(game.config.width / 2, game.config.height*2 / 8, 'Wrong code: Lobby not found', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
+        this.wrongCodeWarning = this.add.text(game.config.width / 2, game.config.height * 2 / 8, 'Wrong code: Lobby not found', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
             .setVisible(false);
         this.wrongCodeWarning.setOrigin(0.5);
 
         //TEXTO AVISO YA ERES HOST; NO PUEDES HACER JOIN
-        this.alreadyHostWarning = this.add.text(game.config.width / 2, game.config.height*2 / 8, 'You are already hosting', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
+        this.alreadyHostWarning = this.add.text(game.config.width / 2, game.config.height * 2 / 8, 'You are already hosting', { fill: '#FF0000', fontFamily: 'menuFont', fontSize: '40px' })
             .setVisible(false);
         this.alreadyHostWarning.setOrigin(0.5);
 
@@ -528,7 +528,7 @@ class SceneMenu extends Phaser.Scene {
         //Timer
         this.event = this.time.addEvent({ delay: 300, callback: this.UpdateServer, callbackScope: this, loop: true });
 
-        if(userName != "Anon"){
+        if (userName != "Anon") {
             GetUserImg(this, userName)
             this.userImage.setPosition(-400, loginPos[28]);
             this.accountText.setColor("white");
@@ -538,39 +538,21 @@ class SceneMenu extends Phaser.Scene {
             this.logOutBtn.setActive(true);
         }
 
-        /*window.addEventListener("beforeunload", function (e) {
-            
-            return setUserOnline(that, userName, false);
-            /*var confirmationMessage = "\o/";
-            (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-                return confirmationMessage;
+        game.input.keyboard.enabled = false
+        var that = this;
+        this.writeTextChat.getChildByName("Chat")
+        .addEventListener("keydown", function (event) {
+            //event.preventDefault();
+            if (event.key === "Enter") {
+                RestCreateMsg(that, userName);
+            }
         });
-    
-        /*window.addEventListener("onunload", function (e) {
-            
-            setUserOnline(that, userName, false);
+        /*// Fix spacebar
+        this.input.keyboard.on('keydown', function (event) {
+            if(event.key == " "){
+                that.writeTextChat.getChildByName('Chat').value += " ";
+            }
         });*/
-
-        //setUserOnline(that, userName, false);
-
-        //Websockets
-        //var ws = new WebsocketsTest();
-        /*console.log("test socket \n");
-        var connection = new WebSocket("ws://localhost:8080/pSockets");
-    
-        connection.open = function(){
-            connection.send("socketTruco chaval");
-        }
-    
-        connection.onerror = function(e){
-            console.log("error: " + e);
-        }
-    
-        connection.onmessage = function(msg){
-            console.log("AAAAAAAAAAAAAAAA: " + msg.data);
-        }
-    
-        console.log(connection);*/
     }
     Highlight(obj, b, selectPlanet) {
 
@@ -715,7 +697,7 @@ class SceneMenu extends Phaser.Scene {
                         break;
                     case "otherClientDisconnected":
 
-                    break;
+                        break;
 
                 }
 
@@ -723,7 +705,7 @@ class SceneMenu extends Phaser.Scene {
 
             connection.onclose = function () {
                 connection = undefined;
-                texto = ""; 
+                texto = "";
                 console.log("Cerrando conexión del HOST");
             }
 
@@ -898,7 +880,7 @@ class SceneMenu extends Phaser.Scene {
     startGame(nextScene) {
         connection.close();
         sfx.sounds[0].play();
-        
+
         clientGamemode = nextScene;
 
         if (election == "Mars")
@@ -992,12 +974,14 @@ class SceneMenu extends Phaser.Scene {
         this.tutorialButton.setVisible(false);
         isTutorial = false;
         var that = this;
-        var timedEvent = this.time.addEvent({ delay: yPos + 500, callback: function () {
+        var timedEvent = this.time.addEvent({
+            delay: yPos + 500, callback: function () {
 
-            isTutorial = false;
+                isTutorial = false;
 
-            this.scene.start(nextScene); 
-             }, callbackScope: this });
+                this.scene.start(nextScene);
+            }, callbackScope: this
+        });
         //VAR CONNECTION POR AQUÍ
     }
     //Show login fields

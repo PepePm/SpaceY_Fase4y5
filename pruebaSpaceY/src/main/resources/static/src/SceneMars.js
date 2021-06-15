@@ -30,7 +30,7 @@ var keyDev_defeat;
 //Marte
 
 var player;
-var playerSpeed = 1;
+var playerSpeed = 1.2;
 var marte;
 var fondoMarte;
 var fondoConsola;
@@ -120,21 +120,21 @@ var nCoheteMat;
 var objCoheteMat;
 var MAX_COHETEMAT = 350;
 var txtCoheteMat;   //Porcentaje de cuanto has llenado el cohete en MARTE
-var spdCargarCohete = 0.25; //velocidad de carga del cohete 
+var spdCargarCohete = 0.35; //velocidad de carga del cohete 
 var coheteMat_color = Phaser.Display.Color.GetColor(150, 103, 34);
 
 //Recursos Marte
-var nComida_M = 10; //Comida inicial
+var nComida_M; //Comida inicial
 var objComida_M;
 var MAX_COMIDA = 150;
 var txtComida_M;
 
-var nRocas_M = 30;
+var nRocas_M;
 var objRocas_M;
 var MAX_ROCAS = 200;
 var txtRocas_M;
 
-var nMaterial_M = 20;
+var nMaterial_M;
 var objMaterial_M;
 var MAX_MATERIAL = 100;
 var txtMaterial_M;
@@ -501,7 +501,7 @@ class SceneMars extends Phaser.Scene {
 
         });
 
-        this.writeTextChat = this.add.dom(1075, 670).createFromCache('formChatMars').setVisible(true).setDepth(7);
+        this.writeTextChat = this.add.dom(1075, 670).createFromCache('formChatMars').setVisible(true).setDepth(6);
         this.writeTextChat.getChildByName('Chat').onclick = function(){SwitchInputs(false)};
 
         this.input.mouse.disableContextMenu();
@@ -510,21 +510,24 @@ class SceneMars extends Phaser.Scene {
             SwitchInputs(true);
         });
 
+        //Fix spacebar
+        game.input.keyboard.enabled = true;
         this.input.keyboard.on('keydown', function (event) {
             if(event.key == " "){
                 that.writeTextChat.getChildByName('Chat').value += " ";
             }
         });
+        
 
 
 
 
 
         //Valores iniciales recursos
-        nCoheteMat = MAX_COHETEMAT;
-        nComida_M = 9000;
-        nRocas_M = 200;
-        nMaterial_M = 20;
+        nCoheteMat = MAX_COHETEMAT*0.5;
+        nComida_M = MAX_COMIDA*0.75;
+        nRocas_M = MAX_ROCAS*0.25;
+        nMaterial_M = MAX_MATERIAL*0.25;
 
         sfx.sounds[2].loop = sfx.loop;  //NI IDEA OIGA                  ****************************************
         sfx.sounds[3].loop = sfx.loop;
@@ -600,7 +603,7 @@ class SceneMars extends Phaser.Scene {
         alertaPeligroDc = this.add.image(144, 365, "alertaPeligro").setScale(-1, 1).setVisible(false); // *************************************************(x=-1, y)FLIP EJE VERTICAL!
 
         //Contador tiempo restante
-        counter = new Counter(this, 1240, 160, 1320, 160, 10 * 60, false);
+        counter = new Counter(this, 1240, 160, 1320, 160, 15 * 60, false);
 
 
 
@@ -1282,6 +1285,7 @@ function DestroyOnScene(obj) {
 }
 
 function SyncGameEnd(that, victory) {
+    
     if (victory) {
 
         // Sync VictoryCondition SEND
@@ -1310,7 +1314,8 @@ function SyncGameEnd(that, victory) {
 
 //Acciones condiciones victoria/derrota
 function VictoryCondition(that) {
-
+    
+    that.writeTextChat.getChildByName('Chat').type="hidden";
     sfx.sounds.forEach(element => {
         element.stop();
     });
@@ -1329,6 +1334,7 @@ function VictoryCondition(that) {
 
 function DefeatCondition(that) {
     if (!isTutorial) {
+        that.writeTextChat.getChildByName('Chat').type="hidden";
         that.called = true;
         sfx.sounds.forEach(element => {
             element.stop();
@@ -1429,6 +1435,18 @@ function OpenPostItMars(obj, scene) {
 }
 
 function SwitchInputs(value){
+
+    console.log(value);
+
+    key_left.reset();
+    key_right.reset();
+    key_up.reset();
+    key_down.reset();
+    key_interact.reset();
+    key_repair.reset();
+
+    keyDev_victory.reset();
+    keyDev_defeat.reset();
 
     key_left.enabled = value;
     key_right.enabled = value;

@@ -380,7 +380,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             this.UIEarthChatBox = scene.add.image(ConsolePos[26], ConsolePos[27], "UIEarthChatBox").setDepth(4);
 
             //Contador tiempo restante
-            this.counter = new Counter(this.scene, 434, 143, 516, 143, 10 * 60, true);
+            this.counter = new Counter(this.scene, 434, 143, 516, 143, 15 * 60, true);
         }
 
         
@@ -662,12 +662,12 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             this.newPayloadType = n;
             if (this.newPayloadType === 1) {
 
-                this.objCohete.comLoad += MAX_COMIDA * 0.05;
+                this.objCohete.comLoad += MAX_COMIDA * 0.075;
                 //console.log("he añadido COMIDA");
             }
             else {
 
-                this.objCohete.matLoad += MAX_MATERIAL * 0.05;
+                this.objCohete.matLoad += MAX_MATERIAL * 0.1;
                 //console.log("he añadido MATERIAL");
             }
 

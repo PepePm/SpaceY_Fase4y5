@@ -454,7 +454,7 @@ class SceneEarth extends Phaser.Scene {
         this.sendButton.setOrigin(0.5);*/
         this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter, this.sendButton, this.globalbutton];
 
-        this.writeTextChat = this.add.dom(295, 550).createFromCache('formChatEarth').setVisible(true).setDepth(7);
+        this.writeTextChat = this.add.dom(295, 550).createFromCache('formChatEarth').setVisible(true).setDepth(6);
         
         var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
         key_enter.on('down', () => {this.chat.SendMessage();});
@@ -465,6 +465,8 @@ class SceneEarth extends Phaser.Scene {
             that.writeTextChat.getChildByName('Chat').blur();
         });
 
+        //Fix spacebar
+        game.input.keyboard.enabled = true;
         this.input.keyboard.on('keydown', function (event) {
             if(event.key == " "){
                 that.writeTextChat.getChildByName('Chat').value += " ";
