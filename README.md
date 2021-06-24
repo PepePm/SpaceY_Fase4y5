@@ -546,8 +546,8 @@ Controles supervisor:
 
 Ambos jugadores pueden comunicarse entre sí a través del chat durante la partida. También pueden utilizar los botones dedicados a eventos concretos para una comunicación más directa. Toda esta comunicación se hace mediante websockets.    
 
-**Protocolo WebSockets**
--------------------> Explicar cómo usamos los websockets
+**Protocolo WebSockets**    
+-------------------> Explicar cómo usamos los websockets    
 ![falta_foto_diagrama_clases_APIREST_y_Websockets]()
 
 ### Arreglo de bugs
