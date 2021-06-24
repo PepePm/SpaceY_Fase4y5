@@ -561,7 +561,13 @@ Hubo un problema en el que un plugin que usábamos para la interfaz dejó de fun
 ● Cuando el usuario se conectaba, no comprobaba si ya estaba conectado, y se podía conectar a la misma cuenta varias veces desde distintos clientes.    
 ● Al refrescar o cerrar la página no se desconectaba al usuario de la base de datos.    
 ● El menú de pausa no funcionaba bien en la escena de la Tierra.    
-● Tras pasar un tiempo jugando el juego se congelaba y el sonido se quedaba en bucle.
+● Tras pasar un tiempo jugando el juego se congelaba y el sonido se quedaba en bucle.    
+● La máquina de comunicaciones no actualizaba bien su estado a la tierra.    
+● La cuenta atrás de tierra y marte no estaban sincronizadas.    
+● Cuando un jugador refrescaba o cerraba la página el otro jugador no era devuelto al menú principal.    
+● Al terminar una partida y volver al menú principal el menú de login no muestra ni el usuario actual ni da opción a desconectarse ni a identificarse.    
+● Las cajas de texto de los chats ingame no estaban bien ajustadas a la interfaz.    
+
 
 ### Mejoras de fases previas
 -> Lista de mejoras <-
