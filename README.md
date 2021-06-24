@@ -1,6 +1,6 @@
 SPACE Y
 =======
-![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/main.png?raw=true)
+![alt text](https://github.com/PepePm/SpaceY_Fase4/blob/master/Resources/Img/main.png?raw=true)
 
 Nombre del juego
 ----------------
@@ -327,7 +327,7 @@ Controles supervisor:
 - RATÓN : Interaccionar con todas las opciones del panel de control.    
 
 
-### FASE 3 EN ADELANTE (ONLINE)
+### FASE 3 EN ADELANTE (ONLINE con API REST)
 
 Ambos (supervisor y stelonauta) disponen de teclado y ratón propios.
 
@@ -452,3 +452,18 @@ Se ha implementado una escena de contactos con una pequeña caricatura de los de
 
 
 
+### FASE 4 (MULTIJUGADOR con WebSockets)
+
+Controles stelonaula:    
+
+- WASD: movimiento    
+- H: accionar máquina    
+- R: reparar máquina    
+
+
+Controles supervisor:    
+- FLECHAS: minijuego de comunicación.    
+- NÚMEROS: minijuego de comunicación.    
+- RATÓN : Interaccionar con todas las opciones del panel de control.    
+
+Ambos jugadores pueden comunicarse con
