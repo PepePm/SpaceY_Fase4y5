@@ -527,7 +527,7 @@ Controles supervisor:
 ![falta_foto_pantalla_multijugador]()
 
 ### Diseño de interfaz:
-**Menú principal**
+**Menú principal**    
 ● Opciones de Host y Join (creador de la partida y jugador que se une)    
 
 **Pantalla Marte**    
