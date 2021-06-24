@@ -509,7 +509,7 @@ Se ha implementado una escena de contactos con una pequeña caricatura de los de
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/diagrama_clases.png?raw=true)
 
 
-### FASE 4 (MULTIJUGADOR con WebSockets)
+# FASE 4 (MULTIJUGADOR con WebSockets)
 
 Controles stelonaula:    
 
