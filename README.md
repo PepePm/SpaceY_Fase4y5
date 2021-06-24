@@ -523,4 +523,27 @@ Controles supervisor:
 - NÚMEROS: minijuego de comunicación.    
 - RATÓN : Interaccionar con todas las opciones del panel de control.    
 
-Ambos jugadores pueden comunicarse entre sí a través del chat durante la partida. También pueden utilizar los botones dedicados a eventos concretos para una comunicación más directa.
+# Pantalla individual en Multijugador
+![falta_foto_pantalla_multijugador]()
+
+### Diseño de interfaz:
+**Menú principal**
+● Opciones de Host y Join (creador de la partida y jugador que se une)    
+
+**Pantalla Marte**    
+● 3 barras de estadísticas (Vida, materiales, herramientas de reparación).    
+● Botones: para pedir comida o herramientas de reparación.    
+● Panel de chat: Comunicaciones de tierra.    
+● Nivel de Terraformación (Círculo verde en panel de chat): Nivel de progreso.    
+
+**Pantalla Tierra**    
+● Panel de chat: Comunicaciones de marte.    
+● Panel de control de máquinas.    
+● Botones: de Emergencia.    
+● Pantalla de visualización de Marte (mapa marciano).    
+● Panel de control de cohete.    
+● Minijuego DDR.    
+
+Ambos jugadores pueden comunicarse entre sí a través del chat durante la partida. También pueden utilizar los botones dedicados a eventos concretos para una comunicación más directa.    
+
+
