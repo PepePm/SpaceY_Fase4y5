@@ -558,7 +558,10 @@ Hubo un problema en el que un plugin que usábamos para la interfaz dejó de fun
 
 # FASE 5 (Mejoras finales / Publicación del juego)
 ### Glitches encontrados
--> Lista de glitches <-    
+● Cuando el usuario se conectaba, no comprobaba si ya estaba conectado, y se podía conectar a la misma cuenta varias veces desde distintos clientes.    
+● Al refrescar o cerrar la página no se desconectaba al usuario de la base de datos.    
+● El menú de pausa no funcionaba bien en la escena de la Tierra.    
+● Tras pasar un tiempo jugando el juego se congelaba y el sonido se quedaba en bucle.
 
 ### Mejoras de fases previas
 -> Lista de mejoras <-
