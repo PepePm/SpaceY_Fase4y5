@@ -1,6 +1,6 @@
 SPACE Y
 =======
-![alt text](https://github.com/PepePm/SpaceY_Fase4/blob/master/Resources/Img/main.png?raw=true)
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/main.png?raw=true)
 
 Nombre del juego
 ----------------
@@ -43,7 +43,11 @@ https://trello.com/b/OI6kYl75/juegos-en-red
 Github
 ------
 
+Fases 1, y 2:
 https://github.com/Jacquesmeyns/SpaceY
+
+Fases 3, 4 y 5:
+https://github.com/PepePm/SpaceY_Fase4
 
 
 
@@ -466,4 +470,4 @@ Controles supervisor:
 - NÚMEROS: minijuego de comunicación.    
 - RATÓN : Interaccionar con todas las opciones del panel de control.    
 
-Ambos jugadores pueden comunicarse con
+Ambos jugadores pueden comunicarse entre sí a través del chat durante la partida. También pueden utilizar los botones dedicados a eventos concretos para una comunicación más directa.
