@@ -43,12 +43,38 @@ https://trello.com/b/OI6kYl75/juegos-en-red
 Github
 ------
 
-Fases 1, y 2:
 https://github.com/Jacquesmeyns/SpaceY
 
-Fases 3, 4 y 5:
-https://github.com/PepePm/SpaceY_Fase4
+FAQ
+------
+- ¿Cómo jugar Offline?
 
+Abrir en cualquier navegador el archivo index.html, esto lanzará el juego.
+Esperar a que cargue el juego, esto puede llevar unos segundos dependiendo del navegador y la computadora. 
+Ver en el apartado de controles la distribución de los mismos para dos jugadores. Puedes consultar el Tutorial en el menú principal. 
+Elegir que posición tomará el jugador, y en el menú principal pulsar sobre PLAY. 
+
+- ¿Cómo jugar Online?
+
+Método OpenVPN:
+
+    Descargar la carpeta que contiene los archivos de configuración del servidor (Space_Y_Server_Files.zip) o de la siguiente dirección de Google Drive https://drive.google.com/file/d/1zql_eXVl3SPLzgq2Laj4gVRrOyECQqHC/view?usp=sharing CONTIENE: SpaceY_Server.jar, Run_Server.bat, la base de datos BD_SpaceY.accdb y el archivo de configuración del servidor de OpenVPN SpaceY.ovpn
+
+    Instalar OpenVpn en nuestra máquina, descargándolo de https://openvpn.net/client-connect-vpn-for-windows/ o del archivo adjuntado en la carpeta del servidor.
+
+    Abrimos OpenVpn, seleccionamos FILE y seleccionamos en nuestra carpeta del servidor el archivo SpaceY.ovpn contenido en Space_Y_Server_Files.rar. Para finalizar, pulsamos sobre el botón ADD en la esquina superior derecha. Nos aparecerá un apartado nuevo con la ip de nuestro servidor, al pinchar sobre el se activará y ya tendremos abierto el servidor.
+
+    Ejecutar el archivo Run_Server.bat para abrir el servidor. Nos aparecerá una ventana indicando que SPRING se ha lanzado.
+
+    Introducir en el navegador la siguiente URL : http://193.161.193.99:63511/ Si somos el servidor, proporcionar a los jugadores la URL de la máquina que hace de servidor.
+
+    Esperar a que el Servidor se lance y cargue todos los Assets del juego
+
+Podremos comprobar el estado del servidor en el icono del mundo dentro del menú principal
+
+ATENCIÓN: Para que funcione el servidor los archivos SpaceY_Server.jar, Run_Server.bat, la base de datos BD_SpaceY.accdb deben estar en la misma carpeta. Puede que por tu versión de java el servidor no pueda funcionar. Adjuntamos un archivo que actualiza la versión actual en tu máquina. (jdk-15.0.1_windows-x64_bin.exe)
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/tutorial_github-10.png?raw=true)
 
 
 GDD
@@ -68,7 +94,7 @@ GDD
    - OBJETIVOS DEL JUEGO Y RECOMPENSAS
    - MECÁNICAS
    - DISEÑO DE NIVEL
-- CONTROLES
+- CONTROLES Y NAVEGACIÓN
 - PANTALLA COMPARTIDA EN LOCAL
 - ESTÉTICA DE JUEGO Y EXPERIENCIA DE USUARIO
 - MÚSICA
@@ -160,8 +186,11 @@ El juego requerirá un mínimo de dos jugadores y se jugará en los siguientes m
 Ventana de título y pequeña introducción con el lanzamiento de un cohete atravesando la
 órbita de Marte.    
 Primero seleccionarás el avatar y el puesto que ocupas. Tu experiencia será diferente según tu
-posición.    
-![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/xp_jugador.png?raw=true)
+posición.  
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/navegacion.png?raw=true)
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/xp_jugador.png?raw=true)
 
 
 **Supervisor:**
@@ -292,6 +321,7 @@ puntos de victoria.
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/tablaFasesT.png?raw=true)
 
+
 **Sistema de puntuación**
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/tablaPuntuacion.png?raw=true)
@@ -299,14 +329,16 @@ puntos de victoria.
 
 **Diagrama de fuentes, recursos y conversores**    
 
-![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/recursos.png?raw=true)
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/recursos.png?raw=true)
+
 
 **Diseño de nivel**
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/tablaDiseñoNivel.png?raw=true)
 
 
-# Controles
+# Controles y Navegación
+
 
 **Supervisor**    
 
@@ -315,6 +347,10 @@ puntos de victoria.
 **Stelonauta**    
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/controlesStelo.png?raw=true)
+
+**Navegación**
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/DIAGRAMA_DE_FLUJO.png?raw=true)
 
 
 ### FASE 2: MODO LOCAL
@@ -330,8 +366,9 @@ Controles supervisor:
 - TECLADO NUMÉRICO: minijuego de comunicación.
 - RATÓN : Interaccionar con todas las opciones del panel de control.    
 
+-Añadido un tutorial y cambio de la estructura del menú
 
-### FASE 3 EN ADELANTE (ONLINE con API REST)
+### FASE 3 EN ADELANTE (ONLINE)
 
 Ambos (supervisor y stelonauta) disponen de teclado y ratón propios.
 
@@ -354,6 +391,18 @@ Controles supervisor:
 - LETRAS: minijuego de comunicación.    
 - ESPACIO:    
 - RATÓN : Interaccionar con todas las opciones del panel de control.    
+
+MEJORAS EN CONECTIVIDAD:
+-Hemos añadido una base de datos para registrar los usuarios, sus contraseñas, sus mensajes y su imagen de perfil.  
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/registro.png?raw=true)
+-Hemos añadido un CHAT implementado en el icono del MENSAJE en el menú principal. 
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/chat.PNG?raw=true)
+-Hemos añadido una consola para el estado del SERVIDOR implementado en el icono del MUNDO en el menú principal. 
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/global.PNG?raw=true)
+-Hemos añadido una caja para iniciar sesión y registrarse en la base de datos del juego que identifica los usuarios conectados. Además permitimos personalización.
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/login.PNG?raw=true)
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/usericon.PNG?raw=true)
+
 
 
 # Pantalla compartida en Local
@@ -454,6 +503,10 @@ Se ha implementado una escena de contactos con una pequeña caricatura de los de
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/img_sceneWin.png?raw=true)
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/img_sceneDefeat.png?raw=true)
 
+**● Diagrama de clases:**
+**Diagrama api rest de la aplicación.**
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/diagrama_clases.png?raw=true)
 
 
 ### FASE 4 (MULTIJUGADOR con WebSockets)
