@@ -523,7 +523,7 @@ Controles supervisor:
 - NÚMEROS: minijuego de comunicación.    
 - RATÓN : Interaccionar con todas las opciones del panel de control.    
 
-# Pantalla individual en Multijugador
+# Pantalla individual en Multijugador    
 ![falta_foto_pantalla_multijugador]()
 
 ### Diseño de interfaz:
@@ -544,6 +544,26 @@ Controles supervisor:
 ● Panel de control de cohete.    
 ● Minijuego DDR.    
 
-Ambos jugadores pueden comunicarse entre sí a través del chat durante la partida. También pueden utilizar los botones dedicados a eventos concretos para una comunicación más directa.    
+Ambos jugadores pueden comunicarse entre sí a través del chat durante la partida. También pueden utilizar los botones dedicados a eventos concretos para una comunicación más directa. Toda esta comunicación se hace mediante websockets.    
 
+**Protocolo WebSockets**
+-------------------> Explicar cómo usamos los websockets
+![falta_foto_diagrama_clases_APIREST_y_Websockets]()
 
+### Arreglo de bugs
+Hubo un problema en el que un plugin que usábamos para la interfaz dejó de funcionar para la versión que usábamos de Phaser. Hemos actualizando Phaser a la última versión y conseguido solucionar el problema.
+
+### Vídeo
+![falta_link_al_video]()
+
+# FASE 5 (Mejoras finales / Publicación del juego)
+### Glitches encontrados
+-> Lista de glitches <-    
+
+### Mejoras de fases previas
+-> Lista de mejoras <-
+
+### Publicado en las siguientes páginas webs
+
+Publicado por: Nombre del integrante    
+Nombre de la web: link de la web.    
