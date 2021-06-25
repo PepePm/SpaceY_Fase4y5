@@ -570,7 +570,14 @@ Hubo un problema en el que un plugin que usábamos para la interfaz dejó de fun
 
 
 ### Mejoras de fases previas
--> Lista de mejoras <-
+-> Lista de mejoras <-    
+Balance de juego:    
+- Velocidad de movimeento del stelonauta +20%    
+- Tiempo de partida +50%    
+- Velocidad de carga del cohete: +28%    
+- Cantidad de recursos que se obtienen al descargar el cohete:    
+* Comida: +25%    
++ Herramientas: +50%    
 
 ### Publicado en las siguientes páginas webs
 
