@@ -28,7 +28,6 @@ var keyDev_defeat;
 
 //Objetos
 //Marte
-
 var player;
 var playerSpeed = 1.2;
 var marte;

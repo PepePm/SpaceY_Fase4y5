@@ -156,7 +156,7 @@ public class UsersController {
 		user.setId(id);
 		users.put(id, user);
 		
-		String name = user.getName();
+		String name = user.getName().toUpperCase();
 		String pass = user.getPassword();
 		boolean online = user.isOnline();
 		int img = user.getUserImg();
