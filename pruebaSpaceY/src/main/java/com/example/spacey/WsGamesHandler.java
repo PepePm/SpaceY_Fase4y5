@@ -27,8 +27,6 @@ public class WsGamesHandler extends TextWebSocketHandler {
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	
-	private Semaphore semaforo = new Semaphore(1);
-	
     // Se ejecuta cuando se ha establecido la conexión con el cliente
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -50,7 +48,8 @@ public class WsGamesHandler extends TextWebSocketHandler {
 				for (int i=0; i < aux.size(); i++) {
 					try {
 						aux.get(i).close();
-						System.out.println("Chapo la partida " + k + " a " + aux.get(i));
+						System.out.println("Un jugador se ha desconectado de la partida " +
+								k + ": cerrando partida al otro jugador");
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -86,7 +85,6 @@ public class WsGamesHandler extends TextWebSocketHandler {
 		switch(action) {
 			case "Start":
 				
-				//semaforo.acquire();
 				// Se añade un jugador de un lobby a su partida correspondiente.
 				// Si no existe la clave, se crea y se añade al jugador
 				if (!games.containsKey(lobbyID)) {
@@ -94,21 +92,17 @@ public class WsGamesHandler extends TextWebSocketHandler {
 					aux.add(session);
 					games.put(lobbyID, aux);
 					
-					//session.sendMessage(new TextMessage("Te respeto: creas"));
+					System.out.println("Sala de partida creada: \n " + lobbyID);
 				}
 				else { // Si existe, se añade al jugador al lobby existente
 					aux = games.get(lobbyID);
 					aux.add(session);
 					games.replace(lobbyID, aux);
-					
-					//session.sendMessage(new TextMessage("Te respeto: existe y te unes"));
+					System.out.println("Jugador se une a sala de la partida:\n " + lobbyID);
 				}
 				
-				System.out.println("start_ lobbyID: " + lobbyID);
-				System.out.println("start_ games: " + games.get(lobbyID));
-				
-				//semaforo.release();
-				
+				System.out.println("Usuarios en la sala: " + games.get(lobbyID) + "\n");
+					
 				break;
 				
 			case "Sync":
@@ -121,8 +115,9 @@ public class WsGamesHandler extends TextWebSocketHandler {
 				// Se envía la información al cliente de la partida que no ha enviado el msg
 				// al servidor
 				
-				System.out.println("sync_ lobbyID: " + newNode.get("lobbyID").asText());
-				System.out.println("sync_ games: " + games.get(lobbyID));
+				System.out.println("Sync en partida: " + newNode.get("lobbyID").asText()+"\n");
+				System.out.println("Dato sincronizado: " + node.get("type").asText() 
+						+ " = " + node.get("value").asText());
 				
 				aux = games.get(lobbyID);
 				for (int i=0; i < aux.size(); i++) {
@@ -135,30 +130,6 @@ public class WsGamesHandler extends TextWebSocketHandler {
 		
 		
 	}
-	
-	/*private void sendToOtherPlayer(WebSocketSession session, JsonNode node) throws IOException {
-
-		ObjectNode newNode = mapper.createObjectNode();
-		newNode.put("name", node.get("name").asText());
-		
-		List<WebSocketSession> players = games.get(node);
-		
-		
-		for(WebSocketSession participant : lobbies.values()) {
-			if(!participant.getId().equals(session.getId())) {
-				participant.sendMessage(new TextMessage(node.toString()));
-			}
-		}
-	}
-	
-	private void sendToOtherPlayer(WebSocketSession session, JsonNode node) throws IOException {
-
-		for(WebSocketSession participant : lobbies.values()) {
-			if(!participant.getId().equals(session.getId())) {
-				participant.sendMessage(new TextMessage(node.toString()));
-			}
-		}
-	}*/
 	
 	private String GetHashId(String initID) {
 		

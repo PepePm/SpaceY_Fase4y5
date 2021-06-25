@@ -65,7 +65,7 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 				
 				if (v.equals(session)) {
 					hosts.remove(k);
-					System.out.println("Elimino lobby sin invitado, lobbyID: " + k);
+					System.out.println("Desconexión de host de un lobby. Se cierra lobby sin invitado: " + k);
 				}
 					
 			});
@@ -80,7 +80,7 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 				
 				// Lo borra del lobby
 				if (v.equals(session)) {
-					System.out.println("Elimino al invitado " + lobbies.get(k) + " del lobby " + k );
+					System.out.println("Desconexión de un invitado del lobby " + k );
 					lobbies.remove(k);
 					
 					// Avisa al host para de que se desconectó el otro cliente
@@ -101,7 +101,8 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 			
 			// Elimina el lobby; Toma al otro cliente del lobby y cierra su conexion
 			WebSocketSession otherClient = lobbies.get(session);
-			System.out.println("Elimino al host " + session + " y al invitado " + otherClient);
+			System.out.println("Desconexión de host de un lobby. Se cierra lobby con invitado" + "\n"
+					+ "Se cierra tambien la conexión al invitado");
 			lobbies.remove(session);
 			otherClient.close();
 		}
@@ -124,6 +125,7 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 		
 		switch(action) {
 			case "Create":
+				
 				//Crea un host en el mapa de hosts. La clave es el id del lobby y el valor el
 				// cliente
 				String lobbyID = GetHashId(session.getId());
@@ -135,24 +137,18 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 				connectedNode.put("type", "connected");
 				connectedNode.put("lobbyID", lobbyID);
 				
+				System.out.println("Nuevo host: " + lobbyID);
+				
 				session.sendMessage(new TextMessage(connectedNode.toString()));
 			break;	
 			case "Join":
+				System.out.println("Buscando si existe lobby con id: " + node.get("lobbyID").asText()+"...");
+				
 				// Busca si en el mapa de hosts hay un lobby abierto con una id especificada
 				newNode.put("lobbyID", node.get("lobbyID").asText().toUpperCase());
 				
-				/*System.out.println("id recibido: " + newNode.get("lobbyID").asText() + "\n");
-				
-				System.out.println("Hosts buscando invitado:");
-				hosts.forEach((k, v)->{
-					System.out.println("Host con clave: " + k + " -> " + v);
-				});*/
-					
 				// ID del lobby del host a comprobar
 				WebSocketSession hostUser = hosts.get(newNode.get("lobbyID").asText());
-				
-				
-				//System.out.println("hostUser: " + hostUser);
 				
 				// Si existe el lobby con ese id,
 				if (hostUser != null) {
@@ -214,6 +210,8 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 			break;
 			
 			case "startGame":
+				System.out.println("Empieza la partida del lobby: " + newNode.get("lobbyID"));
+				
 				//Llamado por el host para iniciar la partida y administrar los modos
 				// de juego de cada jugador.
 				// Información del msg recibido
@@ -248,17 +246,6 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 				
 			break;
 		}
-		
-		/*// Recoge la información del JSON
-		JsonNode node = mapper.readTree(message.getPayload());
-		
-		System.out.println("Mensaje recibido: " + node.toString());
-		
-		sendToOtherPlayer(session, node);*/
-		
-		/*ObjectNode newNode = mapper.createObjectNode();
-		newNode.put("type", node.get("type").asText());
-		newNode.put("value", node.get("value").asText());*/
 	}
 	
 	

@@ -53,10 +53,8 @@ public class UsersController {
 		List<User> userList = template.query("SELECT * FROM Users", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-				//System.out.println("hay cosas" + rs.getString(1));
-				return new User(rowNum, rs.getString("UserName"), rs.getString("UserPassword"), rs.getBoolean("Online"));
+				return new User(rowNum, rs.getString("Username"), rs.getString("UserPassword"), rs.getBoolean("Online"));
 			}
-			//rs.getBoolean("Online")
 		});
 		return userList;
 	}
@@ -64,7 +62,7 @@ public class UsersController {
 	@GetMapping("/count")
 	public int countUsers() {
 		
-		List<User> userList = template.query("SELECT UserName FROM Users", new RowMapper<User>() {
+		List<User> userList = template.query("SELECT Username FROM Users", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return new User();
@@ -81,7 +79,7 @@ public class UsersController {
 		List<User> userList = template.query("SELECT * FROM Users WHERE Online = 'true'", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return new User(rowNum, rs.getString("UserName"), rs.getString("UserPassword"), rs.getBoolean("Online"));
+				return new User(rowNum, rs.getString("Username"), rs.getString("UserPassword"), rs.getBoolean("Online"));
 			}
 			
 		});
@@ -91,7 +89,7 @@ public class UsersController {
 	@GetMapping("/countOnline")
 	public int countUsersOnline() {
 		
-		List<User> userList = template.query("SELECT UserName FROM Users WHERE Online = 'true'", new RowMapper<User>() {
+		List<User> userList = template.query("SELECT Username FROM Users WHERE Online = 'true'", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return new User();
@@ -104,6 +102,7 @@ public class UsersController {
 	@PostMapping("/checkPassword")
 	public boolean checkPassword(@RequestBody User user) {
 		
+		System.out.println("Comprobando contraseña...");
 		String username = user.getName();
 		String password = user.getPassword();
 		List<User> userList = template.query("SELECT * FROM Users WHERE Username='"+username+"'", new RowMapper<User>() {
@@ -118,16 +117,18 @@ public class UsersController {
 		if (userList.size() > 0) {
 			
 			if (userList.get(0).getPassword().equals(password)) {
+				System.out.println("Correcta!\n");
 				return true;
 			}
 		}
-		
+		System.out.println("Incorrecta\n");
 		return false;
 	}
 	
 	@PostMapping("/check")
 	public boolean checkUser(@RequestBody User user) {
 		
+		System.out.println("Comprobando si existe el usuario...");
 		String username = user.getName();
 		
 		List<User> userList = template.query("SELECT * FROM Users WHERE UserName='"+username+"'", new RowMapper<User>() {
@@ -140,10 +141,10 @@ public class UsersController {
 		});
 
 		if (userList.size() > 0) {
-			
+			System.out.println("Existe!...\n");
 			return true;
 		}
-		
+		System.out.println("No existe\n");
 		return false;
 	}
 	
@@ -160,7 +161,7 @@ public class UsersController {
 		boolean online = user.isOnline();
 		int img = user.getUserImg();
 		template.update("INSERT INTO Users(Username,UserPassword,Online,UserImage) VALUES('"+name+"','"+pass+"','"+online+"','"+img+"')");
-
+		System.out.println("Se ha creado un nuevo usuario: \n" + name);
 		return user;
 	}
 
@@ -189,30 +190,4 @@ public class UsersController {
 		return userList.get(0).getUserImg();
 	}
 	
-	/*
-	@GetMapping("/{id}")
-	public ResponseEntity<Item> getItem(@PathVariable long id) {
-
-		Item savedItem = items.get(id);
-
-		if (savedItem != null) {
-			return new ResponseEntity<>(savedItem, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Item> borraItem(@PathVariable long id) {
-
-		Item savedItem = items.get(id);
-
-		if (savedItem != null) {
-			items.remove(savedItem.getId());
-			return new ResponseEntity<>(savedItem, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-*/
 }
