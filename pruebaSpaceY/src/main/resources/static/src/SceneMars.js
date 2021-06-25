@@ -1026,17 +1026,14 @@ class SceneMars extends Phaser.Scene {
     ReturnStormPilot()
     {
         this.StormPilot = false;
-        console.log("las cosas de tocar funcionan");
     }
     ReturnMeteorPilot()
     {
         this.MeteorPilot = false;
-        console.log("las cosas de tocar funcionan");
     }
     ReturnAntenaPilot()
     {
         this.AntenaPilot = false;
-        console.log("las cosas de tocar funcionan");
     }
     ReturnMinePilot(){
         this.MinePilot = false;
@@ -1044,7 +1041,6 @@ class SceneMars extends Phaser.Scene {
     ReturnRocketPilot()
     {
         this.RocketPilot = false;
-        console.log("las cosas de tocar funcionan");
     }
     ReturnTerraPilot(){
         this.TerraPilot = false;
@@ -1443,7 +1439,7 @@ function OpenPostItMars(obj, scene) {
 
 function SwitchInputs(value){
 
-    console.log(value);
+    //console.log(value);
 
     key_left.reset();
     key_right.reset();

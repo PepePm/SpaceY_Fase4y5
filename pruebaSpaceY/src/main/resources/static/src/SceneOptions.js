@@ -225,7 +225,6 @@ class SceneOptions extends Phaser.Scene {
     }
     Altavoz() {
         var value = soundtrack.volume;
-        console.log("SAAAANIC " + value);
         this.bckAltavoces.setScale(1);
         tweening = this.tweens.add({
             targets: this.bckAltavoces,

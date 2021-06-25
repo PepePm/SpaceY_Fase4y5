@@ -260,8 +260,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         this.wearTxt[2] = new WearMachineTxt(scene, this.controlCom.x, this.controlCom.y); // Comunicaciones
         this.wearTxt[3] = new WearMachineTxt(scene, this.controlMina.x, this.controlMina.y); // Mina
 
-        console.log("wearTxt: " + this.wearTxt + " nWear: " + this.nWear + " this.wearTxt[this.nWear]: " +  this.wearTxt[this.nWear].txt);
-
         this.wearTxt[0].txt.setVisible(false);
         this.wearTxt[1].txt.setVisible(false);
         this.wearTxt[2].txt.setVisible(false);
@@ -411,8 +409,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
     HandleOnMessage(msg) {
 
         var data = JSON.parse(msg.data);
-
-        console.log("HOLA");
 
         //ACTUALIZACION DE LA INFORMACION DE LA CONSOLA DE TIERRA
         switch (data["type"]) {

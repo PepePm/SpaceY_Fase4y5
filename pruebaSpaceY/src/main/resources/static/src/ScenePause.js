@@ -147,7 +147,7 @@ class ScenePause extends Phaser.Scene {
 
         if (key_pausemenu.isDown && gamePaused && !this.paused) {
 
-            console.log("cerrar pausa");
+            //console.log("cerrar pausa");
             this.paused = true;
             this.GoBackGame();
         }
@@ -221,7 +221,7 @@ class ScenePause extends Phaser.Scene {
                 
                 that.scene.stop("ScenePause");
 
-                console.log("clientGamemode: " + clientGamemode);
+                //console.log("clientGamemode: " + clientGamemode);
             },
         });
     }

@@ -403,7 +403,6 @@ class SceneEarth extends Phaser.Scene {
             //emitter.setPosition(Phaser.Math.Between(0, game.config.width), 0)
             emitterStorm.emitZoneIndex = 1;
             emitterStorm.active = false;
-            //console.log("APAGA");
         });
         //*/
 
@@ -539,7 +538,7 @@ class SceneEarth extends Phaser.Scene {
                     break;
                 case "syncResPilot":
                     controlTierra.UIEarthNeedResPilot.setVisible(data["value"]);
-                    console.log("pìdiendo recursos");
+                    //console.log("pìdiendo recursos");
                     if(that.resPilot == false)
                     {
                         //console.log("activando piloto res");
@@ -603,7 +602,7 @@ class SceneEarth extends Phaser.Scene {
                     controlTierra.UIEarthTerraform.setScale(terraformLevel);
                     break;
                 case "syncCommsBroken":
-                    console.log("commsBroken " + data["value"]);
+                    //console.log("commsBroken " + data["value"]);
                     weatherControl.commsBroken = data["value"];
                     break;
                 case "syncLobbyMsgs":
@@ -624,10 +623,8 @@ class SceneEarth extends Phaser.Scene {
             });
 
             that.scene.stop("SceneGame");
-            that.scene.stop("ScenePause"); // METER ESTO EN MENU DE PAUSA (?)
+            that.scene.stop("ScenePause");
             that.scene.start("SceneMenu");
-
-            //console.log("chapo");
         }
 
         // Desconexión de usuario si refresca la página
@@ -803,7 +800,6 @@ class SceneEarth extends Phaser.Scene {
     ReturnFoodPilot()
     {
         this.foodPilot = false;
-        console.log("las cosas de tocar funcionan");
     }
     ReturnResPilot(){
         this.resPilot = false;
@@ -1069,7 +1065,6 @@ function OpenPostItEarth(obj, scene) {
             break;
     }
     if (isbig) {
-        ////console.log('no soy grande');
         isbig = false;
         scene.tweens.add({
             targets: obj,

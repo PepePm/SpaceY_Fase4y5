@@ -30,7 +30,7 @@ class Weather {
     SyncStartSandstorm(){
         this.scene.time.addEvent({ delay: 1000*30, callback: this.FinishSandstorm, callbackScope: this});
 
-        console.log("Enviar sandstorm: ");
+        //console.log("Enviar sandstorm: ");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
@@ -57,7 +57,7 @@ class Weather {
     SyncStartMeteorRain(){
         this.scene.time.addEvent({ delay: 3000*5, callback: this.FinishMeteorRain, callbackScope: this});
 
-        console.log("Enviar meteoritos: ");
+        //console.log("Enviar meteoritos: ");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,

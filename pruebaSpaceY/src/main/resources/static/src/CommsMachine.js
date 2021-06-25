@@ -118,7 +118,6 @@ class CommsMachine extends Machine {
 
 
     SyncCommsBroken(){
-        console.log("Comms rota: " + this.isBroken);
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,

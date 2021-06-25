@@ -160,7 +160,7 @@ class SceneGame extends Phaser.Scene {
 		
 		//En cuanto se abra la conexion
 		connection.onopen = function(){
-            console.log("abierto");
+            //console.log("abierto");
             //connection.send("Muy buenas tardes Pepe");
         }
 
@@ -750,7 +750,6 @@ function OpenPostIt(obj,scene) {
     }
     if(isbig)
     {
-        ////console.log('no soy grande');
         isbig = false;
         scene.tweens.add({
             targets: obj,

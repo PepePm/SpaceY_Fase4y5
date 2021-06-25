@@ -18,7 +18,7 @@ function RestCreateMsg (scene, username) {
     var content = scene.writeTextChat.getChildByName('Chat').value;
     scene.writeTextChat.getChildByName('Chat').value = "";
 
-    console.log(username + ": " + content);
+    //console.log(username + ": " + content);
 
     var msg = {
         userName: username,
