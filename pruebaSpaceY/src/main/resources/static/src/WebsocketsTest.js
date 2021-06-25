@@ -50,12 +50,10 @@ class WebsocketsTest {
                 value: "bloon destroyer",
 		    }
 			connection.send(JSON.stringify(data));//*/
-
         }
 
         connection.onmessage = function(msg){
             console.log("De parte del server: " + msg.data);
         }
     }
-
 }

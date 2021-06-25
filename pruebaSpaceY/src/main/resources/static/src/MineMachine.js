@@ -12,15 +12,12 @@ class MineMachine extends Machine {
         //update tecla
         this.keyIndicator.update();
         if (this.canInteract()) {
-            
-            //
             if (!this.isBroken) {
 
                 //Visibilidad on
                 this.keyIndicator.setVisible(true);
 
                 //Picar en la mina
-                //
                 if (key_interact.isDown) {
 
                     if (barraCarga.n < barraCarga.max && indRocas.size < indRocas.maxSize) {
@@ -127,5 +124,4 @@ class MineMachine extends Machine {
         this.obj.anims.stop();
         this.obj.setFrame(0);
     }
-
 }

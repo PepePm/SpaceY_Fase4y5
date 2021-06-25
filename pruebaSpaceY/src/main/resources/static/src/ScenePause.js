@@ -67,7 +67,6 @@ class ScenePause extends Phaser.Scene {
 
             valuechangeCallback: function (value) {
                 print0.text = Math.ceil(value*100);
-                //if(musica!=undefined)
                     soundtrack.volume = value;
                     soundtrack.pistas.forEach(element =>{
                         element.volume = soundtrack.volume;
@@ -83,7 +82,6 @@ class ScenePause extends Phaser.Scene {
             .layout().setVisible(false);
 
         //Slider SFX
-        //if(sliderSfx == undefined)
         sliderSfx = this.rexUI.add.slider({
             x: game.config.width/2,
             y: (game.config.height/7)*3 + 40,
@@ -98,13 +96,10 @@ class ScenePause extends Phaser.Scene {
 
             valuechangeCallback: function (value) {
                 print1.text = Math.ceil(value*100);
-                //if(sfx!=undefined)
-                //{
                     sfx.volume = value;
                     sfx.sounds.forEach(element => {
                         element.volume = sfx.volume;
                     });
-                //}
             },
             space: {
                 top: 4,
@@ -141,20 +136,14 @@ class ScenePause extends Phaser.Scene {
     }
 
     update(delta) {
-
-        /*console.log("key_pause: " + key_pause.isDown + " gamePaused: " + gamePaused + " this.paused: " + 
-            this.paused);*/
-
         if (key_pausemenu.isDown && gamePaused && !this.paused) {
-
-            //console.log("cerrar pausa");
             this.paused = true;
             this.GoBackGame();
         }
         if (key_pausemenu.isUp) {
 
             this.paused = false;
-        }//*/
+        }
     }
 
     Highlight(obj, b) {
@@ -220,15 +209,11 @@ class ScenePause extends Phaser.Scene {
                 }
                 
                 that.scene.stop("ScenePause");
-
-                //console.log("clientGamemode: " + clientGamemode);
             },
         });
     }
 
     GoOptions() {
-        //this.print0.setVisible(true);
-        //this.print1.setVisible(true);
         sliderMusic.setVisible(true);
         sliderSfx.setVisible(true);
         this.volumeButton.setVisible(true);
@@ -241,8 +226,6 @@ class ScenePause extends Phaser.Scene {
     }
 
     OutOptions() {
-        //this.print0.setVisible(false);
-        //this.print1.setVisible(false);
         sliderMusic.setVisible(false);
         sliderSfx.setVisible(false);
         this.volumeButton.setVisible(false);
@@ -272,11 +255,9 @@ class ScenePause extends Phaser.Scene {
     switchMusic() {
         if(sliderMusic.value==1){
             sliderMusic.value = 0;
-            ////console.log("De 100 a 0");
         }
         else if(sliderMusic.value == 0){
             sliderMusic.value = 1;
-            ////console.log("De 0 a 100");
         } else(sliderMusic.value != 0 || sliderMusic.value != 1)
             sliderMusic.value = Math.round(sliderMusic.value);
 
@@ -287,11 +268,9 @@ class ScenePause extends Phaser.Scene {
     switchSfx() {
         if(sliderSfx.value==1){
             sliderSfx.value = 0;
-            ////console.log("De 100 a 0");
         }
         else if(sliderSfx.value == 0){
             sliderSfx.value = 1;
-            ////console.log("De 0 a 100");
         } else(sliderSfx.value != 0 || sliderSfx.value != 1)
         sliderSfx.value = Math.round(sliderSfx.value);
             
@@ -314,8 +293,5 @@ function GlowMe(scene,target,fadeOut){
 
             image.setTint(Phaser.Display.Color.GetColor(value, value, value));
         }
-    });
-    
+    });   
 }
-
-

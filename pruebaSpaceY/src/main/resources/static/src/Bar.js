@@ -33,13 +33,6 @@ class Bar {
 
     Update() {
 
-        /*if (withText) {
-
-            this.txt = scene.add.text(x-24, y-10, Math.round((n/max)*100)+'%',{
-                fontSize:'40px',
-                fill: '#ffffff',
-            }).setVisible(false);
-        }*/
         this.obj.scaleX = (this.n/this.max)*this.ancho;
         if (this.withText)  this.txt.setText(Math.round((this.n/this.max)*100)+'%');
     }
@@ -48,5 +41,4 @@ class Bar {
 
         if (color != -1)    this.obj.tint = color;
     }
-
 }

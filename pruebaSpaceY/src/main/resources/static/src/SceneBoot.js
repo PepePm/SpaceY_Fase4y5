@@ -25,7 +25,6 @@ class SceneBoot extends Phaser.Scene {
 
         this.load.spritesheet('userImages', directory+'User_images.png', { frameWidth: 1134, frameHeight: 964 });
         //Scene Menu
-        //this.load.image("bckMenu", directory+"spaceYmenu_bck.png");
         this.load.image("spaceYlogo", directory+"spaceYmenu.png");
         this.load.image("earthLogo", directory+"spaceYmenuEarth.png");
         //Scene Options
@@ -51,10 +50,6 @@ class SceneBoot extends Phaser.Scene {
         this.load.image("timerSegundos", directory+"ui_M_segundos.png" );
         this.load.image("timerMinutos", directory+"ui_M_minutos.png" );
         this.load.image("timeHoras", directory+"ui_M_horas.png" );
-        //this.load.image("indicadorRocas", directory+"ui_M_rocas.png" );
-        //this.load.image("indicadorO2", directory+"ui_M_o2.png" );
-        //this.load.image("indicadorMateriales", directory+"ui_M_materiales.png" );
-        //this.load.image("indicadorHambre", directory+"ui_M_hambre.png" );
         this.load.spritesheet("indicadores", directory+"M_indicators.png", { frameWidth: 145, frameHeight: 145 });
         this.load.image("flechasAmarillas", directory+"FlechasAmarillas.png" );
         
@@ -64,10 +59,6 @@ class SceneBoot extends Phaser.Scene {
         this.load.image("lanzaderaPuerta", directory+"ui_T_Lanzadera_door.png" );
         this.load.image("lanzaderaPuertaRecursos", directory+"ui_T_Lanzadera_door_2.png" );
         this.load.image("lanzaderaCountdown", directory+"ui_T_countdown.png" );
-        /*this.load.image("cargaMateriales", directory+"ui_T_payload_materiales.png" );
-        this.load.image("cargaRocas", directory+"ui_T_payload_rocas.png" );
-        this.load.image("cargaO2", directory+"ui_T_payload_o2.png" );
-        this.load.image("cargaComida", directory+"ui_T_payload_comida.png" );*/
         this.load.spritesheet("payloads", directory+"ui_T_payloads.png", { frameWidth: 44, frameHeight: 29 });
         this.load.image("paqueteriaBase", directory+"ui_T_Paqueteria_contadores.png" );
         this.load.image("paqueteriaBaseTubo", directory+"ui_T_Paqueteria_contadores_tubo.png" );
@@ -138,7 +129,6 @@ class SceneBoot extends Phaser.Scene {
         //CONSOLA DE LA TIERRA
         this.load.image("UIEarthCons", directory+"UI_Tierra_Caja_Azul_con_Paneles.png" );
         this.load.image("UIEarthTime", directory+"UI_Tierra_Tiempo-08.png" );
-        //this.load.image("UIEarthTerraform", directory+"UI_Marte_Progreso_Terraformacion.png" );//usar el de la tierra
         this.load.image("UIEarthAlerts", directory+"UI_Tierra_Caja_informativa-08.png" );
         this.load.image("UIEarthPilots", directory+"UI_Tierra_Contenedor_Pilotos-08.png" );
         this.load.image("UiEarthSndBrkAntenaPilot", directory+"UI_Tierra_Boton_Maquina-11.png" );
@@ -246,7 +236,6 @@ class SceneBoot extends Phaser.Scene {
         progressBox.fillRect(xx-160, yy-25, 320, 50);
 
         this.load.on('progress', function (value) {
-            //console.log(value);
             progressBar.clear();
             progressBar.fillStyle(0xED7C12, 1);
             progressBar.fillRect(xx-150, yy-15, 300 * value, 30);
@@ -254,13 +243,10 @@ class SceneBoot extends Phaser.Scene {
         });
                     
         this.load.on('fileprogress', function (file) {
-            //console.log(file.src);
             assetText.setText('Loading asset: ' + file.key);
-            //assetText.setText('Loading asset: ' + file.src);
         });
         
         this.load.on('complete', function () {
-            //console.log('complete');
             progressBar.destroy();
             progressBox.destroy();
             loadingText.destroy();
@@ -303,9 +289,6 @@ class SceneBoot extends Phaser.Scene {
             }
         });
         assetText.setOrigin(0.5, 0.5);
-
-
-        //this.load.on('complete',function(){ this.scene.start('SceneMenu');});
     }
 
     create() {
@@ -368,7 +351,6 @@ class SceneBoot extends Phaser.Scene {
             key: 'stelonauta_idle',
             frames: this.anims.generateFrameNumbers('stelonauta_idle', { start: 0, end: 29 }),
             frameRate: 18,
-            //repeat: 1,
         });
 
         this.anims.create({
@@ -407,8 +389,6 @@ class SceneBoot extends Phaser.Scene {
             frameRate: 15,
             repeat: 0,
         });
-
-        ////console.log("Acabé");
         this.scene.start('SceneMenu');
 
         this.scene.stop('SceneLogos');

@@ -1,6 +1,5 @@
 class Meteor {
     constructor(scene, delay){
-        //super(scene, 0, 0, "payloads", 0);
         this.rotation = Phaser.Math.Linear(0, Math.PI*2, Phaser.Math.Between(0,100)/100.0);
 
         this.obj = scene.add.image(marte.x, marte.y, "Meteorito")
@@ -37,9 +36,7 @@ class Meteor {
 
         //Play animation
         this.checkCollision();
-        //this.obj.setVisible(false);
         this.obj.destroy();
-        //this.destroy();
 
         //Sonido explosión meteorito
         sfx.sounds[13].play();
@@ -49,8 +46,6 @@ class Meteor {
 
         //Colisión con el jugador
         if (this.obj.rotation < this.areaCol/2 && this.obj.rotation > -this.areaCol/2) {
-
-            //DefeatCondition(this.scene);
             SyncGameEnd(this.scene, false);
         }
 
@@ -74,7 +69,7 @@ class Meteor {
                 else {
 
                     //Aplicar rotura a la máquina
-                    maquinas[i].wear = 0;//Math.max(0, maquinas[i].wear - maquinas[i].maxWear*0.3);
+                    maquinas[i].wear = 0;
                     maquinas[i].isBroken = true;
                     maquinas[i].obj.anims.stop();
                     maquinas[i].obj.setTexture(maquinas[i].textureBreak);

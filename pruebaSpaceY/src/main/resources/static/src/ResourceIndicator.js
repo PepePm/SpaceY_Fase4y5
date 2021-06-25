@@ -30,6 +30,4 @@ class ResourceIndicator {
     Update() {
         this.txt.setText(Math.round((this.size/this.maxSize)*100)+'%');
     }
-
 }
-

@@ -162,15 +162,10 @@ openExternalLink (name)
             x: endX,
             y: endY,
             delay: nOp * 100,
-            //aplha: {start: game.config.width / 2, to: game.config.width / 8},
             duration: 500,
             ease: 'Expo.easeOut',
             repeat: 0,
             yoyo: false,
-            //delay:delay,
-    
-            //onComplete: this.EnterOnMachine.bind(this)
         });
     }
-
 }

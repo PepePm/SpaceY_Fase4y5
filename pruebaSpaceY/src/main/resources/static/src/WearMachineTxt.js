@@ -17,5 +17,4 @@ class WearMachineTxt {
         this.wear = newValue;
         this.txt.setText(Math.round((this.wear/this.maxWear)*100)+'%');
     }
-
 }

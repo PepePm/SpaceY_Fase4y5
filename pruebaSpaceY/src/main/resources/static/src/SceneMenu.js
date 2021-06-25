@@ -1,5 +1,3 @@
-//const { Input } = require("phaser");
-
 var isTutorial = false;
 
 //is out
@@ -36,7 +34,6 @@ var gameLobbyID;
 var clientGamemode;
 
 //True si hay dos jugadores en el lobby
-//var lobbyFull = false;
 
 class SceneMenu extends Phaser.Scene {
 
@@ -46,14 +43,6 @@ class SceneMenu extends Phaser.Scene {
     }
 
     preload() {
-
-        //this.load.image("player", directory+"vulp_i1.png");
-        //this.load.spritesheet("button", "./Resources/Img/button.png", 185, 80);
-        //this.load.image('background',"./Resources/Img/starfield.jpg");
-        /*var url;
-        url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js';
-        this.load.plugin('rexbbcodetextplugin', url, true);*/
-
         //CHAT POSTITIONS BEFORE - AFTER
         var chtOffset = 1000;
 
@@ -235,7 +224,6 @@ class SceneMenu extends Phaser.Scene {
         this.earthOption = this.add.image(game.config.width * 7 / 8, game.config.height * 1 / 4, 'earthLogo').setScale(0.2)
             .setInteractive()
             .on('pointerdown', () => this.selectEarth())
-            //.on('pointerup', () => function(){if(selected != "Mars")this.Highlight(this.earthOption, true);} )
             .on('pointerover', () => { if (election != "Mars") this.Highlight(this.earthOption, true); })
             .on('pointerout', () => { if (election != "Mars") this.Highlight(this.earthOption, false); })
             .setVisible(false);
@@ -246,7 +234,6 @@ class SceneMenu extends Phaser.Scene {
         this.marsOption = this.add.image(300, game.config.height - 300, 'spaceYlogo').setScale(0.2)
             .setInteractive()
             .on('pointerdown', () => this.selectMars())
-            //.on('pointerup', () => this.Highlight(this.marsOption, true) )
             .on('pointerover', () => { if (election != "Earth") this.Highlight(this.marsOption, true); })
             .on('pointerout', () => { if (election != "Earth") this.Highlight(this.marsOption, false); })
             .setVisible(false);
@@ -323,11 +310,6 @@ class SceneMenu extends Phaser.Scene {
             .setScale(0.8);
         this.chatBase.setOrigin(0.5);
 
-        //chatbox frame
-        /*this.chatFrame= this.add.image(chatPos[4], chatPos[5],'ChatBox_Frame')
-        .setScale(0.8);
-        this.chatFrame.setOrigin(0.5);*/
-
         //chatbox write msg
         this.chatWritter = this.add.image(chatPos[6], chatPos[7], 'ChatBox_MsgBox')
             .setScale(0.37);
@@ -368,13 +350,6 @@ class SceneMenu extends Phaser.Scene {
         });
 
         this.writeTextChat = this.add.dom(1280, 785).createFromCache('formChat').setVisible(false);
-
-        /*this.writeTextChat.addListener("keydown", event => {
-            //console.log("ddddd");
-            if (event.isComposing || event.keyCode === 13) {
-                RestCreateMsg(this, userName);
-            }
-        }); */
 
         //REGISTER
         //register box
@@ -513,12 +488,9 @@ class SceneMenu extends Phaser.Scene {
 
         //Campos Registro
         this.regLogin = this.add.dom(275, 330).createFromCache('formReg').setVisible(false);
-        //this.regLogin.addListener('click');
 
         //SelectMarsImg
         this.regUserImgNum = 1;
-        //                  vvvv Imagen marte vvvv
-        //this.userImg = this.add.image(regisPos[10], regisPos[11],'userImages', this.regUserImgNum).setScale(0.16).setOrigin(0.5);
 
         this.regLogin = this.add.dom(275, 330).createFromCache('formReg').setVisible(false);
 
@@ -540,17 +512,10 @@ class SceneMenu extends Phaser.Scene {
         var that = this;
         this.writeTextChat.getChildByName("Chat")
         .addEventListener("keydown", function (event) {
-            //event.preventDefault();
             if (event.key === "Enter") {
                 RestCreateMsg(that, userName);
             }
         });
-        /*// Fix spacebar
-        this.input.keyboard.on('keydown', function (event) {
-            if(event.key == " "){
-                that.writeTextChat.getChildByName('Chat').value += " ";
-            }
-        });*/
 
         // Desconexión de usuario si refresca la página
         window.onbeforeunload = function(){
@@ -649,15 +614,11 @@ class SceneMenu extends Phaser.Scene {
     selectEarth() {
         election = "Earth";
         this.Highlight(this.earthOption, true, "Earth");
-        //this.easeSelection(this.earthOption, this, true);
-        //this.easeSelection(this.marsOption, this, false);
     }
 
     selectMars() {
         election = "Mars";
         this.Highlight(this.marsOption, true, "Mars");
-        //this.easeSelection(this.marsOption, this, true);
-        //this.easeSelection(this.earthOption, this, false);
     }
 
     //Llamada desde el Host
@@ -713,10 +674,6 @@ class SceneMenu extends Phaser.Scene {
                 texto = "";
                 console.log("Cerrando conexión del HOST");
             }
-
-            /*connection.onmessage = function(msg){
-                
-            }*/
         }
         else {
             if (userName == "Anon") {
@@ -745,7 +702,6 @@ class SceneMenu extends Phaser.Scene {
                     lobbyID: code.getChildByName("lobbyID").value,
                 }
                 gameLobbyID = code.getChildByName("lobbyID").value;
-                //console.log("Codigo enviado: " + code.getChildByName("lobbyID").value);
                 connection.send(JSON.stringify(data));
             }
 
@@ -755,9 +711,6 @@ class SceneMenu extends Phaser.Scene {
 
                 switch (data["type"]) {
                     case "connected":
-                        /*
-                        por si queremos hacer algo cuando se conecte
-                        */
                         break;
                     case "error":
                         console.error("Error en la conexión: " + data["cause"]);
@@ -826,7 +779,7 @@ class SceneMenu extends Phaser.Scene {
             this.accountText.setText('User already logged in');
         }
         else
-            //  Have they entered anything?
+            //  Han metido algo?
             if (inputName.value !== '' && inputPassword.value !== '') {
                 CheckUserPasswordCorrect(this, inputName.value, inputPassword.value);
             }
@@ -1047,9 +1000,7 @@ class SceneMenu extends Phaser.Scene {
     }
 
     CheckLoggedIn(scene) {
-        //console.log("hola holita vecinito" + userName == 'Anon');
         if (userName !== 'Anon') {
-            //console.log("adiosito holita vecinito");
             scene.loginRegister.setActive(false);
             scene.loginRegister.setVisible(false);
 
@@ -1083,8 +1034,6 @@ class SceneMenu extends Phaser.Scene {
                 targets: scene.chatboxStuff[i],
                 x: chatPos[nX],
                 y: chatPos[nY],
-                //delay: 100,
-                //aplha: {start: game.config.width / 2, to: game.config.width / 8},
                 duration: 100,
                 ease: 'Bounce.easeIn',
             });
@@ -1102,8 +1051,6 @@ class SceneMenu extends Phaser.Scene {
                 targets: scene.chatboxStuff[i],
                 x: chatTween[nX],
                 y: chatTween[nY],
-                //delay: 100,
-                //aplha: {start: game.config.width / 2, to: game.config.width / 8},
                 duration: 100,
                 ease: 'Bounce.easeOut',
             });
@@ -1204,7 +1151,6 @@ class SceneMenu extends Phaser.Scene {
                 else if (!loginOut) //sacar log in
                 {
                     this.accountText.setVisible(true);
-                    //this.accountLogin.setVisible(true);
 
                     for (let i = 0; i < scene.loginStuff.length; i++) {
                         scene.tweens.add({
@@ -1241,7 +1187,6 @@ class SceneMenu extends Phaser.Scene {
                         nX += 2; nY += 2;
                     }
                     registerOut = false
-                    //this.ShowRegisternFields(scene,registerOn);
                 }
                 else if (!registerOut) //sacar register
                 {
@@ -1257,7 +1202,6 @@ class SceneMenu extends Phaser.Scene {
                         nX += 2; nY += 2;
                     }
                     registerOut = true
-                    //this.ShowRegisternFields(scene,registerOn);
                 }
 
                 break;
@@ -1295,14 +1239,10 @@ class SceneMenu extends Phaser.Scene {
             x: endX,
             y: endY,
             delay: nOp * 100,
-            //aplha: {start: game.config.width / 2, to: game.config.width / 8},
             duration: 500,
             ease: 'Circ.easeOut',
             repeat: 0,
             yoyo: false,
-            //delay:delay,
-
-            //onComplete: this.EnterOnMachine.bind(this)
         });
     }
 
@@ -1330,14 +1270,10 @@ class SceneMenu extends Phaser.Scene {
             x: endX,
             y: endY,
             delay: nOp * 100,
-            //aplha: {start: game.config.width / 2, to: game.config.width / 8},
             duration: 500,
             ease: 'Circ.easeOut',
             repeat: 0,
             yoyo: false,
-            //delay:delay,
-
-            //onComplete: this.EnterOnMachine.bind(this)
         });
     }
 
@@ -1360,14 +1296,10 @@ class SceneMenu extends Phaser.Scene {
             scaleX: scale,
             scaleY: scale,
             delay: 0,
-            //aplha: {start: game.config.width / 2, to: game.config.width / 8},
             duration: 500,
             ease: 'Circ.easeOut',
             repeat: 0,
             yoyo: false,
-            //delay:delay,
-
-            //onComplete: this.EnterOnMachine.bind(this)
         });
     }
 
@@ -1390,12 +1322,10 @@ class SceneMenu extends Phaser.Scene {
             scaleX: 0.2,
             scaleY: 0.2,
             delay: 0,
-            //aplha: {start: game.config.width / 2, to: game.config.width / 8},
             duration: 500,
             ease: 'Circ.easeOut',
             repeat: 0,
             yoyo: false,
-            //delay:delay,
 
             onComplete: function () {
                 logo.setVisible(false);
@@ -1436,32 +1366,4 @@ class SceneMenu extends Phaser.Scene {
             onComplete: function () { texto.setVisible(false); texto.alpha = 1; },
         });
     }
-
-
-
-    /*
-    easeSelection(boton,scene, value){
-        if(value == true)
-        {
-            var scale = boton.scale.x * 1.1;
-            myTween = 
-            scene.tweens.add({
-                targets: boton,
-                scaleX: scale,
-                scaleY: scale,
-                delay:0,
-                duration: 500,
-                ease: 'Circ.easeOut',
-                repeat: -1,
-                yoyo: true,
-            });
-        }
-        else{
-            myTween.stop();
-        }
-    
-    }*/
-
 }
-
-

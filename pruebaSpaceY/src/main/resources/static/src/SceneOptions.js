@@ -34,21 +34,10 @@ class SceneOptions extends Phaser.Scene {
         //Altavoces animados
         this.bckAltavoces = this.add.image(game.config.width / 2, -2000, "altavoces").setOrigin(0.5);
         this.easeMe(this.bckAltavoces, this, 1);
-        /*this.tweens.add({
-            targets: this.bckAltavoces,
-            scaleX: 1.1,
-            scaleY: 1.1,
-            duration: 800,
-            ease: 'Elastic.easeOut',
-            //onComplete:function(){ },
-            //repeat:-1,
-        });*/
-        //this.event = this.time.addEvent({ delay: 600, callback: Altavoz, callbackScope: this, loop: true});
         this.Altavoz();
 
         var that = this;
         //Slider musica
-        //if(sliderMusic == undefined)
         sliderMusic = this.rexUI.add.slider({
             x: game.config.width / 2,
             y: (game.config.height / 8) * 3 + 40,
@@ -63,7 +52,6 @@ class SceneOptions extends Phaser.Scene {
 
             valuechangeCallback: function (value) {
                 print0.text = Math.ceil(value * 100);
-                //if(musica!=undefined)
                 soundtrack.volume = value;
                 soundtrack.pistas.forEach(element => {
                     element.volume = soundtrack.volume;
@@ -83,7 +71,6 @@ class SceneOptions extends Phaser.Scene {
             .layout();
 
         //Slider SFX
-        //if(sliderSfx == undefined)
         sliderSfx = this.rexUI.add.slider({
             x: game.config.width / 2,
             y: (game.config.height / 8) * 4 + 40,
@@ -98,13 +85,10 @@ class SceneOptions extends Phaser.Scene {
 
             valuechangeCallback: function (value) {
                 print1.text = Math.ceil(value * 100);
-                //if(sfx!=undefined)
-                //{
                 sfx.volume = value;
                 sfx.sounds.forEach(element => {
                     element.volume = sfx.volume;
                 });
-                //}
 
 
 
@@ -148,11 +132,9 @@ class SceneOptions extends Phaser.Scene {
     switchMusic() {
         if (sliderMusic.value == 1) {
             sliderMusic.value = 0;
-            ////console.log("De 100 a 0");
         }
         else if (sliderMusic.value == 0) {
             sliderMusic.value = 1;
-            ////console.log("De 0 a 100");
         } else (sliderMusic.value != 0 || sliderMusic.value != 1)
         sliderMusic.value = Math.round(sliderMusic.value);
 
@@ -163,11 +145,9 @@ class SceneOptions extends Phaser.Scene {
     switchSfx() {
         if (sliderSfx.value == 1) {
             sliderSfx.value = 0;
-            ////console.log("De 100 a 0");
         }
         else if (sliderSfx.value == 0) {
             sliderSfx.value = 1;
-            ////console.log("De 0 a 100");
         } else (sliderSfx.value != 0 || sliderSfx.value != 1)
         sliderSfx.value = Math.round(sliderSfx.value);
 
@@ -213,14 +193,10 @@ class SceneOptions extends Phaser.Scene {
             x: endX,
             y: endY,
             delay: nOp * 150,
-            //aplha: {start: game.config.width / 2, to: game.config.width / 8},
             duration: 500,
             ease: 'Circ.easeOut',
             repeat: 0,
             yoyo: false,
-            //delay:delay,
-
-            //onComplete: this.EnterOnMachine.bind(this)
         });
     }
     Altavoz() {
@@ -237,4 +213,3 @@ class SceneOptions extends Phaser.Scene {
 
 }
 var tweening;
-

@@ -4,11 +4,6 @@ var config = {
     parent: "container",
     type: Phaser.AUTO,
     autoCenter: true,
-    /*scene: {
-        preload: preload,
-        create: create,
-        update: update     
-    },//*/
 
     scene:[SceneLogos, SceneBoot,SceneMars,SceneEarth ,SceneMenu, SceneREST,SceneTutorial, SceneGame, ScenePause,SceneContact, SceneOptions, SceneGameEnd],
 
@@ -28,4 +23,3 @@ var config = {
 }
 
 var game = new Phaser.Game(config);
-

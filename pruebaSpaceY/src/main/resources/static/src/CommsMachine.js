@@ -19,7 +19,6 @@ class CommsMachine extends Machine {
         //update tecla
         this.keyIndicator.update();
         //Desgaste
-        //this.updateWear(delta);
         this.delta = delta;
 
         if (this.canInteract()){
@@ -126,5 +125,4 @@ class CommsMachine extends Machine {
         }
         connection.send(JSON.stringify(data));
     }
-
 }

@@ -641,139 +641,8 @@ class SceneEarth extends Phaser.Scene {
         var pointer = this.input.activePointer;
 
         controlTierra.pantallaPlano.rotation += delta / 16000;
-        //controlTierra.posicionMapa.rotation += delta / 16000;
         controlTierra.posicionMapa.rotation = -positionOffset - 3.14/2 + controlTierra.pantallaPlano.rotation;
-        //controlTierra.posicionMapa.rotation += delta / 16000;
         
-        //controlTierra.posicionMapa.rotation += positionOffset;
-        //positionOffset = 0;
-
-        //console.log(controlTierra.posicionMapa.rotation);
-        
-        //DEBUG PARTICULAS
-        /*if (key_left.isDown) {
-            //Apaga
-            emitterStorm.on = false;
-        }
-        else if (key_right.isDown) {
-            //Enciende
-            emitterStorm.on = true;
-        }*/
-
-        //emitter.setPosition(Phaser.Math.Between(0, game.config.width), 0)
-        //MARTE
-        //Inputs
-        //Movimiento de Marte
-
-        /*if (key_left.isDown) {
-
-            //Rotación de los elementos de Marte
-            updateRotations(1, delta);
-            //marte.rotation += 1*delta/1500*playerSpeed;
-            //Cohete
-            emitterMachines[0].posX = marte.x + 700 * Math.cos(-1.57 + marte.rotation);
-            emitterMachines[0].posY = marte.y + 700 * Math.sin(-1.57 + marte.rotation);
-            //Terraformador
-            emitterMachines[1].posX = marte.x + 700 * Math.cos(3.14 + marte.rotation);
-            emitterMachines[1].posY = marte.y + 700 * Math.sin(3.14 + marte.rotation);
-            //Comunicaciones
-            emitterMachines[2].posX = marte.x + 570 * Math.cos(marte.rotation);
-            emitterMachines[2].posY = marte.y + 570 * Math.sin(marte.rotation);
-            //Mina
-            emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
-            emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
-            //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
-        }
-        else if (key_right.isDown) {
-            
-            //Rotación de los elementos de Marte
-            updateRotations(-1, delta);
-            //marte.rotation += -1*delta/1500*playerSpeed;
-            //Cohete
-            emitterMachines[0].posX = marte.x + 700 * Math.cos(-1.57 + marte.rotation);
-            emitterMachines[0].posY = marte.y + 700 * Math.sin(-1.57 + marte.rotation);
-            //Terraformador
-            emitterMachines[1].posX = marte.x + 700 * Math.cos(3.14 + marte.rotation);
-            emitterMachines[1].posY = marte.y + 700 * Math.sin(3.14 + marte.rotation);
-            //Comunicaciones
-            emitterMachines[2].posX = marte.x + 570 * Math.cos(marte.rotation);
-            emitterMachines[2].posY = marte.y + 570 * Math.sin(marte.rotation);
-            //Mina
-            emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
-            emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
-            //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
-        }
-        else {
-
-            player.anims.play('stelonauta_idle', true);
-            
-        }
-        //if(maquina[i].isRota == true)
-        /*  emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
-          emitterMachines[1].emitParticleAt(emitterMachines[1].posX, emitterMachines[1].posY);
-          emitterMachines[2].emitParticleAt(emitterMachines[2].posX, emitterMachines[2].posY);
-          emitterMachines[3].emitParticleAt(emitterMachines[3].posX, emitterMachines[3].posY);
-        */
-        ////console.log("Pos X: " + emitterMachines[0].posX + "\nPos Y: " + emitterMachines[0].posY);
-
-        /*
-        //SONIDOS DE CORRER EN MARTE
-        if ((key_left.isDown || key_right.isDown) && !startSfxRun) {
-            startSfxRun = true;
-            sfx.sounds[3].play();
-        }
-        if (key_left.isUp && key_right.isUp) {
-            startSfxRun = false;
-            sfx.sounds[3].stop();
-        }*/
-
-        /*
-
-        //Meteoritos en MARTE
-        for(var i=0; i < meteoritos.length; i++) {
- 
-            meteoritos[i].Update();
-        }
-        */
-
-        //////////////////////////////
-        //Interaccionar con máquinas//
-        //////////////////////////////
-        //Mostrar tecla interacción
-        /*if (!(maquinas[0].canInteract() || maquinas[1].canInteract() || maquinas[2].canInteract() || maquinas[3].canInteract()) && maquinas[0].isSending) {
-
-            teclaAccion.setVisible(false);
-        }*/
-        /*
-        //Acciones de cada máquina
-        for(i = 0; i < 4; i++) {
-
-            maquinas[i].update(delta);
-            if(maquinas[i].isBroken == true)
-                emitterMachines[i].emitParticleAt(emitterMachines[i].posX, emitterMachines[i].posY);
-        }*/
-
-        ///////////
-        //Pasivas//
-        ///////////
-
-        /*
-        //Nubes
-        for(var i=0; i<N_NUBES; i++) {
-            nubes[i].Update();
-        }*/
-
-        //Desgaste máquinas//(mejor en sus clases)
-
-        /*
-        //Desgaste hambre//
-        indHam.size = Phaser.Math.Clamp(indHam.size - delta/2500, 0, indHam.maxSize); 
-        indHam.Update();
-        
-        if (indHam.size <= 0)
-            DefeatCondition(this);
-
-        */
         //TIERRA
         controlTierra.Update(delta);
 
@@ -860,7 +729,6 @@ class SceneEarth extends Phaser.Scene {
                 typeToSync = "syncDangerMeteor";
                 break;
         }
-        //console.log("Solicitando arreglar máquina");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
@@ -892,14 +760,11 @@ class SceneEarth extends Phaser.Scene {
 
     easePilot(scene, boton, value) {
 
-
-        //this.scene.time.addEvent({ delay: 1000*5, callback: this.SandStorm, callbackScope: this});
         if (value) {
             var scaleV = 1.3;
             scene.tweens.add({
                 targets: boton,
                 scale: scaleV,
-                //scaleY: boton.scaleY * scaleV,
                 delay: 0,
                 duration: 100,
                 ease: 'Circ.easeOut',
@@ -917,119 +782,6 @@ class SceneEarth extends Phaser.Scene {
 
 }
 
-/*
-function updateRotations(sign, delta) {
-
-    for(var i=0; i<N_NUBES; i++) {
-        nubes[i].obj.rotation += sign*delta/1000*playerSpeed;
-    }
-    for(var i=0; i < meteoritos.length; i++) {
-        meteoritos[i].obj.rotation += sign*delta/1500*playerSpeed;
-    }
-    
-    marte.rotation+=sign*delta/1500*playerSpeed;
-    objCohete.obj.rotation+=sign*delta/1500*playerSpeed;
-
-    for (i=0; i<4; i++) {
-
-        maquinas[i].obj.setRotation(maquinas[i].obj.rotation + sign*delta/1500*playerSpeed);
-        //Update sonidos
-        var beta = maquinas[i].obj.rotation < 0 ? maquinas[i].obj.rotation * -1: maquinas[i].obj.rotation ;
-        if(beta < 0.8)
-        {
-            var volumen = (0.8 - beta)/0.8;
-            if(volumen<0.02)
-                volumen = 0;
-            switch(i)
-            {
-                case 0: //Cohete
-
-                    break;
-                case 1: //Terraformador
-                    break;
-                case 3: //Mina
-                    sfx.sounds[2].volume = volumen;
-                    break;
-                case 2: //Comunicaciones
-                    sfx.sounds[8].volume = volumen;
-                    break;
-            }
-            
-        }
-    }
-
-    sign===1 ? player.flipX = false : player.flipX = true;
-    player.anims.play('stelonauta_run', true);
-
-    //Desgaste extra hambre
-    indHam.size = Phaser.Math.Clamp(indHam.size - delta/2500, 0, indHam.maxSize); 
-    indHam.Update();
-}
-*/
-/*
-function DestroyOnScene(obj) {
-
-    obj.destroy();
-}
-
-//Acciones condiciones victoria/derrota
-function VictoryCondition(that) {
-
-    sfx.sounds.forEach(element => {
-        element.stop();
-    });
-
-    sfx.sounds[4].play();
-
-    soundtrack.pistas[1].stop();
-    soundtrack.pistas[3].stop();
-
-    isVictory = true;
-
-    that.scene.launch('SceneGameEnd');
-    that.scene.pause('SceneGame');
-}
-
-function DefeatCondition(that) {
-    if (!isTutorial) {
-
-        sfx.sounds.forEach(element => {
-            element.stop();
-        });
-
-        sfx.sounds[5].play();
-
-        isVictory = false;
-
-        soundtrack.pistas[1].stop();
-        soundtrack.pistas[3].stop();
-
-        that.scene.launch('SceneGameEnd');
-        that.scene.pause('SceneGame');
-    }
-}
-
-function PauseMenu(that) {
-    sfx.sounds.forEach(element => {
-        element.pause();
-    });
-
-    soundtrack.pistas[1].pause();
-    soundtrack.pistas[3].pause();
-
-    that.scene.launch('ScenePause');
-    that.scene.pause('SceneEarth');
-}
-
-function HighlightPostIt(obj, b) {
-
-    b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
-    //if (!b) obj.add.image(game.config.width/2, game.config.height/2, "postIt");
-}
-function WarningSignal(warning,) {
-    //recibimos uin tipo de mensaje y en función de su contenido enviamos una señal al terminal de marte
-    //
-}*/
 function OpenPostItEarth(obj, scene) {
     sfx.sounds[0].play();
     switch (obj) {
@@ -1090,6 +842,4 @@ function OpenPostItEarth(obj, scene) {
             }
         });
     }
-
 }
-///QUITAR SI ALGO FALLA DE ESTAS FUNCS

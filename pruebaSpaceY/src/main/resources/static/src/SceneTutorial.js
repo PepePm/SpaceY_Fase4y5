@@ -1,7 +1,3 @@
-//import meteorito from './meteorito.js';
-
-//const { default: Machine } = require("./Machine");
-
 //Variables
 var paused = false;
 //Directorio imágenes
@@ -231,24 +227,13 @@ class SceneTutorial extends Phaser.Scene {
 
         //TIERRA
         controlTierra = new EarthControl(this, 0, 0, 8);
-        //controlTierra.PushFromMars();
-		
-		
-		
-		
-		// ui_M_actionbox: Tecla de acción
-        //
 		
 		// ui_M_dangerArrow
 		alertaPeligroIz = this.add.image(665, 365, "alertaPeligro").setVisible(false);
 		
 		// ui_M_dangerArrow_1
 		alertaPeligroDc = this.add.image(144, 365, "alertaPeligro").setScale(-1,1).setVisible(false); // *************************************************FLIP EJE VERTICAL!
-    
-        //Contador tiempo restante
-        //counter = new Counter(this, 10*60);
-        
-        
+
 
         //jugador
         player = this.physics.add.sprite(marte.x,marte.y-620, 'stelonauta_idle').setScale(0.6);
@@ -259,9 +244,6 @@ class SceneTutorial extends Phaser.Scene {
         indHam = new ResourceIndicator(this, 109, 74, 0, nComida_M, MAX_COMIDA);
         indRocas = new ResourceIndicator(this, 109, 166, 1, nRocas_M, MAX_ROCAS);
         indMat = new ResourceIndicator(this, 109, 256, 2, nMaterial_M, MAX_MATERIAL);
-
-        
-        
 
         //Cargamento cohete
         objCoheteMat = new Bar(this, game.config.width/4 - 120, player.y - 100, nCoheteMat, MAX_COHETEMAT, 0.5, 0.5, coheteMat_color, true);
@@ -275,7 +257,6 @@ class SceneTutorial extends Phaser.Scene {
             key: 'stelonauta_idle',
             frames: this.anims.generateFrameNumbers('stelonauta_idle', { start: 0, end: 29 }),
             frameRate: 18,
-            //repeat: 1,
         });
 
         this.anims.create({
@@ -298,12 +279,6 @@ class SceneTutorial extends Phaser.Scene {
 
         keyDev_victory = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M, false);
         keyDev_defeat = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N, false);
-
-
-        
-        //Genera meteoritos cada x ms (TESTING)
-        //var timedEvent = this.time.addEvent({ delay: 3000, callback: genMeteors, callbackScope: this, loop: true });
-
 
         //PARTÍCULAS TORMENTA
         emitterStorm = this.add.particles('spark').createEmitter({
@@ -337,8 +312,6 @@ class SceneTutorial extends Phaser.Scene {
         emitterMachines[0].posX = emitterMachines[0].x;
         emitterMachines[0].posY = emitterMachines[0].y;
 
-        //emitterMachines[0].startFollow(player);
-///*
         //Radio         [1]
         emitterMachines[1] = this.add.particles('smoke');
         emitterMachines[1].createEmitter({
@@ -413,27 +386,7 @@ class SceneTutorial extends Phaser.Scene {
         .on('pointerup', () => HighlightPostIt(postItExp, true))
         .on('pointerover', () => HighlightPostIt(postItExp, true))
         .on('pointerout', () => HighlightPostIt(postItExp, false));
-        
-        
-    //*/
-        /*
-        this.input.on('pointerDown', function (pointer) {
-            //emitter.setPosition(Phaser.Math.Between(0, game.config.width), 0)
-            emitterStorm.emitZoneIndex = 1;
-            emitterStorm.active = false;
-            //console.log("APAGA");
-        });
-        //*/
-    
-        /*
-        this.input.on('pointerdown', function (pointer) {
-            emitZoneIndex = (emitZoneIndex + 1) % emitZones.length;
-            emitter.setEmitZone(emitZones[emitZoneIndex]);
-            emitter.explode();
-        });
-        //*/
-    
-        //emitter.setEmitZone(emitZones[emitZoneIndex]); 
+
         initTutorial(this);
     
     }
@@ -484,81 +437,6 @@ class SceneTutorial extends Phaser.Scene {
         }
         controlTierra.pantallaPlano.rotation+=delta/16000;
         controlTierra.posicionMapa.rotation+=delta/16000;
-        //DEBUG PARTICULAS
-        /*if (key_left.isDown) {
-            //Apaga
-            emitterStorm.on = false;
-        }
-        else if (key_right.isDown) {
-            //Enciende
-            emitterStorm.on = true;
-        }*/
-
-        //emitter.setPosition(Phaser.Math.Between(0, game.config.width), 0)
-        //MARTE
-        //Inputs
-        //Movimiento de Marte
-
-        /*if (key_left.isDown) {
-
-            //Rotación de los elementos de Marte
-            updateRotations(1, delta);
-            //marte.rotation += 1*delta/1500*playerSpeed;
-            //Cohete
-            emitterMachines[0].posX = marte.x + 700 * Math.cos(-1.57 + marte.rotation);
-            emitterMachines[0].posY = marte.y + 700 * Math.sin(-1.57 + marte.rotation);
-            //Terraformador
-            emitterMachines[1].posX = marte.x + 700 * Math.cos(3.14 + marte.rotation);
-            emitterMachines[1].posY = marte.y + 700 * Math.sin(3.14 + marte.rotation);
-            //Comunicaciones
-            emitterMachines[2].posX = marte.x + 570 * Math.cos(marte.rotation);
-            emitterMachines[2].posY = marte.y + 570 * Math.sin(marte.rotation);
-            //Mina
-            emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
-            emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
-            //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
-        }
-        else if (key_right.isDown) {
-            
-            //Rotación de los elementos de Marte
-            updateRotations(-1, delta);
-            //marte.rotation += -1*delta/1500*playerSpeed;
-            //Cohete
-            emitterMachines[0].posX = marte.x + 700 * Math.cos(-1.57 + marte.rotation);
-            emitterMachines[0].posY = marte.y + 700 * Math.sin(-1.57 + marte.rotation);
-            //Terraformador
-            emitterMachines[1].posX = marte.x + 700 * Math.cos(3.14 + marte.rotation);
-            emitterMachines[1].posY = marte.y + 700 * Math.sin(3.14 + marte.rotation);
-            //Comunicaciones
-            emitterMachines[2].posX = marte.x + 570 * Math.cos(marte.rotation);
-            emitterMachines[2].posY = marte.y + 570 * Math.sin(marte.rotation);
-            //Mina
-            emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
-            emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
-            //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
-        }
-        else {
-
-            player.anims.play('stelonauta_idle', true);
-            
-        }*/
-        //if(maquina[i].isRota == true)
-        /*  emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
-          emitterMachines[1].emitParticleAt(emitterMachines[1].posX, emitterMachines[1].posY);
-          emitterMachines[2].emitParticleAt(emitterMachines[2].posX, emitterMachines[2].posY);
-          emitterMachines[3].emitParticleAt(emitterMachines[3].posX, emitterMachines[3].posY);
-        */
-        ////console.log("Pos X: " + emitterMachines[0].posX + "\nPos Y: " + emitterMachines[0].posY);
-        
-
-        /*if ((key_left.isDown || key_right.isDown) && !startSfxRun) {
-            startSfxRun = true;
-            sfx.sounds[3].play();
-        }
-        if (key_left.isUp && key_right.isUp) {
-            startSfxRun = false;
-            sfx.sounds[3].stop();
-        }*/
 
         //Meteoritos
         for(var i=0; i < meteoritos.length; i++) {
@@ -569,11 +447,6 @@ class SceneTutorial extends Phaser.Scene {
         //////////////////////////////
         //Interaccionar con máquinas//
         //////////////////////////////
-        //Mostrar tecla interacción
-        /*if (!(maquinas[0].canInteract() || maquinas[1].canInteract() || maquinas[2].canInteract() || maquinas[3].canInteract()) && maquinas[0].isSending) {
-
-            teclaAccion.setVisible(false);
-        }*/
 
         //Acciones de cada máquina
         for(i = 0; i < 4; i++) {
@@ -592,10 +465,7 @@ class SceneTutorial extends Phaser.Scene {
             nubes[i].Update();
         }
 
-        //Desgaste máquinas//(mejor en sus clases)
-        
-
-        //Desgaste hambre//
+        //Desgaste hambre
         indHam.Update();
 
 
@@ -730,8 +600,6 @@ function moverMascara(mask,scene) //x fposX, y = fposYcmask o smask
         ease: 'Expo.easeInOut',
         repeat: -1,
         yoyo: true,
-        //delay:delay,
-        //onComplete: this.EnterOnMachine.bind(this)
     });
 }
 
@@ -769,14 +637,7 @@ function setRotations(rot,index)
                 case 2: //Comunicaciones
                     sfx.sounds[8].volume = volumen;
                     break;
-            }
-            
+            }   
         }
     }
-
-
-
 }
-
- 
-        

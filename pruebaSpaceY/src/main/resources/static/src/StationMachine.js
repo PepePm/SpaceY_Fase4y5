@@ -124,7 +124,6 @@ class StationMachine extends Machine {
 
         
         //Desgaste
-        //this.updateWear(delta);
         this.delta = delta;
     }
 

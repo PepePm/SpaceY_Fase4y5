@@ -14,8 +14,6 @@ class SceneGameEnd extends Phaser.Scene {
 
         this.fondo = this.add.rectangle(game.config.width/2, game.config.height/2, game.config.width, game.config.height, Phaser.Display.Color.GetColor(0, 0, 0)).setAlpha(0.5);
 
-        //console.log(isVictory);
-
         //Fondo
         if (isVictory) {
 
@@ -95,8 +93,6 @@ class SceneGameEnd extends Phaser.Scene {
     GoBack() {
 
         if (!isTutorial) {
-
-            //this.scene.stop(clientGamemode);
             connection.close();
         }
         else{
@@ -126,28 +122,4 @@ function GlowMe(scene,target,fadeOut){
             image.setTint(Phaser.Display.Color.GetColor(value, value, value));
         }
     });
-    
 }
-
-/*
-key_cleanV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
-key_cleanB = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
-
-//PARA EL UPDATE 
-if (Phaser.Input.Keyboard.JustDown (key_cleanV) && maquinasucia)
-    {
-        if (Phaser.Input.Keyboard.JustDown (key_cleanB))
-        {
-            //contador sucio -1
-        }
-
-    }
-    if (Phaser.Input.Keyboard.JustDown (key_cleanB) && maquinasucia)
-    {
-        if (Phaser.Input.Keyboard.JustDown (key_cleanV))
-        {
-            //contador sucio -1
-        }
-    }
-*/
-

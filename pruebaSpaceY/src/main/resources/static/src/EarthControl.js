@@ -1,4 +1,4 @@
-class EarthControl {//extends Phaser.GameObjects.Sprite {
+class EarthControl {
 
     constructor(scene, x, y, maxSize) {
         //CONSOLE POSITIONS 
@@ -64,7 +64,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         // ui_T_Paqueteria_pasarela
         this.paqPasarela = scene.add.image(1056, 561, "paqueteriaPasarela").setDepth(2);////Tubo3
 
-        this.cargaPayloads = new Array();// = new Array(maxSize);
+        this.cargaPayloads = new Array();
         this.payloadsPosX = 957;
         this.payloadsPosY = 570;
         this.maxSize = maxSize;
@@ -84,7 +84,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         this.unloadRocketBtn = scene.add.image(860, 665, "lanzaderaPuertaRecursos").setDepth(4)
 
             .setInteractive()
-            .on('pointerdown', () => this.tweenLanzPuertaIn())//this.Unload(this.unloadRocketBtn)
+            .on('pointerdown', () => this.tweenLanzPuertaIn())
             .on('pointerup', () => this.Highlight(this.unloadRocketBtn, true))
             .on('pointerover', () => this.Highlight(this.unloadRocketBtn, true))
             .on('pointerout', () => this.Highlight(this.unloadRocketBtn, false));
@@ -191,8 +191,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 that.tweenTube2On(this.nObj);
 
                 that.actualComboFlechas = null;
-
-                ////console.log("combo flechas");
             }
 
         });
@@ -234,21 +232,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             .on('pointerover', () => this.HighlightController(this.controlTerr, true))
             .on('pointerout', () => this.HighlightController(this.controlTerr, false));
 
-        //Textos desgaste                                                                   //**************************************************** */
-        /*this.wearTxt = new Array(4);
-        for (var i=0; i < 4; i++) { //meter que el length es hasta las máquinas.length
-
-            this.wearTxt[i] = scene.add.text(800, 200, Math.round((maquinas[i].wear/maquinas[i].maxWear)*100)+"%",{
-                fontSize:'35px',
-                fill:'#ffffff',
-                fontStyle:'bold',
-            }).setOrigin(0.5).setDepth(5);
-        }*/
-        /*this.wearTxt[0].setPosition(this.controlRocket.x, this.controlRocket.y).setVisible(false);
-        this.wearTxt[1].setPosition(this.controlTerr.x, this.controlTerr.y).setVisible(false);
-        this.wearTxt[2].setPosition(this.controlCom.x, this.controlCom.y).setVisible(false);
-        this.wearTxt[3].setPosition(this.controlMina.x, this.controlMina.y).setVisible(false);*/
-
+        //Textos desgaste
 
         this.nWear = 0;
 
@@ -284,7 +268,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 that.tweenShowWearIN();
 
                 that.actualComboNum = null;
-                ////console.log("Combo numeritos");
             }
 
         });
@@ -317,13 +300,13 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             //botones de peligro 
             this.UiMeteorDanger = scene.add.image(ConsolePos[28], ConsolePos[29], "UIEarthMeteorDanger").setDepth(4)
             .setInteractive()
-                .on('pointerdown', () => scene.WarnFixMachine("DangerMeteor"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerdown', () => scene.WarnFixMachine("DangerMeteor"))
                 .on('pointerup', () => this.Highlight(this.UiMeteorDanger, true))
                 .on('pointerover', () => this.Highlight(this.UiMeteorDanger, true))
                 .on('pointerout', () => this.Highlight(this.UiMeteorDanger, false));
             this.UiStormDanger = scene.add.image(ConsolePos[30], ConsolePos[31], "UIEarthStormDanger").setDepth(4)
             .setInteractive()
-                .on('pointerdown', () => scene.WarnFixMachine("DangerStorm"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerdown', () => scene.WarnFixMachine("DangerStorm"))
                 .on('pointerup', () => this.Highlight(this.UiStormDanger, true))
                 .on('pointerover', () => this.Highlight(this.UiStormDanger, true))
                 .on('pointerout', () => this.Highlight(this.UiStormDanger, false));
@@ -332,14 +315,14 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             this.UiEarthPilots = scene.add.image(ConsolePos[8], ConsolePos[9], "UIEarthPilots").setDepth(4);  //espacio para los pilotos de 
             this.UiEarthSndBrkAntenaPilot = scene.add.image(ConsolePos[10], ConsolePos[11], "UiEarthSndBrkAntenaPilot").setDepth(4)
                 .setInteractive()
-                .on('pointerdown', () => scene.WarnFixMachine("Antena"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerdown', () => scene.WarnFixMachine("Antena"))
                 .on('pointerup', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, true))
                 .on('pointerover', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, true))
                 .on('pointerout', () => this.Highlight(this.UiEarthSndBrkAntenaPilot, false));
 
             this.UiEarthSndBrkTerraPilot = scene.add.image(ConsolePos[12], ConsolePos[13], "UiEarthSndBrkTerraPilot").setDepth(4)
                 .setInteractive()
-                .on('pointerdown', () => scene.WarnFixMachine("Terraform"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerdown', () => scene.WarnFixMachine("Terraform"))
                 .on('pointerup', () => this.Highlight(this.UiEarthSndBrkTerraPilot, true))
                 .on('pointerover', () => this.Highlight(this.UiEarthSndBrkTerraPilot, true))
                 .on('pointerout', () => this.Highlight(this.UiEarthSndBrkTerraPilot, false));
@@ -347,14 +330,14 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.UiEarthSndBrkRocketPilot = scene.add.image(ConsolePos[14], ConsolePos[15], "UiEarthSndBrkRocketPilot").setDepth(4)
                 .setInteractive()
-                .on('pointerdown', () => scene.WarnFixMachine("Rocket"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerdown', () => scene.WarnFixMachine("Rocket"))
                 .on('pointerup', () => this.Highlight(this.UiEarthSndBrkRocketPilot, true))
                 .on('pointerover', () => this.Highlight(this.UiEarthSndBrkRocketPilot, true))
                 .on('pointerout', () => this.Highlight(this.UiEarthSndBrkRocketPilot, false));
 
             this.UiEarthSndBrkMine = scene.add.image(ConsolePos[16], ConsolePos[17], "UiEarthSndBrkMinePilot").setDepth(4)
                 .setInteractive()
-                .on('pointerdown', () => scene.WarnFixMachine("Mine"))//this.Unload(this.unloadRocketBtn)
+                .on('pointerdown', () => scene.WarnFixMachine("Mine"))
                 .on('pointerup', () => this.Highlight(this.UiEarthSndBrkMine, true))
                 .on('pointerover', () => this.Highlight(this.UiEarthSndBrkMine, true))
                 .on('pointerout', () => this.Highlight(this.UiEarthSndBrkMine, false));
@@ -366,7 +349,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.UIEarthSndMsgBtn = scene.add.image(ConsolePos[22], ConsolePos[23], "UIEarthSndMsg").setDepth(4)
                 .setInteractive()
-                .on('pointerdown', () => scene.chat.SendMessage())//this.Unload(this.unloadRocketBtn)
+                .on('pointerdown', () => scene.chat.SendMessage())
                 .on('pointerup', () => this.Highlight(this.UIEarthSndMsgBtn, true))
                 .on('pointerover', () => this.Highlight(this.UIEarthSndMsgBtn, true))
                 .on('pointerout', () => this.Highlight(this.UIEarthSndMsgBtn, false));
@@ -396,50 +379,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
         //NO HACE FALTA: CUANDO HAGAMOS SIGNAL DE QUE HA LLEGADO EL COHETE SE HACE
         if (this.goLand)
             controlTierra.Land(delta);
-
-        /*//Desgaste textos NO HACE FALTA: SINCRONIZADO POR LA CLASE wearTxt.js
-        for (var i=0; i < 4; i++) {
-            this.wearTxt[i].setText(Math.round((maquinas[i].wear/maquinas[i].maxWear)*100)+"%");
-        }
-        */
-
-
     }
-    /*
-    HandleOnMessage(msg) {
-
-        var data = JSON.parse(msg.data);
-
-        //ACTUALIZACION DE LA INFORMACION DE LA CONSOLA DE TIERRA
-        switch (data["type"]) {
-            case "syncFoodPilot":
-                this.UIEarthNeedFoodPilot.setVisible(data["value"]);
-                this.easePilot(this.scene, this.UIEarthNeedFoodPilot, data["value"]);
-                break;
-            case "syncResPilot":
-                this.UIEarthNeedResPilot.setVisible(data["value"]);
-                this.easePilot(this.scene, this.UiMarsMinePilot, data["value"]);
-                break;
-
-        }
-    }
-    easePilot(scene, boton, value) {
-        if (value) {
-            var scaleV = 1.3;
-            scene.tweens.add({
-                targets: boton,
-                scaleX: scaleV,
-                scaleY: scaleV,
-                delay: 0,
-                duration: 500,
-                ease: 'Circ.easeOut',
-                repeat: -1,
-                yoyo: true,
-            });
-        }
-
-    }
-    */
 
 
     HighlightController(obj, b) {
@@ -470,7 +410,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.rocket.anims.play("movimientoCoheteReverse");
             this.objCohete = new Rocket (this.scene, this.rocket.x, this.rocket.y); //creamos un cohete nuevo
-            //console.log("he creado un cohete");
         }
     }
 
@@ -481,13 +420,8 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.rocket.y = -600;
             this.goTakeOff = false;
-            //estacionTransporte.isComing = true;
-            //estacionTransporte.loadOfEarth = true;
-            //Aterriza en marte
-            //sfx.sounds[12].play();
             //enviamos la comida del cohete y los materiales añadidos para sincronizarlos con el otro cohete 
-            //console.log("comida enviada" + this.objCohete.comLoad);
-            //console.log("comida enviada" + this.objCohete.matLoad);
+
             var comida = {
                 action: "Sync",
                 lobbyID: gameLobbyID,
@@ -505,7 +439,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             connection.send(JSON.stringify(materials));
 
             this.objCohete = undefined; //destruimos el cohete 
-            //console.log("he borrado uncohete");
         }
     }
 
@@ -622,9 +555,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.counterCom++;
             this.txtCounterCom.setText(this.counterCom);
-
-            //toDestroy = this.cargaPayloads[0];
-            //this.cargaPayloads[0].obj.destroy();
         }
         else if (obj === this.ddrBtnMat) {
 
@@ -659,12 +589,10 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             if (this.newPayloadType === 1) {
 
                 this.objCohete.comLoad += MAX_COMIDA * 0.075;
-                //console.log("he añadido COMIDA");
             }
             else {
 
                 this.objCohete.matLoad += MAX_MATERIAL * 0.1;
-                //console.log("he añadido MATERIAL");
             }
 
             this.wait = true;
@@ -692,7 +620,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
     }
 
-    //
     CreateNewPayload() {
         if (this.zPayL === 0) {
             var newPayload = new Payload(this.scene, this.payloadsPosX, this.payloadsPosY, this.newPayloadType);
@@ -715,7 +642,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             yoyo: true
         });
         if (this.size === this.maxSize && this.typeOfLoad === 1 && !this.goTakeOff) {
-            //sfx.sounds[7].play();
             obj.tint = Phaser.Display.Color.GetColor(255, 255, 255)
 
             var delay = 0;
@@ -833,7 +759,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
         this.TxtEvents.setVisible(true);
         sfx.sounds[14].play();
-        ////console.log("warninnnn"+this.TxtEvents.alpha);
         //Meteoritos
         if (n === 0) {
 
@@ -864,9 +789,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 ease: 'Cubic.easeOut',
                 repeat: 22,
                 yoyo: true,
-
-                //onStart: function () {that.TxtEvents.setVisible(true);},
-                //onComplete: function () { that.tweenTxtEventsOUT(); },
             });
         }
         else {
@@ -878,9 +800,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
                 ease: 'Cubic.easeOut',
                 repeat: 35,
                 yoyo: true,
-
-                //onStart: function () {that.TxtEvents.setVisible(true);},
-                //onComplete: function() {that.tweenTxtEventsOUT()},
             });
         }
 
@@ -895,8 +814,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             ease: 'Cubic.easeOut',
             repeat: 0,
             yoyo: false,
-
-            //onStart: function () {that.wearTxt[that.nWear].setVisible(true); that.wearTxt[that.nWear].alpha = 1;},
             onComplete: function () {that.TxtEvents.setVisible(false); that.TxtEvents.alpha = 1; sfx.sounds[14].stop();},
         });
     }
@@ -904,7 +821,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
     //Mostrar estado máquina
     tweenShowWearIN() {
         var that = this;
-        //console.log("wearTxt: " + this.wearTxt + " nWear: " + this.nWear + " this.wearTxt[this.nWear]: " +  this.wearTxt[this.nWear]);
         this.wearTxt[this.nWear].txt.setVisible(true);
         
         
@@ -1002,9 +918,7 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
             this.scene.tweens.add({
                 targets: this.unloadRocketBtn,
-                //x: this.unloadRocketBtn.x+220,
                 rotation: 0,
-                //scaleX: 1,
                 duration: 500,
                 ease: 'Cubic.easeOut',
                 repeat: 0,
@@ -1084,8 +998,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             ease: 'Expo.easeOut',
             repeat: 0,
             yoyo: false,
-
-            //onComplete: this.tweenLanzPuertaOut.bind(this)
         });
     }
 
@@ -1128,8 +1040,6 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
             ease: 'Expo.easeOut',
             repeat: 0,
             yoyo: false,
-
-            //onComplete: this.tweenLanzPuertaOut.bind(this)
         });
     }
 
@@ -1137,72 +1047,4 @@ class EarthControl {//extends Phaser.GameObjects.Sprite {
 
         b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
     }
-
 }
-
-/*
-POR SI PIERDO MIS COSITAS LAS DEJO COMENTADITAS -JD
-Esto va en SceneEarth
-
-                case "syncAntenaWear":
-                    controlTierra.wearTxt[2] = data["value"];
-                    // valor a mostrar(desgaste de la máquina) = data["value"]
-                    break;
-                case "syncMineWear":
-                    controlTierra.wearTxt[3] = data["value"];
-                    // valor a mostrar(desgaste de la máquina) = data["value"]
-                    break;
-                case "syncRocketWear":
-                    controlTierra.wearTxt[0] = data["value"];
-                    // valor a mostrar(desgaste de la máquina) = data["value"]
-                    break;
-                case "syncTerraformWear":
-                    controlTierra.wearTxt[1] = data["value"];
-                    // valor a mostrar(desgaste de la máquina) = data["value"]
-                    break;
-
-
-
-
-
-
-
-
-    getMachineWear(machineId){
-        var typeToSync;
-        switch (machineId) {
-            case 2://Antena
-                typeToSync = "syncAntenaWear";
-                break;
-
-            case 3://Mine
-                typeToSync = "syncMineWear";
-                break;
-
-            case 0://Rocket
-                typeToSync = "syncRocketWear";
-                break;
-
-            case 1://Terraform
-                typeToSync = "syncTerraformWear";
-                break;
-        }
-        console.log("Solicitando estado de máquina");
-        var data = {
-            action: "Sync",
-            lobbyID: gameLobbyID,
-            type: typeToSync,
-            value: true,
-        }
-        connection.send(JSON.stringify(data));
-    }
-
-
-
-
-
-            case "Terraform":
-                typeToSync = "syncTerraform";
-                typeToSync = "syncTerraformPilot";
-                break;
-*/

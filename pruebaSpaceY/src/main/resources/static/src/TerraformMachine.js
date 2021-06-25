@@ -70,7 +70,6 @@ class TerraformMachine extends Machine {
         }
 
         //Desgaste
-        //this.updateWear(delta);
         this.delta = delta;
     }
 
@@ -112,8 +111,6 @@ class TerraformMachine extends Machine {
             this.repairBar.n = 0;
             this.repairBar.Update();
         }
-        
-
     }
 
     StopAnim() {
@@ -121,6 +118,4 @@ class TerraformMachine extends Machine {
         this.obj.anims.stop();
         this.obj.setFrame(0);
     }
-
-
 }

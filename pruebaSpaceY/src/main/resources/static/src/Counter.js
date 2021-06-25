@@ -1,8 +1,6 @@
 class Counter{
     constructor(scene, xM, yM, xS, yS, initTime, sync) {
         
-        // ui_M_horas
-		//timerHoras = this.add.image(553, 97, "timeHoras");
 		// ui_M_minutos
         this.timerMinutos = scene.add.image(xM, yM, "timerMinutos").setDepth(5);
 		// ui_M_segundos
@@ -83,7 +81,6 @@ function countDown ()
 
         
         //sync
-        //console.log("Sync tiempo");
         var data = {
             action: "Sync",
             lobbyID: gameLobbyID,
@@ -93,7 +90,6 @@ function countDown ()
         connection.send(JSON.stringify(data));
     
     }
-    
 }
 
 //Fuente: https://phaser.discourse.group/t/countdown-timer/2471/3

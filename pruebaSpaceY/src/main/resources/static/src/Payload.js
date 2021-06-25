@@ -34,8 +34,6 @@ class Payload extends Phaser.GameObjects.Sprite {
     }
 
     EnterOnMachine() {
-
-        //this.obj.y = 600;
         controlTierra.tweenTube1On();
         this.obj.setVisible(false);
         this.destroy();
@@ -82,4 +80,3 @@ class Payload extends Phaser.GameObjects.Sprite {
         this.destroy();
     }
 }
-

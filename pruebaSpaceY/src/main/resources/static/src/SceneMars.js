@@ -72,42 +72,6 @@ var lineasChat = 0;
 var chatPos;
 var chatTween;
 
-/*
-//Tierra
-var controlTierra;
-
-var fondoTierra;
-var lanzadera;
-var rocket;
-var lanzPuerta;
-var lanzCtdn;
-var cargaMat;
-var cargaO2;
-var cargaRocas;
-var cargaComida;
-var paqBase;
-var paqBtnComida;
-var paqBtnO2;
-var paqBtnMat;
-var paqBtnEnv;
-var paqPasarela;
-var ddrBase;
-var ddrFlecha_0;
-var ddrFlecha_1;
-var ddrFlecha_2;
-var ddrBtnMat;
-var ddrBtnO2;
-var ddrBtnComida;
-var controlBase;
-var controlKey;	
-var controlPass;
-var controlTerr;
-var controlMina;
-var controlRocket;
-var controlCom;
-var pantalla;
-var pantallaPlano;
-*/
 //Barra terraformación                              //MOVER Y HACER GRANDE  ************************************************************
 var nTerraformacion = 0;
 var indTerra;
@@ -170,9 +134,6 @@ class SceneMars extends Phaser.Scene {
     }
 
     preload() {
-
-        //gameLobbyID = "testing";
-        //console.error("BORRA ESTO CUANDO ACABES DE HACER TESTEO");
         this.load.image('smoke', './Resources/smoke_particle.png');
 
         //CHAT POSTITIONS BEFORE - AFTER
@@ -221,7 +182,6 @@ class SceneMars extends Phaser.Scene {
 
     // ============================================ METODOS PARA PEDIR RECURSOS     =========================================
     AskForFood() {
-        //console.log("PIDIENDO COMIDITA");
         sfx.sounds[0].play();
         var data = {
             action: "Sync",
@@ -232,7 +192,6 @@ class SceneMars extends Phaser.Scene {
         connection.send(JSON.stringify(data));
     }
     AskForResources() {
-        //console.log("PIDIENDO RESOURCES");
         sfx.sounds[0].play();
         var data = {
             action: "Sync",
@@ -258,10 +217,7 @@ class SceneMars extends Phaser.Scene {
         });
 
         //***************                                METODOS DE INTERACCION CON SERVIDOR               ************************* */
-        //console.log("GameSessionInnitiated");
         connection = new WebSocket("wss://" + urlServer + "/games");
-
-        //console.log("conexión: " + connection);
 
         connection.onopen = function () {
             var data = {
@@ -322,7 +278,6 @@ class SceneMars extends Phaser.Scene {
                     }
                     connection.send(JSON.stringify(data));
                     break;
-                //
 
                 //Me dicen que actualize el piloto de alguna máquina
                 case "syncAntenaPilot":
@@ -343,7 +298,6 @@ class SceneMars extends Phaser.Scene {
                         that.UiMarsMinePilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsMinePilot, data["value"]);
                     }
-                    
                     break;
                 case "syncRocketPilot":
                     if(that.RocketPilot == false)
@@ -352,9 +306,7 @@ class SceneMars extends Phaser.Scene {
                         that.RocketPilot = true;
                         that.UiMarsRocketPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMarsRocketPilot, data["value"]);
-
                     }
-                   
                     break;
                 case "syncTerraformPilot":
                     if(that.TerraPilot == false)
@@ -366,31 +318,15 @@ class SceneMars extends Phaser.Scene {
                     }
                     
                     break;
-                //Actualizar rotación   ------------>Realmente necesario? No es mejor cada vez que me mueva en el update?
-                /*case "syncCharPos":
-                    var data = {
-                        action: "Sync",
-                        lobbyID: gameLobbyID,
-                        type: "syncCharPos",
-                        value: marte.rotation,
-                    }
-                    connection.send(JSON.stringify(data));
-                    break;*/
                 case "syncRocketFoodToMars":
                     //ATERRIZAR COHETE
                     estacionTransporte.isComing = true;
-                    //Coger Makelele    
-                    //console.log(data["value"] + "comidita");
                     objCohete.comLoad = Number(data["value"]);
-                    //console.log("He obtenido" + objCohete.comLoad + " de comida");
                     break;
                 case "syncRocketResToMars":
                     //ATERRIZAR COHETE
                     estacionTransporte.isComing = true;
-                    //Coger Makelele    
-                    //console.log(data["value"] + "mats");
                     objCohete.matLoad = Number(data["value"]);
-                    //console.log("He obtenido" + objCohete.matLoad + " de comida");
                     break;
                 case "syncStartSandstorm":
                     maquinas[2].Sandstorm();
@@ -406,9 +342,8 @@ class SceneMars extends Phaser.Scene {
                         sfx.sounds[7].play();
                         that.StormPilot = true;
                         that.UiStormPilot.setVisible(data["value"]);
-                        that.easePilot(that, that.UiStormPilot, data["value"]);
-                        
-                    }   //MOSTRAR POR CONSOLA EN LAS ALERTAS QUE SE VIENEN METEORITOS
+                        that.easePilot(that, that.UiStormPilot, data["value"]);   
+                    }
                     break;
                 case "syncDangerMeteor":
                     if(that.MeteorPilot == false){
@@ -417,7 +352,7 @@ class SceneMars extends Phaser.Scene {
                         that.UiMeteorPilot.setVisible(data["value"]);
                         that.easePilot(that, that.UiMeteorPilot, data["value"]);
                         
-                    }   //MOSTRAR POR CONSOLA EN LAS ALERTAS QUE SE VIENEN METEORITOS
+                    }
                     break;
             }
 
@@ -431,10 +366,8 @@ class SceneMars extends Phaser.Scene {
             soundtrack.pistas[0].play();
 
             that.scene.stop("SceneGame");
-            that.scene.stop("ScenePause"); // METER ESTO EN MENU DE PAUSA (?)
+            that.scene.stop("ScenePause");
             that.scene.start("SceneMenu");
-
-            //console.log("chapo");
         }
 
 
@@ -449,32 +382,6 @@ class SceneMars extends Phaser.Scene {
         this.chat = new InGameChat(this, game.config.width / 10*6 -7, game.config.height / 5 + 45, 402, 387, 15);
 
         //Chatbox icon
-        /*this.chatbutton = this.add.image(chatPos[0], chatPos[1], 'ChatBox_ChatIcon') //CAMBIAR POR ChatBox_NewMsgIcon cuando haya nuevo mensaje
-            .setScale(0.6);
-        this.chatbutton.setInteractive()
-            .on('pointerdown', () => this.MovinBoxes(this, 1))
-            .on('pointerover', () => this.enterIconHoverState(this.chatbutton, this))
-            .on('pointerout', () => this.enterIconRestState(this.chatbutton))
-        this.chatbutton.setOrigin(0.5);
-
-        //chatbox base
-        this.chatBase = this.add.image(chatPos[2], chatPos[3], 'ChatBox_Base')
-            .setScale(0.8);
-        this.chatBase.setOrigin(0.5);
-
-        //chatbox write msg
-        this.chatWritter = this.add.image(chatPos[6], chatPos[7], 'ChatBox_MsgBox')
-            .setScale(0.37);
-        this.chatWritter.setOrigin(0.5);*/
-
-        //chatbox send
-        /*this.sendButton = this.add.image(chatPos[8], chatPos[9], 'ChatBox_SendBtn')
-            .setScale(0.4);
-        this.sendButton.setInteractive()
-            .on('pointerdown', () => this.chat.SendMessage())
-            .on('pointerover', () => this.enterIconHoverState(this.sendButton, this))
-            .on('pointerout', () => this.enterIconRestState(this.sendButton))
-        this.sendButton.setOrigin(0.5);*/
         this.chatboxStuff = [this.chatbutton, this.chatBase, this.chatFrame, this.chatWritter, this.sendButton, this.globalbutton];
 
         var key_enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
@@ -482,12 +389,6 @@ class SceneMars extends Phaser.Scene {
 
 
         //Chatbox code
-        //this.chatContent = [];
-        //loadMsgs(this);
-
-        //this.chatText = this.add.text(game.config.width / 6 * 4 + 10, game.config.height / 5 + 10, this.chatContent, { fontSize: "25px", fontFamily: 'menuFont', color: 'white', wordWrap: { width: 450 } }).setOrigin(0);
-
-        //this.chatText.setMask(mask).setVisible(false);
 
         var zone = this.add.zone(800, 300, 400, 400).setOrigin(0).setInteractive();
         var that = this;
@@ -572,8 +473,6 @@ class SceneMars extends Phaser.Scene {
         maquinas[2] = comunicaciones;
         maquinas[3] = mina;
 
-        //maquinas[2].Start();
-
         //Nubes
         nubes = new Array(N_NUBES);
 
@@ -587,16 +486,10 @@ class SceneMars extends Phaser.Scene {
         meteoritos = new Array();
 
         //TIERRA    CREACION DE LOS ASSETS DE TIERRA
-        //controlTierra = new EarthControl(this, 0, 0, 8);
-        //controlTierra.PushFromMars();
-
-
-
 
         // ui_M_actionbox: Tecla de acción
-        //
 
-        // ui_M_dangerArrow                                         //NI IDEA OIGA                  ****************************************
+        // ui_M_dangerArrow
         alertaPeligroIz = this.add.image(665, 365, "alertaPeligro").setVisible(false);
 
         // ui_M_dangerArrow_1
@@ -640,12 +533,6 @@ class SceneMars extends Phaser.Scene {
         keyDev_victory = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M, false);
         keyDev_defeat = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N, false);
 
-        
-
-        //Genera meteoritos cada x ms (TESTING)
-        //var timedEvent = this.time.addEvent({ delay: 3000, callback: genMeteors, callbackScope: this, loop: true });
-
-
         //PARTÍCULAS TORMENTA
         emitterStorm = this.add.particles('polvo').createEmitter({
             x: { min: 0, max: 1500 },
@@ -677,8 +564,6 @@ class SceneMars extends Phaser.Scene {
 
         emitterMachines[0].posX = emitterMachines[0].x;
         emitterMachines[0].posY = emitterMachines[0].y;
-
-        //emitterMachines[0].startFollow(player);
 
         //Radio         [1]
         emitterMachines[1] = this.add.particles('smoke');
@@ -755,26 +640,6 @@ class SceneMars extends Phaser.Scene {
             .on('pointerover', () => HighlightPostIt(postItExpMars, true))
             .on('pointerout', () => HighlightPostIt(postItExpMars, false));
 
-
-        //*/
-        /*
-        this.input.on('pointerDown', function (pointer) {
-            //emitter.setPosition(Phaser.Math.Between(0, game.config.width), 0)
-            emitterStorm.emitZoneIndex = 1;
-            emitterStorm.active = false;
-            //console.log("APAGA");
-        });
-        //*/
-
-        /*
-        this.input.on('pointerdown', function (pointer) {
-            emitZoneIndex = (emitZoneIndex + 1) % emitZones.length;
-            emitter.setEmitZone(emitZones[emitZoneIndex]);
-            emitter.explode();
-        });
-        //*/
-
-        //emitter.setEmitZone(emitZones[emitZoneIndex]); 
         //Añadimos fondo de marte
 
         //*****************************                    ELEMENTOS DE LA CONSOLA DE MARTE        ***********************************
@@ -793,7 +658,7 @@ class SceneMars extends Phaser.Scene {
 
         this.UiMarsSndMsgBtn = this.add.image(ConsolePos[18], ConsolePos[19], "UIMarsSndMsg").setDepth(4)
             .setInteractive()
-            .on('pointerdown', () => this.chat.SendMessage())//this.Unload(this.unloadRocketBtn)
+            .on('pointerdown', () => this.chat.SendMessage())
             .on('pointerup', () => this.Highlight(this.UiMarsSndMsgBtn, true))
             .on('pointerover', () => this.Highlight(this.UiMarsSndMsgBtn, true))
             .on('pointerout', () => this.Highlight(this.UiMarsSndMsgBtn, false));
@@ -801,7 +666,7 @@ class SceneMars extends Phaser.Scene {
         //boton para enviar recursos
         this.UiMarsSndResBtn = this.add.image(ConsolePos[20], ConsolePos[21], "UIMarsSndRes").setDepth(4)
             .setInteractive()
-            .on('pointerdown', () => this.AskForResources())//this.Unload(this.unloadRocketBtn)
+            .on('pointerdown', () => this.AskForResources())
             .on('pointerup', () => this.Highlight(this.UiMarsSndResBtn, true))
             .on('pointerover', () => this.Highlight(this.UiMarsSndResBtn, true))
             .on('pointerout', () => this.Highlight(this.UiMarsSndResBtn, false));
@@ -809,7 +674,7 @@ class SceneMars extends Phaser.Scene {
         //BOTON QUE ENVIA SEÑAL A TIERRA PARA RECIBIR PROVISIONES
         this.UiMarsSndFoodBtn = this.add.image(ConsolePos[22], ConsolePos[23], "UIMarsSndFood").setDepth(4)
             .setInteractive()
-            .on('pointerdown', () => this.AskForFood())//this.Unload(this.unloadRocketBtn)
+            .on('pointerdown', () => this.AskForFood())
             .on('pointerup', () => this.Highlight(this.UiMarsSndFoodBtn, true))
             .on('pointerover', () => this.Highlight(this.UiMarsSndFoodBtn, true))
             .on('pointerout', () => this.Highlight(this.UiMarsSndFoodBtn, false));
@@ -835,7 +700,6 @@ class SceneMars extends Phaser.Scene {
         //Actualizo el porcentaje de terraformación
         if (key_up.isDown) {
             this.UIMarsTerraform.setScale(indTerra.size / indTerra.maxSize);
-            //console.log("Nivel terraform: " + indTerra.size);
             var data = {
                 action: "Sync",
                 lobbyID: gameLobbyID,
@@ -852,18 +716,7 @@ class SceneMars extends Phaser.Scene {
         else{
             this.writeTextChat.setVisible(true);
         }
-        //controlTierra.pantallaPlano.rotation+=delta/16000;
-        //DEBUG PARTICULAS
-        /*if (key_left.isDown) {
-            //Apaga
-            emitterStorm.on = false;
-        }
-        else if (key_right.isDown) {
-            //Enciende
-            emitterStorm.on = true;
-        }*/
 
-        //emitter.setPosition(Phaser.Math.Between(0, game.config.width), 0)
         //MARTE
         //Inputs
         //Movimiento de Marte
@@ -872,7 +725,6 @@ class SceneMars extends Phaser.Scene {
 
             //Rotación de los elementos de Marte
             updateRotations(1, delta);
-            //marte.rotation += 1*delta/1500*playerSpeed;
             //Cohete
             emitterMachines[0].posX = marte.x + 700 * Math.cos(-1.57 + marte.rotation);
             emitterMachines[0].posY = marte.y + 700 * Math.sin(-1.57 + marte.rotation);
@@ -885,7 +737,6 @@ class SceneMars extends Phaser.Scene {
             //Mina
             emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
             emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
-            //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
 
             var data = {
                 action: "Sync",
@@ -901,7 +752,6 @@ class SceneMars extends Phaser.Scene {
 
             //Rotación de los elementos de Marte
             updateRotations(-1, delta);
-            //marte.rotation += -1*delta/1500*playerSpeed;
             //Cohete
             emitterMachines[0].posX = marte.x + 700 * Math.cos(-1.57 + marte.rotation);
             emitterMachines[0].posY = marte.y + 700 * Math.sin(-1.57 + marte.rotation);
@@ -914,7 +764,6 @@ class SceneMars extends Phaser.Scene {
             //Mina
             emitterMachines[3].posX = marte.x + 870 * Math.cos(1.57 + marte.rotation);
             emitterMachines[3].posY = marte.y + 870 * Math.sin(1.57 + marte.rotation);
-            //emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
 
             var data = {
                 action: "Sync",
@@ -929,20 +778,11 @@ class SceneMars extends Phaser.Scene {
             player.anims.play('stelonauta_idle', true);
 
         }
-        //if(maquina[i].isRota == true)
-        /*  emitterMachines[0].emitParticleAt(emitterMachines[0].posX, emitterMachines[0].posY);
-          emitterMachines[1].emitParticleAt(emitterMachines[1].posX, emitterMachines[1].posY);
-          emitterMachines[2].emitParticleAt(emitterMachines[2].posX, emitterMachines[2].posY);
-          emitterMachines[3].emitParticleAt(emitterMachines[3].posX, emitterMachines[3].posY);
-        */
-        ////console.log("Pos X: " + emitterMachines[0].posX + "\nPos Y: " + emitterMachines[0].posY);
-
 
         //SONIDOS DE CORRER EN MARTE
         if ((key_left.isDown || key_right.isDown) && !startSfxRun) {
             startSfxRun = true;
             sfx.sounds[3].play();
-            //console.log("Audio caminando");
         }
         if (key_left.isUp && key_right.isUp) {
             startSfxRun = false;
@@ -961,11 +801,6 @@ class SceneMars extends Phaser.Scene {
         //////////////////////////////
         //Interaccionar con máquinas//
         //////////////////////////////
-        //Mostrar tecla interacción
-        /*if (!(maquinas[0].canInteract() || maquinas[1].canInteract() || maquinas[2].canInteract() || maquinas[3].canInteract()) && maquinas[0].isSending) {
-
-            teclaAccion.setVisible(false);
-        }*/
 
         //Acciones de cada máquina
         for (i = 0; i < 4; i++) {
@@ -994,7 +829,6 @@ class SceneMars extends Phaser.Scene {
 
         if (indHam.size <= 0 && !this.called)
             SyncGameEnd(this, false);
-        //DefeatCondition(this);
 
 
         //MARTE
@@ -1019,7 +853,6 @@ class SceneMars extends Phaser.Scene {
 
             SyncGameEnd(this, true);
         }
-        //
     }
 
     //CONTROL DE LOS PILOTOS
@@ -1047,114 +880,6 @@ class SceneMars extends Phaser.Scene {
     }
 
     //sacar el chat 
-
-    /*
-        MovinBoxes(scene, id) {
-            sfx.sounds[1].play();
-    
-            var nX = 0; var nY = 1;
-            switch (id) {
-                case 0: // Abrir cerrar lobby 
-                    lobbyActive = !lobbyActive;
-                    this.ChatManager(scene, id);
-                    break;
-                case 1: //abrir cerrar chatbox chatbox
-    
-                    chatBoxActive = !chatBoxActive;
-                    this.ChatManager(scene, id);
-    
-                    break;
-                case 2: //login loginBox,loginOption;
-    
-    
-                    if (loginOut)    //guardar log in
-                    {
-    
-                        for (let i = 0; i < scene.loginStuff.length; i++) {
-                            scene.tweens.add({
-                                targets: scene.loginStuff[i],
-                                x: loginPos[nX],
-                                y: loginPos[nY],
-                                duration: 100,
-                                ease: 'Bounce.easeOut',
-                            });
-                            nX += 2; nY += 2;
-                        }
-                        loginOut = true;
-                        this.ShowLoginFields(scene, loginOut);
-    
-                        this.accountText.setVisible(false);
-                        this.accountLogin.setVisible(false);
-                        this.accountLogin.setVisible(false);
-                        this.accountLogin.setActive(false);
-                    }
-                    else if (!loginOut) //sacar log in
-                    {
-                        this.accountText.setVisible(true);
-                        //this.accountLogin.setVisible(true);
-    
-                        for (let i = 0; i < scene.loginStuff.length; i++) {
-                            scene.tweens.add({
-                                targets: scene.loginStuff[i],
-                                x: loginTween[nX],
-                                y: loginTween[nY],
-                                duration: 100,
-                                ease: 'Bounce.easeOut',
-                            });
-                            nX += 2; nY += 2;
-                        }
-                        loginOut = false;
-    
-                        this.ShowLoginFields(scene, loginOut);
-                    }
-    
-                    break;
-                case 3: //register registerBox, registerBtn, nextImg, prevImg;
-    
-                    if (registerOut) //guardar register
-                    {
-                        this.regLogin.setVisible(false);
-                        this.accountText.setColor("white");
-                        this.accountText.setText('Please enter in your account');
-    
-                        for (let i = 0; i < scene.registerStuff.length; i++) {
-                            scene.tweens.add({
-                                targets: scene.registerStuff[i],
-                                x: regisPos[nX],
-                                y: regisPos[nY],
-                                duration: 100,
-                                ease: 'Expo.easeOut',
-                            });
-                            nX += 2; nY += 2;
-                        }
-                        registerOut = false
-                        //this.ShowRegisternFields(scene,registerOn);
-                    }
-                    else if (!registerOut) //sacar register
-                    {
-                        this.regLogin.setVisible(true);
-                        for (let i = 0; i < scene.registerStuff.length; i++) {
-                            scene.tweens.add({
-                                targets: scene.registerStuff[i],
-                                x: regisTween[nX],
-                                y: regisTween[nY],
-                                duration: 100,
-                                ease: 'Expo.easeOut',
-                            });
-                            nX += 2; nY += 2;
-                        }
-                        registerOut = true
-                        //this.ShowRegisternFields(scene,registerOn);
-                    }
-    
-                    break;
-            }
-    
-    
-    
-    
-        }
-        */
     CloseChat(scene) {
         var nX = 0; var nY = 1;
         scene.chatWritter.setVisible(false);
@@ -1169,8 +894,6 @@ class SceneMars extends Phaser.Scene {
                 targets: scene.chatboxStuff[i],
                 x: chatPos[nX],
                 y: chatPos[nY],
-                //delay: 100,
-                //aplha: {start: game.config.width / 2, to: game.config.width / 8},
                 duration: 100,
                 ease: 'Bounce.easeIn',
             });
@@ -1183,7 +906,6 @@ class SceneMars extends Phaser.Scene {
     // ===============================          INTERACTIVIDAD  ===========================================================
 
     enterIconHoverState(boton, scene) {
-        //console.log("Sonidito de hover un boton");
         sfx.sounds[1].play();
         boton.x = boton.x + movTxt;
         boton.y = boton.y + movTxt;
@@ -1227,9 +949,6 @@ class SceneMars extends Phaser.Scene {
     //==============================================================================================================
 }
 function genMeteors() {
-    
-    //var delay = 0;
-    //console.log("genero meteoros")
     for (var i = 0; i < 1; i++) {
 
         meteoritos[i] = new Meteor(this);
@@ -1329,7 +1048,6 @@ function VictoryCondition(that) {
     soundtrack.pistas[3].stop();
 
     isVictory = true;
-    //console.log("isvictory: " + isVictory);
 
     that.scene.launch('SceneGameEnd');
     that.scene.pause('SceneGame');
@@ -1346,7 +1064,6 @@ function DefeatCondition(that) {
         sfx.sounds[5].play();
 
         isVictory = false;
-        //console.log("isderrota: " + isVictory);
 
         soundtrack.pistas[1].stop();
         soundtrack.pistas[3].stop();
@@ -1370,7 +1087,6 @@ function PauseMenu(that) {
 function HighlightPostIt(obj, b) {
 
     b ? obj.tint = Phaser.Display.Color.GetColor(139, 139, 139) : obj.tint = Phaser.Display.Color.GetColor(255, 255, 255);
-    //if (!b) obj.add.image(game.config.width/2, game.config.height/2, "postIt");
 }
 
 function OpenPostItMars(obj, scene) {
@@ -1408,7 +1124,6 @@ function OpenPostItMars(obj, scene) {
             break;
     }
     if (isbig) {
-        ////console.log('no soy grande');
         isbig = false;
         scene.tweens.add({
             targets: obj,
@@ -1439,8 +1154,6 @@ function OpenPostItMars(obj, scene) {
 
 function SwitchInputs(value){
 
-    //console.log(value);
-
     key_left.reset();
     key_right.reset();
     key_up.reset();
@@ -1461,4 +1174,3 @@ function SwitchInputs(value){
     keyDev_victory.enabled = value;
     keyDev_defeat.enabled = value;
 }
-

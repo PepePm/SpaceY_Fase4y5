@@ -1,15 +1,11 @@
-class Machine {//extends Phaser.GameObjects.Sprite {
+class Machine {
     constructor(scene, x, y, nMachine) {
-
-        //this.obj = scene.add.image(x, y, "componentes", nMachine);
-        //this.obj.setOrigin(0.5, 13.5);
 
         //Colocar elementos alrededor de marte
         switch(nMachine) {
 
             case 0:
                 //Estación de transporte
-                //this.obj = scene.add.sprite(x, y, "rocket");
                 this.obj = scene.add.sprite(x, y, "movimientoCohete", 0);
                 this.obj.setRotation(0);
                 this.textureNormal = "movimientoCohete";
@@ -140,4 +136,3 @@ class Machine {//extends Phaser.GameObjects.Sprite {
 
     
 }
-

@@ -13,6 +13,4 @@ class Cloud {
         
         this.obj.rotation += this.speed;
     }
-
-
 }

@@ -21,8 +21,7 @@ class Rocket {
 
             //si el cohete ha salido de la pantalla 
 
-            //controlTierra.tweenLanzPuertaExtIn();
-            //controlTierra.tweenLanzPuertaExtIn();   //tierra abre compuerta y entra cohete 
+            //tierra abre compuerta y entra cohete 
             estacionTransporte.isSending = false;
             estacionTransporte.location = 1;
             this.goLand = true;
@@ -38,7 +37,6 @@ class Rocket {
                 value: true,
             }
             connection.send(JSON.stringify(data));
-            //console.log("enviando cohete a tierra");
         }
     }
 
@@ -95,10 +93,6 @@ class Rocket {
                 },
             },
             duration: 100,  //que todo el tween dure 
-
-
         });
-
     }
-
 }
