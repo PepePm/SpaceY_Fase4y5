@@ -630,7 +630,7 @@ class SceneEarth extends Phaser.Scene {
         // Desconexión de usuario si refresca la página
         window.onbeforeunload = function(){
             if (userName != "Anon") {
-                setUserOnline(scene, username, false);
+                setUserOnline(that, userName, false);
             }
         }
     }

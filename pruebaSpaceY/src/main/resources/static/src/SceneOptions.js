@@ -56,7 +56,6 @@ class SceneOptions extends Phaser.Scene {
                 soundtrack.pistas.forEach(element => {
                     element.volume = soundtrack.volume;
                 });
-                soundtrack.pistas[0].volume = soundtrack.volume * 0.2;
 
                 tweening.stop();
                 that.Altavoz();
