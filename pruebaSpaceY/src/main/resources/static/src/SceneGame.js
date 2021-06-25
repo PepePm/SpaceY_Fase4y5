@@ -363,11 +363,11 @@ class SceneGame extends Phaser.Scene {
         //////////////////////////DEBUG
         if (keyDev_victory.isDown) {
 
-            DefeatCondition(this);
+            //DefeatCondition(this);
         }
         if (keyDev_defeat.isDown) {
 
-            VictoryCondition(this);
+            //VictoryCondition(this);
         }
     }   
 }

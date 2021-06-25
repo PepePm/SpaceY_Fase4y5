@@ -846,11 +846,11 @@ class SceneMars extends Phaser.Scene {
         //////////////////////////DEBUG
         if (keyDev_defeat.isDown) {
 
-            SyncGameEnd(this, false);
+            //SyncGameEnd(this, false);
         }
         if (keyDev_victory.isDown) {
 
-            SyncGameEnd(this, true);
+            //SyncGameEnd(this, true);
         }
     }
 

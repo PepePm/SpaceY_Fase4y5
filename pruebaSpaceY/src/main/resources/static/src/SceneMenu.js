@@ -728,7 +728,6 @@ class SceneMenu extends Phaser.Scene {
 
             connection.onclose = function () {
                 connection = undefined;
-                console.log("Cerrando conexión del JOIN");
             }
         } else if (userName == "Anon") {
             this.tweenFadeIn(this.loginNeededWarning, this);

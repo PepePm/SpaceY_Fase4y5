@@ -485,11 +485,11 @@ class SceneTutorial extends Phaser.Scene {
 
         if (keyDev_victory.isDown) {
 
-            DefeatCondition(this);
+            //DefeatCondition(this);
         }
         if (keyDev_defeat.isDown) {
 
-            VictoryCondition(this);
+            //VictoryCondition(this);
         }
     }
 
@@ -574,7 +574,6 @@ function CrearMascara(scene,posXM,posYM,tipoM, posXT,posYT,tipoT){
             //mascara cuadrada tierra
             maskMarte.fillStyle(000000,1);  //color y alpha
             maskMarte.fillRect(posXT,posYT,100,100);  //x, y,width height
-            ////console.log('letsgo');
             break;
         case 'c':
             //mascara circular  tierra
