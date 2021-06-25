@@ -570,7 +570,6 @@ Hubo un problema en el que un plugin que usábamos para la interfaz dejó de fun
 
 
 ### Mejoras de fases previas
--> Lista de mejoras <-    
 Balance de juego:    
 - Velocidad de movimeento del stelonauta +20%    
 - Tiempo de partida +50%    
