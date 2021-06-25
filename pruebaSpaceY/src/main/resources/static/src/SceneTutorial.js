@@ -3,6 +3,7 @@
 //const { default: Machine } = require("./Machine");
 
 //Variables
+var paused = false;
 //Directorio imágenes
 var directory = "./Resources/Game/";
 
@@ -166,6 +167,9 @@ class SceneTutorial extends Phaser.Scene {
 
     create() {
 
+        //Activar teclas
+        game.input.keyboard.enabled = true;
+
         nCoheteMat = MAX_COHETEMAT;
         nComida_M = MAX_COMIDA;
         nRocas_M = MAX_ROCAS*100;
@@ -269,14 +273,14 @@ class SceneTutorial extends Phaser.Scene {
         //Animaciones
         this.anims.create({
             key: 'stelonauta_idle',
-            frames: this.anims.generateFrameNumbers('stelonauta_idle', { start: 0, end: 59 }),
+            frames: this.anims.generateFrameNumbers('stelonauta_idle', { start: 0, end: 29 }),
             frameRate: 18,
             //repeat: 1,
         });
 
         this.anims.create({
             key: 'stelonauta_run',
-            frames: this.anims.generateFrameNumbers('stelonauta_run', { start: 0, end: 21 }),
+            frames: this.anims.generateFrameNumbers('stelonauta_run', { start: 0, end: 20 }),
             frameRate: 18,
         });
 
