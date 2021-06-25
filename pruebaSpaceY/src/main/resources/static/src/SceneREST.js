@@ -124,7 +124,6 @@ function loadUsers() {
     $.ajax({
         url: "https://"+urlServer+'/users'
     }).done(function (users) {
-        //console.log('Users loaded: ' + JSON.stringify(users));
     })
 }
 
@@ -318,13 +317,6 @@ function isServerOnline(scene) {
             setOnline(scene, false);
         },
 
-    }).done(function (msgs) {
-        //console.log('Historial mensajes: ');
-        for (var i=0; i < msgs.length; i++) {
-
-            //console.log(msgs[i].userName + ": " + msgs[i].content);
-        }
-        
     })
 }
 function setOnline(scene, b) {

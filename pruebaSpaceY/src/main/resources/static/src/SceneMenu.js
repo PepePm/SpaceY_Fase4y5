@@ -625,9 +625,7 @@ class SceneMenu extends Phaser.Scene {
     goHost() {
         var texto = this.lobbyCode;
         var boton = this.hostButton;
-        console.log("Try host");
         if (userName != "Anon" && connection == undefined && election != undefined) {
-            console.log("Hosting");
             connection = new WebSocket("ws://" + urlServer + "/lobbies");
 
             connection.onopen = function () {
@@ -672,7 +670,6 @@ class SceneMenu extends Phaser.Scene {
             connection.onclose = function () {
                 connection = undefined;
                 texto = "";
-                console.log("Cerrando conexión del HOST");
             }
         }
         else {
@@ -693,7 +690,6 @@ class SceneMenu extends Phaser.Scene {
     goJoin() {
         var code = this.writeGameID;
         if (userName != "Anon" && connection == undefined) {
-            console.log("Hosting");
             connection = new WebSocket("ws://" + urlServer + "/lobbies");
 
             connection.onopen = function () {

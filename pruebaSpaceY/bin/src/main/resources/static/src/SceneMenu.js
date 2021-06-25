@@ -1,5 +1,3 @@
-//const { Input } = require("phaser");
-
 var isTutorial = false;
 //is out
 var chatBoxActive = false;
@@ -29,14 +27,6 @@ class SceneMenu extends Phaser.Scene {
     }
 
     preload() {
-        
-        //this.load.image("player", directory+"vulp_i1.png");
-        //this.load.spritesheet("button", "./Resources/Img/button.png", 185, 80);
-        //this.load.image('background',"./Resources/Img/starfield.jpg");
-    /*var url;
-    url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js';
-    this.load.plugin('rexbbcodetextplugin', url, true);*/
-    
     //CHAT POSTITIONS BEFORE - AFTER
     var chtOffset = 1000;
    
@@ -225,11 +215,6 @@ create() {
     .setScale(0.8);
     this.chatBase.setOrigin(0.5);
 
-    //chatbox frame
-    /*this.chatFrame= this.add.image(chatPos[4], chatPos[5],'ChatBox_Frame')
-    .setScale(0.8);
-    this.chatFrame.setOrigin(0.5);*/
-
     //chatbox write msg
     this.chatWritter = this.add.image(chatPos[6], chatPos[7],'ChatBox_MsgBox')
     .setScale(0.37);
@@ -271,12 +256,6 @@ create() {
     });
 
     this.writeTextChat = this.add.dom(1280, 785).createFromCache('formChat').setVisible(false);
-
-    /*this.writeTextChat.addListener("keydown", event => {
-        if (event.isComposing || event.keyCode === 13) {
-            RestCreateMsg(this, userName);
-        }
-    }); */
 
     //REGISTER
     //register box
@@ -415,46 +394,14 @@ create() {
 
     //Campos Registro
     this.regLogin = this.add.dom(275, 330).createFromCache('formReg').setVisible(false);
-    //this.regLogin.addListener('click');
 
 
     //Timer
     this.event = this.time.addEvent({ delay: 300, callback: this.UpdateServer, callbackScope: this, loop: true});
 
-
-    /*window.addEventListener("beforeunload", function (e) {
-        
-        return setUserOnline(that, userName, false);
-        /*var confirmationMessage = "\o/";
-        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-            return confirmationMessage;
-    });
-
-    /*window.addEventListener("onunload", function (e) {
-        
-        setUserOnline(that, userName, false);
-    });*/
-
-    //setUserOnline(that, userName, false);
-
     //Websockets
     var ws = new WebsocketsTest();
-    /*console.log("test socket \n");
-    var connection = new WebSocket("ws://localhost:8080/pSockets");
 
-    connection.open = function(){
-        connection.send("socketTruco chaval");
-    }
-
-    connection.onerror = function(e){
-        console.log("error: " + e);
-    }
-
-    connection.onmessage = function(msg){
-        console.log("A: " + msg.data);
-    }
-
-    console.log(connection);*/
 }
 
 
@@ -487,7 +434,7 @@ goLogInText() {
     var inputName = this.accountLogin.getChildByName('user');
     var inputPassword = this.accountLogin.getChildByName('password');
     
-    //  Have they entered anything?
+    //  Han metido algo?
     if (inputName.value !== '' && inputPassword.value !== '')
     {
         CheckUserPasswordCorrect(this, inputName.value, inputPassword.value);
@@ -533,9 +480,6 @@ goCreateUser() {
 }
 
 //INTERACTIVIDAD
-
-
-
 enterIconHoverState(boton, scene) {
     
     sfx.sounds[1].play();
@@ -583,8 +527,6 @@ enterAPIREST() {
     sfx.sounds[0].play();
     this.scene.start('SceneREST');
 }
-
-
 
 enterButtonHoverState(boton) {
     sfx.sounds[1].play();
@@ -864,7 +806,6 @@ MovinBoxes(scene, id)
             else if (!loginOut) //sacar log in
             {
                 this.accountText.setVisible(true);
-                //this.accountLogin.setVisible(true);
 
                 for (let i = 0; i < scene.loginStuff.length; i++)
 
@@ -905,7 +846,6 @@ MovinBoxes(scene, id)
                     nX+=2;nY+=2;
                 }
                 registerOut = false
-                //this.ShowRegisternFields(scene,registerOn);
             }
             else if(!registerOut) //sacar register
             {
@@ -922,7 +862,6 @@ MovinBoxes(scene, id)
                     nX+=2;nY+=2;
                 }
                 registerOut = true
-                //this.ShowRegisternFields(scene,registerOn);
             }
             
             break;
@@ -951,14 +890,10 @@ easeMe(boton,scene,nOp){
         x: endX,
         y: endY,
         delay: nOp * 100,
-        //aplha: {start: game.config.width / 2, to: game.config.width / 8},
         duration: 500,
         ease: 'Circ.easeOut',
         repeat: 0,
         yoyo: false,
-        //delay:delay,
-
-        //onComplete: this.EnterOnMachine.bind(this)
     });
 }
 
