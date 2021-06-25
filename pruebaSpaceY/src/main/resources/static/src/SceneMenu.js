@@ -626,7 +626,7 @@ class SceneMenu extends Phaser.Scene {
         var texto = this.lobbyCode;
         var boton = this.hostButton;
         if (userName != "Anon" && connection == undefined && election != undefined) {
-            connection = new WebSocket("ws://" + urlServer + "/lobbies");
+            connection = new WebSocket("wss://" + urlServer + "/lobbies");
 
             connection.onopen = function () {
                 var data = {
@@ -690,7 +690,7 @@ class SceneMenu extends Phaser.Scene {
     goJoin() {
         var code = this.writeGameID;
         if (userName != "Anon" && connection == undefined) {
-            connection = new WebSocket("ws://" + urlServer + "/lobbies");
+            connection = new WebSocket("wss://" + urlServer + "/lobbies");
 
             connection.onopen = function () {
                 var data = {

@@ -30,7 +30,7 @@ public class WsGamesHandler extends TextWebSocketHandler {
     // Se ejecuta cuando se ha establecido la conexión con el cliente
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		
+
 	}
 	
 	// Se ejecuta cuando un cliente se ha desconectado
@@ -48,8 +48,7 @@ public class WsGamesHandler extends TextWebSocketHandler {
 				for (int i=0; i < aux.size(); i++) {
 					try {
 						aux.get(i).close();
-						System.out.println("Un jugador se ha desconectado de la partida " +
-								k + ": cerrando partida al otro jugador");
+						System.out.println("Un jugador se ha desconectado de la partida " + k);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -65,7 +64,7 @@ public class WsGamesHandler extends TextWebSocketHandler {
 	// Se ejecuta cuando un cliente envía un mensaje al server
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		
+
 		// Recoge todos los pares del JSON
 		JsonNode node = mapper.readTree(message.getPayload());
 		// Objeto para leer cada atributo

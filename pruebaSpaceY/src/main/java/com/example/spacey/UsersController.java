@@ -103,7 +103,7 @@ public class UsersController {
 	public boolean checkPassword(@RequestBody User user) {
 		
 		System.out.println("Comprobando contraseña...");
-		String username = user.getName();
+		String username = user.getName().toUpperCase();
 		String password = user.getPassword();
 		List<User> userList = template.query("SELECT * FROM Users WHERE Username='"+username+"'", new RowMapper<User>() {
 			@Override
@@ -170,15 +170,16 @@ public class UsersController {
 
 		boolean online = user.isOnline();
 		
-		template.update("UPDATE Users SET Online='"+online+"' WHERE Username='"+user.getName()+"';");
+		template.update("UPDATE Users SET Online='"+online+"' WHERE Username='"+user.getName().toUpperCase()+"';");
 
 		return null;
 	}
 	
 	@GetMapping("/{username}")
 	public int GetNumImg(@PathVariable String username) {
-
-		List<User> userList = template.query("SELECT * FROM Users WHERE Username='"+username+"'", new RowMapper<User>() {
+		
+		String user = username.toUpperCase();
+		List<User> userList = template.query("SELECT * FROM Users WHERE Username='"+user+"'", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 				

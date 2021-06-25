@@ -62,7 +62,7 @@ public class MessageController {
 		String content = msg.getContent();
 		boolean svInfo = msg.isServerInfo();
 		
-		System.out.println("Mensaje recibido de" + username + ": " + content);
+		System.out.println("Mensaje recibido de " + username + ": " + content);
 		
 		template.update("INSERT INTO Messages(Username,MsgContent,ServerInfo) VALUES('"+username+"','"+content+"','"+svInfo+"')");
 

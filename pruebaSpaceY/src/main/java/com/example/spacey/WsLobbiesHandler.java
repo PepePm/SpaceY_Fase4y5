@@ -210,7 +210,7 @@ public class WsLobbiesHandler extends TextWebSocketHandler {
 			break;
 			
 			case "startGame":
-				System.out.println("Empieza la partida del lobby: " + newNode.get("lobbyID"));
+				System.out.println("Va a empezar una partida del lobby");
 				
 				//Llamado por el host para iniciar la partida y administrar los modos
 				// de juego de cada jugador.
