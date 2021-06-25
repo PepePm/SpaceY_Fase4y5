@@ -5,7 +5,7 @@ var soundtrack = undefined;
 //"http://193.161.193.99:63511";
 //79.146.8.198:8080
 
-var urlServer = "79.146.47.38:8080";
+var urlServer = "spaceygame.herokuapp.com";
 
 class SceneBoot extends Phaser.Scene {
     
@@ -15,6 +15,7 @@ class SceneBoot extends Phaser.Scene {
     }
 
     preload(){
+        
         //Scene Contact
         this.load.image("tablon", directory+"tablon.png");
         this.load.image("jacks", directory+"jacks.png");

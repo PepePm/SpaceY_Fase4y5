@@ -1,6 +1,7 @@
 package com.example.spacey;
 
 import java.util.Collection;
+
 import java.util.List;
 import java.util.Map;
 import java.sql.ResultSet;
@@ -26,6 +27,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 @RestController
@@ -36,7 +44,6 @@ public class UsersController {
 	@Autowired
 	private JdbcTemplate template;
 	
-
 	Map<Long, User> users = new ConcurrentHashMap<>(); 
 	AtomicLong nextId = new AtomicLong(0);
 	
@@ -46,7 +53,8 @@ public class UsersController {
 		List<User> userList = template.query("SELECT * FROM Users", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return new User(rowNum, rs.getString("Name"), rs.getString("Password"), rs.getBoolean("Online"));
+				//System.out.println("hay cosas" + rs.getString(1));
+				return new User(rowNum, rs.getString("UserName"), rs.getString("UserPassword"), rs.getBoolean("Online"));
 			}
 			//rs.getBoolean("Online")
 		});
@@ -56,14 +64,14 @@ public class UsersController {
 	@GetMapping("/count")
 	public int countUsers() {
 		
-		List<User> userList = template.query("SELECT Name FROM Users", new RowMapper<User>() {
+		List<User> userList = template.query("SELECT UserName FROM Users", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return new User();
 			}
 			
 		});
-
+		
 		return userList.size();
 	}
 	
@@ -73,25 +81,23 @@ public class UsersController {
 		List<User> userList = template.query("SELECT * FROM Users WHERE Online = 'true'", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return new User(rowNum, rs.getString("Name"), rs.getString("Password"), rs.getBoolean("Online"));
+				return new User(rowNum, rs.getString("UserName"), rs.getString("UserPassword"), rs.getBoolean("Online"));
 			}
 			
 		});
-
 		return userList;
 	}
 	
 	@GetMapping("/countOnline")
 	public int countUsersOnline() {
 		
-		List<User> userList = template.query("SELECT Name FROM Users WHERE Online = 'true'", new RowMapper<User>() {
+		List<User> userList = template.query("SELECT UserName FROM Users WHERE Online = 'true'", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return new User();
 			}
 			
 		});
-
 		return userList.size();
 	}
 	
@@ -100,15 +106,15 @@ public class UsersController {
 		
 		String username = user.getName();
 		String password = user.getPassword();
-		List<User> userList = template.query("SELECT * FROM Users WHERE Name='"+username+"'", new RowMapper<User>() {
+		List<User> userList = template.query("SELECT * FROM Users WHERE Username='"+username+"'", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 				
-				return new User(rowNum, rs.getString("Name"), rs.getString("Password"), rs.getBoolean("Online"));
+				return new User(rowNum, rs.getString("Username"), rs.getString("UserPassword"), rs.getBoolean("Online"));
 			}
 			
 		});
-
+		
 		if (userList.size() > 0) {
 			
 			if (userList.get(0).getPassword().equals(password)) {
@@ -117,7 +123,6 @@ public class UsersController {
 		}
 		
 		return false;
-		
 	}
 	
 	@PostMapping("/check")
@@ -125,11 +130,11 @@ public class UsersController {
 		
 		String username = user.getName();
 		
-		List<User> userList = template.query("SELECT * FROM Users WHERE Name='"+username+"'", new RowMapper<User>() {
+		List<User> userList = template.query("SELECT * FROM Users WHERE UserName='"+username+"'", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 				
-				return new User(rowNum, rs.getString("Name"), rs.getString("Password"), rs.getBoolean("Online"));
+				return new User(rowNum, rs.getString("Username"), rs.getString("UserPassword"), rs.getBoolean("Online"));
 			}
 			
 		});
@@ -140,7 +145,6 @@ public class UsersController {
 		}
 		
 		return false;
-		
 	}
 	
 	@PostMapping
@@ -155,7 +159,7 @@ public class UsersController {
 		String pass = user.getPassword();
 		boolean online = user.isOnline();
 		int img = user.getUserImg();
-		template.update("INSERT INTO Users(Name,Password,Online,UserImage) VALUES('"+name+"','"+pass+"','"+online+"','"+img+"')");
+		template.update("INSERT INTO Users(Username,UserPassword,Online,UserImage) VALUES('"+name+"','"+pass+"','"+online+"','"+img+"')");
 
 		return user;
 	}
@@ -165,7 +169,7 @@ public class UsersController {
 
 		boolean online = user.isOnline();
 		
-		template.update("UPDATE Users SET Online='"+online+"' WHERE Name='"+user.getName()+"';");
+		template.update("UPDATE Users SET Online='"+online+"' WHERE Username='"+user.getName()+"';");
 
 		return null;
 	}
@@ -173,7 +177,7 @@ public class UsersController {
 	@GetMapping("/{username}")
 	public int GetNumImg(@PathVariable String username) {
 
-		List<User> userList = template.query("SELECT * FROM Users WHERE Name='"+username+"'", new RowMapper<User>() {
+		List<User> userList = template.query("SELECT * FROM Users WHERE Username='"+username+"'", new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 				

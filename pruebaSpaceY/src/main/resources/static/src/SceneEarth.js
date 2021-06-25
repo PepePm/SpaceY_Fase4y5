@@ -504,7 +504,7 @@ class SceneEarth extends Phaser.Scene {
         //***************                                METODOS DE INTERACCION CON SERVIDOR               ************************* */
         
         //console.log("GameSessionInnitiated");
-        connection = new WebSocket("ws://" + urlServer + "/games");
+        connection = new WebSocket("wss://" + urlServer + "/games");
 
         //console.log("conexión: " + connection);
 
@@ -630,15 +630,12 @@ class SceneEarth extends Phaser.Scene {
             //console.log("chapo");
         }
 
-
-        
-
-
-        // Metodo que avisa A MARTE sobre una máquina rota en funcion del ID de la máquina. 
-
-
-        //**************************************************************************************************************************** */
-
+        // Desconexión de usuario si refresca la página
+        window.onbeforeunload = function(){
+            if (userName != "Anon") {
+                setUserOnline(scene, username, false);
+            }
+        }
     }
     update(time, delta) {
         

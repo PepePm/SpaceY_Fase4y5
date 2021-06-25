@@ -135,8 +135,6 @@ class SceneMenu extends Phaser.Scene {
 
         key_pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC, false);
 
-
-
         soundtrack.pistas[1].stop();
         soundtrack.pistas[3].stop();
 
@@ -553,6 +551,13 @@ class SceneMenu extends Phaser.Scene {
                 that.writeTextChat.getChildByName('Chat').value += " ";
             }
         });*/
+
+        // Desconexión de usuario si refresca la página
+        window.onbeforeunload = function(){
+            if (userName != "Anon") {
+                setUserOnline(that, userName, false);
+            }
+        }
     }
     Highlight(obj, b, selectPlanet) {
 
@@ -815,14 +820,20 @@ class SceneMenu extends Phaser.Scene {
         var inputName = this.accountLogin.getChildByName('user');
         var inputPassword = this.accountLogin.getChildByName('password');
 
-        //  Have they entered anything?
-        if (inputName.value !== '' && inputPassword.value !== '') {
-            CheckUserPasswordCorrect(this, inputName.value, inputPassword.value);
-        }
-        else {
+        // ¿Está conectado?
+        if (isUserOnline(this, inputName.value)) {
             this.accountText.setColor("red");
-            this.accountText.setText('User or password incomplete');
+            this.accountText.setText('User already logged in');
         }
+        else
+            //  Have they entered anything?
+            if (inputName.value !== '' && inputPassword.value !== '') {
+                CheckUserPasswordCorrect(this, inputName.value, inputPassword.value);
+            }
+            else {
+                this.accountText.setColor("red");
+                this.accountText.setText('User or password incomplete');
+            }
     }
 
     goLogOut() {

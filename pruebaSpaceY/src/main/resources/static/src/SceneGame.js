@@ -145,7 +145,7 @@ var connection;
 class SceneGame extends Phaser.Scene {
     
     constructor() {
-		//var connection2 = new WebSocket("ws://"+ urlServer +"/lobbies");	//urlServer es una variable global
+		//var connection2 = new WebSocket("wss://"+ urlServer +"/lobbies");	//urlServer es una variable global
 		
         super("SceneGame");
     }
@@ -156,7 +156,7 @@ class SceneGame extends Phaser.Scene {
 
     create() {
 	
-		connection = new WebSocket("ws://"+ urlServer +"/lobbies");
+		connection = new WebSocket("wss://"+ urlServer +"/lobbies");
 		
 		//En cuanto se abra la conexion
 		connection.onopen = function(){

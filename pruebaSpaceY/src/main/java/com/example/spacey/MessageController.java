@@ -44,9 +44,10 @@ public class MessageController {
 		List<Message> messageList = template.query("SELECT * FROM Messages", new RowMapper<Message>() {
 			@Override
 			public Message mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return new Message(rowNum, rs.getString("Username"), rs.getString("Content"), rs.getBoolean("ServerInfo"));
+				return new Message(rowNum, rs.getString("Username"), rs.getString("MsgContent"), rs.getBoolean("ServerInfo"));
 			}
 		});
+		
 		return messageList;
 	}
 	
@@ -62,7 +63,7 @@ public class MessageController {
 		String content = msg.getContent();
 		boolean svInfo = msg.isServerInfo();
 		
-		template.update("INSERT INTO Messages(Id,Username,Content,ServerInfo) VALUES('"+id+"','"+username+"','"+content+"','"+svInfo+"')");
+		template.update("INSERT INTO Messages(Username,MsgContent,ServerInfo) VALUES('"+username+"','"+content+"','"+svInfo+"')");
 
 		return msg;
 	}

@@ -1,8 +1,8 @@
 class WebsocketsTest {
     
     constructor(){
-        //var connection = new WebSocket("ws://79.146.8.198:8080/lobbies");
-        //var connection = new WebSocket("ws://79.146.8.198:8080/games");
+        //var connection = new WebSocket("wss://79.146.8.198:8080/lobbies");
+        //var connection = new WebSocket("wss://79.146.8.198:8080/games");
 
         connection.onopen = function(){
             //LOBBY

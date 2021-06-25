@@ -259,7 +259,7 @@ class SceneMars extends Phaser.Scene {
 
         //***************                                METODOS DE INTERACCION CON SERVIDOR               ************************* */
         //console.log("GameSessionInnitiated");
-        connection = new WebSocket("ws://" + urlServer + "/games");
+        connection = new WebSocket("wss://" + urlServer + "/games");
 
         //console.log("conexión: " + connection);
 
@@ -823,6 +823,13 @@ class SceneMars extends Phaser.Scene {
 
         this.called = false;
 
+
+        // Desconexión de usuario si refresca la página
+        window.onbeforeunload = function(){
+            if (userName != "Anon") {
+                setUserOnline(that, userName, false);
+            }
+        }
     }
     update(time, delta) {
         //Actualizo el porcentaje de terraformación
