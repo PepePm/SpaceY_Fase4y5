@@ -1447,7 +1447,6 @@ function SwitchInputs(value){
     key_down.reset();
     key_interact.reset();
     key_repair.reset();
-    key_skipTutorial.reset();
 
     keyDev_victory.reset();
     keyDev_defeat.reset();
@@ -1458,7 +1457,6 @@ function SwitchInputs(value){
     key_down.enabled = value;
     key_interact.enabled = value;
     key_repair.enabled = value;
-    key_skipTutorial.enabled = value;
 
     keyDev_victory.enabled = value;
     keyDev_defeat.enabled = value;
