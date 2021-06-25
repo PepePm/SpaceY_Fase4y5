@@ -576,8 +576,8 @@ Balance de juego:
 - Tiempo de partida +50%    
 - Velocidad de carga del cohete: +28%    
 - Cantidad de recursos que se obtienen al descargar el cohete:    
-* Comida: +25%    
-+ Herramientas: +50%    
+  * Comida: +25%    
+  + Herramientas: +50%    
 
 ### Publicado en las siguientes páginas webs
 
