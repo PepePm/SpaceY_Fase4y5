@@ -513,9 +513,10 @@ Se ha implementado una escena de contactos con una pequeña caricatura de los de
 
 Controles stelonaula:    
 
-- WASD: movimiento    
+- A,D: movimiento    
 - H: accionar máquina    
 - R: reparar máquina    
+- W: recoger/guardar minerales (mina/cohete-terraformador)
 
 
 Controles supervisor:    
