@@ -537,13 +537,13 @@ Pantalla de Tierra:
     
 Se han contemplado la posibilidad de varios errores por parte del jugador, y para evitarlos hemos insertado mecanismos de feedback para que el usuario sepa qué falta por hacer mediante la visualización de mensajes en color rojo indicando el problema.    
     
-Para indicar que no se puede jugar sin estar conectado con una cuenta.    
+● Para indicar que no se puede jugar sin estar conectado con una cuenta.    
 ![mensaje_error_login](https://github.com/PepePm/SpaceY_Fase4/blob/master/pruebaSpaceY/Img/error_not_logged.png)
     
-Para indicar que necesita elegir un planeta si quiere ser el host.    
+● Para indicar que necesita elegir un planeta si quiere ser el host.    
 ![mensaje_error_planeta](https://github.com/PepePm/SpaceY_Fase4/blob/master/pruebaSpaceY/Img/error_choose_planet.png)
     
-Para indicar que el código de lobby insertado es erróneo.    
+● Para indicar que el código de lobby insertado es erróneo.    
 ![mensaje_error_join](https://github.com/PepePm/SpaceY_Fase4/blob/master/pruebaSpaceY/Img/error_lobby_not_found.png)
 
 **Pantalla Marte**    
