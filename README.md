@@ -547,7 +547,21 @@ Controles supervisor:
 Ambos jugadores pueden comunicarse entre sí a través del chat durante la partida. También pueden utilizar los botones dedicados a eventos concretos para una comunicación más directa. Toda esta comunicación se hace mediante websockets.    
 
 **Protocolo WebSockets**    
--------------------> Explicar cómo usamos los websockets    
+Se han creado dos "Handlers" de websockets, uno para administrar los lobbies, y otra para sincronizar las partidas de los jugadores. Funcionan de la siguiente manera:    
+● WsLobbiesHandler:   
+  * afterConnectionEstablished: El handshake inicial se realiza:
+      - En el host, cuando crea una sala al pulsar el botón "Host".
+      - En el invitado, cuando pulsa el botón de "Join".
+
+  * handleTextMessage: Según el valor de "action", realiza distintas acciones:
+      - "Create": Crea un lobby añadiendo en un mapa concurrenthash al usuario con la clave "lobbyID". Este es el identificador de la sala, el cual ha sido creado mediante "Hashid", que crea un código hash a partir del id del usuario, para que sea aleatorio y único.
+      - "Sync": Utilizado para sincronizar información entre el host y el invitado. Solo sincroniza la elección de rol(Tierra/Marte) dentro de la partida.
+      - "startGame": Llamado cuando el inivtado se une a un lobby. Envía un mensaje a cada usuario con el nombre de la escena de juego que dene cargar ("sceneEarth"/"sceneMars") y da la orden de que comience la partida.
+
+  * afterConnectionClosed: Se llama cuando un usuario se desconecta. Esto puede ser porque haya empezado la partida (y ya no se necesite el lobby), o porque haya una desconexión del usuario. Si el usuario desconectado...
+    - Es host, elimina el lobby del mapa hash y desconecta del WebSocket al usuario invitado, si lo hubiese.
+    - Es invitado, lo desconecta y lo elimina del mapa hash; pero no desconecta al host.
+
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/diagrama_clasesF4.png?raw=true)no se ve pq hay que punlicar la rama
 
 ### Arreglo de bugs
