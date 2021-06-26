@@ -562,6 +562,13 @@ Se han creado dos "Handlers" de websockets, uno para administrar los lobbies, y 
     - Es host, elimina el lobby del mapa hash y desconecta del WebSocket al usuario invitado, si lo hubiese.
     - Es invitado, lo desconecta y lo elimina del mapa hash; pero no desconecta al host.
 
+● WsGamesHandler:  
+  * afterConnectionEstablished: 
+
+  * handleTextMessage: 
+
+  * afterConnectionClosed: 
+
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/diagrama_clasesF4.png?raw=true)no se ve pq hay que punlicar la rama
 
 ### Arreglo de bugs
