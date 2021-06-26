@@ -524,7 +524,11 @@ Controles supervisor:
 - RATÓN : Interaccionar con todas las opciones del panel de control.    
 
 # Pantalla individual en Multijugador    
-![falta_foto_pantalla_multijugador]()
+Pantalla de Marte:    
+![falta_foto_pantalla_multijugador_marte](https://github.com/PepePm/SpaceY_Fase4/blob/master/pruebaSpaceY/Img/cohete_roto.png)
+
+Pantalla de Tierra:    
+![falta_foto_pantalla_multijugador_tierra](https://github.com/PepePm/SpaceY_Fase4/blob/master/pruebaSpaceY/Img/tierra_sin_cohete.png)
 
 ### Diseño de interfaz:
 **Menú principal**    
