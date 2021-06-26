@@ -27,7 +27,7 @@ class Rocket {
             this.goLand = true;
 
             //Aterriza en tierra
-            sfx.sounds[12].play();
+            
 
             //ENVIAMOS MENSAJE AL SERVIDOR PARA ATERRIZAR COHETE
             var data = {

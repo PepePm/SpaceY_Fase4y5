@@ -119,7 +119,7 @@ class StationMachine extends Machine {
         if (this.isSending)
             objCohete.TakeOff(delta);
 
-        if (this.isComing)
+        if (this.isComing) 
             objCohete.Land(delta);
 
         

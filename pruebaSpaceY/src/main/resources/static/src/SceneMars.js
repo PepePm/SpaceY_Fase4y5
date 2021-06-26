@@ -319,11 +319,15 @@ class SceneMars extends Phaser.Scene {
                     break;
                 case "syncRocketFoodToMars":
                     //ATERRIZAR COHETE
+                    sfx.sounds[12].stop();
+                    sfx.sounds[12].play();
                     estacionTransporte.isComing = true;
                     objCohete.comLoad = Number(data["value"]);
                     break;
                 case "syncRocketResToMars":
                     //ATERRIZAR COHETE
+                    sfx.sounds[12].stop();
+                    sfx.sounds[12].play();
                     estacionTransporte.isComing = true;
                     objCohete.matLoad = Number(data["value"]);
                     break;
