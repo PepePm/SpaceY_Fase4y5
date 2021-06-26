@@ -532,6 +532,9 @@ Pantalla de Tierra:
 
 ### Diseño de interfaz:
 **Menú principal**    
+Se han implementado mejoras visuales en el menú principal:    
+![nuevo_menu]()
+
 ● Opciones de Host y Join (creador de la partida y jugador que se une)    
 ![pantalla_host_join](https://github.com/PepePm/SpaceY_Fase4/blob/master/pruebaSpaceY/Img/menu_play.png)
     
