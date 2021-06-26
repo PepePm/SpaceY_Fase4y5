@@ -45,6 +45,36 @@ Github
 
 https://github.com/Jacquesmeyns/SpaceY
 
+FAQ
+------
+- ¿Cómo jugar Offline?
+
+Abrir en cualquier navegador el archivo index.html, esto lanzará el juego.
+Esperar a que cargue el juego, esto puede llevar unos segundos dependiendo del navegador y la computadora. 
+Ver en el apartado de controles la distribución de los mismos para dos jugadores. Puedes consultar el Tutorial en el menú principal. 
+Elegir que posición tomará el jugador, y en el menú principal pulsar sobre PLAY. 
+
+- ¿Cómo jugar Online?
+
+Método OpenVPN:
+
+    Descargar la carpeta que contiene los archivos de configuración del servidor (Space_Y_Server_Files.zip) o de la siguiente dirección de Google Drive https://drive.google.com/file/d/1zql_eXVl3SPLzgq2Laj4gVRrOyECQqHC/view?usp=sharing CONTIENE: SpaceY_Server.jar, Run_Server.bat, la base de datos BD_SpaceY.accdb y el archivo de configuración del servidor de OpenVPN SpaceY.ovpn
+
+    Instalar OpenVpn en nuestra máquina, descargándolo de https://openvpn.net/client-connect-vpn-for-windows/ o del archivo adjuntado en la carpeta del servidor.
+
+    Abrimos OpenVpn, seleccionamos FILE y seleccionamos en nuestra carpeta del servidor el archivo SpaceY.ovpn contenido en Space_Y_Server_Files.rar. Para finalizar, pulsamos sobre el botón ADD en la esquina superior derecha. Nos aparecerá un apartado nuevo con la ip de nuestro servidor, al pinchar sobre el se activará y ya tendremos abierto el servidor.
+
+    Ejecutar el archivo Run_Server.bat para abrir el servidor. Nos aparecerá una ventana indicando que SPRING se ha lanzado.
+
+    Introducir en el navegador la siguiente URL : http://193.161.193.99:63511/ Si somos el servidor, proporcionar a los jugadores la URL de la máquina que hace de servidor.
+
+    Esperar a que el Servidor se lance y cargue todos los Assets del juego
+
+Podremos comprobar el estado del servidor en el icono del mundo dentro del menú principal
+
+ATENCIÓN: Para que funcione el servidor los archivos SpaceY_Server.jar, Run_Server.bat, la base de datos BD_SpaceY.accdb deben estar en la misma carpeta. Puede que por tu versión de java el servidor no pueda funcionar. Adjuntamos un archivo que actualiza la versión actual en tu máquina. (jdk-15.0.1_windows-x64_bin.exe)
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/tutorial_github-10.png?raw=true)
 
 
 GDD
@@ -64,7 +94,7 @@ GDD
    - OBJETIVOS DEL JUEGO Y RECOMPENSAS
    - MECÁNICAS
    - DISEÑO DE NIVEL
-- CONTROLES
+- CONTROLES Y NAVEGACIÓN
 - PANTALLA COMPARTIDA EN LOCAL
 - ESTÉTICA DE JUEGO Y EXPERIENCIA DE USUARIO
 - MÚSICA
@@ -156,8 +186,11 @@ El juego requerirá un mínimo de dos jugadores y se jugará en los siguientes m
 Ventana de título y pequeña introducción con el lanzamiento de un cohete atravesando la
 órbita de Marte.    
 Primero seleccionarás el avatar y el puesto que ocupas. Tu experiencia será diferente según tu
-posición.    
-![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/xp_jugador.png?raw=true)
+posición.  
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/navegacion.png?raw=true)
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/xp_jugador.png?raw=true)
 
 
 **Supervisor:**
@@ -288,6 +321,7 @@ puntos de victoria.
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/tablaFasesT.png?raw=true)
 
+
 **Sistema de puntuación**
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/tablaPuntuacion.png?raw=true)
@@ -295,14 +329,16 @@ puntos de victoria.
 
 **Diagrama de fuentes, recursos y conversores**    
 
-![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/recursos.png?raw=true)
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/recursos.png?raw=true)
+
 
 **Diseño de nivel**
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/tablaDiseñoNivel.png?raw=true)
 
 
-# Controles
+# Controles y Navegación
+
 
 **Supervisor**    
 
@@ -311,6 +347,10 @@ puntos de victoria.
 **Stelonauta**    
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/controlesStelo.png?raw=true)
+
+**Navegación**
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/DIAGRAMA_DE_FLUJO.png?raw=true)
 
 
 ### FASE 2: MODO LOCAL
@@ -326,6 +366,7 @@ Controles supervisor:
 - TECLADO NUMÉRICO: minijuego de comunicación.
 - RATÓN : Interaccionar con todas las opciones del panel de control.    
 
+-Añadido un tutorial y cambio de la estructura del menú
 
 ### FASE 3 EN ADELANTE (ONLINE)
 
@@ -350,6 +391,18 @@ Controles supervisor:
 - LETRAS: minijuego de comunicación.    
 - ESPACIO:    
 - RATÓN : Interaccionar con todas las opciones del panel de control.    
+
+MEJORAS EN CONECTIVIDAD:
+-Hemos añadido una base de datos para registrar los usuarios, sus contraseñas, sus mensajes y su imagen de perfil.  
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/registro.png?raw=true)
+-Hemos añadido un CHAT implementado en el icono del MENSAJE en el menú principal. 
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/chat.PNG?raw=true)
+-Hemos añadido una consola para el estado del SERVIDOR implementado en el icono del MUNDO en el menú principal. 
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/global.PNG?raw=true)
+-Hemos añadido una caja para iniciar sesión y registrarse en la base de datos del juego que identifica los usuarios conectados. Además permitimos personalización.    
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/login.PNG?raw=true)
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/usericon.PNG?raw=true)
+
 
 
 # Pantalla compartida en Local
@@ -450,5 +503,105 @@ Se ha implementado una escena de contactos con una pequeña caricatura de los de
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/img_sceneWin.png?raw=true)
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/img_sceneDefeat.png?raw=true)
 
+**● Diagrama de clases:**
+**Diagrama api rest de la aplicación.**
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/diagrama_clases.png?raw=true)
 
 
+# FASE 4 (MULTIJUGADOR con WebSockets)
+
+Controles stelonaula:    
+
+- WASD: movimiento    
+- H: accionar máquina    
+- R: reparar máquina    
+
+
+Controles supervisor:    
+- FLECHAS: minijuego de comunicación.    
+- NÚMEROS: minijuego de comunicación.    
+- RATÓN : Interaccionar con todas las opciones del panel de control.    
+
+# Pantalla individual en Multijugador    
+![falta_foto_pantalla_multijugador]()
+
+### Diseño de interfaz:
+**Menú principal**    
+● Opciones de Host y Join (creador de la partida y jugador que se une)    
+
+**Pantalla Marte**    
+● 3 barras de estadísticas (Vida, materiales, herramientas de reparación).    
+● Botones: para pedir comida o herramientas de reparación.    
+● Panel de chat: Comunicaciones de tierra.    
+● Nivel de Terraformación (Círculo verde en panel de chat): Nivel de progreso.    
+
+**Pantalla Tierra**    
+● Panel de chat: Comunicaciones de marte.    
+● Panel de control de máquinas.    
+● Botones: de Emergencia.    
+● Pantalla de visualización de Marte (mapa marciano).    
+● Panel de control de cohete.    
+● Minijuego DDR.    
+
+Ambos jugadores pueden comunicarse entre sí a través del chat durante la partida. También pueden utilizar los botones dedicados a eventos concretos para una comunicación más directa. Toda esta comunicación se hace mediante websockets.    
+
+**Protocolo WebSockets**    
+Se han creado dos "Handlers" de websockets, uno para administrar los lobbies, y otra para sincronizar las partidas de los jugadores. Funcionan de la siguiente manera:    
+● WsLobbiesHandler:   
+  * afterConnectionEstablished: El handshake inicial se realiza:
+      - En el host, cuando crea una sala al pulsar el botón "Host".
+      - En el invitado, cuando pulsa el botón de "Join".
+
+  * handleTextMessage: Según el valor de "action", realiza distintas acciones:
+      - "Create": Crea un lobby añadiendo en un mapa concurrenthash al usuario con la clave "lobbyID". Este es el identificador de la sala, el cual ha sido creado mediante "Hashid", que crea un código hash a partir del id del usuario, para que sea aleatorio y único.
+      - "Sync": Utilizado para sincronizar información entre el host y el invitado. Solo sincroniza la elección de rol(Tierra/Marte) dentro de la partida.
+      - "startGame": Llamado cuando el inivtado se une a un lobby. Envía un mensaje a cada usuario con el nombre de la escena de juego que dene cargar ("sceneEarth"/"sceneMars") y da la orden de que comience la partida.
+
+  * afterConnectionClosed: Se llama cuando un usuario se desconecta. Esto puede ser porque haya empezado la partida (y ya no se necesite el lobby), o porque haya una desconexión del usuario. Si el usuario desconectado...
+    - Es host, elimina el lobby del mapa hash y desconecta del WebSocket al usuario invitado, si lo hubiese.
+    - Es invitado, lo desconecta y lo elimina del mapa hash; pero no desconecta al host.
+
+● WsGamesHandler:  
+  * afterConnectionEstablished: El handshake inicial se realiza nada más el jugador carga la escena de juego ("sceneEarth"/"sceneMars").
+
+  * handleTextMessage: Según el valor de "action", realiza distintas acciones:
+      - "Start": Se ejecuta tras hacer el handshake inicial. Si es el primer jugador del lobby que se une, almacena en un mapa concurrenthash al usuario con el id del lobby como clave. Si es el segundo jugador (ya existe en el hashmap su lobby como clave), modifica el valor de esa clave añadiendo a este jugador tambíen.
+      - "Sync": Utilizado para sincronizar variables de juego. Al servidor los jugadores le envían un json con 3 atributos: id del lobby, "type" que indica el nombre de la variable y "value" que indica su nuevo valor. El servidor distingue de qué jugador es el mensaje y se lo reenvia al otro usuario de la partida con ese lobbyID.
+
+  * afterConnectionClosed: Si un jugador se desconecta en mitad de una partida, también se cierra la conexión al otro jugador.
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/diagrama_clasesF4.png?raw=true)no se ve pq hay que punlicar la rama
+
+### Arreglo de bugs
+Hubo un problema en el que un plugin que usábamos para la interfaz dejó de funcionar para la versión que usábamos de Phaser. Hemos actualizando Phaser a la última versión y conseguido solucionar el problema.
+
+### Vídeo
+![falta_link_al_video]()
+
+# FASE 5 (Mejoras finales / Publicación del juego)
+### Glitches encontrados
+● Cuando el usuario se conectaba, no comprobaba si ya estaba conectado, y se podía conectar a la misma cuenta varias veces desde distintos clientes.    
+● Al refrescar o cerrar la página no se desconectaba al usuario de la base de datos.    
+● El menú de pausa no funcionaba bien en la escena de la Tierra.    
+● Tras pasar un tiempo jugando el juego se congelaba y el sonido se quedaba en bucle.    
+● La máquina de comunicaciones no actualizaba bien su estado a la tierra.    
+● La cuenta atrás de tierra y marte no estaban sincronizadas.    
+● Cuando un jugador refrescaba o cerraba la página el otro jugador no era devuelto al menú principal.    
+● Al terminar una partida y volver al menú principal el menú de login no muestra ni el usuario actual ni da opción a desconectarse ni a identificarse.    
+● Las cajas de texto de los chats ingame no estaban bien ajustadas a la interfaz.    
+
+
+### Mejoras de fases previas
+Balance de juego:    
+- Velocidad de movimeento del stelonauta +20%    
+- Tiempo de partida +50%    
+- Velocidad de carga del cohete: +28%    
+- Cantidad de recursos que se obtienen al descargar el cohete:    
+  * Comida: +25%    
+  + Herramientas: +50%    
+
+### Publicado en las siguientes páginas webs
+
+Publicado por: Nombre del integrante    
+Nombre de la web: link de la web.    
