@@ -535,6 +535,12 @@ Pantalla de Tierra:
 ● Opciones de Host y Join (creador de la partida y jugador que se une)    
 ![pantalla_host_join](https://github.com/PepePm/SpaceY_Fase4/blob/master/pruebaSpaceY/Img/menu_play.png)
     
+Para jugar una partida, el usuario tiene la opción de ser el host de una:    
+![pantalla_host_join_logged_in](https://github.com/PepePm/SpaceY_Fase4/blob/master/pruebaSpaceY/Img/menu_play_host_logged.png)
+
+O la otra opción de entrar en una partida ya hosteada:    
+![pantalla_host_join_logged_in](https://github.com/PepePm/SpaceY_Fase4/blob/master/pruebaSpaceY/Img/menu_play_join_logged.png)
+    
 Se han contemplado la posibilidad de varios errores por parte del jugador, y para evitarlos hemos insertado mecanismos de feedback para que el usuario sepa qué falta por hacer mediante la visualización de mensajes en color rojo indicando el problema.    
     
 ● Para indicar que no se puede jugar sin estar conectado con una cuenta.    
