@@ -563,11 +563,13 @@ Se han creado dos "Handlers" de websockets, uno para administrar los lobbies, y 
     - Es invitado, lo desconecta y lo elimina del mapa hash; pero no desconecta al host.
 
 ● WsGamesHandler:  
-  * afterConnectionEstablished: 
+  * afterConnectionEstablished: El handshake inicial se realiza nada más el jugador carga la escena de juego ("sceneEarth"/"sceneMars").
 
-  * handleTextMessage: 
+  * handleTextMessage: Según el valor de "action", realiza distintas acciones:
+      - "Start": Se ejecuta tras hacer el handshake inicial. Si es el primer jugador del lobby que se une, almacena en un mapa concurrenthash al usuario con el id del lobby como clave. Si es el segundo jugador (ya existe en el hashmap su lobby como clave), modifica el valor de esa clave añadiendo a este jugador tambíen.
+      - "Sync": Utilizado para sincronizar variables de juego. Al servidor los jugadores le envían un json con 3 atributos: id del lobby, "type" que indica el nombre de la variable y "value" que indica su nuevo valor. El servidor distingue de qué jugador es el mensaje y se lo reenvia al otro usuario de la partida con ese lobbyID.
 
-  * afterConnectionClosed: 
+  * afterConnectionClosed: Si un jugador se desconecta en mitad de una partida, también se cierra la conexión al otro jugador.
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/diagrama_clasesF4.png?raw=true)no se ve pq hay que punlicar la rama
 
