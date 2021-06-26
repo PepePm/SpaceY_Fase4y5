@@ -571,7 +571,7 @@ Se han creado dos "Handlers" de websockets, uno para administrar los lobbies, y 
 
   * afterConnectionClosed: Si un jugador se desconecta en mitad de una partida, también se cierra la conexión al otro jugador.
 
-![falta_diagrama_de_clases](https://github.com/PepePm/SpaceY_Fase4/blob/Pruebas-spring/Resources/Img/diagrama_clasesF4.png?raw=true)
+![falta_diagrama_de_clases](https://github.com/PepePm/SpaceY_Fase4/PruebaSpaceY/Img/diagrama_clasesF4.png?raw=true)
 
 ### Arreglo de bugs
 Hubo un problema en el que un plugin que usábamos para la interfaz dejó de funcionar para la versión que usábamos de Phaser. Hemos actualizando Phaser a la última versión y conseguido solucionar el problema.
