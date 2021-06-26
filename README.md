@@ -615,6 +615,7 @@ Hubo un problema en el que un plugin que usábamos para la interfaz dejó de fun
 ● Cuando un jugador refrescaba o cerraba la página el otro jugador no era devuelto al menú principal.    
 ● Al terminar una partida y volver al menú principal el menú de login no muestra ni el usuario actual ni da opción a desconectarse ni a identificarse.    
 ● Las cajas de texto de los chats ingame no estaban bien ajustadas a la interfaz.    
+● Las cajas de texto de los chats ingame no se ocultaban bien al pausar el juego o al mostrar el post-it de ayuda.    
 
 
 ### Mejoras de fases previas
@@ -628,5 +629,7 @@ Balance de juego:
 
 ### Publicado en las siguientes páginas webs
 
-Publicado por: Nombre del integrante    
-Nombre de la web: link de la web.    
+● Outpan: https://www.outpan.com/app/45269f840d/space-y    
+● Gamejolt: https://gamejolt.com/games/space_y/627500    
+● Newgrounds: https://www.newgrounds.com/portal/view/802004    
+
