@@ -129,7 +129,7 @@ function loadUsers() {
 
 function isUserOnline(scene, username){
     for(var i=0; i<scene.lobbyContent.length; i++){
-        if(scene.lobbyContent[i] == username)
+        if(scene.lobbyContent[i] == username.toUpperCase())
             return true;
     }
     return false;

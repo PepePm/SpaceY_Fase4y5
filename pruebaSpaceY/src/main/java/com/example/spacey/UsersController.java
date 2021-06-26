@@ -129,7 +129,7 @@ public class UsersController {
 	public boolean checkUser(@RequestBody User user) {
 		
 		System.out.println("Comprobando si existe el usuario...");
-		String username = user.getName();
+		String username = user.getName().toUpperCase();
 		
 		List<User> userList = template.query("SELECT * FROM Users WHERE UserName='"+username+"'", new RowMapper<User>() {
 			@Override
