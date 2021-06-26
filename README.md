@@ -632,4 +632,4 @@ Balance de juego:
 ● Outpan: https://www.outpan.com/app/45269f840d/space-y    
 ● Gamejolt: https://gamejolt.com/games/space_y/627500    
 ● Newgrounds: https://www.newgrounds.com/portal/view/802004    
-
+● Gamepix:
