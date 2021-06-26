@@ -171,7 +171,7 @@ class SceneEarth extends Phaser.Scene {
         keyDev_defeat = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N, false);
 
         //POST IT
-        postItEarth = this.add.image(game.config.width - 90, 100, "postIt").setDepth(7)
+        postItEarth = this.add.image(game.config.width - 90, 100, "postIt").setDepth(10)
             .setInteractive()
             .on('pointerdown', () => OpenPostItEarth(postItEarth, this))
             .on('pointerup', () => HighlightPostIt(postItEarth, true))
@@ -179,7 +179,7 @@ class SceneEarth extends Phaser.Scene {
             .on('pointerout', () => HighlightPostIt(postItEarth, false));
 
         postItExpEarth = this.add.image(game.config.width - 100, 100, "UIEarthTuto")
-            .setDepth(7)
+            .setDepth(10)
             .setScale(0.2)
             .setInteractive()
             .setVisible(false)
@@ -376,7 +376,7 @@ class SceneEarth extends Phaser.Scene {
             this.paused = false;
         }
 
-        if(gamePaused){
+        if(gamePaused || isbig){
             this.writeTextChat.setVisible(false);
         }
         else{

@@ -626,7 +626,7 @@ class SceneMars extends Phaser.Scene {
         });
 
         //POST IT
-        postItMars = this.add.image(game.config.width - 90, 100, "postIt").setDepth(7)
+        postItMars = this.add.image(game.config.width - 90, 100, "postIt").setDepth(10)
             .setInteractive()
             .on('pointerdown', () => OpenPostItMars(postItMars, this))
             .on('pointerup', () => HighlightPostIt(postItMars, true))
@@ -634,7 +634,7 @@ class SceneMars extends Phaser.Scene {
             .on('pointerout', () => HighlightPostIt(postItMars, false));
 
         postItExpMars = this.add.image(game.config.width - 100, 100, "UIMarsTuto")
-            .setDepth(7)
+            .setDepth(10)
             .setScale(0.2)
             .setInteractive()
             .setVisible(false)
@@ -713,7 +713,7 @@ class SceneMars extends Phaser.Scene {
         }
         
 
-        if(gamePaused){
+        if(gamePaused || isbig){
             this.writeTextChat.setVisible(false);
         }
         else{

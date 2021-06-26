@@ -372,7 +372,6 @@ class SceneTutorial extends Phaser.Scene {
         //POST IT
         postIt = this.add.image(game.config.width-90,100, "postIt").setDepth(7)
         .setInteractive()
-        .on('pointerdown', () => OpenPostIt(postIt,this))
         .on('pointerup', () => HighlightPostIt(postIt, true))
         .on('pointerover', () => HighlightPostIt(postIt, true))
         .on('pointerout', () => HighlightPostIt(postIt, false));	
@@ -382,7 +381,6 @@ class SceneTutorial extends Phaser.Scene {
         .setScale(0.2)
         .setInteractive()
         .setVisible(false)
-        .on('pointerdown', () => OpenPostIt(postItExp,this))
         .on('pointerup', () => HighlightPostIt(postItExp, true))
         .on('pointerover', () => HighlightPostIt(postItExp, true))
         .on('pointerout', () => HighlightPostIt(postItExp, false));
