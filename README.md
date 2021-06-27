@@ -47,14 +47,7 @@ https://github.com/PepePm/SpaceY_Fase4y5
 
 FAQ
 ------
-- ¿Cómo jugar Offline?
-
-Abrir en cualquier navegador el archivo index.html, esto lanzará el juego.
-Esperar a que cargue el juego, esto puede llevar unos segundos dependiendo del navegador y la computadora. 
-Ver en el apartado de controles la distribución de los mismos para dos jugadores. Puedes consultar el Tutorial en el menú principal. 
-Elegir que posición tomará el jugador, y en el menú principal pulsar sobre PLAY. 
-
-- ¿Cómo jugar Online?
+- ¿Cómo jugar?    
 Hay dos opciones. Una de ellas es vía portales de juegos online:        
 ● Outpan: https://www.outpan.com/app/45269f840d/space-y    
 ● Gamejolt: https://gamejolt.com/games/space_y/627500    
