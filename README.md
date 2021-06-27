@@ -65,8 +65,6 @@ Y la otra es descargando el archivo EjecutableCliente.zip. Ejecutar el archivo R
 
 Podremos comprobar el estado del servidor en el icono del mundo dentro del menú principal
 
-![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/tutorial_github-10.png?raw=true)
-
 
 GDD
 ------
