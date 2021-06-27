@@ -48,6 +48,7 @@ https://github.com/PepePm/SpaceY_Fase4y5
 FAQ
 ------
 - ¿Cómo jugar?    
+
 Hay dos opciones. Una de ellas es vía portales de juegos online:        
 ● Outpan: https://www.outpan.com/app/45269f840d/space-y    
 ● Gamejolt: https://gamejolt.com/games/space_y/627500    
