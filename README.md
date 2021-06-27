@@ -43,7 +43,7 @@ https://trello.com/b/OI6kYl75/juegos-en-red
 Github
 ------
 
-https://github.com/Jacquesmeyns/SpaceY
+https://github.com/PepePm/SpaceY_Fase4y5
 
 FAQ
 ------
@@ -55,24 +55,15 @@ Ver en el apartado de controles la distribución de los mismos para dos jugadore
 Elegir que posición tomará el jugador, y en el menú principal pulsar sobre PLAY. 
 
 - ¿Cómo jugar Online?
-
-Método OpenVPN:
-
-    Descargar la carpeta que contiene los archivos de configuración del servidor (Space_Y_Server_Files.zip) o de la siguiente dirección de Google Drive https://drive.google.com/file/d/1zql_eXVl3SPLzgq2Laj4gVRrOyECQqHC/view?usp=sharing CONTIENE: SpaceY_Server.jar, Run_Server.bat, la base de datos BD_SpaceY.accdb y el archivo de configuración del servidor de OpenVPN SpaceY.ovpn
-
-    Instalar OpenVpn en nuestra máquina, descargándolo de https://openvpn.net/client-connect-vpn-for-windows/ o del archivo adjuntado en la carpeta del servidor.
-
-    Abrimos OpenVpn, seleccionamos FILE y seleccionamos en nuestra carpeta del servidor el archivo SpaceY.ovpn contenido en Space_Y_Server_Files.rar. Para finalizar, pulsamos sobre el botón ADD en la esquina superior derecha. Nos aparecerá un apartado nuevo con la ip de nuestro servidor, al pinchar sobre el se activará y ya tendremos abierto el servidor.
-
-    Ejecutar el archivo Run_Server.bat para abrir el servidor. Nos aparecerá una ventana indicando que SPRING se ha lanzado.
-
-    Introducir en el navegador la siguiente URL : http://193.161.193.99:63511/ Si somos el servidor, proporcionar a los jugadores la URL de la máquina que hace de servidor.
-
-    Esperar a que el Servidor se lance y cargue todos los Assets del juego
+Hay dos opciones. Una de ellas es vía portales de juegos online:        
+● Outpan: https://www.outpan.com/app/45269f840d/space-y    
+● Gamejolt: https://gamejolt.com/games/space_y/627500    
+● Newgrounds: https://www.newgrounds.com/portal/view/802004    
+● Gamepix:    
+    
+Y la otra es descargando el archivo EjecutableCliente.zip. Ejecutar el archivo Run.bat que contiene y acceder en un navegador a la url http://localhols:8080/.
 
 Podremos comprobar el estado del servidor en el icono del mundo dentro del menú principal
-
-ATENCIÓN: Para que funcione el servidor los archivos SpaceY_Server.jar, Run_Server.bat, la base de datos BD_SpaceY.accdb deben estar en la misma carpeta. Puede que por tu versión de java el servidor no pueda funcionar. Adjuntamos un archivo que actualiza la versión actual en tu máquina. (jdk-15.0.1_windows-x64_bin.exe)
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/tutorial_github-10.png?raw=true)
 
@@ -368,7 +359,7 @@ Controles supervisor:
 
 -Añadido un tutorial y cambio de la estructura del menú
 
-### FASE 3 EN ADELANTE (ONLINE)
+### FASE 3 (ONLINE)
 
 Ambos (supervisor y stelonauta) disponen de teclado y ratón propios.
 
@@ -507,6 +498,38 @@ Se ha implementado una escena de contactos con una pequeña caricatura de los de
 **Diagrama api rest de la aplicación.**
 
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/diagrama_clases.png?raw=true)
+
+FAQ (deprecated)
+------
+- ¿Cómo jugar Offline?
+
+Abrir en cualquier navegador el archivo index.html, esto lanzará el juego.
+Esperar a que cargue el juego, esto puede llevar unos segundos dependiendo del navegador y la computadora. 
+Ver en el apartado de controles la distribución de los mismos para dos jugadores. Puedes consultar el Tutorial en el menú principal. 
+Elegir que posición tomará el jugador, y en el menú principal pulsar sobre PLAY. 
+
+- ¿Cómo jugar Online?
+
+Método OpenVPN:
+
+    Descargar la carpeta que contiene los archivos de configuración del servidor (Space_Y_Server_Files.zip) o de la siguiente dirección de Google Drive https://drive.google.com/file/d/1zql_eXVl3SPLzgq2Laj4gVRrOyECQqHC/view?usp=sharing CONTIENE: SpaceY_Server.jar, Run_Server.bat, la base de datos BD_SpaceY.accdb y el archivo de configuración del servidor de OpenVPN SpaceY.ovpn
+
+    Instalar OpenVpn en nuestra máquina, descargándolo de https://openvpn.net/client-connect-vpn-for-windows/ o del archivo adjuntado en la carpeta del servidor.
+
+    Abrimos OpenVpn, seleccionamos FILE y seleccionamos en nuestra carpeta del servidor el archivo SpaceY.ovpn contenido en Space_Y_Server_Files.rar. Para finalizar, pulsamos sobre el botón ADD en la esquina superior derecha. Nos aparecerá un apartado nuevo con la ip de nuestro servidor, al pinchar sobre el se activará y ya tendremos abierto el servidor.
+
+    Ejecutar el archivo Run_Server.bat para abrir el servidor. Nos aparecerá una ventana indicando que SPRING se ha lanzado.
+
+    Introducir en el navegador la siguiente URL : http://193.161.193.99:63511/ Si somos el servidor, proporcionar a los jugadores la URL de la máquina que hace de servidor.
+
+    Esperar a que el Servidor se lance y cargue todos los Assets del juego
+
+Podremos comprobar el estado del servidor en el icono del mundo dentro del menú principal
+
+ATENCIÓN: Para que funcione el servidor los archivos SpaceY_Server.jar, Run_Server.bat, la base de datos BD_SpaceY.accdb deben estar en la misma carpeta. Puede que por tu versión de java el servidor no pueda funcionar. Adjuntamos un archivo que actualiza la versión actual en tu máquina. (jdk-15.0.1_windows-x64_bin.exe)
+
+![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/Pruebas-spring/Resources/Img/tutorial_github-10.png?raw=true)
+
 
 
 # FASE 4 (MULTIJUGADOR con WebSockets)
