@@ -50,10 +50,10 @@ FAQ
 - ¿Cómo jugar?    
 
 Hay dos opciones. Una de ellas es vía portales de juegos online:    
-  ● Outpan: https://www.outpan.com/app/45269f840d/space-y    
-  ● Gamejolt: https://gamejolt.com/games/space_y/627500    
-  ● Newgrounds: https://www.newgrounds.com/portal/view/802004    
-  ● Gamepix:    
+    ● Outpan: https://www.outpan.com/app/45269f840d/space-y    
+    ● Gamejolt: https://gamejolt.com/games/space_y/627500    
+    ● Newgrounds: https://www.newgrounds.com/portal/view/802004    
+    ● Gamepix:    
     
 Y la otra es descargando el archivo EjecutableCliente.zip. Ejecutar el archivo Run.bat que contiene y acceder en un navegador a la url http://localhols:8080/.
 
