@@ -618,7 +618,7 @@ Se han creado dos "Handlers" de websockets, uno para administrar los lobbies, y 
 Hubo un problema en el que un plugin que usábamos para la interfaz dejó de funcionar para la versión que usábamos de Phaser. Hemos actualizando Phaser a la última versión y conseguido solucionar el problema.
 
 ### Vídeo
-![Link_al_video](https://youtu.be/W5nuEOOh8-4)
+![Link_al_video](https://www.youtube.com/watch?v=W5nuEOOh8-4)
 
 # FASE 5 (Mejoras finales / Publicación del juego)
 ### Glitches encontrados
