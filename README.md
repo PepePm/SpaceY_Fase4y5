@@ -2,6 +2,9 @@ SPACE Y
 =======
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/main.png?raw=true)
 
+### Vídeo
+[![Enlace al video](https://img.youtube.com/vi/s-Aeqy_POtg/maxresdefault.jpg)](https://www.youtube.com/watch?v=s-Aeqy_POtg)
+
 Nombre del juego
 ----------------
 
@@ -617,10 +620,6 @@ Se han creado dos "Handlers" de websockets, uno para administrar los lobbies, y 
 ### Arreglo de bugs
 Hubo un problema en el que un plugin que usábamos para la interfaz dejó de funcionar para la versión que usábamos de Phaser. Hemos actualizando Phaser a la última versión y conseguido solucionar el problema.
 
-### Vídeo
-![Link_al_video](https://www.youtube.com/watch?v=W5nuEOOh8-4)
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/s-Aeqy_POtg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # FASE 5 (Mejoras finales / Publicación del juego)
 ### Glitches encontrados
