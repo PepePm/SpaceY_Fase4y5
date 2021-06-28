@@ -3,7 +3,7 @@ SPACE Y
 ![alt text](https://github.com/Jacquesmeyns/SpaceY/blob/master/Resources/Img/main.png?raw=true)
 
 ### Vídeo
-[![Enlace al video](https://img.youtube.com/vi/s-Aeqy_POtg/maxresdefault.jpg)](https://www.youtube.com/watch?v=s-Aeqy_POtg)
+[![Enlace al video](https://img.youtube.com/vi/s-Aeqy_POtg/maxresdefault.jpg)](https://youtu.be/t3tKVCfu9xE)
 
 Nombre del juego
 ----------------
